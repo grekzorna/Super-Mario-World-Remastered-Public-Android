@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://0tdd488g3h7b"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/EnemyClass.gd" id="1_478wu"]
+[ext_resource type="Texture2D" uid="uid://c747nfhoov18d" path="res://Assets/Sprites/Enemys/FireSnake.png" id="2_sqch7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts3p1"]
+atlas = ExtResource("2_sqch7")
+region = Rect2(0, 16, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnx3q"]
+atlas = ExtResource("2_sqch7")
+region = Rect2(0, 24, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g7hrf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts3p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnx3q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_12xdi"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_6dbt3"]
+resource_name = "new_animation"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqdl0"]
+_data = {
+&"new_animation": SubResource("Animation_6dbt3")
+}
+
+[node name="MiniFlame" type="CharacterBody2D"]
+script = ExtResource("1_478wu")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_g7hrf")
+autoplay = "default"
+frame_progress = 0.563916
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_12xdi")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hqdl0")
+}
+autoplay = "new_animation"
+speed_scale = 0.5
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

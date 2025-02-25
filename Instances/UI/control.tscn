@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://qkplsyrv5u1o"]
+
+[ext_resource type="Script" path="res://Scripts/UI/option_section_node.gd" id="1_htrde"]
+[ext_resource type="FontVariation" uid="uid://danbjhdwr003q" path="res://UI/NewFont.tres" id="2_t5abj"]
+[ext_resource type="Texture2D" uid="uid://7m3ti8gletaw" path="res://Assets/Sprites/UI/Underline.png" id="3_02fvp"]
+[ext_resource type="PackedScene" uid="uid://den5kogms88pd" path="res://Instances/UI/selectable_option_node.tscn" id="3_p5fjr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_htrde")
+
+[node name="Title" type="Label" parent="."]
+z_index = 8
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_t5abj")
+text = "Controls
+"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Underline" type="NinePatchRect" parent="Title"]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 107.0
+offset_bottom = 24.0
+texture = ExtResource("3_02fvp")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 32.0
+offset_right = 2.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="SelectableOptionNode" parent="Container" instance=ExtResource("3_p5fjr")]
+layout_mode = 2
+option_title = "AHAHAHHAHA"
+highlighted = false

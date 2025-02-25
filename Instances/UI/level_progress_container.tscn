@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://bny4pp5xobqjb"]
+
+[ext_resource type="Script" path="res://Scripts/UI/level_progress_container.gd" id="1_bbcei"]
+[ext_resource type="FontFile" uid="uid://lfpsqjjnmb8i" path="res://Assets/Sprites/UI/Font.png" id="1_i1ruv"]
+[ext_resource type="Texture2D" uid="uid://rg1wniybqasa" path="res://Assets/Sprites/UI/StatusScreen/Icons/ClearEmpty.png" id="3_ojs1n"]
+[ext_resource type="Texture2D" uid="uid://dexhjackjngwp" path="res://Assets/Sprites/UI/StatusScreen/Icons/CoinEmpty.png" id="4_frspf"]
+[ext_resource type="Texture2D" uid="uid://dwh4ji2idji4p" path="res://Assets/Sprites/UI/StatusScreen/Icons/PCoinEmpty.png" id="5_nwcpw"]
+
+[sub_resource type="FontVariation" id="FontVariation_5um2d"]
+base_font = ExtResource("1_i1ruv")
+spacing_space = -6
+
+[node name="LevelProgressContainer" type="HBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_bbcei")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_5um2d")
+text = " -"
+
+[node name="LevelTitle" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_i1ruv")
+theme_override_fonts/mono_font = ExtResource("1_i1ruv")
+theme_override_fonts/italics_font = ExtResource("1_i1ruv")
+theme_override_fonts/bold_italics_font = ExtResource("1_i1ruv")
+theme_override_fonts/bold_font = ExtResource("1_i1ruv")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+scroll_active = false
+meta_underlined = false
+hint_underlined = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="Clears" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.25
+theme_override_constants/separation = 0
+
+[node name="Standard" type="TextureRect" parent="Clears"]
+layout_mode = 2
+texture = ExtResource("3_ojs1n")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="Secret" type="TextureRect" parent="Clears"]
+auto_translate_mode = 1
+layout_mode = 2
+texture = ExtResource("3_ojs1n")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="DragonCoins" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("4_frspf")
+expand_mode = 2
+stretch_mode = 2
+
+[node name="PeachCoin" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_nwcpw")
+expand_mode = 2
+stretch_mode = 2

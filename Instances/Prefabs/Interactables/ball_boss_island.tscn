@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlssgujm0lxke"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/ball_boss_island.gd" id="1_61d3m"]
+[ext_resource type="Texture2D" uid="uid://c4ngxk3da3q22" path="res://Assets/Sprites/Objects/BossIsland.png" id="1_r4h0q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tlr8"]
+size = Vector2(190, 30)
+
+[node name="Island" type="AnimatableBody2D"]
+z_index = -1
+position = Vector2(176, 84)
+disable_mode = 1
+collision_layer = 13
+collision_mask = 0
+constant_linear_velocity = Vector2(0, -64)
+script = ExtResource("1_61d3m")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1, -95)
+shape = SubResource("RectangleShape2D_7tlr8")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -32)
+texture = ExtResource("1_r4h0q")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

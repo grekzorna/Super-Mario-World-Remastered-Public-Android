@@ -1,0 +1,367 @@
+[gd_scene load_steps=25 format=3 uid="uid://k2h7lm56u4v6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/magikoopa.gd" id="1_ynx26"]
+[ext_resource type="Texture2D" uid="uid://cbo8xk7f57yv0" path="res://Assets/Sprites/Enemys/Magikoopa.png" id="2_ltv08"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="3_h0sue"]
+[ext_resource type="Texture2D" uid="uid://d10locfdswlic" path="res://Assets/Sprites/Enemys/MagikoopaProjectile.png" id="3_j1gi2"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="4_wr356"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53lri"]
+atlas = ExtResource("2_ltv08")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q63m7"]
+atlas = ExtResource("2_ltv08")
+region = Rect2(0, 32, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xc3p"]
+atlas = ExtResource("2_ltv08")
+region = Rect2(0, 64, 96, 32)
+
+[sub_resource type="Animation" id="Animation_lgel8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Magic:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/Shape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Magic/Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sxgyk"]
+resource_name = "Shoot"
+length = 2.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Magic:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitbox/Shape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Magic/Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_807gv"]
+resource_name = "Warp"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(5, 5, 5, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/Shape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2jp70"]
+_data = {
+"RESET": SubResource("Animation_lgel8"),
+"Shoot": SubResource("Animation_sxgyk"),
+"Warp": SubResource("Animation_807gv")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7ryr"]
+size = Vector2(10, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1205"]
+atlas = ExtResource("3_j1gi2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5i1q"]
+atlas = ExtResource("3_j1gi2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me264"]
+atlas = ExtResource("3_j1gi2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6rcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1205")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5i1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me264")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_hlrp5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gsl1t"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vrknw"]
+_data = {
+"RESET": SubResource("Animation_hlrp5"),
+"Spin": SubResource("Animation_gsl1t")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ysfp"]
+radius = 6.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tds8r"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_08ihu"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 12.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 8.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfh0d"]
+size = Vector2(6, 8)
+
+[node name="Magikoopa" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_ynx26")
+gib_type = 1
+can_spin_kill = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = SubResource("AtlasTexture_53lri")
+offset = Vector2(-8, 0)
+hframes = 3
+script = ExtResource("3_h0sue")
+textures = Array[Texture2D]([SubResource("AtlasTexture_53lri"), SubResource("AtlasTexture_q63m7"), SubResource("AtlasTexture_5xc3p")])
+settings_value = "magikoopa"
+
+[node name="ShootPosition" type="Node2D" parent="Sprite"]
+position = Vector2(0, -15)
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2jp70")
+}
+autoplay = "Warp"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_x7ryr")
+disabled = true
+
+[node name="Magic" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_o6rcx")
+autoplay = "default"
+frame_progress = 0.179704
+
+[node name="Animations" type="AnimationPlayer" parent="Magic"]
+libraries = {
+"": SubResource("AnimationLibrary_vrknw")
+}
+autoplay = "Spin"
+
+[node name="Hitbox" type="Area2D" parent="Magic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Magic/Hitbox"]
+shape = SubResource("CircleShape2D_6ysfp")
+disabled = true
+
+[node name="Glimmer" type="GPUParticles2D" parent="Magic"]
+material = SubResource("CanvasItemMaterial_tds8r")
+process_material = SubResource("ParticleProcessMaterial_08ihu")
+texture = ExtResource("4_wr356")
+randomness = 1.0
+
+[node name="CastJoint" type="Node2D" parent="."]
+top_level = true
+
+[node name="PositionCast" type="RayCast2D" parent="CastJoint"]
+position = Vector2(0, -64)
+target_position = Vector2(0, 256)
+collision_mask = 16384
+
+[node name="README" type="Label" parent="."]
+z_index = 4096
+z_as_relative = false
+offset_left = -112.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 104.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 8
+text = "Magikoopas weird in the way that he behaves, you have to place down magikoopa tiles within the tilemap which will dictate where he can and cant teleport to. 
+
+you can find the tiles in the scene collection in the standard tileset, or under res://instances/parts/magikoopa_tile.tscn
+
+you can also just set and physics body to be on collision layer 15, which will also work."
+autowrap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_bfh0d")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Magic/Hitbox" to="." method="_on_hitbox_area_entered"]

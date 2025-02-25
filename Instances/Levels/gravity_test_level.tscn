@@ -1,0 +1,108 @@
+[gd_scene load_steps=14 format=3 uid="uid://c1vo6pbm40o4w"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_4elcv"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="2_xj6fv"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="3_rfmbr"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="4_7ps6v"]
+[ext_resource type="Texture2D" uid="uid://dlftqi6u1b2f4" path="res://Assets/Sprites/Backgrounds/Overworld/NightSkyEncore.png" id="5_lsojc"]
+[ext_resource type="PackedScene" uid="uid://cbjy0t1s8p87m" path="res://Instances/Prefabs/Interactables/gravity_area.tscn" id="6_a71vt"]
+[ext_resource type="Script" path="res://TextureCircle.gd" id="7_aj8o0"]
+[ext_resource type="Texture2D" uid="uid://cdk8biuugh34a" path="res://Assets/Sprites/Objects/StoneBlock.png" id="8_bv634"]
+[ext_resource type="PackedScene" uid="uid://dv8x8ro8chub2" path="res://Instances/Prefabs/Items/yoshi_egg.tscn" id="9_fj5ny"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86e6e"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0fxru"]
+radius = 232.138
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_es8m3"]
+size = Vector2(256, 80)
+
+[node name="Test" type="Node"]
+script = ExtResource("1_4elcv")
+
+[node name="TileMap" parent="." instance=ExtResource("2_xj6fv")]
+layer_0/tile_data = PackedInt32Array(65532, 589826, 12, 131068, 589826, 14, 196604, 589826, 14, 65533, 589826, 12, 131069, 589826, 14, 196605, 589826, 14, 65534, 589826, 12, 131070, 589826, 14, 196606, 589826, 14, 65535, 589826, 12, 131071, 589826, 14, 196607, 589826, 14, 0, 589826, 12, 65536, 589826, 14, 131072, 589826, 14, 1, 589826, 12, 65537, 589826, 14, 131073, 589826, 14, 2, 589826, 12, 65538, 589826, 14, 131074, 589826, 14, 3, 589826, 12, 65539, 589826, 14, 131075, 589826, 14, 4, 589826, 12, 65540, 589826, 14, 131076, 589826, 14, 5, 589826, 12, 65541, 589826, 14, 131077, 589826, 14, 6, 589826, 12, 65542, 589826, 14, 131078, 589826, 14, 7, 589826, 12, 65543, 589826, 14, 131079, 589826, 14, 8, 589826, 12, 65544, 589826, 14, 131080, 589826, 14, 9, 589826, 12, 65545, 589826, 14, 131081, 589826, 14, 10, 589826, 12, 65546, 589826, 14, 131082, 589826, 14, 11, 589826, 12, 65547, 589826, 14, 131083, 589826, 14, 12, 589826, 12, 65548, 589826, 14, 131084, 589826, 14, 13, 589826, 12, 65549, 589826, 14, 131085, 589826, 14, 14, 589826, 12, 65550, 589826, 14, 131086, 589826, 14, 15, 589826, 12, 65551, 589826, 14, 131087, 589826, 14, 16, 589826, 12, 65552, 589826, 14, 131088, 589826, 14, 17, 589826, 12, 65553, 589826, 14, 131089, 589826, 14, 18, 589826, 12, 65554, 589826, 14, 131090, 589826, 14, 19, 589826, 12, 65555, 589826, 14, 131091, 589826, 14, 20, 589826, 12, 65556, 589826, 14, 131092, 589826, 14, 21, 589826, 12, 65557, 589826, 14, 131093, 589826, 14, 22, 589826, 12, 65558, 589826, 14, 131094, 589826, 14, 23, 589826, 12, 65559, 589826, 14, 131095, 589826, 14, 24, 589826, 12, 65560, 589826, 14, 131096, 589826, 14, 25, 589826, 12, 65561, 589826, 14, 131097, 589826, 14, 26, 589826, 12, 65562, 589826, 14, 131098, 589826, 14, 27, 589826, 12, 65563, 589826, 14, 131099, 589826, 14, 28, 589826, 12, 65564, 589826, 14, 131100, 589826, 14, 29, 589826, 12, 65565, 589826, 14, 131101, 589826, 14, 30, 589826, 12, 65566, 589826, 14, 131102, 589826, 14, 31, 589826, 12, 65567, 589826, 14, 131103, 589826, 14, 32, 589826, 12, 65568, 589826, 14, 131104, 589826, 14, 33, 720898, 12, 65569, 720898, 14, 131105, 720898, 14, -589812, 524290, 12, -524276, 524290, 13, -458740, 524290, 13, -393204, 524290, 15, -589811, 589826, 12, -524275, 589826, 14, -458739, 589826, 14, -393203, 589826, 15, -589810, 589826, 12, -524274, 589826, 14, -458738, 589826, 14, -393202, 589826, 15, -589809, 589826, 12, -524273, 589826, 14, -458737, 589826, 14, -393201, 589826, 15, -589808, 589826, 12, -524272, 589826, 14, -458736, 589826, 14, -393200, 589826, 15, -589807, 589826, 12, -524271, 589826, 14, -458735, 589826, 14, -393199, 589826, 15, -589806, 589826, 12, -524270, 589826, 14, -458734, 589826, 14, -393198, 589826, 15, -589805, 589826, 12, -524269, 589826, 14, -458733, 589826, 14, -393197, 589826, 15, -589804, 589826, 12, -524268, 589826, 14, -458732, 589826, 14, -393196, 589826, 15, -589803, 589826, 12, -524267, 589826, 14, -458731, 589826, 14, -393195, 589826, 15, -589802, 589826, 12, -524266, 589826, 14, -458730, 589826, 14, -393194, 589826, 15, -589801, 589826, 12, -524265, 589826, 14, -458729, 589826, 14, -393193, 589826, 15, -589800, 589826, 12, -524264, 589826, 14, -458728, 589826, 14, -393192, 589826, 15, -589799, 589826, 12, -524263, 589826, 14, -458727, 589826, 14, -393191, 589826, 15, -589798, 589826, 12, -524262, 589826, 14, -458726, 589826, 14, -393190, 589826, 15, 65531, 524290, 12, 131067, 524290, 13, 196603, 524290, 13, 262139, 524290, 15, 262140, 589826, 15, 262141, 589826, 15, 262142, 589826, 15, 262143, 589826, 15, 196608, 589826, 15, 196609, 589826, 15, 196610, 589826, 15, 196611, 589826, 15, 196612, 589826, 15, 196613, 589826, 15, 196614, 589826, 15, 196615, 589826, 15, 196616, 589826, 15, 196617, 589826, 15, 196618, 589826, 15, 196619, 589826, 15, 196620, 589826, 15, 196621, 589826, 15, 196622, 589826, 15, 196623, 589826, 15, 196624, 589826, 15, 196625, 589826, 15, 196626, 589826, 15, 196627, 589826, 15, 196628, 589826, 15, 196629, 589826, 15, 196630, 589826, 15, 196631, 589826, 15, 196632, 589826, 15, 196633, 589826, 15, 196634, 589826, 15, 196635, 589826, 15, 196636, 589826, 15, 196637, 589826, 15, 196638, 589826, 15, 196639, 589826, 15, 196640, 589826, 15, 196641, 720898, 15, -589797, 720898, 12, -524261, 720898, 14, -458725, 720898, 14, -393189, 720898, 15)
+
+[node name="Player" parent="." instance=ExtResource("3_rfmbr")]
+material = SubResource("ShaderMaterial_86e6e")
+
+[node name="LevelBG" parent="." instance=ExtResource("4_7ps6v")]
+main_texture = ExtResource("5_lsojc")
+
+[node name="TextureCircle" type="Node2D" parent="."]
+texture_repeat = 2
+position = Vector2(776, -80)
+script = ExtResource("7_aj8o0")
+texture_fill = ExtResource("8_bv634")
+collidable = true
+
+[node name="GravityArea" parent="TextureCircle" instance=ExtResource("6_a71vt")]
+gravity_vector = Vector2(1, 0)
+circle_area = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureCircle/GravityArea"]
+shape = SubResource("CircleShape2D_0fxru")
+
+[node name="TextureCircle2" type="Node2D" parent="."]
+texture_repeat = 2
+position = Vector2(784, -536)
+script = ExtResource("7_aj8o0")
+texture_fill = ExtResource("8_bv634")
+collidable = true
+
+[node name="GravityArea" parent="TextureCircle2" instance=ExtResource("6_a71vt")]
+gravity_vector = Vector2(1, 0)
+circle_area = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureCircle2/GravityArea"]
+shape = SubResource("CircleShape2D_0fxru")
+
+[node name="YoshiEgg" parent="." instance=ExtResource("9_fj5ny")]
+position = Vector2(496, -16)
+
+[node name="GravityArea2" parent="." instance=ExtResource("6_a71vt")]
+position = Vector2(368, -24)
+gravity_vector = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea2"]
+position = Vector2(-48, -16)
+shape = SubResource("RectangleShape2D_es8m3")

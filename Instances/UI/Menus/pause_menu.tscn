@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt34b1nqv1wp1"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseMenu.gd" id="1_k1i8c"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="2_u8tdb"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_6vhxf"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="4_0n56h"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_k1i8c")
+
+[node name="Box" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -28.0
+offset_right = 50.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_u8tdb")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 9
+
+[node name="Vbox" type="VBoxContainer" parent="Box/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_6vhxf")
+text = "Continue"
+uppercase = true
+
+[node name="Label2" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_6vhxf")
+text = "Restart"
+uppercase = true
+
+[node name="Label3" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_6vhxf")
+text = "Quit Level"
+uppercase = true
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 131.0
+offset_right = 200.0
+offset_bottom = 139.0
+mouse_filter = 2
+texture = ExtResource("4_0n56h")
+flip_h = true

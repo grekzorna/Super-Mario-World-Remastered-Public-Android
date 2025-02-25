@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://4mt8hikh0s6s"]
+
+[ext_resource type="Texture2D" uid="uid://cslnb78sb4tgj" path="res://Assets/Sprites/Map/MapSprites/CaveMapPoint.png" id="1_nt3fm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clxnb"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdg4k"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhphy"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8eyb"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnajb"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwsh3"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcy70"]
+atlas = ExtResource("1_nt3fm")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1o60x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clxnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdg4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhphy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8eyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnajb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwsh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcy70")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RedCaveMapVisual" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_1o60x")
+autoplay = "default"
+frame_progress = 0.197738

@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh8jqegu0y5g7"]
+
+[ext_resource type="Script" uid="uid://2y4dvq58fsj0" path="res://Scripts/Interactables/wooden_spin_platform.gd" id="1_jd3g4"]
+[ext_resource type="Texture2D" uid="uid://31ip4o0xy683" path="res://Assets/Sprites/Objects/PlatformSheet.png" id="2_m0c5e"]
+[ext_resource type="Texture2D" uid="uid://brsocw050od3x" path="res://Assets/Sprites/Objects/WoodenSpinPlatformBall.png" id="2_tg3of"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8hcn"]
+atlas = ExtResource("2_m0c5e")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cy0c0"]
+size = Vector2(64, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1uidl"]
+size = Vector2(64, 4)
+
+[node name="WoodenSpinPlatform" type="Node2D"]
+z_index = -5
+script = ExtResource("1_jd3g4")
+metadata/_edit_horizontal_guides_ = [-56.0]
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+position = Vector2(0, -88)
+collision_layer = 15
+collision_mask = 0
+
+[node name="Sprite" type="NinePatchRect" parent="Platform"]
+offset_left = -32.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_g8hcn")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+
+[node name="Collision" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_cy0c0")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="Platform"]
+position = Vector2(0, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/Hitbox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_1uidl")
+
+[node name="Rotation" type="Node2D" parent="."]
+
+[node name="RotationPoint" type="Node2D" parent="Rotation"]
+position = Vector2(0, -88)
+
+[node name="Platform" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+remote_path = NodePath("../../../Platform")
+update_rotation = false
+update_scale = false
+
+[node name="Ball1" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+position = Vector2(0, 8)
+remote_path = NodePath("../../../Ball1")
+update_rotation = false
+update_scale = false
+
+[node name="Ball2" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+position = Vector2(0, 24)
+remote_path = NodePath("../../../Ball2")
+update_rotation = false
+update_scale = false
+
+[node name="Ball3" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+position = Vector2(0, 40)
+remote_path = NodePath("../../../Ball3")
+update_rotation = false
+update_scale = false
+
+[node name="Ball4" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+position = Vector2(0, 56)
+remote_path = NodePath("../../../Ball4")
+update_rotation = false
+update_scale = false
+
+[node name="Ball5" type="RemoteTransform2D" parent="Rotation/RotationPoint"]
+position = Vector2(0, 72)
+remote_path = NodePath("../../../Ball5")
+update_rotation = false
+update_scale = false
+
+[node name="Ball1" type="Sprite2D" parent="."]
+position = Vector2(0, -80)
+texture = ExtResource("2_tg3of")
+
+[node name="Ball2" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+texture = ExtResource("2_tg3of")
+
+[node name="Ball3" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+texture = ExtResource("2_tg3of")
+
+[node name="Ball4" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("2_tg3of")
+
+[node name="Ball5" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_tg3of")
+
+[connection signal="area_entered" from="Platform/Hitbox" to="." method="_on_hitbox_area_entered"]

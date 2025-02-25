@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://2n65pmkmpmp3"]
+
+[ext_resource type="Script" uid="uid://q4sph7cxj7vh" path="res://Scripts/LevelElements/BulletBillLauncher.gd" id="1_xve2t"]
+[ext_resource type="Texture2D" uid="uid://b1slbhxy78d4q" path="res://Assets/Sprites/Objects/BulletBillLauncher.png" id="2_wug6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0prld"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30oik"]
+size = Vector2(48, 32)
+
+[node name="BulletBillLauncher" type="StaticBody2D"]
+collision_layer = 5
+script = ExtResource("1_xve2t")
+bullet_time = 5
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0prld")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_wug6i")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="PlayerDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_30oik")
+
+[connection signal="timeout" from="Timer" to="." method="summon_cannon_ball"]

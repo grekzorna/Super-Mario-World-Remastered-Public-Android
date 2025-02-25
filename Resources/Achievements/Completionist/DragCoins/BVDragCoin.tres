@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://biht6nrn04bdg"]
+
+[ext_resource type="Texture2D" uid="uid://bbdlkxhai23yb" path="res://Assets/Sprites/AchievementIcons/46584.png" id="1_nefp6"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_vgn0w"]
+
+[resource]
+script = ExtResource("1_vgn0w")
+title = "The Dragon's Hoard"
+description = "Collect all Dragon Coins in all eligible levels in the Valley of Bowser"
+icon = ExtResource("1_nefp6")

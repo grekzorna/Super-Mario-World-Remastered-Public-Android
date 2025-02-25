@@ -1,0 +1,346 @@
+[gd_scene load_steps=25 format=3 uid="uid://cjrk7sj67hipw"]
+
+[ext_resource type="Script" path="res://Scripts/Autoload/game_manager.gd" id="1_menhw"]
+[ext_resource type="Texture2D" uid="uid://clquarihnko0u" path="res://Assets/Sprites/UI/Messages/YI1 A.png" id="2_vm6vc"]
+[ext_resource type="Texture2D" uid="uid://c83tu557yabu6" path="res://Assets/Sprites/Characters/DykasKong.png" id="3_k407n"]
+[ext_resource type="PackedScene" uid="uid://bks21whts2vvh" path="res://Instances/UI/speedrun_timer.tscn" id="6_25a6y"]
+[ext_resource type="AudioStream" uid="uid://c8g55fjvmtlnb" path="res://Assets/Audio/SFX/Crash.wav" id="8_f7dcq"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="8_yha2h"]
+[ext_resource type="PackedScene" uid="uid://bdwod2eetvwea" path="res://Instances/UI/course_clear.tscn" id="20_aa66g"]
+[ext_resource type="Texture2D" uid="uid://366jnmfg8vjg" path="res://Assets/Sprites/UI/GameOver.png" id="21_lfatl"]
+
+[sub_resource type="Animation" id="Animation_abcuy"]
+resource_name = "Appear"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pvref"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Message:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tv14v"]
+_data = {
+"Appear": SubResource("Animation_abcuy"),
+"RESET": SubResource("Animation_pvref")
+}
+
+[sub_resource type="Animation" id="Animation_upxee"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, 135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Over:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(497, 135)]
+}
+
+[sub_resource type="Animation" id="Animation_2ven4"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Game:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-32, 135), Vector2(216, 135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Over:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(497, 135), Vector2(264, 135)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5sdu"]
+_data = {
+"RESET": SubResource("Animation_upxee"),
+"Show": SubResource("Animation_2ven4")
+}
+
+[sub_resource type="Shader" id="Shader_krkh3"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_usxvh"]
+shader = SubResource("Shader_krkh3")
+
+[sub_resource type="Shader" id="Shader_xm74j"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ngb7"]
+shader = SubResource("Shader_xm74j")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 480.0
+shader_parameter/screen_height = 270.0
+
+[sub_resource type="Animation" id="Animation_l6cnr"]
+resource_name = "Close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.05, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ol46f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek5yi"]
+_data = {
+"Close": SubResource("Animation_l6cnr"),
+"RESET": SubResource("Animation_ol46f")
+}
+
+[sub_resource type="Animation" id="Animation_kxkp1"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.833333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pkpkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3lsjg"]
+_data = {
+"Appear": SubResource("Animation_kxkp1"),
+"RESET": SubResource("Animation_pkpkx")
+}
+
+[node name="GameManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_menhw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 10
+
+[node name="Message" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 83.0
+offset_right = 40.0
+offset_bottom = 123.0
+grow_horizontal = 2
+scale = Vector2(1e-05, 1e-05)
+mouse_filter = 2
+use_top_left = true
+
+[node name="MessageRect" type="TextureRect" parent="CanvasLayer/Message"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_vm6vc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_tv14v")
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 48.0
+grow_horizontal = 0
+texture = ExtResource("3_k407n")
+expand_mode = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="CourseClear" parent="UI" instance=ExtResource("20_aa66g")]
+auto_translate_mode = 1
+
+[node name="GameOverText" type="Node" parent="UI"]
+
+[node name="Game" type="Sprite2D" parent="UI/GameOverText"]
+z_index = 4096
+z_as_relative = false
+position = Vector2(-32, 135)
+texture = ExtResource("21_lfatl")
+vframes = 2
+
+[node name="Over" type="Sprite2D" parent="UI/GameOverText"]
+z_index = 4096
+z_as_relative = false
+position = Vector2(497, 135)
+texture = ExtResource("21_lfatl")
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/GameOverText"]
+libraries = {
+"": SubResource("AnimationLibrary_l5sdu")
+}
+
+[node name="ColorRect" type="ColorRect" parent="UI/GameOverText"]
+material = SubResource("ShaderMaterial_usxvh")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="SpeedrunTimer" parent="UI" instance=ExtResource("6_25a6y")]
+
+[node name="CircleClose" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_7ngb7")
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
+
+[node name="Animations" type="AnimationPlayer" parent="UI/CircleClose"]
+libraries = {
+"": SubResource("AnimationLibrary_ek5yi")
+}
+
+[node name="Crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_f7dcq")
+volume_db = 24.0
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="SavingText" type="Label" parent="CanvasLayer2"]
+modulate = Color(1, 1, 1, 0)
+z_index = 4096
+z_as_relative = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_yha2h")
+text = "Saving..."
+vertical_alignment = 1
+uppercase = true
+
+[node name="Animation" type="AnimationPlayer" parent="CanvasLayer2/SavingText"]
+libraries = {
+"": SubResource("AnimationLibrary_3lsjg")
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

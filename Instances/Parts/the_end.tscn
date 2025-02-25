@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://qxbhbjvatqar"]
+
+[ext_resource type="Texture2D" uid="uid://jq7mgnqbr845" path="res://Assets/Sprites/Characters/Peach/Ending.png" id="1_uxkyn"]
+[ext_resource type="Texture2D" uid="uid://dbkkt3ti8w37r" path="res://Assets/Sprites/Characters/Mario/Ending.png" id="2_do8fk"]
+[ext_resource type="Texture2D" uid="uid://cbi02abuynpbd" path="res://Assets/Sprites/Characters/Luigi/Ending.png" id="3_5fnso"]
+[ext_resource type="Texture2D" uid="uid://b4euj3sb66whn" path="res://Assets/Sprites/Characters/Toadette/Ending.png" id="4_iw05l"]
+[ext_resource type="Texture2D" uid="uid://cdu26cn1b0da4" path="res://Assets/Sprites/Characters/Toad/Ending.png" id="5_16lfq"]
+[ext_resource type="Texture2D" uid="uid://b0qenq6nie1jv" path="res://Assets/Sprites/Cutscenes/TheEnd.png" id="6_dquii"]
+
+[sub_resource type="GDScript" id="GDScript_y4rfs"]
+script/source = "extends Node2D
+
+@onready var ending_sprites := {0: preload(\"res://Assets/Sprites/Characters/Mario/Ending.png\"), 1: preload(\"res://Assets/Sprites/Characters/Luigi/Ending.png\"), 2: preload(\"res://Assets/Sprites/Characters/Toad/Ending.png\"), 3: preload(\"res://Assets/Sprites/Characters/Toadette/Ending.png\")}
+@onready var players := [$Player1, $Player2, $Player3, $Player4]
+
+var can_leave := false
+
+func _ready() -> void:
+	for i in CoopManager.players_connected:
+		players[i].show()
+		players[i].texture = CoopManager.player_characters[i].ending_portrait
+	await $Animation.animation_finished
+	can_leave = true
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"ui_accept\") and can_leave:
+		TransitionManager.transition_to_menu(TransitionManager.TITLE_SCREEN, GameManager.current_level)
+"
+
+[sub_resource type="Animation" id="Animation_cqcam"]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pfau5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s0sww"]
+_data = {
+&"Appear": SubResource("Animation_cqcam"),
+&"RESET": SubResource("Animation_pfau5")
+}
+
+[node name="TheEnd" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
+script = SubResource("GDScript_y4rfs")
+
+[node name="Peach" type="Sprite2D" parent="."]
+z_index = 4
+position = Vector2(176, -72)
+texture = ExtResource("1_uxkyn")
+
+[node name="Player1" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(136, -32)
+texture = ExtResource("2_do8fk")
+offset = Vector2(0, -40)
+
+[node name="Player2" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(216, -32)
+texture = ExtResource("3_5fnso")
+offset = Vector2(0, -40)
+flip_h = true
+
+[node name="Player3" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(248, -31)
+texture = ExtResource("4_iw05l")
+offset = Vector2(0, -40)
+flip_h = true
+
+[node name="Player4" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(104, -31)
+texture = ExtResource("5_16lfq")
+offset = Vector2(0, -40)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(176, -144)
+texture = ExtResource("6_dquii")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_s0sww")
+}

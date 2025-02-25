@@ -1,0 +1,274 @@
+[gd_scene load_steps=31 format=3 uid="uid://be68yx0gtbtig"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/KoopaTroopa.gd" id="1_t3ph6"]
+[ext_resource type="Script" path="res://Scripts/HeldObjects/green_koopa_shell.gd" id="2_y8knc"]
+[ext_resource type="Texture2D" uid="uid://csk3ikj546q61" path="res://Assets/Sprites/Enemys/Koopas/KoopaShells/Blue.png" id="3_fip1g"]
+[ext_resource type="Texture2D" uid="uid://cbqfuxjjdwpk6" path="res://Assets/Sprites/Enemys/Koopas/KoopaTroopas/Green.png" id="3_p66hl"]
+[ext_resource type="PackedScene" uid="uid://buynfqe32158d" path="res://Instances/Parts/drop_shadow.tscn" id="3_t2bhh"]
+[ext_resource type="AudioStream" uid="uid://jv0kf12d575x" path="res://Assets/Audio/SFX/bump.wav" id="5_18rw4"]
+[ext_resource type="PackedScene" uid="uid://xqivdp4tj0se" path="res://Instances/Particles/Player/skid.tscn" id="6_ekdlf"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="6_loeeu"]
+
+[sub_resource type="Animation" id="Animation_hsrgp"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_ncayn"]
+resource_name = "Shake"
+length = 0.4
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o2ko8"]
+_data = {
+"RESET": SubResource("Animation_hsrgp"),
+"Shake": SubResource("Animation_ncayn")
+}
+
+[sub_resource type="Animation" id="Animation_iyk6p"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_yp8y6"]
+resource_name = "IdleEntity"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_70ygd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_noby3"]
+resource_name = "Spin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_jcph4"]
+resource_name = "SpinEntity"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qffy5"]
+_data = {
+"Idle": SubResource("Animation_iyk6p"),
+"IdleEntity": SubResource("Animation_yp8y6"),
+"RESET": SubResource("Animation_70ygd"),
+"Spin": SubResource("Animation_noby3"),
+"SpinEntity": SubResource("Animation_jcph4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elyd6"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dsix"]
+size = Vector2(9.5, 8.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l7c5"]
+radius = 14.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_54vbe"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(-10, -0.5, 0)
+spread = 22.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[sub_resource type="PackedScene" id="PackedScene_gwbqt"]
+_bundled = {
+"conn_count": 3,
+"conns": PackedInt32Array(6, 0, 39, 38, 2, 0, 0, 10, 0, 39, 40, 2, 0, 0, 12, 0, 42, 41, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("KoopaShell", "collision_layer", "collision_mask", "floor_constant_speed", "script", "can_destroy", "destructable", "CharacterBody2D", "Sprite", "position", "texture", "hframes", "vframes", "frame", "Sprite2D", "DropShadow", "RespawnShake", "root_node", "libraries", "speed_scale", "AnimationPlayer", "Animations", "CollisionShape2D", "visible", "shape", "Hitbox", "Area2D", "Bounce", "stream", "volume_db", "AudioStreamPlayer", "Node2D", "KoopaPickupRange", "VisibleOnScreenNotifier2D", "self_modulate", "Skid", "emitting", "process_material", "hitbox_hit", "area_entered", "_on_koopa_pickup_range_area_entered", "_on_visible_on_screen_notifier_2d_screen_entered", "screen_entered"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 7, 0, -1, 6, 1, 0, 2, 1, 3, 2, 4, 3, 5, 2, 6, 2, 0, 0, 0, 14, 8, -1, 5, 9, 4, 10, 5, 11, 1, 12, 1, 13, 6, 0, 1, 0, 2147483647, 15, 7, 0, 0, 1, 0, 20, 16, -1, 3, 17, 8, 18, 9, 19, 10, 0, 1, 0, 20, 21, -1, 1, 18, 11, 0, 0, 0, 22, 22, -1, 3, 23, 12, 9, 13, 24, 14, 0, 0, 0, 26, 25, -1, 2, 23, 12, 9, 4, 0, 6, 0, 22, 22, -1, 2, 9, 15, 24, 16, 0, 0, 0, 30, 27, -1, 2, 28, 17, 29, 18, 0, 0, 0, 31, 31, -1, 0, 0, 9, 0, 26, 32, -1, 1, 23, 12, 0, 10, 0, 22, 22, -1, 2, 9, 4, 24, 19, 0, 0, 0, 33, 33, -1, 2, 34, 20, 9, 21, 0, 0, 0, 2147483647, 35, 22, 2, 36, 12, 37, 23, 0),
+"variants": [16, 4, true, ExtResource("2_y8knc"), Vector2(0, -8), ExtResource("3_fip1g"), 2, ExtResource("3_t2bhh"), NodePath(""), {
+"": SubResource("AnimationLibrary_o2ko8")
+}, 2.0, {
+"": SubResource("AnimationLibrary_qffy5")
+}, false, Vector2(0, -4), SubResource("RectangleShape2D_elyd6"), Vector2(0, 3), SubResource("RectangleShape2D_2dsix"), ExtResource("5_18rw4"), -15.0, SubResource("CircleShape2D_8l7c5"), Color(1, 1, 1, 0), Vector2(0, -9), ExtResource("6_ekdlf"), SubResource("ParticleProcessMaterial_54vbe")],
+"version": 3
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffnw1"]
+atlas = ExtResource("6_loeeu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jao0q"]
+atlas = ExtResource("6_loeeu")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x5s02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffnw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jao0q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_j2ad1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_cytue"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3c2t"]
+_data = {
+"RESET": SubResource("Animation_j2ad1"),
+"default": SubResource("Animation_cytue")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56jfv"]
+size = Vector2(12, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ot44"]
+size = Vector2(16, 20)
+
+[node name="KoopaTroopa" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+floor_constant_speed = true
+script = ExtResource("1_t3ph6")
+enemy_height = 12
+yoshi_behavior = "Spit"
+spit_item = SubResource("PackedScene_gwbqt")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -12)
+scale = Vector2(1.9, 2.1)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("3_p66hl")
+hframes = 2
+
+[node name="DropShadow" parent="Sprite" instance=ExtResource("3_t2bhh")]
+
+[node name="Wings" type="AnimatedSprite2D" parent="Sprite"]
+visible = false
+position = Vector2(6, -3)
+sprite_frames = SubResource("SpriteFrames_x5s02")
+autoplay = "default"
+frame_progress = 0.359816
+
+[node name="DropShadow" parent="Sprite/Wings" instance=ExtResource("3_t2bhh")]
+
+[node name="Animations" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_w3c2t")
+}
+autoplay = "default"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_56jfv")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_3ot44")
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2(-10, -5)
+target_position = Vector2(0, 16)
+collision_mask = 15
+hit_from_inside = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

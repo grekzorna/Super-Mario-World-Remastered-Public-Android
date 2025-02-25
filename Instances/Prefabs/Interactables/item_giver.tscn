@@ -1,0 +1,270 @@
+[gd_scene load_steps=23 format=3 uid="uid://b3bv5d6f7y4rw"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/item_giver.gd" id="1_uentp"]
+[ext_resource type="Texture2D" uid="uid://cua8n6buq7off" path="res://Assets/Sprites/Objects/ItemGiverBase.png" id="1_wycru"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="2_22s5a"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="2_bhpql"]
+[ext_resource type="Texture2D" uid="uid://bki3y2ufqlbul" path="res://Assets/Sprites/Particles/HologramMask.png" id="2_iy312"]
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="5_d77le"]
+[ext_resource type="Texture2D" uid="uid://dhb570bi4rwm6" path="res://Assets/Sprites/Objects/ArrowBlocks.png" id="6_8ees6"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="7_3akcd"]
+
+[sub_resource type="Animation" id="Animation_ysc2m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_nnrh7"]
+resource_name = "new_animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnmre"]
+_data = {
+"RESET": SubResource("Animation_ysc2m"),
+"new_animation": SubResource("Animation_nnrh7")
+}
+
+[sub_resource type="Curve" id="Curve_13dcc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.902857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vnfy4"]
+curve = SubResource("Curve_13dcc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02fqn"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -15, 0)
+alpha_curve = SubResource("CurveTexture_vnfy4")
+
+[sub_resource type="Shader" id="Shader_faeoq"]
+code = "shader_type canvas_item;
+
+uniform vec4 baseColor: source_color = vec4(0.3058, 0.835, 0.960, 1.);
+uniform float speed = 0.5;
+uniform vec4 linesColor: source_color = vec4(0.633232, 0.910156, 0.555693, 1.);
+uniform float linesColorIntensity = 5.;
+uniform sampler2D hologramTexture;
+uniform vec2 hologramTextureTiling = vec2(1., 5.);
+
+vec2 tilingAndOffset(vec2 uv, vec2 tiling, vec2 offset) {
+    return mod(uv * tiling + offset, 1);
+}
+
+void fragment() {
+    vec2 offset = vec2(TIME * speed / 100.0);
+    vec2 tiling = tilingAndOffset(UV, hologramTextureTiling, offset);
+
+    vec4 noise = texture(hologramTexture, tiling);
+
+    float fresnel = 0.71;
+    vec4 colorLines = linesColor * vec4(vec3(linesColorIntensity), 1.0);
+    vec4 emission = colorLines * fresnel * noise;
+
+    vec4 albedo = baseColor;
+    float alpha = dot(noise.rgb, vec3(1.0));
+    vec4 hologram;
+    hologram.rgb = emission.rgb + (1.0 - emission.rgb) * albedo.rgb * albedo.a;
+    hologram.a = emission.a + (1.0 - emission.a) * alpha;
+    hologram.a = hologram.a + (1.0 - hologram.a) * albedo.a;
+    COLOR = texture(TEXTURE, UV);
+    COLOR.rgb = COLOR.rgb + (1.0 - COLOR.rgb) * hologram.rgb;
+    COLOR.a = min(COLOR.a, hologram.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opdb7"]
+shader = SubResource("Shader_faeoq")
+shader_parameter/baseColor = Color(0.305882, 0.835294, 0.960784, 0.752941)
+shader_parameter/speed = 64.0
+shader_parameter/linesColor = Color(0.631373, 0.909804, 0.556863, 0.509804)
+shader_parameter/linesColorIntensity = -0.005
+shader_parameter/hologramTextureTiling = Vector2(4, 4)
+shader_parameter/hologramTexture = ExtResource("2_iy312")
+
+[sub_resource type="Animation" id="Animation_hwvjx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tlasn"]
+resource_name = "Take"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_byrjg"]
+resource_name = "new_animation"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -13), Vector2(0, -20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vneel"]
+_data = {
+"RESET": SubResource("Animation_hwvjx"),
+"Take": SubResource("Animation_tlasn"),
+"new_animation": SubResource("Animation_byrjg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvoip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goqqn"]
+size = Vector2(16, 16)
+
+[node name="ItemGiver" type="Node2D"]
+script = ExtResource("1_uentp")
+starting_item = ExtResource("2_22s5a")
+can_cycle = true
+
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_wycru")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Base"]
+libraries = {
+"": SubResource("AnimationLibrary_vnmre")
+}
+autoplay = "new_animation"
+speed_scale = 10.0
+
+[node name="Collision" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-16, 0, 16, 0, 10, -2, -10, -2)
+one_way_collision = true
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+modulate = Color(0.462745, 1, 1, 1)
+z_index = -1
+position = Vector2(0, -3)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_02fqn")
+lifetime = 1.5
+
+[node name="ItemPreview" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_opdb7")
+position = Vector2(0, -24)
+texture = ExtResource("2_bhpql")
+
+[node name="Animation" type="AnimationPlayer" parent="ItemPreview"]
+libraries = {
+"": SubResource("AnimationLibrary_vneel")
+}
+autoplay = "new_animation"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_kvoip")
+
+[node name="Block" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(-24, -56)
+script = ExtResource("5_d77le")
+visuals = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Block"]
+texture = ExtResource("6_8ees6")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+shape = SubResource("RectangleShape2D_goqqn")
+
+[node name="Block2" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(24, -56)
+script = ExtResource("5_d77le")
+visuals = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="Block2"]
+texture = ExtResource("6_8ees6")
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
+shape = SubResource("RectangleShape2D_goqqn")
+
+[node name="Label" type="Label" parent="."]
+z_index = 6
+offset_left = -56.0
+offset_right = 56.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("7_3akcd")
+text = "Mushroom"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="block_hitted" from="Block" to="." method="cycle_item" binds= [-1]]
+[connection signal="block_hitted" from="Block2" to="." method="cycle_item" binds= [1]]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwcgvaei6jt52"]
+
+[ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="1_jlrmp"]
+[ext_resource type="Script" path="res://Scripts/Classes/Items/peach_coin.gd" id="2_3x5ch"]
+[ext_resource type="Texture2D" uid="uid://1wkpndp036e0" path="res://Assets/Sprites/Items/PeachCoin.png" id="2_7kmej"]
+[ext_resource type="Texture2D" uid="uid://erkpjwgk5vrd" path="res://Assets/Sprites/Items/PeachCoinCollected.png" id="3_wbe2q"]
+[ext_resource type="Texture2D" uid="uid://ccq77edy615lq" path="res://Assets/Sprites/Particles/CrystalCoinShine.png" id="3_wwhrh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i4ai"]
+atlas = ExtResource("2_7kmej")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2yeb"]
+atlas = ExtResource("2_7kmej")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy52p"]
+atlas = ExtResource("2_7kmej")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arj8f"]
+atlas = ExtResource("2_7kmej")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bg5p5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wbe2q")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_0i4ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2yeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy52p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arj8f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_st1os"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k58mo"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 24.0
+emission_ring_radius = 16.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 2.0
+anim_speed_max = 4.0
+
+[node name="PeachCoin" instance=ExtResource("1_jlrmp")]
+script = ExtResource("2_3x5ch")
+
+[node name="Sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_bg5p5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="3"]
+material = SubResource("CanvasItemMaterial_st1os")
+amount = 4
+texture = ExtResource("3_wwhrh")
+process_material = SubResource("ParticleProcessMaterial_k58mo")

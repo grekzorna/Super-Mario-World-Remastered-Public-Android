@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvndki60vuma3"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/fire_flower.gd" id="1_ixvxh"]
+[ext_resource type="Resource" uid="uid://cspfu8p1yhsoc" path="res://Resources/PlayerPowerUpState/Shell.tres" id="2_shqtp"]
+[ext_resource type="Texture2D" uid="uid://cox6li6at1ja1" path="res://Assets/Sprites/Items/BlueShell.png" id="3_hxrjk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0i1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0nnm"]
+size = Vector2(10, 1)
+
+[node name="ShellPowerup" type="CharacterBody2D"]
+script = ExtResource("1_ixvxh")
+power = ExtResource("2_shqtp")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_hxrjk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_i0i1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_d0nnm")

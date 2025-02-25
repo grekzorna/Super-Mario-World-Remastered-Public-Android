@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://5kw6hx8wfe78"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_fcmij"]
+[ext_resource type="Texture2D" uid="uid://dkkkykfdwdmvd" path="res://Assets/Sprites/AchievementIcons/Speedrun.png" id="1_yw2ii"]
+
+[resource]
+script = ExtResource("1_fcmij")
+title = "That Was Fast!"
+description = "Rescue the princess in under 20 minutes"
+icon = ExtResource("1_yw2ii")

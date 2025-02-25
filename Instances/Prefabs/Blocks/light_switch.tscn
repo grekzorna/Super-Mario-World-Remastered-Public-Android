@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxm5rcpyhjrgk"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/light_switch.gd" id="1_xcymv"]
+[ext_resource type="Texture2D" uid="uid://mmijnxivxymm" path="res://Assets/Sprites/Objects/LightSwitch.png" id="2_4rqse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qr0g8"]
+size = Vector2(16, 16)
+
+[node name="LightSwitch" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_xcymv")
+visuals = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4rqse")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qr0g8")

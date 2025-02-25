@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://dy5trv20aii3n"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_cqvdd"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_oicot"]
+[ext_resource type="AudioStream" uid="uid://cwraguncjdkmy" path="res://Resources/MusicTracks/Overworld.tres" id="2_qesck"]
+[ext_resource type="AudioStream" uid="uid://dhdlx2rwva53m" path="res://Resources/MusicTracks/OverworldAutumnAlt.tres" id="3_814f4"]
+[ext_resource type="Texture2D" uid="uid://501o5v4tsfv0" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds/Clouds1.png" id="4_piphp"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="5_iebvb"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="7_w1roi"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="11_m7tbt"]
+[ext_resource type="PackedScene" uid="uid://dv8x8ro8chub2" path="res://Instances/Prefabs/Items/yoshi_egg.tscn" id="12_fcloj"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="13_vwbqn"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywbs5"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="Special3A" type="Node"]
+script = ExtResource("1_cqvdd")
+level_music = ExtResource("2_qesck")
+autumn_music = ExtResource("3_814f4")
+lock_camera = true
+
+[node name="LevelBG" parent="." instance=ExtResource("2_oicot")]
+main_texture = ExtResource("4_piphp")
+sky_colour = Color(0.972549, 0.894118, 0.690196, 1)
+
+[node name="Player" parent="." instance=ExtResource("5_iebvb")]
+material = SubResource("ShaderMaterial_ywbs5")
+position = Vector2(72, 0)
+
+[node name="TileMap" parent="." instance=ExtResource("7_w1roi")]
+layer_0/tile_data = PackedInt32Array(-262140, 917509, 4, -262139, 983045, 4, -262128, 917509, 4, -262127, 983045, 4, -1048560, 786437, 5, -1048559, 851973, 5, -983024, 786437, 5, -983023, 851973, 5, -917488, 786437, 5, -917487, 851973, 5, -851952, 786437, 5, -851951, 851973, 5, -786416, 786437, 5, -786415, 851973, 5, -720880, 786437, 5, -720879, 851973, 5, -655344, 786437, 5, -655343, 851973, 5, -589808, 786437, 5, -589807, 851973, 5, -524272, 786437, 5, -524271, 851973, 5, -458736, 786437, 5, -458735, 851973, 5, -393200, 786437, 5, -393199, 851973, 5, -327664, 786437, 5, -327663, 851973, 5, -1114108, 786437, 5, -1114107, 851973, 5, -1048572, 786437, 5, -1048571, 851973, 5, -983036, 786437, 5, -983035, 851973, 5, -917500, 786437, 5, -917499, 851973, 5, -851964, 786437, 5, -851963, 851973, 5, -786428, 786437, 5, -786427, 851973, 5, -720892, 786437, 5, -720891, 851973, 5, -655356, 786437, 5, -655355, 851973, 5, -589820, 786437, 5, -589819, 851973, 5, -524284, 786437, 5, -524283, 851973, 5, -458748, 786437, 5, -458747, 851973, 5, -393212, 786437, 5, -393211, 851973, 5, -327676, 786437, 5, -327675, 851973, 5, -1114096, 786437, 5, -1114095, 851973, 5)
+layer_1/tile_data = PackedInt32Array(3, 65555, 0, 4, 65555, 0, 5, 65555, 0, 6, 65555, 0, 7, 65555, 0, 8, 65555, 0, 9, 65555, 0, 10, 65555, 0, 11, 65555, 0, 12, 65555, 0, 13, 65555, 0, 14, 65555, 0, 15, 65555, 0, 16, 65555, 0, 17, 65555, 0, 65539, 65555, 1, 65540, 65555, 1, 65541, 65555, 1, 65542, 65555, 1, 65543, 65555, 1, 65544, 65555, 1, 65545, 65555, 1, 65546, 65555, 1, 65547, 65555, 1, 65548, 65555, 1, 65549, 65555, 1, 65550, 65555, 1, 65551, 65555, 1, 65552, 65555, 1, 65553, 65555, 1, 131075, 65555, 1, 131076, 65555, 1, 131077, 65555, 1, 131078, 65555, 1, 131079, 65555, 1, 131080, 65555, 1, 131081, 65555, 1, 131082, 65555, 1, 131083, 65555, 1, 131084, 65555, 1, 131085, 65555, 1, 131086, 65555, 1, 131087, 65555, 1, 131088, 65555, 1, 131089, 65555, 1, 18, 65555, 0, 65554, 65555, 1, 131090, 65555, 1, 2, 19, 0, 65538, 19, 1, 131074, 19, 1, 19, 131091, 0, 65555, 131091, 1, 131091, 131091, 1, 196610, 19, 2, 196611, 65555, 2, 196612, 65555, 2, 196613, 65555, 2, 196614, 65555, 2, 196615, 65555, 2, 196616, 65555, 2, 196617, 65555, 2, 196618, 65555, 2, 196619, 65555, 2, 196620, 65555, 2, 196621, 65555, 2, 196622, 65555, 2, 196623, 65555, 2, 196624, 65555, 2, 196625, 65555, 2, 196626, 65555, 2, 196627, 131091, 2)
+
+[node name="LevelGuide" type="Sprite2D" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+z_index = -10
+position = Vector2(48, -384)
+centered = false
+
+[node name="?Block" parent="." instance=ExtResource("11_m7tbt")]
+position = Vector2(184, -56)
+item = ExtResource("12_fcloj")
+
+[node name="PipeArea" parent="." instance=ExtResource("13_vwbqn")]
+position = Vector2(80, -48)
+enter_direction = "Up"
+exit_only = true
+
+[node name="PipeArea2" parent="." instance=ExtResource("13_vwbqn")]
+position = Vector2(272, -48)
+enter_direction = "Up"
+level_scene = "res://Instances/Levels/SpecialWorld/special_3.tscn"
+pipe_id = 1

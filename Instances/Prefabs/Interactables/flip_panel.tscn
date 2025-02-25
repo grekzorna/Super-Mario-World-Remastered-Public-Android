@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqjcyap8tko20"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/FlipPanel.gd" id="1_0iimy"]
+[ext_resource type="Texture2D" uid="uid://syn6qsodx0dp" path="res://Assets/Sprites/Castle/FlipPanel.png" id="2_luppx"]
+[ext_resource type="Texture2D" uid="uid://ntop0f2nhg4x" path="res://Assets/Sprites/Castle/ChainFence.png" id="3_ajp30"]
+[ext_resource type="PackedScene" uid="uid://cnv6i6byojhnq" path="res://Instances/Parts/climbable_area.tscn" id="4_88n5v"]
+[ext_resource type="Texture2D" uid="uid://0u7skxqiwcqm" path="res://icon.png" id="5_qm6hc"]
+
+[node name="FlipPanel" type="CollisionShape2D"]
+script = ExtResource("1_0iimy")
+
+[node name="Panel" type="NinePatchRect" parent="."]
+visibility_layer = 2
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_luppx")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+visibility_layer = 2
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ajp30")
+stretch_mode = 1
+
+[node name="ClimbableArea" parent="." instance=ExtResource("4_88n5v")]
+punchable = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbableArea"]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("5_qm6hc")
+
+[connection signal="area_entered" from="ClimbableArea" to="." method="_on_climbable_area_area_entered"]
+[connection signal="area_exited" from="ClimbableArea" to="." method="_on_climbable_area_area_exited"]

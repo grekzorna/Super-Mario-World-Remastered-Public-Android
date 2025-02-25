@@ -1,0 +1,193 @@
+[gd_scene load_steps=15 format=3 uid="uid://dbw4ae1mpdkb6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/bonus_wheel_block.gd" id="1_fq5t7"]
+[ext_resource type="Texture2D" uid="uid://bw1a5u0puq82u" path="res://Assets/Sprites/UI/StockPanel.png" id="2_vhhbr"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="3_fyept"]
+[ext_resource type="Texture2D" uid="uid://cpjxlqt3sjb6c" path="res://Assets/Sprites/Items/FireFlowerSheet.png" id="4_7af14"]
+[ext_resource type="Texture2D" uid="uid://cue225imgd2wp" path="res://Assets/Sprites/Items/StarMan.png" id="5_c58ws"]
+[ext_resource type="PackedScene" uid="uid://dlr37a5oqwcql" path="res://Instances/Parts/BlockParts/block_animations.tscn" id="6_0ldes"]
+
+[sub_resource type="Animation" id="Animation_2ywit"]
+resource_name = "Flash"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_cfuuu"]
+resource_name = "Flower"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 24)]
+}
+
+[sub_resource type="Animation" id="Animation_hovuw"]
+resource_name = "Mushroom"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dibnw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:wheel_choice")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fp4vu"]
+resource_name = "Spin"
+length = 0.75
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 24), Vector2(0, 48), Vector2(0, 72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..:wheel_choice")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["Mushroom", "Flower", "Star", "Mushroom"]
+}
+
+[sub_resource type="Animation" id="Animation_ngjio"]
+resource_name = "Star"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18m4q"]
+_data = {
+"Flash": SubResource("Animation_2ywit"),
+"Flower": SubResource("Animation_cfuuu"),
+"Mushroom": SubResource("Animation_hovuw"),
+"RESET": SubResource("Animation_dibnw"),
+"Spin": SubResource("Animation_fp4vu"),
+"Star": SubResource("Animation_ngjio")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dexk1"]
+size = Vector2(16, 16)
+
+[node name="BonusWheelBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+sync_to_physics = false
+script = ExtResource("1_fq5t7")
+visuals = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+clip_children = 2
+texture = ExtResource("2_vhhbr")
+
+[node name="Items" type="Node2D" parent="Sprite"]
+
+[node name="Mushroom" type="Sprite2D" parent="Sprite/Items"]
+texture = ExtResource("3_fyept")
+
+[node name="Flower" type="Sprite2D" parent="Sprite/Items"]
+position = Vector2(0, -24)
+texture = ExtResource("4_7af14")
+hframes = 2
+
+[node name="Star" type="Sprite2D" parent="Sprite/Items"]
+position = Vector2(0, -48)
+texture = ExtResource("5_c58ws")
+hframes = 3
+
+[node name="Mushroom2" type="Sprite2D" parent="Sprite/Items"]
+position = Vector2(0, -72)
+texture = ExtResource("3_fyept")
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite/Items"]
+libraries = {
+"": SubResource("AnimationLibrary_18m4q")
+}
+speed_scale = 0.75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_dexk1")
+one_way_collision = true
+
+[node name="BlockAnimations" parent="." instance=ExtResource("6_0ldes")]

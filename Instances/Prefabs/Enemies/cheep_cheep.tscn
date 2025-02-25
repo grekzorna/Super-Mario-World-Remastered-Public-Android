@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5yrc1k2ix7cd"]
+
+[ext_resource type="Script" uid="uid://dtkqq6jij7ymc" path="res://Scripts/Classes/Enemies/CheepCheep.gd" id="1_qj4nr"]
+[ext_resource type="Texture2D" uid="uid://b85m3u16gre6x" path="res://Assets/Sprites/Enemys/CheepCheep.png" id="2_a32xg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmvjm"]
+atlas = ExtResource("2_a32xg")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e50yf"]
+atlas = ExtResource("2_a32xg")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82wef"]
+atlas = ExtResource("2_a32xg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3xce"]
+atlas = ExtResource("2_a32xg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sn8cl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmvjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e50yf")
+}],
+"loop": true,
+"name": &"Flop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82wef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3xce")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0moy"]
+size = Vector2(6, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2fck"]
+size = Vector2(8, 8)
+
+[node name="CheepCheep" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+floor_max_angle = 0.0
+floor_snap_length = 0.0
+script = ExtResource("1_qj4nr")
+yoshi_behavior = "Swallow"
+ice_offset = Vector2(0, -8)
+can_jump_on = false
+can_swim = true
+player_bounce_off = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sn8cl")
+animation = &"Swim"
+autoplay = "Swim"
+frame_progress = 0.195924
+flip_h = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_u0moy")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_m2fck")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

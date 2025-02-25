@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://rkrysvirsrqq"]
+
+[ext_resource type="AudioStream" uid="uid://mq6aqbplu1fq" path="res://Assets/Audio/BGM/SMB1/SMB1Castle.mp3" id="1_s8kbv"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Smb 1 Castle"
+clip_0/stream = ExtResource("1_s8kbv")
+clip_0/auto_advance = 0
+metadata/Name = "SMB1 Castle Remix"
+metadata/Artist = "Zavok"

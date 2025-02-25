@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://co4dmvnrx8ccr"]
+
+[ext_resource type="Texture2D" uid="uid://d18u17amiy55s" path="res://Assets/Sprites/Challenges/RunBack/Arrow.png" id="1_yfu1j"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/RunBackArrow.gd" id="2_ke3r7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v4bi"]
+atlas = ExtResource("1_yfu1j")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6h5lk"]
+atlas = ExtResource("1_yfu1j")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rsdsv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6v4bi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6h5lk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Arrow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_rsdsv")
+autoplay = "default"
+frame_progress = 0.0149732
+script = ExtResource("2_ke3r7")

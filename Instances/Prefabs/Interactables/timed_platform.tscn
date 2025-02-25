@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://phrtc56c7brx"]
+
+[ext_resource type="Texture2D" uid="uid://b0u138abujoml" path="res://Assets/Sprites/Objects/TimedPlatform.png" id="1_4kjtg"]
+[ext_resource type="Script" path="res://Scripts/Interactables/timed_platform.gd" id="1_nt4mb"]
+[ext_resource type="Texture2D" uid="uid://bjcu21vvji5wy" path="res://Assets/Sprites/Objects/TimedPlatformNumbers.png" id="2_5ppaf"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="3_hss7n"]
+[ext_resource type="Texture2D" uid="uid://dvjurkkyahvnr" path="res://Assets/Sprites/Objects/AutumnTimedPlatform.png" id="4_20iom"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wson1"]
+atlas = ExtResource("2_5ppaf")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbne8"]
+atlas = ExtResource("2_5ppaf")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvuk4"]
+atlas = ExtResource("2_5ppaf")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mcn2"]
+atlas = ExtResource("2_5ppaf")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eqmv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wson1")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbne8")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvuk4")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mcn2")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvfi5"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwngd"]
+size = Vector2(32, 2)
+
+[node name="TimedPlatform" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_nt4mb")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_4kjtg")
+script = ExtResource("3_hss7n")
+autumn_texture = ExtResource("4_20iom")
+overhaul_only = true
+
+[node name="Numbers" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4eqmv")
+animation = &"4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mvfi5")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_vwngd")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="drop"]

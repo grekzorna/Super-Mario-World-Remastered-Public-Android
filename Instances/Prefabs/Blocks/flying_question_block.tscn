@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfip1xv4shg3l"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/flying_question_block.gd" id="1_1ew45"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="3_8h6gl"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="4_8feao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgquj"]
+atlas = ExtResource("3_8h6gl")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbimi"]
+atlas = ExtResource("3_8h6gl")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o3l8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgquj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbimi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FlyingQuestionBlock" type="Node2D"]
+physics_interpolation_mode = 2
+script = ExtResource("1_1ew45")
+continuous_flight = false
+
+[node name="Wings" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_o3l8a")
+autoplay = "default"
+frame_progress = 0.375365
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="?Block" parent="." instance=ExtResource("4_8feao")]
+sync_to_physics = false

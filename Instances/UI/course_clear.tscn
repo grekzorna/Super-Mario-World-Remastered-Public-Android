@@ -1,0 +1,369 @@
+[gd_scene load_steps=26 format=3 uid="uid://bdwod2eetvwea"]
+
+[ext_resource type="Script" uid="uid://c0sp4ocd1v1eb" path="res://Scripts/UI/course_clear.gd" id="1_hne7n"]
+[ext_resource type="Texture2D" uid="uid://doupp6si2rkce" path="res://Assets/Sprites/UI/HUD/CourseClearTemplate.png" id="1_kofbi"]
+[ext_resource type="Texture2D" uid="uid://dasc6w32qumo4" path="res://Assets/Sprites/UI/HUD/Clock.png" id="2_bbegy"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_pegdq"]
+[ext_resource type="Texture2D" uid="uid://bp62wfmjw0ost" path="res://Assets/Sprites/UI/HUD/HUDX.png" id="4_ke7pn"]
+[ext_resource type="Texture2D" uid="uid://ba65dunp68ehu" path="res://Assets/Sprites/Characters/Mario/HUDTitle.png" id="6_4pwmu"]
+[ext_resource type="Texture2D" uid="uid://mjp1jtb61m4p" path="res://Assets/Sprites/UI/HUD/StarCount.png" id="6_prsa3"]
+[ext_resource type="FontFile" uid="uid://c5xts2bvjtjs3" path="res://Assets/Sprites/UI/HUD/CreditsFont.png" id="7_2ddnx"]
+[ext_resource type="AudioStream" uid="uid://6j3677mfd111" path="res://Assets/Audio/SFX/drumrollstart.wav" id="9_cq6g1"]
+[ext_resource type="AudioStream" uid="uid://chc65pu7dd010" path="res://Assets/Audio/SFX/drumrollloop.wav" id="9_oq0du"]
+[ext_resource type="AudioStream" uid="uid://c8dg4wrt4qra1" path="res://Assets/Audio/SFX/drumrollend.wav" id="10_t8se4"]
+[ext_resource type="Shader" uid="uid://bctbpwip7ks6o" path="res://Scripts/Shaders/circle_transition_tres.gdshader" id="13_oe3nr"]
+[ext_resource type="AudioStream" uid="uid://dux3ibl35ihv7" path="res://Assets/Audio/BGM/SMW/LevelClose.mp3" id="13_sxck4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xvnyk"]
+line_spacing = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4itb5"]
+line_spacing = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4smym"]
+line_spacing = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_14vdy"]
+line_spacing = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_dn7ni"]
+line_spacing = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7c6ng"]
+shader = ExtResource("13_oe3nr")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 480.0
+shader_parameter/screen_height = 270.0
+
+[sub_resource type="Animation" id="Animation_7a8xn"]
+resource_name = "Close"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3),
+"transitions": PackedFloat32Array(1, 999, 1),
+"update": 0,
+"values": [1.05, 0.0, 1.05]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_074n5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oi7w2"]
+_data = {
+&"Close": SubResource("Animation_7a8xn"),
+&"RESET": SubResource("Animation_074n5")
+}
+
+[sub_resource type="Animation" id="Animation_o2i7p"]
+resource_name = "FinishAnimation"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5, 11),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.5, 10, 10.0566),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"calculate_points"
+}, {
+"args": [],
+"method": &"tally_score"
+}, {
+"args": [],
+"method": &"finished_animation"
+}, {
+"args": [],
+"method": &"exit_level"
+}]
+}
+tracks/2/type = "animation"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Circle/Animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": PackedStringArray("RESET", "Close"),
+"times": PackedFloat32Array(0, 8.5)
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FadeOut")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("13_sxck4")
+}],
+"times": PackedFloat32Array(8.5)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="Animation" id="Animation_juf0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssfso"]
+_data = {
+&"FinishAnimation": SubResource("Animation_o2i7p"),
+&"RESET": SubResource("Animation_juf0m")
+}
+
+[node name="CourseClear" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hne7n")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 188.0
+offset_top = 115.0
+offset_right = 292.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "course clear!"
+uppercase = true
+
+[node name="Clock" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 188.0
+offset_top = 139.0
+offset_right = 196.0
+offset_bottom = 147.0
+mouse_filter = 2
+texture = ExtResource("2_bbegy")
+stretch_mode = 5
+
+[node name="Timeleft" type="Label" parent="."]
+layout_mode = 2
+offset_left = 196.0
+offset_top = 139.0
+offset_right = 220.0
+offset_bottom = 147.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "000"
+label_settings = SubResource("LabelSettings_xvnyk")
+
+[node name="X" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 220.0
+offset_top = 139.0
+offset_right = 228.0
+offset_bottom = 147.0
+mouse_filter = 2
+texture = ExtResource("4_ke7pn")
+
+[node name="Multiplier" type="Label" parent="."]
+layout_mode = 2
+offset_left = 228.0
+offset_top = 139.0
+offset_right = 244.0
+offset_bottom = 147.0
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "00"
+label_settings = SubResource("LabelSettings_4itb5")
+
+[node name="=" type="Label" parent="."]
+layout_mode = 2
+offset_left = 244.0
+offset_top = 139.0
+offset_right = 252.0
+offset_bottom = 147.0
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "="
+label_settings = SubResource("LabelSettings_4smym")
+
+[node name="Total" type="Label" parent="."]
+layout_mode = 2
+offset_left = 252.0
+offset_top = 139.0
+offset_right = 292.0
+offset_bottom = 147.0
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "00000"
+label_settings = SubResource("LabelSettings_14vdy")
+horizontal_alignment = 2
+
+[node name="PlayerName" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 192.0
+offset_top = 99.0
+offset_right = 296.0
+offset_bottom = 107.0
+mouse_filter = 2
+texture = ExtResource("6_4pwmu")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="BonusStar" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 196.0
+offset_top = 151.0
+offset_right = 284.0
+offset_bottom = 171.0
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Bonus" type="Label" parent="BonusStar"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_pegdq")
+text = "BONUS!"
+label_settings = SubResource("LabelSettings_dn7ni")
+vertical_alignment = 2
+uppercase = true
+
+[node name="StarTotal" type="HBoxContainer" parent="BonusStar"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="StarX" type="TextureRect" parent="BonusStar/StarTotal"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("6_prsa3")
+stretch_mode = 2
+
+[node name="BonusStars" type="Label" parent="BonusStar/StarTotal"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("7_2ddnx")
+text = "10"
+vertical_alignment = 2
+
+[node name="DrumrollStart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_cq6g1")
+volume_db = -10.0
+
+[node name="DrumrollLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_oq0du")
+volume_db = -5.0
+
+[node name="DrumrollEnd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_t8se4")
+volume_db = -10.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -36.0
+offset_right = 52.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_kofbi")
+stretch_mode = 5
+
+[node name="Circle" type="ColorRect" parent="."]
+z_index = 4096
+material = SubResource("ShaderMaterial_7c6ng")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Animation" type="AnimationPlayer" parent="Circle"]
+libraries = {
+&"": SubResource("AnimationLibrary_oi7w2")
+}
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ssfso")
+}
+
+[node name="FadeOut" type="AudioStreamPlayer" parent="."]

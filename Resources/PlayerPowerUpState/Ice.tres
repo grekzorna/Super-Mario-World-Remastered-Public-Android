@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=5 format=3 uid="uid://d3s1narr175by"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_oi3mt"]
+[ext_resource type="Texture2D" uid="uid://b51rawfp56x8i" path="res://Assets/Sprites/Items/IceFlower.png" id="1_wmf6t"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="2_y3w5y"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Ice.gd" id="3_hlvwr"]
+
+[resource]
+script = ExtResource("1_oi3mt")
+state_name = "Ice"
+sprite_frame_name = "Ice"
+power_script = ExtResource("3_hlvwr")
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = false
+power_down = ExtResource("2_y3w5y")
+power_tier = 2
+item_sprite = ExtResource("1_wmf6t")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

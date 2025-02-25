@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b64ifuvsk4v36"]
+
+[ext_resource type="Script" uid="uid://bt27qcumrkt57" path="res://Scripts/Classes/Enemies/Eerie.gd" id="1_am5qj"]
+[ext_resource type="Script" uid="uid://bqdfwdbvl65wk" path="res://Scripts/Classes/EnemyClass.gd" id="2_06jc4"]
+[ext_resource type="Texture2D" uid="uid://bonmac6vfoh0y" path="res://Assets/Sprites/Enemys/Eerie.png" id="2_iopwq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d70ob"]
+atlas = ExtResource("2_iopwq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7npgc"]
+atlas = ExtResource("2_iopwq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cv4u3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d70ob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7npgc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wq6yf"]
+radius = 4.0
+
+[node name="Eerie" type="CharacterBody2D"]
+script = ExtResource("1_am5qj")
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+metadata/_custom_type_script = ExtResource("2_06jc4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cv4u3")
+autoplay = "default"
+frame_progress = 0.716064
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_wq6yf")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

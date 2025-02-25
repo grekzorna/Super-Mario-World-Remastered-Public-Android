@@ -1,0 +1,848 @@
+[gd_scene load_steps=60 format=3 uid="uid://ddg0gmjyyrqa0"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Levels/epiloguecutscene.gd" id="1_0wnrm"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_50y86"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_cs6xm"]
+[ext_resource type="PackedScene" uid="uid://cp5jp56rp76so" path="res://Instances/Prefabs/Items/yoshi_berry.tscn" id="4_e3g88"]
+[ext_resource type="Texture2D" uid="uid://d3hajamnhjfc8" path="res://Assets/Sprites/Objects/YoshiFirePlace.png" id="5_uuxtc"]
+[ext_resource type="Texture2D" uid="uid://c807vdpkccf3o" path="res://Assets/Sprites/Objects/YoshiHouse.png" id="6_sw0av"]
+[ext_resource type="PackedScene" uid="uid://drlaty4ed1k8v" path="res://Instances/Prefabs/FriendlyEntities/bird.tscn" id="7_7sdlh"]
+[ext_resource type="Texture2D" uid="uid://hfq5r5gibl48" path="res://Assets/Sprites/Cutscenes/YoshiHouseBanner.png" id="8_5a7oi"]
+[ext_resource type="AudioStream" uid="uid://bqtw6qm56osh4" path="res://Assets/Audio/BGM/SMW/EpilogueCutscene.mp3" id="9_4ygis"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="9_p40kc"]
+[ext_resource type="Texture2D" uid="uid://dw1x233mbnmp4" path="res://Assets/Sprites/Objects/AutumnYoshiHouse.png" id="10_t7q28"]
+[ext_resource type="Texture2D" uid="uid://di2i5id8vbt5g" path="res://Assets/Sprites/Characters/Peach/Modern.png" id="13_smm1n"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="14_2k7t5"]
+[ext_resource type="Texture2D" uid="uid://dmv3vhp47jrsm" path="res://Assets/Sprites/Characters/Peach/SNES.png" id="15_eg5qf"]
+[ext_resource type="Texture2D" uid="uid://crv4topsehlnq" path="res://Assets/Sprites/Characters/Peach/GBA.png" id="16_qpn5l"]
+[ext_resource type="Texture2D" uid="uid://vh01k4xog3td" path="res://Assets/Sprites/Cutscenes/Eggs/1.png" id="20_iayi1"]
+[ext_resource type="Texture2D" uid="uid://c3ky4nbmmgjic" path="res://Assets/Sprites/UI/EmptyEggFrame.png" id="21_7r475"]
+[ext_resource type="Texture2D" uid="uid://btjbqljdunnmy" path="res://Assets/Sprites/UI/HUD/QuestionMark.png" id="22_g4ruy"]
+[ext_resource type="Texture2D" uid="uid://dkldram0vpfrj" path="res://Assets/Sprites/Characters/Yoshi/BabyYoshis/Red.png" id="23_1go8q"]
+[ext_resource type="Texture2D" uid="uid://ccp5uopuudw2" path="res://Assets/Sprites/Cutscenes/Eggs/2.png" id="24_1tq7s"]
+[ext_resource type="Texture2D" uid="uid://drkxwiekav2c6" path="res://Assets/Sprites/Characters/Yoshi/BabyYoshis/Blue.png" id="25_vg0ye"]
+[ext_resource type="Texture2D" uid="uid://pd3elmy75lje" path="res://Assets/Sprites/Cutscenes/Eggs/3.png" id="26_jo11i"]
+[ext_resource type="Texture2D" uid="uid://blsicm6bbvjlu" path="res://Assets/Sprites/Characters/Yoshi/BabyYoshis/Yellow.png" id="27_aei5b"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="27_cxm3w"]
+[ext_resource type="Texture2D" uid="uid://dcep3itad7x3o" path="res://Assets/Sprites/Characters/Yoshi/Body.png" id="27_epc6e"]
+[ext_resource type="Texture2D" uid="uid://c427mausifbwh" path="res://Assets/Sprites/Cutscenes/Eggs/4.png" id="28_emhrj"]
+[ext_resource type="Texture2D" uid="uid://b3etbiskxr24p" path="res://Assets/Sprites/Characters/Yoshi/BabyYoshis/Green.png" id="29_wu1gm"]
+[ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="30_6qnmk"]
+[ext_resource type="Texture2D" uid="uid://shlkej8pdfxd" path="res://Assets/Sprites/UI/ThankYou.png" id="30_yk07f"]
+[ext_resource type="Texture2D" uid="uid://bs0jauvyxkm81" path="res://Assets/Sprites/UI/ThankYouQuestionMark.png" id="31_bdl06"]
+[ext_resource type="PackedScene" uid="uid://b07lfqfo25fi1" path="res://Instances/Prefabs/player_yoshi.tscn" id="31_xfth2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f5s7"]
+atlas = ExtResource("5_uuxtc")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enmkh"]
+atlas = ExtResource("5_uuxtc")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh278"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f5s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enmkh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5b52"]
+size = Vector2(170, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woeti"]
+size = Vector2(13, 17)
+
+[sub_resource type="Animation" id="Animation_gaod7"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_m81og"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="Animation" id="Animation_48hws"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_445yw"]
+resource_name = "Wave"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [12, 13]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vaytj"]
+_data = {
+"Idle": SubResource("Animation_gaod7"),
+"RESET": SubResource("Animation_m81og"),
+"Walk": SubResource("Animation_48hws"),
+"Wave": SubResource("Animation_445yw")
+}
+
+[sub_resource type="Animation" id="Animation_cxn6x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8m6jj"]
+resource_name = "new_animation"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1998, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7orpd"]
+_data = {
+"RESET": SubResource("Animation_cxn6x"),
+"new_animation": SubResource("Animation_8m6jj")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sehdf"]
+atlas = ExtResource("30_yk07f")
+region = Rect2(0, 0, 75, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44va0"]
+atlas = ExtResource("30_yk07f")
+region = Rect2(75, 0, 53, 32)
+
+[sub_resource type="Animation" id="Animation_u80po"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thank:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-112, -104), Vector2(144, -104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("You:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(448, -104), Vector2(208, -104)]
+}
+
+[sub_resource type="Animation" id="Animation_pytmq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Thank:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-112, -104)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("You:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(448, -104)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_of3b6"]
+_data = {
+"Enter": SubResource("Animation_u80po"),
+"RESET": SubResource("Animation_pytmq")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xb7up"]
+shader = ExtResource("27_cxm3w")
+shader_parameter/og_1 = Color(1, 0, 0.831373, 1)
+shader_parameter/og_2 = Color(0.760784, 0, 0.631373, 1)
+shader_parameter/og_3 = Color(0.478431, 0, 0.4, 1)
+shader_parameter/og_arm = Color(1, 1, 0, 1)
+shader_parameter/og_arm_2 = Color(0, 1, 0, 1)
+shader_parameter/colour_1 = Color(0.827451, 0.631373, 0, 1)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = Color(0, 0, 0, 1)
+shader_parameter/arm_2_colour = Color(0, 0, 0, 1)
+shader_parameter/epsilon = 0.001
+
+[sub_resource type="Animation" id="Animation_y46ir"]
+resource_name = "Await"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-16.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3996),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [17, 15]
+}
+
+[sub_resource type="Animation" id="Animation_sjqjh"]
+resource_name = "AwaitFront"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-16.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3996),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [11, 13]
+}
+
+[sub_resource type="Animation" id="Animation_k1egu"]
+resource_name = "Jump"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2997, 0.4995),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-16.0, -24.0, -16.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2997, 0.4995),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [17, 19, 17]
+}
+
+[sub_resource type="Animation" id="Animation_lynfk"]
+resource_name = "JumpFront"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2997, 0.4995),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-16.0, -24.0, -16.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3996),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [14, 11]
+}
+
+[sub_resource type="Animation" id="Animation_2blfr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-16.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ycig"]
+_data = {
+"Await": SubResource("Animation_y46ir"),
+"AwaitFront": SubResource("Animation_sjqjh"),
+"Jump": SubResource("Animation_k1egu"),
+"JumpFront": SubResource("Animation_lynfk"),
+"RESET": SubResource("Animation_2blfr")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aqv7i"]
+shader = ExtResource("27_cxm3w")
+shader_parameter/og_1 = Color(1, 0, 0.831373, 1)
+shader_parameter/og_2 = Color(0.760784, 0, 0.631373, 1)
+shader_parameter/og_3 = Color(0.478431, 0, 0.4, 1)
+shader_parameter/og_arm = Color(1, 1, 0, 1)
+shader_parameter/og_arm_2 = Color(0, 1, 0, 1)
+shader_parameter/colour_1 = Color(0, 0, 0, 1)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = null
+shader_parameter/arm_2_colour = null
+shader_parameter/epsilon = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ht13s"]
+shader = ExtResource("27_cxm3w")
+shader_parameter/og_1 = Color(1, 0, 0.831373, 1)
+shader_parameter/og_2 = Color(0.760784, 0, 0.631373, 1)
+shader_parameter/og_3 = Color(0.478431, 0, 0.4, 1)
+shader_parameter/og_arm = Color(1, 1, 0, 1)
+shader_parameter/og_arm_2 = Color(0, 1, 0, 1)
+shader_parameter/colour_1 = Color(0, 0, 0, 1)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = null
+shader_parameter/arm_2_colour = null
+shader_parameter/epsilon = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2xpv3"]
+shader = ExtResource("27_cxm3w")
+shader_parameter/og_1 = Color(1, 0, 0.831373, 1)
+shader_parameter/og_2 = Color(0.760784, 0, 0.631373, 1)
+shader_parameter/og_3 = Color(0.478431, 0, 0.4, 1)
+shader_parameter/og_arm = Color(1, 1, 0, 1)
+shader_parameter/og_arm_2 = Color(0, 1, 0, 1)
+shader_parameter/colour_1 = Color(0, 0, 0, 1)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = null
+shader_parameter/arm_2_colour = null
+shader_parameter/epsilon = 0.001
+
+[node name="Cutscene" type="Node"]
+script = ExtResource("1_0wnrm")
+
+[node name="LevelBG" parent="." instance=ExtResource("2_50y86")]
+light_mask = 513
+visibility_layer = 1023
+z_as_relative = false
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)
+
+[node name="TileMap" parent="." instance=ExtResource("3_cs6xm")]
+layer_0/tile_data = PackedInt32Array(65535, 655360, 0, 0, 655360, 0, 1, 655360, 0, 2, 655360, 0, 3, 655360, 0, 4, 655360, 0, 5, 655360, 0, 6, 655360, 0, 7, 655360, 0, 8, 655360, 0, 9, 655360, 0, 10, 655360, 0, 11, 655360, 0, 12, 655360, 0, 13, 655360, 0, 14, 655360, 0, 15, 655360, 0, 16, 655360, 0, 17, 655360, 0, 18, 655360, 0, 19, 655360, 0, 20, 655360, 0, 21, 655360, 0, 22, 655360, 0, 23, 655360, 0, 24, 655360, 0, 25, 655360, 0, 26, 720896, 0, 131071, 589824, 2, 65536, 589824, 2, 65537, 589824, 2, 65538, 589824, 2, 65539, 589824, 2, 65540, 589824, 2, 65541, 589824, 2, 65542, 589824, 2, 65543, 589824, 2, 65544, 589824, 2, 65545, 589824, 2, 65546, 589824, 2, 65547, 589824, 2, 65548, 589824, 2, 65549, 589824, 2, 65550, 589824, 2, 65551, 589824, 2, 65552, 589824, 2, 65553, 589824, 2, 65554, 589824, 2, 65555, 589824, 2, 65556, 589824, 2, 65557, 589824, 2, 65558, 589824, 2, 65559, 589824, 2, 65560, 589824, 2, 65561, 589824, 2, 65562, 720896, 2, 196607, 589824, 2, 131072, 589824, 2, 131073, 589824, 2, 131074, 589824, 2, 131075, 589824, 2, 131076, 589824, 2, 131077, 589824, 2, 131078, 589824, 2, 131079, 589824, 2, 131080, 589824, 2, 131081, 589824, 2, 131082, 589824, 2, 131083, 589824, 2, 131084, 589824, 2, 131085, 589824, 2, 131086, 589824, 2, 131087, 589824, 2, 131088, 589824, 2, 131089, 589824, 2, 131090, 589824, 2, 131091, 589824, 2, 131092, 589824, 2, 131093, 589824, 2, 131094, 589824, 2, 131095, 589824, 2, 131096, 589824, 2, 131097, 589824, 2, 131098, 720896, 2, 262143, 589824, 3, 196608, 589824, 3, 196609, 589824, 3, 196610, 589824, 3, 196611, 589824, 3, 196612, 589824, 3, 196613, 589824, 3, 196614, 589824, 3, 196615, 589824, 3, 196616, 589824, 3, 196617, 589824, 3, 196618, 589824, 3, 196619, 589824, 3, 196620, 589824, 3, 196621, 589824, 3, 196622, 589824, 3, 196623, 589824, 3, 196624, 589824, 3, 196625, 589824, 3, 196626, 589824, 3, 196627, 589824, 3, 196628, 589824, 3, 196629, 589824, 3, 196630, 589824, 3, 196631, 589824, 3, 196632, 589824, 3, 196633, 589824, 3, 196634, 720896, 3, 65529, 524288, 0, 65530, 655360, 0, 65531, 655360, 0, 65532, 655360, 0, 65533, 655360, 0, 65534, 655360, 0, 131065, 524288, 1, 131066, 589824, 2, 131067, 589824, 2, 131068, 589824, 2, 131069, 589824, 2, 131070, 589824, 2, 196601, 524288, 1, 196602, 589824, 2, 196603, 589824, 2, 196604, 589824, 2, 196605, 589824, 2, 196606, 589824, 2, 262137, 524288, 3, 262138, 589824, 3, 262139, 589824, 3, 262140, 589824, 3, 262141, 589824, 3, 262142, 589824, 3)
+
+[node name="House" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(-8, 0)
+
+[node name="YoshiBerry" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(96, -120)
+
+[node name="YoshiBerry2" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(112, -104)
+
+[node name="YoshiBerry3" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(160, -120)
+
+[node name="YoshiBerry4" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(176, -88)
+
+[node name="YoshiBerry5" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(208, -104)
+
+[node name="YoshiBerry6" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(240, -120)
+
+[node name="YoshiBerry7" parent="House" instance=ExtResource("4_e3g88")]
+position = Vector2(272, -104)
+
+[node name="Fireplace" type="AnimatedSprite2D" parent="House"]
+z_index = 1
+position = Vector2(247, -8)
+sprite_frames = SubResource("SpriteFrames_bh278")
+autoplay = "default"
+frame_progress = 0.9996
+
+[node name="Bird" parent="House" instance=ExtResource("7_7sdlh")]
+position = Vector2(112, -144)
+
+[node name="Bird2" parent="House" instance=ExtResource("7_7sdlh")]
+position = Vector2(128, -144)
+
+[node name="Bird3" parent="House" instance=ExtResource("7_7sdlh")]
+position = Vector2(144, -144)
+
+[node name="Bird4" parent="House" instance=ExtResource("7_7sdlh")]
+position = Vector2(160, -144)
+
+[node name="BirdPlatform" type="StaticBody2D" parent="House"]
+collision_layer = 65536
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(184, -141)
+shape = SubResource("RectangleShape2D_q5b52")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(92.5, -151.5)
+shape = SubResource("RectangleShape2D_woeti")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(275, -152)
+shape = SubResource("RectangleShape2D_woeti")
+
+[node name="Banner" type="Sprite2D" parent="House"]
+position = Vector2(184, -120)
+texture = ExtResource("8_5a7oi")
+
+[node name="Level104" type="Sprite2D" parent="House"]
+z_index = -3
+position = Vector2(56, -384)
+texture = ExtResource("6_sw0av")
+centered = false
+script = ExtResource("9_p40kc")
+autumn_texture = ExtResource("10_t7q28")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4ygis")
+autoplay = true
+bus = &"Music"
+
+[node name="Peach" type="Sprite2D" parent="."]
+position = Vector2(504, -16)
+texture = ExtResource("13_smm1n")
+hframes = 6
+vframes = 3
+frame = 6
+script = ExtResource("14_2k7t5")
+textures = Array[Texture2D]([ExtResource("15_eg5qf"), ExtResource("16_qpn5l"), ExtResource("13_smm1n")])
+settings_value = "peach"
+
+[node name="Animation" type="AnimationPlayer" parent="Peach"]
+libraries = {
+"": SubResource("AnimationLibrary_vaytj")
+}
+autoplay = "Walk"
+
+[node name="Eggs" type="Node" parent="."]
+
+[node name="Egg1" type="Sprite2D" parent="Eggs"]
+position = Vector2(528, -10)
+texture = ExtResource("20_iayi1")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg1"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg1/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg1"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("23_1go8q")
+flip_h = true
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg1/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg2" type="Sprite2D" parent="Eggs"]
+position = Vector2(544, -10)
+texture = ExtResource("24_1tq7s")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg2"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg2/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg2"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("25_vg0ye")
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg2/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg3" type="Sprite2D" parent="Eggs"]
+position = Vector2(560, -10)
+texture = ExtResource("26_jo11i")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg3"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg3/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg3"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("27_aei5b")
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg3/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg4" type="Sprite2D" parent="Eggs"]
+position = Vector2(576, -10)
+texture = ExtResource("28_emhrj")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg4"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg4/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg4"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("29_wu1gm")
+flip_h = true
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg4/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg5" type="Sprite2D" parent="Eggs"]
+position = Vector2(592, -10)
+texture = ExtResource("20_iayi1")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg5"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg5/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg5"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("23_1go8q")
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg5/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg6" type="Sprite2D" parent="Eggs"]
+position = Vector2(608, -10)
+texture = ExtResource("24_1tq7s")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg6"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg6/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg6"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("25_vg0ye")
+flip_h = true
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg6/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Egg7" type="Sprite2D" parent="Eggs"]
+position = Vector2(624, -10)
+texture = ExtResource("26_jo11i")
+
+[node name="Outline" type="Sprite2D" parent="Eggs/Egg7"]
+visible = false
+show_behind_parent = true
+z_index = 9
+texture = ExtResource("21_7r475")
+
+[node name="Sprite2D" type="Sprite2D" parent="Eggs/Egg7/Outline"]
+position = Vector2(0, -16)
+texture = ExtResource("22_g4ruy")
+
+[node name="BabyYoshi" type="Sprite2D" parent="Eggs/Egg7"]
+visible = false
+z_index = 1
+position = Vector2(0, 2)
+texture = ExtResource("27_aei5b")
+hframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="Eggs/Egg7/BabyYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_7orpd")
+}
+autoplay = "new_animation"
+
+[node name="Thank" type="Sprite2D" parent="."]
+position = Vector2(-112, -104)
+texture = SubResource("AtlasTexture_sehdf")
+
+[node name="You" type="Sprite2D" parent="."]
+position = Vector2(448, -104)
+texture = SubResource("AtlasTexture_44va0")
+
+[node name="QuestionMark" type="Sprite2D" parent="You"]
+position = Vector2(34, 0)
+texture = ExtResource("31_bdl06")
+
+[node name="ThanksAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_of3b6")
+}
+
+[node name="Player1" parent="." instance=ExtResource("30_6qnmk")]
+position = Vector2(376, 0)
+scale = Vector2(-1, 1)
+animation_speed = 1.0
+
+[node name="Player2" parent="." instance=ExtResource("30_6qnmk")]
+position = Vector2(400, 0)
+scale = Vector2(-1, 1)
+animation_speed = 1.0
+
+[node name="Player3" parent="." instance=ExtResource("30_6qnmk")]
+position = Vector2(424, 0)
+scale = Vector2(-1, 1)
+animation_speed = 1.0
+
+[node name="Player4" parent="." instance=ExtResource("30_6qnmk")]
+position = Vector2(448, 0)
+scale = Vector2(-1, 1)
+animation_speed = 1.0
+
+[node name="RedYoshi" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_xb7up")
+position = Vector2(80, -16)
+texture = ExtResource("27_epc6e")
+flip_h = true
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="Animations" type="AnimationPlayer" parent="RedYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_8ycig")
+}
+autoplay = "Jump"
+
+[node name="YellowYoshi" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_aqv7i")
+position = Vector2(272, -16)
+texture = ExtResource("27_epc6e")
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="Animations" type="AnimationPlayer" parent="YellowYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_8ycig")
+}
+autoplay = "Jump"
+
+[node name="BlueYoshi" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_ht13s")
+position = Vector2(152, -16)
+texture = ExtResource("27_epc6e")
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="Animations" type="AnimationPlayer" parent="BlueYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_8ycig")
+}
+autoplay = "JumpFront"
+
+[node name="GreenYoshi" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_2xpv3")
+position = Vector2(200, -16)
+texture = ExtResource("27_epc6e")
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="Animations" type="AnimationPlayer" parent="GreenYoshi"]
+libraries = {
+"": SubResource("AnimationLibrary_8ycig")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(176, -88)
+
+[node name="YoshiFollower" parent="." instance=ExtResource("31_xfth2")]
+position = Vector2(472, 2)
+scale = Vector2(-1, 1)
+colour = 0

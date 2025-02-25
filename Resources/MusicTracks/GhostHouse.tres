@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://d2mfwfapwilqw"]
+
+[ext_resource type="AudioStream" uid="uid://cw7gre3rh41vx" path="res://Assets/Audio/BGM/SMW/GhostHouse.mp3" id="1_8w4m0"]
+[ext_resource type="AudioStream" uid="uid://cw7gre3rh41vx" path="res://Assets/Audio/BGM/SMW/GhostHouse.mp3" id="2_gli0a"]
+
+
+[resource]
+clip_count = 2
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_8w4m0")
+clip_0/auto_advance = 0
+clip_1/name = &"Hurry"
+clip_1/stream = ExtResource("2_gli0a")
+clip_1/auto_advance = 0

@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://cj2jbxkpdnsge"]
+
+[ext_resource type="Script" uid="uid://docllhwq888my" path="res://Scripts/Classes/Enemies/buzzy_beetle.gd" id="1_2n3u1"]
+[ext_resource type="PackedScene" uid="uid://dg56biujpnwrj" path="res://Instances/Prefabs/HeldObjects/buzzy_beetle_shell.tscn" id="2_kf86a"]
+[ext_resource type="Texture2D" uid="uid://4hc3r3tc4oqc" path="res://Assets/Sprites/Enemys/BuzzyBeetle.png" id="2_u3xjq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0qjx"]
+atlas = ExtResource("2_u3xjq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf8g1"]
+atlas = ExtResource("2_u3xjq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ir8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0qjx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf8g1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nn0h"]
+size = Vector2(9, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ux3y3"]
+size = Vector2(14, 15.25)
+
+[node name="BuzzyBeetle" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+floor_constant_speed = true
+floor_max_angle = 1.309
+floor_snap_length = 8.0
+script = ExtResource("1_2n3u1")
+enemy_height = 8
+yoshi_behavior = "Spit"
+spit_item = ExtResource("2_kf86a")
+can_fire_damage = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_8ir8y")
+autoplay = "default"
+frame_progress = 0.268796
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_8nn0h")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -1.375)
+shape = SubResource("RectangleShape2D_ux3y3")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -8)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

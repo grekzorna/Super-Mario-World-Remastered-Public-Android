@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqgy375ps0uyc"]
+
+[ext_resource type="Texture2D" uid="uid://gmhqni2dgd7c" path="res://Assets/Sprites/Objects/Bubbles.png" id="1_2cvf7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x5b4u"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6j7y"]
+atlas = ExtResource("1_2cvf7")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dwpk7"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 16.0
+initial_velocity_max = 64.0
+gravity = Vector3(0, 0, 0)
+damping_min = 11.333
+damping_max = 45.108
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Bubbles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_x5b4u")
+emitting = false
+amount = 4
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+texture = SubResource("AtlasTexture_u6j7y")
+process_material = SubResource("ParticleProcessMaterial_dwpk7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

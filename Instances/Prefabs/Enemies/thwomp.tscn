@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1kb7n60xn8m4"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/thwomp.gd" id="1_hwbye"]
+[ext_resource type="Texture2D" uid="uid://c34g204uvqkjp" path="res://Assets/Sprites/Enemys/Thwomp.png" id="2_knekj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc3ca"]
+size = Vector2(24, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vbnsl"]
+size = Vector2(22, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0mww"]
+atlas = ExtResource("2_knekj")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a1c1"]
+atlas = ExtResource("2_knekj")
+region = Rect2(48, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkywo"]
+atlas = ExtResource("2_knekj")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c6qye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0mww")
+}],
+"loop": true,
+"name": &"Curious",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5a1c1")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkywo")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Thwomp" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_hwbye")
+enemy_height = 32
+spiky_top = true
+can_slide_damage = false
+can_cape_damage = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_yc3ca")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_vbnsl")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_c6qye")
+animation = &"Fall"
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

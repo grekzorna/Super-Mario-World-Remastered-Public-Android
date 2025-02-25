@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://jhonajeybg8c"]
+
+[ext_resource type="Texture2D" uid="uid://bo0svqs365se0" path="res://Assets/Sprites/AchievementIcons/47085.png" id="1_g0di1"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_wlbwo"]
+
+[resource]
+script = ExtResource("1_wlbwo")
+title = "Perfect Bonus Stage"
+description = "Score 8 extra lives in the 'Bonus Game'"
+icon = ExtResource("1_g0di1")

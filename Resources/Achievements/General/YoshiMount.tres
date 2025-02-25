@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://b6aroiq3p6ffx"]
+
+[ext_resource type="Texture2D" uid="uid://dw7kwk1m3rqsh" path="res://Assets/Sprites/AchievementIcons/46580.png" id="1_kk7gj"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_528mr"]
+
+[resource]
+script = ExtResource("2_528mr")
+title = "Giddy Up!"
+description = "Catch a ride with a friend"
+icon = ExtResource("1_kk7gj")

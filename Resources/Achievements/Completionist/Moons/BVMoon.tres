@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://2cqtt0q8nodg"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_bcxh7"]
+[ext_resource type="Texture2D" uid="uid://kolocg54m5yd" path="res://Assets/Sprites/AchievementIcons/46555.png" id="1_g2ytn"]
+
+[resource]
+script = ExtResource("1_bcxh7")
+title = "Under A Koopa Moon"
+description = "Collect the 3-Up Moon in the Valley of Bowser"
+icon = ExtResource("1_g2ytn")

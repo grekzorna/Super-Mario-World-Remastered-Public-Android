@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5r0f2brbk6jh"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/pipe_to_pipe_area.gd" id="1_86p4b"]
+[ext_resource type="Texture2D" uid="uid://dsnat3snrspjq" path="res://Assets/Sprites/Editor/PipeToPipeIcon.png" id="2_j55tj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju66d"]
+custom_solver_bias = 1.0
+size = Vector2(16, 16)
+
+[node name="PipeToPipeArea" type="Node2D" groups=["Pipes"]]
+script = ExtResource("1_86p4b")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-8, -8)
+shape = SubResource("RectangleShape2D_ju66d")
+debug_color = Color(1, 0.117647, 0.247059, 0.419608)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 100
+position = Vector2(-8, -8)
+scale = Vector2(0.666667, 0.666667)
+texture = ExtResource("2_j55tj")
+centered = false
+
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

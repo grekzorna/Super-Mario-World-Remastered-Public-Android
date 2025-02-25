@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://urn3bvyh3uen"]
+
+[ext_resource type="Texture2D" uid="uid://dbea532ujtyd6" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocksEmpty.png" id="1_jrgsc"]
+[ext_resource type="Script" path="res://Scripts/UI/switch_block_display.gd" id="2_u1rym"]
+
+[node name="SwitchBlockDisplay" type="TextureRect"]
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_jrgsc")
+script = ExtResource("2_u1rym")

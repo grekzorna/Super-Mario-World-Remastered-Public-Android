@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc5byho57tb16"]
+
+[ext_resource type="Script" path="res://Scripts/HeldObjects/key.gd" id="1_yne2g"]
+[ext_resource type="Texture2D" uid="uid://dyblagiqq23rh" path="res://Assets/Sprites/Objects/Key.png" id="2_djqcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ngm6"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6u4mw"]
+size = Vector2(18, 18)
+
+[node name="Key" type="CharacterBody2D"]
+collision_layer = 24
+collision_mask = 5
+script = ExtResource("1_yne2g")
+directional_sprite = true
+kickable = false
+reward_life = true
+player_can_stand = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_djqcn")
+flip_h = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_3ngm6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_6u4mw")
+one_way_collision = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

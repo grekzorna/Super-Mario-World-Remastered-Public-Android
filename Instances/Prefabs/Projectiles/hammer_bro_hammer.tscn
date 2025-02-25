@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://s4a6vmjiv55t"]
+
+[ext_resource type="Script" uid="uid://fs0pn84kil3a" path="res://Scripts/Projectile/HammerBroHammer.gd" id="1_qkkdc"]
+[ext_resource type="Texture2D" uid="uid://beblkrdkt1240" path="res://Assets/Sprites/Objects/HammerBroHammer.png" id="2_j1sap"]
+[ext_resource type="PackedScene" uid="uid://bnwrxrh5og7c5" path="res://Instances/Prefabs/Projectiles/yoshi_hammer_projectile.tscn" id="2_msw27"]
+[ext_resource type="Script" uid="uid://bqdfwdbvl65wk" path="res://Scripts/Classes/EnemyClass.gd" id="2_o2er3"]
+
+[sub_resource type="Animation" id="Animation_kewkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kau81"]
+resource_name = "Spin"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.5708, 3.14159, 4.71239]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqq7h"]
+_data = {
+&"RESET": SubResource("Animation_kewkx"),
+&"Spin": SubResource("Animation_kau81")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uawin"]
+radius = 4.0
+
+[node name="HammerBroHammer" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_qkkdc")
+yoshi_behavior = "Spit"
+spit_item = ExtResource("2_msw27")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+metadata/_custom_type_script = ExtResource("2_o2er3")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_j1sap")
+hframes = 2
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_hqq7h")
+}
+autoplay = "Spin"
+speed_scale = 2.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_uawin")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

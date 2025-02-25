@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="JoypadButton" load_steps=4 format=3 uid="uid://bhx5wsfsmnyy4"]
+
+[ext_resource type="Texture2D" uid="uid://drvri3t5j10oo" path="res://Assets/Sprites/UI/InputButtons/Generic/LeftStickUp.png" id="1_s0hap"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/GamepadButton.gd" id="1_yeyn1"]
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_xcgm7"]
+axis = 1
+axis_value = -1.0
+
+[resource]
+script = ExtResource("1_yeyn1")
+input_event = SubResource("InputEventJoypadMotion_xcgm7")
+ps_texture = ExtResource("1_s0hap")
+xbox_texture = ExtResource("1_s0hap")
+switch_texture = ExtResource("1_s0hap")

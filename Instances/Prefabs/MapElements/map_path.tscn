@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctdejseygt1r2"]
+
+[sub_resource type="Animation" id="Animation_8hg1n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4utfg"]
+resource_name = "Travel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ygw35"]
+_data = {
+"RESET": SubResource("Animation_8hg1n"),
+"Travel": SubResource("Animation_4utfg")
+}
+
+[node name="MapMario" type="Path2D"]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(88, 232)
+rotates = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PathFollow2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ygw35")
+}
+
+[node name="MarioPoint" type="Node2D" parent="PathFollow2D"]
+
+[node name="_Timer_18766" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true

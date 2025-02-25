@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://xrshmq8pbhws"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/red_ring.gd" id="1_epy03"]
+[ext_resource type="Texture2D" uid="uid://dk45duilni02a" path="res://Assets/Sprites/Objects/RedRing.png" id="2_7stmr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84qse"]
+atlas = ExtResource("2_7stmr")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrmxh"]
+atlas = ExtResource("2_7stmr")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5o51o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84qse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrmxh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hov1b"]
+size = Vector2(10, 24)
+
+[node name="RedRing" type="Node2D"]
+script = ExtResource("1_epy03")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(1, 1.25)
+sprite_frames = SubResource("SpriteFrames_5o51o")
+autoplay = "default"
+frame_progress = 0.490593
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_hov1b")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

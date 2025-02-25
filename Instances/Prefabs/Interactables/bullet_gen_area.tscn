@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcagib3qkm7xx"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/BulletBillGenerator.gd" id="1_polgy"]
+
+[node name="BulletGenArea" type="Area2D"]
+script = ExtResource("1_polgy")

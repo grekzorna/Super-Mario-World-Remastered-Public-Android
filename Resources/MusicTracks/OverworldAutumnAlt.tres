@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://dhdlx2rwva53m"]
+
+[ext_resource type="AudioStream" uid="uid://cgua47a7oyxb8" path="res://Assets/Audio/BGM/SMW/AutumnOverworld2.mp3" id="1_mh0o7"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Hi"
+clip_0/stream = ExtResource("1_mh0o7")
+clip_0/auto_advance = 0
+metadata/Name = "VLDC - Beach"
+metadata/Artist = "Vinci"

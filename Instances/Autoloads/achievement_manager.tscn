@@ -1,0 +1,151 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7ty4s7c32lqo"]
+
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="1_nl0pp"]
+[ext_resource type="Script" path="res://Scripts/Autoload/achievement_manager.gd" id="1_uyrve"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_hxuj5"]
+[ext_resource type="AudioStream" uid="uid://bclwpypkvd01f" path="res://Assets/Audio/SFX/1up.wav" id="4_3rm3n"]
+[ext_resource type="Texture2D" uid="uid://ccjcwn3yrupss" path="res://Assets/Sprites/AchievementIcons/46551.png" id="4_x1eu8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4d2h"]
+texture = ExtResource("1_nl0pp")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="Animation" id="Animation_5k0ys"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AchievementUnlockToast:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(480, 230)]
+}
+
+[sub_resource type="Animation" id="Animation_73jq7"]
+resource_name = "Show"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AchievementUnlockToast:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 2, 2.3),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(480, 230), Vector2(264, 230), Vector2(264, 230), Vector2(480, 230)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AchievementUnlockToast/SFX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_3rm3n")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfmfi"]
+_data = {
+&"Show": SubResource("Animation_73jq7"),
+&"RESET": SubResource("Animation_5k0ys")
+}
+
+[node name="AchievementManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_uyrve")
+
+[node name="Ui" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="AchievementUnlockToast" type="Control" parent="Ui"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 216.002
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="Ui/AchievementUnlockToast"]
+self_modulate = Color(1, 1, 1, 0.470588)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_h4d2h")
+
+[node name="Exclaim" type="Label" parent="Ui/AchievementUnlockToast/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 40.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_hxuj5")
+text = "Achievement Unlocked!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Title" type="Label" parent="Ui/AchievementUnlockToast/Panel"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_hxuj5")
+text = "Achievement nameadwadwadwadwadwadwadwadwwad"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+uppercase = true
+
+[node name="Icon" type="TextureRect" parent="Ui/AchievementUnlockToast/Panel"]
+self_modulate = Color(1, 1, 1, 0.819608)
+layout_mode = 0
+offset_left = 2.22791
+offset_top = 2.0
+offset_right = 38.2279
+offset_bottom = 38.0
+mouse_filter = 2
+texture = ExtResource("4_x1eu8")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ui/AchievementUnlockToast"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_rfmfi")
+}
+speed_scale = 0.5
+
+[node name="SFX" type="AudioStreamPlayer" parent="Ui/AchievementUnlockToast"]
+bus = &"UI"

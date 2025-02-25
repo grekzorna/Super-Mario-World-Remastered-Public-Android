@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://djv4vf3ok4ik"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/mushroom_lifts.gd" id="1_35bjs"]
+[ext_resource type="Texture2D" uid="uid://cy84jrwrkvxs3" path="res://Assets/Sprites/Tilesets/Decorations/MushroomTiles.png" id="2_vuuw6"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="3_4n6wa"]
+[ext_resource type="Texture2D" uid="uid://rq5yhni3ajck" path="res://Assets/Sprites/Tilesets/Decorations/MushroomAutumnTiles.png" id="4_kqxms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghanh"]
+size = Vector2(32, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvomc"]
+atlas = ExtResource("2_vuuw6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0i56"]
+atlas = ExtResource("4_kqxms")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q12r"]
+atlas = ExtResource("4_kqxms")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfoi0"]
+size = Vector2(32, 16)
+
+[node name="MushroomSmallLift" type="Node2D"]
+script = ExtResource("1_35bjs")
+
+[node name="Mushroom1" type="StaticBody2D" parent="."]
+position = Vector2(-32, 0)
+
+[node name="PlayerDetect" type="Area2D" parent="Mushroom1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushroom1/PlayerDetect"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_ghanh")
+
+[node name="Sprite" type="Sprite2D" parent="Mushroom1"]
+position = Vector2(-8, 0)
+texture = SubResource("AtlasTexture_uvomc")
+script = ExtResource("3_4n6wa")
+autumn_texture = SubResource("AtlasTexture_v0i56")
+overhaul_only = true
+
+[node name="Sprite2" type="Sprite2D" parent="Mushroom1"]
+position = Vector2(8, 0)
+texture = SubResource("AtlasTexture_uvomc")
+flip_h = true
+script = ExtResource("3_4n6wa")
+autumn_texture = SubResource("AtlasTexture_3q12r")
+overhaul_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushroom1"]
+shape = SubResource("RectangleShape2D_mfoi0")
+one_way_collision = true
+
+[node name="Line" type="NinePatchRect" parent="Mushroom1"]
+z_index = -1
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 6832.0
+texture = ExtResource("2_vuuw6")
+region_rect = Rect2(48, 16, 16, 16)
+axis_stretch_vertical = 1
+
+[node name="Mushroom2" type="StaticBody2D" parent="."]
+position = Vector2(32, 0)
+
+[node name="PlayerDetect" type="Area2D" parent="Mushroom2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushroom2/PlayerDetect"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_ghanh")
+
+[node name="Sprite" type="Sprite2D" parent="Mushroom2"]
+position = Vector2(-8, 0)
+texture = SubResource("AtlasTexture_uvomc")
+script = ExtResource("3_4n6wa")
+autumn_texture = SubResource("AtlasTexture_v0i56")
+overhaul_only = true
+
+[node name="Sprite2" type="Sprite2D" parent="Mushroom2"]
+position = Vector2(8, 0)
+texture = SubResource("AtlasTexture_uvomc")
+flip_h = true
+script = ExtResource("3_4n6wa")
+autumn_texture = SubResource("AtlasTexture_v0i56")
+overhaul_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushroom2"]
+shape = SubResource("RectangleShape2D_mfoi0")
+one_way_collision = true
+
+[node name="Line" type="NinePatchRect" parent="Mushroom2"]
+z_index = -1
+offset_left = -8.0
+offset_right = 8.0
+offset_bottom = 6832.0
+texture = ExtResource("2_vuuw6")
+region_rect = Rect2(48, 16, 16, 16)
+axis_stretch_vertical = 1

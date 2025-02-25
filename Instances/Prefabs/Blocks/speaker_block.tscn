@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://wsiwhw5luv8e"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/SpeakerBlock.gd" id="1_4jube"]
+[ext_resource type="Texture2D" uid="uid://bkxaanhv2pqiw" path="res://Assets/Sprites/Objects/SpeakerBlock.png" id="2_6neb3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7isl7"]
+size = Vector2(16, 16)
+
+[sub_resource type="Animation" id="Animation_0gehx"]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fvn62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqc1c"]
+_data = {
+&"RESET": SubResource("Animation_fvn62"),
+&"Hit": SubResource("Animation_0gehx")
+}
+
+[node name="SpeakerBlock" type="AnimatableBody2D"]
+process_mode = 3
+collision_layer = 5
+script = ExtResource("1_4jube")
+enable_side_hits = false
+enable_ground_pounds = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_6neb3")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_7isl7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yqc1c")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 100
+visible = false
+
+[node name="Label" type="Label" parent="CanvasLayer2"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+text = "Message Block is missing its message!
+Please report!!! Scene: "

@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://djx5lll084uu7"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/CustomParticle.gd" id="1_sk53l"]
+[ext_resource type="Texture2D" uid="uid://dwdxfiisy3idf" path="res://Assets/Sprites/Particles/Puff.png" id="2_ik62k"]
+[ext_resource type="Texture2D" uid="uid://bp13j7m3adixo" path="res://Assets/Sprites/Particles/SpinJumpStar.png" id="3_prinw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hxiep"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mpds3"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[sub_resource type="Curve" id="Curve_6jefr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.747826, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_i1j60"]
+curve = SubResource("Curve_6jefr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8dexj"]
+particle_flag_disable_z = true
+direction = Vector3(1, -1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_curve = SubResource("CurveTexture_i1j60")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_alafr"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_curve = SubResource("CurveTexture_i1j60")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rusm0"]
+particle_flag_disable_z = true
+direction = Vector3(-1, -1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_curve = SubResource("CurveTexture_i1j60")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b3u3g"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_curve = SubResource("CurveTexture_i1j60")
+
+[node name="CustomParticle" type="Node2D"]
+script = ExtResource("1_sk53l")
+
+[node name="Puff" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_hxiep")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_mpds3")
+texture = ExtResource("2_ik62k")
+lifetime = 0.5
+one_shot = true
+
+[node name="Star1" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_8dexj")
+texture = ExtResource("3_prinw")
+lifetime = 0.5
+one_shot = true
+
+[node name="Star2" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_alafr")
+texture = ExtResource("3_prinw")
+lifetime = 0.5
+one_shot = true
+
+[node name="Star3" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_rusm0")
+texture = ExtResource("3_prinw")
+lifetime = 0.5
+one_shot = true
+
+[node name="Star4" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_b3u3g")
+texture = ExtResource("3_prinw")
+lifetime = 0.5
+one_shot = true

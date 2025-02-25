@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://dcfkr3hcxobbb"]
+
+[ext_resource type="Script" uid="uid://dbpymdxefexg4" path="res://Scripts/Classes/Enemies/Spiny.gd" id="1_mqhou"]
+[ext_resource type="Texture2D" uid="uid://b45eu2m0gmfnk" path="res://Assets/Sprites/Enemys/Spiny.png" id="2_dobjh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th4h8"]
+atlas = ExtResource("2_dobjh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utnyp"]
+atlas = ExtResource("2_dobjh")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jeasa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th4h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utnyp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqqq6"]
+size = Vector2(10, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8v20s"]
+size = Vector2(12, 9)
+
+[node name="Spiny" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_mqhou")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+spiky_top = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_jeasa")
+autoplay = "default"
+frame_progress = 0.655449
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_eqqq6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_8v20s")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct10rin1ctb18"]
+
+[ext_resource type="Script" uid="uid://b2bdoqu3b4dgf" path="res://Scripts/Classes/Blocks/RouletteBlock.gd" id="1_buhv0"]
+[ext_resource type="Texture2D" uid="uid://dbpfixwsx21a5" path="res://Assets/Sprites/Objects/RouletteBlock.png" id="2_xgn3h"]
+[ext_resource type="PackedScene" uid="uid://bjc68myrr4roi" path="res://Instances/Prefabs/Items/roulette_block_item.tscn" id="4_tdp08"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="9_kc1vh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lfic"]
+size = Vector2(16, 16)
+
+[node name="RouletteBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+collision_layer = 5
+sync_to_physics = false
+script = ExtResource("1_buhv0")
+visuals = NodePath("Casing")
+
+[node name="Casing" type="Sprite2D" parent="."]
+z_index = 10
+texture = ExtResource("2_xgn3h")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6lfic")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="ItemDispenser" parent="." instance=ExtResource("9_kc1vh")]
+
+[node name="RouletteBlockItem" parent="." instance=ExtResource("4_tdp08")]
+can_move = false
+
+[connection signal="timeout" from="Timer" to="." method="cycle_items"]

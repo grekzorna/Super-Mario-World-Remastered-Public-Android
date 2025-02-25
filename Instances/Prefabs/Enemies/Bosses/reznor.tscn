@@ -1,0 +1,83 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbsf4imndh5on"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/Bosses/reznor.gd" id="1_yntce"]
+[ext_resource type="Texture2D" uid="uid://ba4r0q88hpany" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorSheet.png" id="2_lsicg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_biy54"]
+atlas = ExtResource("2_lsicg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkxwh"]
+atlas = ExtResource("2_lsicg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v0an"]
+atlas = ExtResource("2_lsicg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvth2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_biy54")
+}],
+"loop": true,
+"name": &"Fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkxwh")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v0an")
+}],
+"loop": true,
+"name": &"Turn",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fct8"]
+size = Vector2(18, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2md4b"]
+size = Vector2(20, 26)
+
+[node name="Reznor" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_yntce")
+gib_type = 1
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_spin_kill = false
+can_ground_pound = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lvth2")
+animation = &"Turn"
+frame_progress = 0.690292
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_5fct8")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_2md4b")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="shoot_fireball"]

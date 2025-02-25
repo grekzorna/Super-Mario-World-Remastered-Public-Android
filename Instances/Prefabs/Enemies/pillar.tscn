@@ -1,0 +1,161 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0qyt138b6pop"]
+
+[ext_resource type="Texture2D" uid="uid://c4fdju1fwpvc2" path="res://Assets/Sprites/Objects/Pillar.png" id="1_5j35r"]
+[ext_resource type="Script" uid="uid://btnvk7io1ubc3" path="res://Scripts/Classes/Enemies/pillar.gd" id="1_aiagb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xa7iv"]
+size = Vector2(126, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krj2q"]
+size = Vector2(140, 10.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfn32"]
+size = Vector2(105, 148)
+
+[sub_resource type="Animation" id="Animation_l2vrg"]
+resource_name = "Loop"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, 24), Vector2(0, 24), Vector2(0, 144), Vector2(0, 144), Vector2(0, -16), Vector2(0, -16)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_impact"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Joint/Area2D:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2, 2.16667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Joint/CollisionShape2D3:one_way_collision")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.51, 1.91),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_o0n4r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Joint/Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Joint/CollisionShape2D3:one_way_collision")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0g6h"]
+_data = {
+&"Loop": SubResource("Animation_l2vrg"),
+&"RESET": SubResource("Animation_o0n4r")
+}
+
+[node name="Pillar" type="Node2D"]
+z_index = -5
+script = ExtResource("1_aiagb")
+
+[node name="Joint" type="StaticBody2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Sprite" type="Sprite2D" parent="Joint"]
+position = Vector2(0, -76)
+texture = ExtResource("1_5j35r")
+
+[node name="Area2D" type="Area2D" parent="Joint"]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joint/Area2D"]
+position = Vector2(1, -8)
+shape = SubResource("RectangleShape2D_xa7iv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joint"]
+position = Vector2(-57, -82)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_krj2q")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Joint"]
+position = Vector2(59, -83)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_krj2q")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Joint"]
+position = Vector2(1.5, -78)
+rotation = -3.14159
+shape = SubResource("RectangleShape2D_jfn32")
+one_way_collision = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v0g6h")
+}
+autoplay = "Loop"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0.5, -40.5)
+scale = Vector2(9.25, 9.45)
+
+[connection signal="area_entered" from="Joint/Area2D" to="." method="_on_area_2d_area_entered"]

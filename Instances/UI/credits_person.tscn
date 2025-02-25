@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddgyd5vi5uvdl"]
+
+[ext_resource type="FontFile" uid="uid://c5xts2bvjtjs3" path="res://Assets/Sprites/UI/HUD/CreditsFont.png" id="1_ufat5"]
+
+[node name="CreditsPerson" type="Label"]
+visibility_layer = 4
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("1_ufat5")
+horizontal_alignment = 1
+autowrap_mode = 3
+uppercase = true

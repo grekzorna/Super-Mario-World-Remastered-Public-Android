@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://clji4vwaq4j6v"]
+
+[ext_resource type="Texture2D" uid="uid://c8x0tqr6yhjhs" path="res://Assets/Sprites/AchievementIcons/46588.png" id="1_pd832"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_u74yi"]
+
+[resource]
+script = ExtResource("1_u74yi")
+title = "Like A Giant Bank"
+description = "Collect all Dragon Coins in all eligible levels in Vanilla Dome"
+icon = ExtResource("1_pd832")

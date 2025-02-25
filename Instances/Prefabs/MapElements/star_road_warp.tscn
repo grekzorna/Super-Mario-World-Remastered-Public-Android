@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://bdkivqa6mhx1l"]
+
+[ext_resource type="Script" path="res://Scripts/star_road_warp.gd" id="1_xwrn7"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapPointVisualClass.gd" id="2_lx88o"]
+[ext_resource type="Texture2D" uid="uid://b31ogerkop4x6" path="res://Assets/Sprites/Map/MapSprites/StarRoadPoint.png" id="3_50wch"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lb00"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu10w"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjq1o"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8j5h"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu0up"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxo48"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibayp"]
+atlas = ExtResource("3_50wch")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aclvu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lb00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu10w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjq1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8j5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu0up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxo48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibayp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu10w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="StarRoadWarp" type="Node2D"]
+script = ExtResource("1_xwrn7")
+title = "Star Road"
+
+[node name="Visual" type="Node2D" parent="."]
+script = ExtResource("2_lx88o")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Visual"]
+sprite_frames = SubResource("SpriteFrames_aclvu")
+autoplay = "default"
+frame_progress = 0.901788

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://c12jh2e2j1qc0"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="2_sh1hu"]
+
+[resource]
+script = ExtResource("2_sh1hu")
+level_title = "Donut Plains 3"
+level_scene_path = "res://Instances/Levels/DonutPlains/dp_3.tscn"
+has_secret_exit = false
+has_dragon_coins = true
+dragon_coin_amount = 5
+map_point_warp = "DonutPlains/DP3"
+map_scene_warp = "res://Instances/Levels/Maps/MainIsland.tscn"

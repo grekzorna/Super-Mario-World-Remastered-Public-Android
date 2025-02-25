@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmr2p20vhtt5v"]
+
+[sub_resource type="GDScript" id="GDScript_kn8bh"]
+script/source = "extends Node2D
+
+@export var start_offset := 0.0
+
+@export var amount := 1
+const FALLING_DRAG_COIN = preload(\"res://Instances/Parts/falling_drag_coin.tscn\")
+func _ready() -> void:
+	await get_tree().create_timer(start_offset, false).timeout
+	spawn_coins()
+
+func spawn_coins() -> void:
+	for i in amount:
+		var node = FALLING_DRAG_COIN.instantiate()
+		node.position.y = -i * 4
+		add_child(node)
+		await get_tree().create_timer(0.6, false).timeout
+"
+
+[node name="CutsceneDragCoinSpawner" type="Node2D"]
+script = SubResource("GDScript_kn8bh")

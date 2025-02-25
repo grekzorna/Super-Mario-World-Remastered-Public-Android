@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uy8t5hpg3w1o"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/vs_mode_manager.gd" id="1_vilqi"]
+
+[node name="VSModeManager" type="Node"]
+script = ExtResource("1_vilqi")

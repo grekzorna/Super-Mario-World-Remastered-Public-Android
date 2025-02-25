@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://bimrxpg5a4yrk"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/1Up.gd" id="1_xv5on"]
+[ext_resource type="Texture2D" uid="uid://cc38oksw2dkdu" path="res://Assets/Sprites/Items/1up.png" id="2_8t5ft"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="3_hfbeu"]
+[ext_resource type="Script" path="res://Scripts/Classes/water_bouyancy.gd" id="4_1gexa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuhjr"]
+atlas = ExtResource("2_8t5ft")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48srl"]
+atlas = ExtResource("2_8t5ft")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywmn2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwqdd"]
+size = Vector2(10, 4)
+
+[node name="1Up" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_snap_length = 0.0
+safe_margin = 0.001
+script = ExtResource("1_xv5on")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_vuhjr")
+script = ExtResource("3_hfbeu")
+textures = Array[Texture2D]([SubResource("AtlasTexture_vuhjr"), SubResource("AtlasTexture_48srl")])
+settings_value = "1up"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ywmn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_hwqdd")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_1gexa")
+hitbox = NodePath("../Area2D")
+
+[connection signal="area_entered" from="Area2D" to="." method="hitbox_hit"]

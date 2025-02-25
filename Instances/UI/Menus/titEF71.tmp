@@ -1,0 +1,459 @@
+[gd_scene load_steps=29 format=3 uid="uid://m8b8qt3r5ujn"]
+
+[ext_resource type="Texture2D" uid="uid://pckj3xf24wys" path="res://Assets/Sprites/UI/Logo.png" id="1_s2w3a"]
+[ext_resource type="Script" path="res://Scripts/UI/title_screen.gd" id="1_vemv5"]
+[ext_resource type="Texture2D" uid="uid://brpkusquyfnyu" path="res://Assets/Sprites/UI/MainBG.png" id="2_aihp8"]
+[ext_resource type="Texture2D" uid="uid://gqv4p5bghklh" path="res://Assets/Sprites/UI/SettingsBG.png" id="2_yvbf2"]
+[ext_resource type="Texture2D" uid="uid://5pk0boo12kaf" path="res://Assets/Sprites/UI/PlayBG.png" id="3_vpx8s"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_xqtje"]
+[ext_resource type="Texture2D" uid="uid://bgoq2m25h31w0" path="res://Assets/Sprites/UI/QuitBG.png" id="4_arvbc"]
+[ext_resource type="Texture2D" uid="uid://d2g1m7wul4xs3" path="res://Assets/Sprites/UI/TitleBorder.png" id="4_qedfh"]
+[ext_resource type="AudioStream" uid="uid://dwprsksod70pb" path="res://Assets/Audio/BGM/02 Title.mp3" id="9_0dadt"]
+[ext_resource type="PackedScene" uid="uid://djn6v47x0bta5" path="res://Instances/UI/Menus/main_menu_options.tscn" id="9_mfyry"]
+[ext_resource type="AudioStream" uid="uid://ds8tleexl2qnb" path="res://Assets/Audio/BGM/Title Bells.wav" id="12_hql0n"]
+[ext_resource type="PackedScene" uid="uid://8uyqq4rf0cl1" path="res://Instances/UI/Menus/settings_menu.tscn" id="12_sm3o8"]
+[ext_resource type="PackedScene" uid="uid://g0kxywn2ba76" path="res://Instances/UI/save_container.tscn" id="13_jm622"]
+
+[sub_resource type="Shader" id="Shader_xqsvx"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsnwt"]
+shader = SubResource("Shader_xqsvx")
+shader_parameter/motion = Vector2(-8, -8)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_hrs07"]
+resource_name = "Leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PressStart:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(188, 180), Vector2(188, 280)]
+}
+
+[sub_resource type="Animation" id="Animation_kitgc"]
+resource_name = "LeaveTitle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logo:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(112, 32), Vector2(112, -108)]
+}
+
+[sub_resource type="Animation" id="Animation_cc4tt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 256)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Logo:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(112, -116)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PressStart:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(196, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_rnv4n"]
+resource_name = "ShowTitle"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 256)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Logo:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(112, -116), Vector2(112, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PressStart:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.7, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(188, 328), Vector2(188, 180)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfvt5"]
+_data = {
+"Leave": SubResource("Animation_hrs07"),
+"LeaveTitle": SubResource("Animation_kitgc"),
+"RESET": SubResource("Animation_cc4tt"),
+"ShowTitle": SubResource("Animation_rnv4n")
+}
+
+[sub_resource type="Animation" id="Animation_wtlji"]
+resource_name = "Flash"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jxsgt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cqv4h"]
+_data = {
+"Flash": SubResource("Animation_wtlji"),
+"RESET": SubResource("Animation_jxsgt")
+}
+
+[sub_resource type="Shader" id="Shader_eikt6"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knxcf"]
+shader = SubResource("Shader_eikt6")
+shader_parameter/circle_size = 0.0
+shader_parameter/screen_width = 480.0
+shader_parameter/screen_height = 270.0
+
+[sub_resource type="Animation" id="Animation_mnhrb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircleShow:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b0c1n"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircleShow:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u67xq"]
+_data = {
+"RESET": SubResource("Animation_mnhrb"),
+"Show": SubResource("Animation_b0c1n")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vemv5")
+metadata/_edit_use_anchors_ = true
+
+[node name="Border" type="NinePatchRect" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qedfh")
+patch_margin_left = 64
+patch_margin_top = 56
+patch_margin_right = 64
+patch_margin_bottom = 56
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="BGs" type="Node" parent="."]
+
+[node name="Main" type="TextureRect" parent="BGs"]
+z_index = -1
+material = SubResource("ShaderMaterial_jsnwt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aihp8")
+stretch_mode = 1
+
+[node name="Play" type="TextureRect" parent="BGs"]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_jsnwt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vpx8s")
+stretch_mode = 1
+
+[node name="Quit" type="TextureRect" parent="BGs"]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_jsnwt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_arvbc")
+stretch_mode = 1
+
+[node name="Settings" type="TextureRect" parent="BGs"]
+visible = false
+z_index = -1
+material = SubResource("ShaderMaterial_jsnwt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yvbf2")
+stretch_mode = 1
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 256.0
+offset_right = 40320.0
+offset_bottom = 22936.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="MainMenu"]
+top_level = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = -116.0
+offset_right = 128.0
+offset_bottom = -20.0
+grow_horizontal = 2
+texture = ExtResource("1_s2w3a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_yfvt5")
+}
+autoplay = "ShowTitle"
+
+[node name="PressStart" type="Label" parent="MainMenu"]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 45.0
+offset_right = 44.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xqtje")
+text = "Press start"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu/PressStart"]
+libraries = {
+"": SubResource("AnimationLibrary_cqv4h")
+}
+autoplay = "Flash"
+
+[node name="Label" type="Label" parent="MainMenu/PressStart"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = 28.9999
+offset_right = 80.0
+offset_bottom = 51.9999
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.380392, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_xqtje")
+text = "c 1990,1991 Nintendo
+kyzandev 2023
+"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="MainMenuOptions" parent="." instance=ExtResource("9_mfyry")]
+
+[node name="SettingsMenu" parent="." instance=ExtResource("12_sm3o8")]
+
+[node name="CircleShow" type="ColorRect" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_knxcf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CircleAnim" type="AnimationPlayer" parent="CircleShow"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_u67xq")
+}
+autoplay = "Show"
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0dadt")
+bus = &"Music"
+
+[node name="XmasMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_hql0n")
+bus = &"Music"
+
+[node name="SaveContainer" parent="." instance=ExtResource("13_jm622")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+visible = false
+z_index = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -11.5
+offset_right = 144.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_xqtje")
+text = "Loading Save, this may take a bit..."
+vertical_alignment = 1
+uppercase = true
+
+[connection signal="entered" from="." to="MainMenuOptions" method="enter"]
+[connection signal="options_selected" from="MainMenuOptions" to="SettingsMenu" method="open"]
+[connection signal="play_selected" from="MainMenuOptions" to="." method="stop_music"]
+[connection signal="play_selected" from="MainMenuOptions" to="." method="hide_logo"]
+[connection signal="play_selected" from="MainMenuOptions" to="SaveContainer" method="enter"]
+[connection signal="quit_selected" from="MainMenuOptions" to="MainMenuOptions" method="close_game"]
+[connection signal="closed" from="SettingsMenu" to="MainMenuOptions" method="enter"]
+[connection signal="closed" from="SaveContainer" to="." method="show_menu_options"]
+[connection signal="save_selected" from="SaveContainer" to="." method="close_circle"]

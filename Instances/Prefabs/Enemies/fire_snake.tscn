@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://drf7tln761fba"]
+
+[ext_resource type="Script" uid="uid://bbtmgby5gq5i7" path="res://Scripts/Classes/Enemies/fire_snake.gd" id="1_velsn"]
+[ext_resource type="Texture2D" uid="uid://c747nfhoov18d" path="res://Assets/Sprites/Enemys/FireSnake.png" id="2_o4nc5"]
+[ext_resource type="PackedScene" uid="uid://ecqp8mbc1hs5" path="res://Instances/Prefabs/Projectiles/fire_breath_single.tscn" id="2_t2f8n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uv20"]
+atlas = ExtResource("2_o4nc5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4xot7"]
+atlas = ExtResource("2_o4nc5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ito8n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uv20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4xot7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ug85i"]
+size = Vector2(6, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nngcb"]
+radius = 4.0
+
+[node name="FireSnake" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_velsn")
+yoshi_behavior = "Spit"
+spit_item = ExtResource("2_t2f8n")
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_ito8n")
+autoplay = "default"
+frame_progress = 0.76997
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ug85i")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_nngcb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -7)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="jump"]

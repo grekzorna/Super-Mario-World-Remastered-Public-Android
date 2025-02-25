@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cjasg0rsxbilt"]
+
+[ext_resource type="Texture2D" uid="uid://dxmfdw8n3xuuv" path="res://Assets/Sprites/AchievementIcons/46591.png" id="1_dyrl2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_exhhj"]
+
+[resource]
+script = ExtResource("1_exhhj")
+title = "Unleash The Dragon"
+description = "Collect all Dragon Coins within a level"
+icon = ExtResource("1_dyrl2")

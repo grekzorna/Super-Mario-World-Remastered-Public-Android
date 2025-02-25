@@ -1,0 +1,180 @@
+[gd_scene load_steps=20 format=3 uid="uid://bm8hjaxlwm10w"]
+
+[ext_resource type="Texture2D" uid="uid://crt8ffn5r0ppy" path="res://Assets/Sprites/Items/CoinSheet.png" id="1_0l0uc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fugx4"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2v07x"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n07ok"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wsvi"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b42l1"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iub3v"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl5wj"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwcjp"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_426eu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fugx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2v07x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n07ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wsvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b42l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iub3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl5wj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwcjp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_xu2ga"]
+script/source = "extends VariationAnimatedSprite
+
+func _ready() -> void:
+	GameManager.add_coin(1, global_position)
+
+func sparkle() -> void:
+	GameManager.add_score(10, true, global_position)
+	ParticleManager.summon_particle(ParticleManager.SPARKLE, global_position - Vector2(0, 24))
+	queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msptl"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_autdl"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u43b2"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh8kr"]
+atlas = ExtResource("1_0l0uc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yw8h1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msptl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_autdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u43b2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh8kr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="Animation" id="Animation_lxbky"]
+resource_name = "Appear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -24), Vector2(0, -20)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"sparkle"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wbppu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p871c"]
+_data = {
+&"RESET": SubResource("Animation_wbppu"),
+&"Appear": SubResource("Animation_lxbky")
+}
+
+[node name="Coin" type="AnimatedSprite2D"]
+z_index = -2
+sprite_frames = SubResource("SpriteFrames_426eu")
+autoplay = "default"
+script = SubResource("GDScript_xu2ga")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_yw8h1"), SubResource("SpriteFrames_426eu")])
+settings_value = "coin"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p871c")
+}
+autoplay = "Appear"

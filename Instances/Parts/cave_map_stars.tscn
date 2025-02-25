@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://bhchvt4btomxu"]
+
+[ext_resource type="Texture2D" uid="uid://d3uph3by040im" path="res://Assets/Sprites/Map/CaveStars.png" id="1_x8pq0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to7mv"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73aya"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8m6dr"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj3lb"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85htp"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dri7q"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkvd3"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 48, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaeco"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5ojb"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2tjg"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwt5b"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 40, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wcd"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 48, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvmqt"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 56, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1cl1"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmwuj"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gj2o"]
+atlas = ExtResource("1_x8pq0")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ivon8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to7mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73aya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8m6dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj3lb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85htp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dri7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkvd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaeco")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5ojb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2tjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwt5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvmqt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1cl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmwuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gj2o")
+}],
+"loop": true,
+"name": &"default2",
+"speed": 10.0
+}]
+
+[node name="CaveMapStars" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ivon8")
+animation = &"default2"
+autoplay = "default"
+frame_progress = 0.551075
+centered = false

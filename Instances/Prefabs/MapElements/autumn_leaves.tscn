@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8eu6sdel7agc"]
+
+[ext_resource type="Texture2D" uid="uid://b4h70tameaf31" path="res://Assets/Sprites/Map/AutumnLeaf.png" id="1_w2ns4"]
+
+[sub_resource type="GDScript" id="GDScript_ia64b"]
+script/source = "extends Parallax2D
+
+func _ready() -> void:
+	if GameManager.autumn == false:
+		get_parent().queue_free()
+"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_urhnu"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_wfndu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.728395, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_twkib"]
+curve = SubResource("Curve_wfndu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ioj1"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -16, 0)
+emission_shape = 3
+emission_box_extents = Vector3(240, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(-1, 5, 0)
+tangential_accel_min = -20.0
+tangential_accel_max = 20.0
+scale_curve = SubResource("CurveTexture_twkib")
+anim_offset_max = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 0
+
+[node name="AutumnLeaves" type="Parallax2D" parent="."]
+scroll_offset = Vector2(32, 0)
+script = SubResource("GDScript_ia64b")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="AutumnLeaves"]
+material = SubResource("CanvasItemMaterial_urhnu")
+position = Vector2(200, 40)
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_7ioj1")
+texture = ExtResource("1_w2ns4")
+lifetime = 8.0
+preprocess = 5.0
+randomness = 1.0

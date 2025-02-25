@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=3 format=3 uid="uid://b84iwjp4ib15g"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_gbvv2"]
+[ext_resource type="Texture2D" uid="uid://dbufq5428qq6x" path="res://Assets/Sprites/Items/PoisonMushroom.png" id="1_roedr"]
+
+[resource]
+script = ExtResource("1_gbvv2")
+state_name = "Small"
+sprite_frame_name = "Small"
+states = Array[Script]([])
+hitbox_size = "Small"
+transform_animation = false
+power_tier = 0
+item_sprite = ExtResource("1_roedr")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://due2pg4xeiycu"]
+
+[ext_resource type="Texture2D" uid="uid://dotysib26hc2i" path="res://Assets/Sprites/AchievementIcons/46760.png" id="1_koal2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_g44j5"]
+
+[resource]
+script = ExtResource("2_g44j5")
+title = "Bowser Disposer"
+description = "Beat Bowser and save the princess"
+icon = ExtResource("1_koal2")

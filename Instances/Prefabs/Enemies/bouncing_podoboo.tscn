@@ -1,0 +1,105 @@
+[gd_scene load_steps=13 format=3 uid="uid://y4ob5iecxqtk"]
+
+[ext_resource type="Script" uid="uid://b2kocv2mnveex" path="res://Scripts/Classes/Enemies/bouncing_podoboo.gd" id="1_u3g4m"]
+[ext_resource type="Texture2D" uid="uid://daxvpldn05c7v" path="res://Assets/Sprites/Enemys/Podoboo.png" id="2_0kckq"]
+[ext_resource type="Script" uid="uid://6j5n2wv3uif1" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_0trq8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ian1u"]
+atlas = ExtResource("2_0kckq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1842x"]
+atlas = ExtResource("2_0kckq")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vph5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ian1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1842x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04j4j"]
+atlas = ExtResource("2_0kckq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbr1j"]
+atlas = ExtResource("2_0kckq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k58dq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04j4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbr1j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtoex"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8ij0"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3y1fh"]
+size = Vector2(9999, 20)
+
+[node name="BouncingPodoboo" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 524292
+script = ExtResource("1_u3g4m")
+spiky_top = true
+can_lava_swim = true
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+rotation = -0.677188
+sprite_frames = SubResource("SpriteFrames_vph5l")
+autoplay = "default"
+frame_progress = 0.887134
+script = ExtResource("3_0trq8")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_vph5l"), SubResource("SpriteFrames_k58dq")])
+settings_value = "podoboo"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+rotation = -0.0313654
+shape = SubResource("CircleShape2D_gtoex")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_a8ij0")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+top_level = true
+position = Vector2(0, 48)
+collision_layer = 524288
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_3y1fh")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

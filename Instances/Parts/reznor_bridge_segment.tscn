@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ygmxara2cyed"]
+
+[ext_resource type="Texture2D" uid="uid://bhs7f0bcqbilo" path="res://Assets/Sprites/Tilesets/Decorations/CastleCurtains.png" id="1_0om75"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ln1p"]
+atlas = ExtResource("1_0om75")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lpiuc"]
+size = Vector2(16, 16)
+
+[node name="ReznorBridgeSegment" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2ln1p")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lpiuc")

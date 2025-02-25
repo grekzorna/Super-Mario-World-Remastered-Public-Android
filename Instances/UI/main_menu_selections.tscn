@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvydavs8pfpqo"]
+
+[ext_resource type="Script" path="res://Scripts/UI/main_menu_selections.gd" id="1_oc6em"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="2_uod0t"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_fuvhd"]
+
+[node name="MainMenuSelections" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oc6em")
+options = Array[String](["", "", "", "", "", ""])
+option_colours = Array[Color]([Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39375
+anchor_top = 0.577778
+anchor_right = 0.66875
+anchor_bottom = 0.855556
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Selection1" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Selection1"]
+modulate = Color(1, 0.312295, 0.248026, 1)
+layout_mode = 2
+texture = ExtResource("2_uod0t")
+stretch_mode = 3
+flip_h = true
+
+[node name="BaseLabel" type="Label" parent="VBoxContainer/Selection1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fuvhd")
+text = "Test"
+uppercase = true

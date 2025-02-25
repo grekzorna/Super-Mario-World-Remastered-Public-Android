@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://volfpatnmqws"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_30t4m"]
+[ext_resource type="Texture2D" uid="uid://vukx2ssmuiv2" path="res://Assets/Sprites/UI/TextImages/Star.png" id="2_jpxdh"]
+
+[resource]
+script = ExtResource("1_30t4m")
+level_title = "Star Road 1"
+level_scene_path = "res://Instances/Levels/StarRoad/star_1.tscn"
+start_cutscene_path = ""
+has_secret_exit = true
+yoshi_allowed = true
+has_dragon_coins = true
+title_image = ExtResource("2_jpxdh")
+dragon_coin_amount = 5
+counts_as_exit = true
+map_point_warp = "Level1"
+map_scene_warp = "res://Instances/Levels/Maps/StarRoad.tscn"

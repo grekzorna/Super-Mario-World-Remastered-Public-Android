@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4kpsixibdsq2"]
+
+[ext_resource type="Texture2D" uid="uid://b8w8pnfqcegvl" path="res://Assets/Sprites/UI/PMeterEmpty.png" id="1_1vv21"]
+[ext_resource type="Texture2D" uid="uid://cbm2lki8gbe55" path="res://Assets/Sprites/UI/PMeterFull.png" id="2_cm2ij"]
+[ext_resource type="Script" path="res://Scripts/UI/racoon_p_meter_bar.gd" id="3_12hj2"]
+[ext_resource type="AudioStream" uid="uid://b0mn27m5m8l3f" path="res://Assets/Audio/SFX/p-meter.wav" id="4_qka74"]
+
+[node name="RaccoonPMeter" type="Node2D"]
+script = ExtResource("3_12hj2")
+character_offsets = {
+0: Vector2(0, 0),
+1: Vector2(0, 0),
+2: Vector2(0, 0),
+3: Vector2(0, 0)
+}
+show_on_displays = false
+
+[node name="Bar" type="TextureProgressBar" parent="."]
+offset_left = -14.0
+offset_top = 19.0
+offset_right = 18.0
+offset_bottom = 24.0
+max_value = 8.0
+value = 8.0
+texture_under = ExtResource("1_1vv21")
+texture_progress = ExtResource("2_cm2ij")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qka74")
+volume_db = -5.0
+bus = &"SFX"

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dc8jkufspx04l"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/BottomHalf.gd" id="1_4pcoj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spbw8"]
+size = Vector2(10, 0.1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssaqe"]
+size = Vector2(18, 5)
+
+[node name="BottomHalf" type="Node2D"]
+script = ExtResource("1_4pcoj")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_spbw8")
+debug_color = Color(1, 0.6, 0, 0.419608)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="HurtBox" type="Node2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="HurtBox"]
+
+[node name="Shape" type="CollisionShape2D" parent="HurtBox/Hitbox"]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_ssaqe")
+disabled = true
+
+[connection signal="block_hit" from="." to="." method="hit"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

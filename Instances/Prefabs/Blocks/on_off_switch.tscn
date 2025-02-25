@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://cr3lh62esdmi"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/OnOffSwitch.gd" id="1_qrr8p"]
+[ext_resource type="Texture2D" uid="uid://dkwke5samsydl" path="res://Assets/Sprites/Objects/OnOffSwitch.png" id="2_hv268"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_yh5cr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mweqm"]
+atlas = ExtResource("2_hv268")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vh2q"]
+atlas = ExtResource("2_hv268")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kvg3"]
+atlas = ExtResource("2_hv268")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g3b5"]
+atlas = ExtResource("2_hv268")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d345d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mweqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vh2q")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kvg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g3b5")
+}],
+"loop": true,
+"name": &"On",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pyac"]
+atlas = ExtResource("2_hv268")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcafp"]
+atlas = ExtResource("2_hv268")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tb88l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pyac")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcafp")
+}],
+"loop": true,
+"name": &"On",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xiyg"]
+size = Vector2(16, 16)
+
+[node name="OnOffSwitch" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+editor_description = "\"Ona, Ona, Ona, Ona... On Off Switch!!!\""
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_qrr8p")
+visuals = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+editor_description = "\"Ona, Ona, Ona, Ona... ON OFF SWITCH!\""
+sprite_frames = SubResource("SpriteFrames_d345d")
+animation = &"Off"
+frame_progress = 0.439136
+speed_scale = 0.5
+script = ExtResource("3_yh5cr")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_tb88l"), SubResource("SpriteFrames_d345d")])
+settings_value = "onoffswitch"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1xiyg")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://caincdwavu6k8"]
+
+[ext_resource type="Texture2D" uid="uid://bdyxy6o8lypmr" path="res://Assets/Sprites/Objects/ArrowSign.png" id="1_tecmw"]
+[ext_resource type="Texture2D" uid="uid://b0khnvskkl3uq" path="res://Assets/Sprites/Objects/BigArrowSign.png" id="3_e8wd8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6g4dt"]
+atlas = ExtResource("1_tecmw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="GDScript" id="GDScript_0esru"]
+script/source = "extends AutumnSprite
+
+func _ready() -> void:
+	if GameManager.autumn:
+		if overhaul_only:
+			if SettingsManager.settings_file.autumn_type == 1:
+				return
+		if is_instance_valid(autumn_texture):
+			texture = autumn_texture
+	$LargePost.visible = SettingsManager.sprite_settings.signpost == 1
+	self_modulate.a = 1 if SettingsManager.sprite_settings.signpost == 0 else 0
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4nrv"]
+atlas = ExtResource("1_tecmw")
+region = Rect2(0, 32, 32, 32)
+
+[node name="Sign" type="Sprite2D"]
+z_index = -4
+texture = SubResource("AtlasTexture_6g4dt")
+script = SubResource("GDScript_0esru")
+autumn_texture = SubResource("AtlasTexture_s4nrv")
+overhaul_only = true
+
+[node name="LargePost" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("3_e8wd8")

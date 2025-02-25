@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://hn3b0qewuae3"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/porcupuffer.gd" id="1_cmhiq"]
+[ext_resource type="Texture2D" uid="uid://dq2lx3776ssrd" path="res://Assets/Sprites/Enemys/Porcupuffer.png" id="2_eoow4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t1h8"]
+atlas = ExtResource("2_eoow4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdevm"]
+atlas = ExtResource("2_eoow4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hn410"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t1h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdevm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcfp5"]
+
+[node name="Porcupuffer" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+slide_on_ceiling = false
+script = ExtResource("1_cmhiq")
+spiky_top = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hn410")
+autoplay = "default"
+frame_progress = 0.110661
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_rcfp5")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(1.6, 1.6)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

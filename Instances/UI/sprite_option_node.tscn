@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://u84jg7u3at58"]
+
+[ext_resource type="PackedScene" uid="uid://den5kogms88pd" path="res://Instances/UI/selectable_option_node.tscn" id="1_hhqv1"]
+[ext_resource type="Script" path="res://Scripts/UI/sprite_option_node.gd" id="2_o8tvf"]
+[ext_resource type="Texture2D" uid="uid://0u7skxqiwcqm" path="res://icon.png" id="3_n1ojq"]
+
+[node name="SelectableOptionNode" instance=ExtResource("1_hhqv1")]
+script = ExtResource("2_o8tvf")
+textures = Array[Texture2D]([])
+option_value_usage = 1
+
+[node name="Control" type="Control" parent="." index="1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Control" index="0"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Control" index="1"]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_n1ojq")

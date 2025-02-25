@@ -1,0 +1,131 @@
+[gd_scene load_steps=16 format=3 uid="uid://cp5jp56rp76so"]
+
+[ext_resource type="Texture2D" uid="uid://bulmxuyjq4d50" path="res://Assets/Sprites/Objects/BerrySheet.png" id="1_euhq5"]
+[ext_resource type="Script" path="res://Scripts/Classes/Items/yoshi_berry.gd" id="1_fq4qf"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="2_3suej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nacca"]
+shader = ExtResource("2_3suej")
+shader_parameter/og_1 = Color(1, 1, 0, 1)
+shader_parameter/og_2 = null
+shader_parameter/og_3 = null
+shader_parameter/og_arm = null
+shader_parameter/og_arm_2 = null
+shader_parameter/colour_1 = Color(0.972549, 0.345098, 0, 1)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = null
+shader_parameter/arm_2_colour = null
+shader_parameter/epsilon = 0.001
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsogc"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sqqg"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc3ac"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3s3t"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj0rv"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0ktf"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1umf"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drhhp"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnra8"]
+atlas = ExtResource("1_euhq5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7s6jr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsogc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sqqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc3ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sqqg")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3s3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj0rv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0ktf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj0rv")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1umf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drhhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnra8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drhhp")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i50hd"]
+size = Vector2(11, 10)
+
+[node name="YoshiBerry" type="Node2D"]
+process_mode = 3
+z_index = -1
+script = ExtResource("1_fq4qf")
+colour_hexes = Array[Color]([Color(0.972549, 0.345098, 0, 1), Color(0.784314, 0.972549, 0, 1), Color(0.972549, 0.470588, 0.784314, 1)])
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_nacca")
+sprite_frames = SubResource("SpriteFrames_7s6jr")
+animation = &"2"
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_i50hd")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsb1qnbspjwp7"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/EnemyClass.gd" id="1_jmx0g"]
+[ext_resource type="Texture2D" uid="uid://b4vv662me2wts" path="res://Assets/Sprites/Enemys/Fuzzy.png" id="2_vuubv"]
+
+[sub_resource type="Animation" id="Animation_jbf2k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_svx6p"]
+resource_name = "defaulty"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_44mrt"]
+_data = {
+"RESET": SubResource("Animation_jbf2k"),
+"defaulty": SubResource("Animation_svx6p")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdslg"]
+radius = 4.0
+
+[node name="Fuzzy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_jmx0g")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vuubv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_44mrt")
+}
+autoplay = "defaulty"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jdslg")
+
+[connection signal="area_entered" from="Area2D" to="." method="check_hit"]

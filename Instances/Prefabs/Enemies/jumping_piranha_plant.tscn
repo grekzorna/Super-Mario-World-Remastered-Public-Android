@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://dw1nycwrsfncs"]
+
+[ext_resource type="Script" uid="uid://dkc0llylq5kff" path="res://Scripts/Classes/Enemies/JumpingPiranhaPlant.gd" id="1_jvpns"]
+[ext_resource type="Texture2D" uid="uid://ceuxd3inp0gou" path="res://Assets/Sprites/Enemys/AutumnJumpingPiranhaPlant.png" id="2_d1liv"]
+[ext_resource type="Texture2D" uid="uid://b0rm0evveqoc0" path="res://Assets/Sprites/Enemys/JumpingPiranhaPlant.png" id="2_rvb5f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpl7d"]
+atlas = ExtResource("2_rvb5f")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w71ui"]
+atlas = ExtResource("2_rvb5f")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3hb5"]
+atlas = ExtResource("2_rvb5f")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fv4v"]
+atlas = ExtResource("2_rvb5f")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0t88l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpl7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w71ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3hb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fv4v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij5s0"]
+atlas = ExtResource("2_d1liv")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfuxi"]
+atlas = ExtResource("2_d1liv")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5nkn"]
+atlas = ExtResource("2_d1liv")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3b6v"]
+atlas = ExtResource("2_d1liv")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i12me"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij5s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfuxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5nkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3b6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqhhg"]
+size = Vector2(10, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lroni"]
+radius = 13.0
+
+[node name="JumpingPiranhaPlant" type="CharacterBody2D"]
+z_index = -10
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_jvpns")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+ice_size = Vector2(1, 1.5)
+can_swim = true
+spiky_top = true
+can_ground_pound = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_0t88l")
+autoplay = "default"
+frame_progress = 0.875781
+
+[node name="AutumnSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_i12me")
+autoplay = "default"
+frame_progress = 0.248492
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_jqhhg")
+
+[node name="PlayerDetect" type="Node2D" parent="."]
+
+[node name="Area" type="Area2D" parent="PlayerDetect"]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="PlayerDetect/Area"]
+position = Vector2(0, -21)
+shape = SubResource("CircleShape2D_lroni")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

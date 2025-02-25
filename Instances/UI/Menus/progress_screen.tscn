@@ -1,0 +1,697 @@
+[gd_scene load_steps=57 format=3 uid="uid://pkrimgb5el1d"]
+
+[ext_resource type="Script" path="res://Scripts/UI/progress_screen.gd" id="1_af6gh"]
+[ext_resource type="AudioStream" uid="uid://h175875wkwmj" path="res://Assets/Audio/BGM/SMW/ProgressScreen.mp3" id="1_e0001"]
+[ext_resource type="Texture2D" uid="uid://brpkusquyfnyu" path="res://Assets/Sprites/UI/MainBG.png" id="2_63fmw"]
+[ext_resource type="Resource" uid="uid://dj3hx2sxuddb3" path="res://Resources/MapAreas/YoshiIsland.tres" id="2_litvp"]
+[ext_resource type="Texture2D" uid="uid://bjmklpmam0rwq" path="res://Assets/Sprites/UI/StatusScreen/Bar.png" id="3_7f182"]
+[ext_resource type="Texture2D" uid="uid://c77t25a1stp22" path="res://Assets/Sprites/UI/StatusScreen/Header.png" id="4_jsvku"]
+[ext_resource type="Texture2D" uid="uid://cboiug2mdn16g" path="res://Assets/Sprites/UI/StatusScreen/BoardGuide.png" id="5_jl60x"]
+[ext_resource type="Texture2D" uid="uid://cjp17vlbnukl" path="res://Assets/Sprites/UI/StatusScreen/Board.png" id="5_nwpix"]
+[ext_resource type="PackedScene" uid="uid://bny4pp5xobqjb" path="res://Instances/UI/level_progress_container.tscn" id="6_nc30s"]
+[ext_resource type="Texture2D" uid="uid://c4lplt88vai13" path="res://Assets/Sprites/UI/StatusScreen/HeaderGuide.png" id="6_x6cda"]
+[ext_resource type="Texture2D" uid="uid://dasc6w32qumo4" path="res://Assets/Sprites/UI/HUD/Clock.png" id="8_vinbu"]
+[ext_resource type="FontFile" uid="uid://c5xts2bvjtjs3" path="res://Assets/Sprites/UI/HUD/CreditsFont.png" id="9_fr3r4"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="10_37t6m"]
+[ext_resource type="FontFile" uid="uid://lfpsqjjnmb8i" path="res://Assets/Sprites/UI/Font.png" id="10_ypusm"]
+[ext_resource type="Texture2D" uid="uid://bmxg6clj8in1e" path="res://Assets/Sprites/Characters/Luigi/HUDIcon.png" id="12_lhtqb"]
+[ext_resource type="Texture2D" uid="uid://bgd457gedcuns" path="res://Assets/Sprites/Characters/Toad/HUDIcon.png" id="13_fqc3n"]
+[ext_resource type="Texture2D" uid="uid://dcvllrp6g1rlu" path="res://Assets/Sprites/Characters/Toadette/HUDIcon.png" id="14_f800x"]
+[ext_resource type="Texture2D" uid="uid://ba65dunp68ehu" path="res://Assets/Sprites/Characters/Mario/HUDTitle.png" id="15_f5v82"]
+[ext_resource type="Texture2D" uid="uid://3kc61mbt1ywx" path="res://Assets/Sprites/UI/HUD/DinoCoin.png" id="16_v1gmk"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="17_7xbpj"]
+[ext_resource type="PackedScene" uid="uid://bk6j14k4vtp3s" path="res://Instances/UI/Menus/achievement_viewer.tscn" id="20_7oqh1"]
+[ext_resource type="Texture2D" uid="uid://cvaegmcjp6xp1" path="res://Assets/Sprites/UI/StatusScreen/StatusIndicator.png" id="22_4mpc0"]
+[ext_resource type="Texture2D" uid="uid://dd2w6l12dvkl6" path="res://Assets/Sprites/UI/Season.png" id="22_h1iot"]
+[ext_resource type="Texture2D" uid="uid://d0er0rpegxwib" path="res://Assets/Sprites/UI/StatusScreen/PeachHelp.png" id="23_hjep4"]
+[ext_resource type="Texture2D" uid="uid://di2i5id8vbt5g" path="res://Assets/Sprites/Characters/Peach/Modern.png" id="24_h6wis"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="25_cqald"]
+[ext_resource type="Texture2D" uid="uid://dmv3vhp47jrsm" path="res://Assets/Sprites/Characters/Peach/SNES.png" id="26_bnarn"]
+[ext_resource type="Texture2D" uid="uid://crv4topsehlnq" path="res://Assets/Sprites/Characters/Peach/GBA.png" id="27_85rac"]
+
+[sub_resource type="Shader" id="Shader_7cmqc"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xhcq"]
+shader = SubResource("Shader_7cmqc")
+shader_parameter/motion = Vector2(-4, -4)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="FontVariation" id="FontVariation_khw5m"]
+base_font = ExtResource("10_ypusm")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcxri"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02cqf"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y47m0"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wioi1"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxc3p"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcwus"]
+atlas = ExtResource("26_bnarn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_owf7i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcxri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02cqf")
+}],
+"loop": true,
+"name": &"Clear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y47m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wioi1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxc3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcwus")
+}],
+"loop": true,
+"name": &"Help",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q45yr"]
+atlas = ExtResource("27_85rac")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7rgg"]
+atlas = ExtResource("27_85rac")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnags"]
+atlas = ExtResource("27_85rac")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nupht"]
+atlas = ExtResource("27_85rac")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1lbt"]
+atlas = ExtResource("27_85rac")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6307f"]
+atlas = ExtResource("27_85rac")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_233n2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q45yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7rgg")
+}],
+"loop": true,
+"name": &"Clear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnags")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nupht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1lbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6307f")
+}],
+"loop": true,
+"name": &"Help",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ksd6"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aal41"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reox6"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_115sl"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0ti0"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg5v6"]
+atlas = ExtResource("24_h6wis")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bcgc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ksd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aal41")
+}],
+"loop": true,
+"name": &"Clear",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reox6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_115sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0ti0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg5v6")
+}],
+"loop": true,
+"name": &"Help",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_mhsk3"]
+resource_name = "Clear"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Peach:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Clear"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Help:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BG:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1.01075e-06, 0.970936, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_61xaa"]
+resource_name = "NotClear"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Peach:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Help"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Help:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BG:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.970884, 0.168835, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pe5vr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Peach:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Clear"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Help:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BG:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.970884, 0.168835, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b3fs4"]
+_data = {
+&"Clear": SubResource("Animation_mhsk3"),
+&"NotClear": SubResource("Animation_61xaa"),
+&"RESET": SubResource("Animation_pe5vr")
+}
+
+[node name="ProgressScreen" type="Node"]
+script = ExtResource("1_af6gh")
+current_area = ExtResource("2_litvp")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_e0001")
+autoplay = true
+bus = &"Music"
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="TextureRect" parent="UI"]
+material = SubResource("ShaderMaterial_7xhcq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_63fmw")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Bar" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = ExtResource("3_7f182")
+
+[node name="Board" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15625
+anchor_top = 0.203704
+anchor_right = 0.841667
+anchor_bottom = 0.8
+offset_left = 5.0
+offset_top = 24.9999
+offset_right = -5.00015
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_nwpix")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Board"]
+visible = false
+modulate = Color(0.31802, 0.31802, 0.31802, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_jl60x")
+
+[node name="Margin" type="MarginContainer" parent="UI/Board"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 29
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 6
+
+[node name="Container" type="VBoxContainer" parent="UI/Board/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="LevelProgressContainer" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+layout_mode = 2
+
+[node name="LevelProgressContainer2" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer3" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer4" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer5" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer6" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer7" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer8" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer9" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer10" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer11" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer12" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer13" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer14" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer15" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="LevelProgressContainer16" parent="UI/Board/Margin/Container" instance=ExtResource("6_nc30s")]
+auto_translate_mode = 1
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Board"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 155.0
+offset_right = 158.0
+offset_bottom = 174.0
+rotation = -1.5708
+theme_override_fonts/font = ExtResource("9_fr3r4")
+text = "Forest of illusion"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+justification_flags = 162
+uppercase = true
+
+[node name="Arrow" type="TextureRect" parent="UI/Board"]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 5.99994
+offset_right = 345.0
+offset_bottom = 13.9999
+texture = ExtResource("10_37t6m")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Header" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.234375
+anchor_right = 0.765625
+anchor_bottom = 0.211111
+offset_left = 107.5
+offset_right = -107.5
+offset_bottom = -17.0
+grow_horizontal = 2
+texture = ExtResource("4_jsvku")
+metadata/_edit_use_anchors_ = true
+
+[node name="Guide" type="TextureRect" parent="UI/Header"]
+visible = false
+modulate = Color(0.442911, 0.442911, 0.442911, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_x6cda")
+
+[node name="Container" type="VBoxContainer" parent="UI/Header"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.286275
+anchor_top = 0.280702
+anchor_right = 0.847059
+anchor_bottom = 0.736842
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="HBoxContainer" parent="UI/Header/Container"]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="Clock" type="TextureRect" parent="UI/Header/Container/Time"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("8_vinbu")
+
+[node name="Label" type="Label" parent="UI/Header/Container/Time"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("17_7xbpj")
+text = "00:00:00"
+
+[node name="Score" type="HBoxContainer" parent="UI/Header/Container"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Header/Container/Score"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_khw5m")
+text = "SCORE"
+
+[node name="Label2" type="Label" parent="UI/Header/Container/Score"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/font = ExtResource("17_7xbpj")
+text = "0"
+
+[node name="LivesCoins" type="HBoxContainer" parent="UI/Header/Container"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Lives" type="HBoxContainer" parent="UI/Header/Container/LivesCoins"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PlayerIcons" type="HBoxContainer" parent="UI/Header/Container/LivesCoins/Lives"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="Player1" type="TextureRect" parent="UI/Header/Container/LivesCoins/Lives/PlayerIcons"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("15_f5v82")
+stretch_mode = 3
+
+[node name="Player2" type="TextureRect" parent="UI/Header/Container/LivesCoins/Lives/PlayerIcons"]
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+texture = ExtResource("12_lhtqb")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Player3" type="TextureRect" parent="UI/Header/Container/LivesCoins/Lives/PlayerIcons"]
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+texture = ExtResource("13_fqc3n")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Player4" type="TextureRect" parent="UI/Header/Container/LivesCoins/Lives/PlayerIcons"]
+auto_translate_mode = 1
+visible = false
+layout_mode = 2
+texture = ExtResource("14_f800x")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UI/Header/Container/LivesCoins/Lives"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_7xbpj")
+text = "*13"
+
+[node name="Coins" type="HBoxContainer" parent="UI/Header/Container/LivesCoins"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Header/Container/LivesCoins/Coins"]
+layout_mode = 2
+texture = ExtResource("16_v1gmk")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="UI/Header/Container/LivesCoins/Coins"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("17_7xbpj")
+text = "*48"
+
+[node name="LevelTitle" type="Label" parent="UI/Header"]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 160.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_ypusm")
+text = "yoshi's island 1"
+vertical_alignment = 1
+
+[node name="SeasonIndicator" type="Sprite2D" parent="UI/Header"]
+position = Vector2(235.5, 32)
+texture = ExtResource("22_h1iot")
+hframes = 2
+
+[node name="PeachIndicator" type="Control" parent="UI/Header"]
+clip_contents = true
+anchors_preset = 0
+offset_left = 29.0
+offset_top = 18.0
+offset_right = 53.0
+offset_bottom = 42.0
+
+[node name="BG" type="Sprite2D" parent="UI/Header/PeachIndicator"]
+modulate = Color(0.970884, 0.168835, 0, 1)
+texture = ExtResource("22_4mpc0")
+centered = false
+
+[node name="Help" type="Sprite2D" parent="UI/Header/PeachIndicator"]
+position = Vector2(11.5, 4)
+texture = ExtResource("23_hjep4")
+
+[node name="Peach" type="AnimatedSprite2D" parent="UI/Header/PeachIndicator"]
+position = Vector2(11.5, 15)
+sprite_frames = SubResource("SpriteFrames_owf7i")
+animation = &"Clear"
+script = ExtResource("25_cqald")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_owf7i"), SubResource("SpriteFrames_233n2"), SubResource("SpriteFrames_0bcgc")])
+settings_value = "peach"
+metadata/_custom_type_script = ExtResource("25_cqald")
+
+[node name="Animation" type="AnimationPlayer" parent="UI/Header/PeachIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_b3fs4")
+}
+autoplay = "NotClear"
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 77.0
+offset_right = 79.0
+offset_bottom = 117.0
+
+[node name="AchievementViewer" parent="UI" instance=ExtResource("20_7oqh1")]
+layout_mode = 1
+
+[connection signal="closed" from="UI/AchievementViewer" to="." method="achievement_closed"]

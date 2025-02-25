@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=4 format=3 uid="uid://b8cl3invnv0aj"]
+
+[ext_resource type="Resource" uid="uid://b84iwjp4ib15g" path="res://Resources/PlayerPowerUpState/Small.tres" id="1_5r6t3"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="1_7hh0x"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_xu5jg"]
+
+[resource]
+script = ExtResource("1_xu5jg")
+state_name = "Big"
+sprite_frame_name = "Big"
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = false
+power_down = ExtResource("1_5r6t3")
+power_tier = 1
+item_sprite = ExtResource("1_7hh0x")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

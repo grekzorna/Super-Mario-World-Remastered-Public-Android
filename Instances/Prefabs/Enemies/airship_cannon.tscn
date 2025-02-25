@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bk6gwhcfdn3nn"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/airship_cannon.gd" id="1_2ybqj"]
+[ext_resource type="Texture2D" uid="uid://b37swe4oqxbts" path="res://Assets/Sprites/Enemys/CannonLauncher.png" id="1_m8b40"]
+[ext_resource type="Texture2D" uid="uid://bbt3splpo65vc" path="res://Assets/Sprites/Enemys/CannonHolder.png" id="2_r6e2h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akvcq"]
+size = Vector2(16, 16)
+
+[node name="AirshipCannon" type="StaticBody2D"]
+collision_layer = 5
+script = ExtResource("1_2ybqj")
+
+[node name="Cannon" type="Sprite2D" parent="."]
+texture = ExtResource("1_m8b40")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_akvcq")
+
+[node name="Holder" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+texture = ExtResource("2_r6e2h")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="summon_cannon_ball"]

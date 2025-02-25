@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=14 format=3 uid="uid://3tpjwk78oca4"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_0mffn"]
+[ext_resource type="Resource" uid="uid://biht6nrn04bdg" path="res://Resources/Achievements/Completionist/DragCoins/BVDragCoin.tres" id="1_jrsqe"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="2_33otd"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV1.tres" id="3_jkw3q"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV2.tres" id="4_grdg7"]
+[ext_resource type="Resource" uid="uid://botsaye235o5a" path="res://Resources/LevelData/BowserValley/VGH.tres" id="5_uikxt"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV3.tres" id="6_ipan7"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV4.tres" id="7_lm6s8"]
+[ext_resource type="Resource" uid="uid://dcn8c0gcfeadu" path="res://Resources/LevelData/BowserValley/Castle7.tres" id="8_75jn4"]
+[ext_resource type="Resource" uid="uid://dak6wg0oxdg73" path="res://Resources/LevelData/BowserValley/BVF.tres" id="9_f0q3e"]
+[ext_resource type="Resource" uid="uid://bvmyr6ic1e116" path="res://Resources/LevelData/BowserValley/FrontDoor.tres" id="11_g3vm2"]
+[ext_resource type="Resource" uid="uid://dlsnewsafo4s0" path="res://Resources/LevelData/BowserValley/BackDoor.tres" id="12_natb8"]
+[ext_resource type="AudioStream" uid="uid://i2hyhrts0o6w" path="res://Assets/Audio/BGM/SMW/BowserValley.mp3" id="13_l8fhy"]
+
+[resource]
+script = ExtResource("2_33otd")
+area_name = "Valley of Bowser"
+music = ExtResource("13_l8fhy")
+levels = Array[ExtResource("1_0mffn")]([ExtResource("3_jkw3q"), ExtResource("4_grdg7"), ExtResource("5_uikxt"), ExtResource("6_ipan7"), ExtResource("7_lm6s8"), ExtResource("8_75jn4"), ExtResource("9_f0q3e"), ExtResource("11_g3vm2"), ExtResource("12_natb8")])
+dragon_coin_achievement = ExtResource("1_jrsqe")

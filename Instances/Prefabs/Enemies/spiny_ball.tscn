@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://x4x6v8br1brx"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/spiny_ball.gd" id="1_nxpt0"]
+[ext_resource type="Texture2D" uid="uid://k5hiuv20y0wf" path="res://Assets/Sprites/Enemys/SpinyBall.png" id="2_8s5i8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gemy0"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vbre"]
+radius = 6.0
+
+[node name="SpinyBall" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_nxpt0")
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_8s5i8")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_gemy0")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_7vbre")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

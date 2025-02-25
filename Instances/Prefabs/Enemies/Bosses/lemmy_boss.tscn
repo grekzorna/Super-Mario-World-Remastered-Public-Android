@@ -1,0 +1,314 @@
+[gd_scene load_steps=29 format=3 uid="uid://c3bq5ba2qo4n4"]
+
+[ext_resource type="Script" uid="uid://bmvn6g2jky4ij" path="res://Scripts/Classes/Enemies/Bosses/PipeBoss.gd" id="1_xut1i"]
+[ext_resource type="Script" uid="uid://dqvvfw7fnr66v" path="res://Scripts/Classes/Enemies/Bosses/PipeBossEnemy.gd" id="2_qdbjp"]
+[ext_resource type="Texture2D" uid="uid://blivo46chqeue" path="res://Assets/Sprites/Characters/Bosses/Lemmy.png" id="3_3alyh"]
+[ext_resource type="Texture2D" uid="uid://bbxrbmdrqsyvc" path="res://Assets/Sprites/Characters/Bosses/LemmyDummy.png" id="4_1sd2a"]
+[ext_resource type="Script" uid="uid://bn5kyth8eyxbb" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="5_xlgey"]
+[ext_resource type="Resource" uid="uid://cdxlwmj7u3grj" path="res://Resources/Achievements/Progression/Castle3.tres" id="6_7iaeq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaj1b"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4otad"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iydcb"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rro4y"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6lb8"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkj8p"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_repn0"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wt6m"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atl7e"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogc3a"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3um6"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt542"]
+atlas = ExtResource("3_3alyh")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8y5lh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaj1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4otad")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iydcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rro4y")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6lb8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkj8p")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_repn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wt6m")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atl7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogc3a")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3um6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt542")
+}],
+"loop": true,
+"name": &"Hurt",
+"speed": 30.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rsba"]
+size = Vector2(14, 10.5)
+
+[sub_resource type="Animation" id="Animation_uyo8x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v3u36"]
+resource_name = "Raise"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vau86"]
+_data = {
+&"RESET": SubResource("Animation_uyo8x"),
+&"Raise": SubResource("Animation_v3u36")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5i1j"]
+atlas = ExtResource("4_1sd2a")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_leq5u"]
+atlas = ExtResource("4_1sd2a")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkq2j"]
+atlas = ExtResource("4_1sd2a")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bc2j"]
+atlas = ExtResource("4_1sd2a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_563f2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5i1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leq5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkq2j")
+}],
+"loop": true,
+"name": &"Hurt",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bc2j")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="LemmyBoss" type="Node" node_paths=PackedStringArray("main_boss", "dummies")]
+script = ExtResource("1_xut1i")
+main_boss = NodePath("Lemmy")
+dummies = [NodePath("Dummy1"), NodePath("Dummy2")]
+
+[node name="Lemmy" type="CharacterBody2D" parent="."]
+visible = false
+z_index = -1
+script = ExtResource("2_qdbjp")
+enemy_height = 8
+gib_type = 1
+can_slide_damage = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Lemmy"]
+sprite_frames = SubResource("SpriteFrames_8y5lh")
+animation = &"Hurt"
+speed_scale = 0.5
+
+[node name="Hitbox" type="Area2D" parent="Lemmy/Sprite"]
+position = Vector2(0, 11)
+
+[node name="Shape" type="CollisionShape2D" parent="Lemmy/Sprite/Hitbox"]
+shape = SubResource("RectangleShape2D_6rsba")
+
+[node name="Animations" type="AnimationPlayer" parent="Lemmy"]
+libraries = {
+&"": SubResource("AnimationLibrary_vau86")
+}
+
+[node name="Dummy1" type="CharacterBody2D" parent="."]
+visible = false
+z_index = -1
+script = ExtResource("2_qdbjp")
+enemy_height = 8
+gib_type = 1
+can_slide_damage = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Dummy1"]
+sprite_frames = SubResource("SpriteFrames_563f2")
+animation = &"Idle"
+frame_progress = 0.0879157
+speed_scale = 0.5
+
+[node name="Hitbox" type="Area2D" parent="Dummy1/Sprite"]
+position = Vector2(0, 11)
+
+[node name="Shape" type="CollisionShape2D" parent="Dummy1/Sprite/Hitbox"]
+shape = SubResource("RectangleShape2D_6rsba")
+
+[node name="Animations" type="AnimationPlayer" parent="Dummy1"]
+libraries = {
+&"": SubResource("AnimationLibrary_vau86")
+}
+
+[node name="Dummy2" type="CharacterBody2D" parent="."]
+visible = false
+z_index = -1
+script = ExtResource("2_qdbjp")
+enemy_height = 8
+gib_type = 1
+can_slide_damage = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Dummy2"]
+sprite_frames = SubResource("SpriteFrames_563f2")
+animation = &"Idle"
+frame_progress = 0.733809
+speed_scale = 0.5
+
+[node name="Hitbox" type="Area2D" parent="Dummy2/Sprite"]
+position = Vector2(0, 11)
+
+[node name="Shape" type="CollisionShape2D" parent="Dummy2/Sprite/Hitbox"]
+shape = SubResource("RectangleShape2D_6rsba")
+
+[node name="Animations" type="AnimationPlayer" parent="Dummy2"]
+libraries = {
+&"": SubResource("AnimationLibrary_vau86")
+}
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("5_xlgey")
+achievement = ExtResource("6_7iaeq")
+
+[connection signal="defeated" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="jumped_on" from="Lemmy" to="." method="enemy_hit" binds= ["Main"]]
+[connection signal="area_entered" from="Lemmy/Sprite/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Lemmy/Sprite/Hitbox" to="Lemmy" method="check_hit"]
+[connection signal="area_entered" from="Lemmy/Sprite/Hitbox" to="Lemmy" method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Dummy1/Sprite/Hitbox" to="Dummy1" method="check_hit"]
+[connection signal="area_entered" from="Dummy2/Sprite/Hitbox" to="Dummy2" method="check_hit"]

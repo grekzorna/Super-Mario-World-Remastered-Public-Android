@@ -1,0 +1,29 @@
+[gd_resource type="AudioStreamInteractive" load_steps=4 format=3 uid="uid://tmquifk0xxio"]
+
+[ext_resource type="AudioStream" uid="uid://k1mpngj7jcjo" path="res://Assets/Audio/BGM/SMW/Fortress.mp3" id="1_by1l7"]
+[ext_resource type="AudioStream" uid="uid://bhhkjlwdotshb" path="res://Assets/Audio/BGM/SMW/FortressYoshi.mp3" id="2_e2x3l"]
+[ext_resource type="AudioStream" uid="uid://k1mpngj7jcjo" path="res://Assets/Audio/BGM/SMW/Fortress.mp3" id="3_ybfkk"]
+
+
+[resource]
+clip_count = 4
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_by1l7")
+clip_0/auto_advance = 0
+clip_1/name = &"Yoshi"
+clip_1/stream = ExtResource("2_e2x3l")
+clip_1/auto_advance = 0
+clip_2/name = &"Hurry"
+clip_2/stream = ExtResource("3_ybfkk")
+clip_2/auto_advance = 0
+clip_3/name = &"HurryYoshi"
+clip_3/stream = ExtResource("3_ybfkk")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}

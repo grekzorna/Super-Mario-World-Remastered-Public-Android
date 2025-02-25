@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://b55o5oesywdn2"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/mecha_koopa_held.gd" id="1_ujoyi"]
+[ext_resource type="Texture2D" uid="uid://c2r06g7vxmrap" path="res://Assets/Sprites/Enemys/MechaKoopa.png" id="2_p2k7y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhbao"]
+atlas = ExtResource("2_p2k7y")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcsmp"]
+atlas = ExtResource("2_p2k7y")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a1iiv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhbao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcsmp")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s468t"]
+size = Vector2(20, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3aqd"]
+size = Vector2(10, 8)
+
+[node name="MechaKoopaHeld" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_ujoyi")
+directional_sprite = true
+can_destroy = true
+destructable = true
+kick_bounce = true
+respawnable = true
+respawn_entity_scene = "res://Instances/Prefabs/Enemies/mecha_koopa.tscn"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_a1iiv")
+autoplay = "default"
+frame = 1
+frame_progress = 1.0
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_s468t")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_i3aqd")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

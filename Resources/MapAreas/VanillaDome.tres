@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=17 format=3 uid="uid://5uk6b7vfalck"]
+
+[ext_resource type="Resource" uid="uid://clji4vwaq4j6v" path="res://Resources/Achievements/Completionist/DragCoins/VDDragCoin.tres" id="1_ajcdh"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="1_j5ti3"]
+[ext_resource type="Resource" uid="uid://b2lyt6bl34qg" path="res://Resources/LevelData/VanillaDome/VD1.tres" id="1_ok374"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_q0c7w"]
+[ext_resource type="AudioStream" uid="uid://d0uc0y41ofbj5" path="res://Assets/Audio/BGM/SMW/VanillaDomeAutumn.mp3" id="1_s1pjq"]
+[ext_resource type="Resource" uid="uid://byipdsh5aoswf" path="res://Resources/LevelData/VanillaDome/VD2.tres" id="2_36h7y"]
+[ext_resource type="Resource" uid="uid://bps7un4a6jvbp" path="res://Resources/LevelData/VanillaDome/RedSwitchPalace.tres" id="3_k20rl"]
+[ext_resource type="Resource" uid="uid://f5x6iir2n2tm" path="res://Resources/LevelData/VanillaDome/VGH.tres" id="4_t3d7u"]
+[ext_resource type="Resource" uid="uid://bfkpsa1ulwf7g" path="res://Resources/LevelData/VanillaDome/VD3.tres" id="5_e4yq1"]
+[ext_resource type="Resource" uid="uid://dvfxyu2lee6bm" path="res://Resources/LevelData/VanillaDome/VD4.tres" id="6_t80tp"]
+[ext_resource type="Resource" uid="uid://dofqlbp1rddj0" path="res://Resources/LevelData/VanillaDome/Castle3.tres" id="7_ddfv5"]
+[ext_resource type="Resource" uid="uid://ck1m7domkrhte" path="res://Resources/LevelData/VanillaDome/VS1.tres" id="8_e6dp3"]
+[ext_resource type="Resource" uid="uid://chmv3vntvwrrp" path="res://Resources/LevelData/VanillaDome/VS2.tres" id="9_xa6qt"]
+[ext_resource type="Resource" uid="uid://cwarc20s2b88g" path="res://Resources/LevelData/VanillaDome/VanillaFortress.tres" id="10_xwlje"]
+[ext_resource type="Resource" uid="uid://3kbueh2w887n" path="res://Resources/LevelData/VanillaDome/VS3.tres" id="12_3oqgu"]
+[ext_resource type="AudioStream" uid="uid://4mqtss21i4wa" path="res://Assets/Audio/BGM/SMW/VanillaDome.mp3" id="13_wxgru"]
+
+[resource]
+script = ExtResource("1_j5ti3")
+area_name = "Vanilla Dome"
+music = ExtResource("13_wxgru")
+autumn_music = ExtResource("1_s1pjq")
+levels = Array[ExtResource("1_q0c7w")]([ExtResource("1_ok374"), ExtResource("2_36h7y"), ExtResource("3_k20rl"), ExtResource("4_t3d7u"), ExtResource("5_e4yq1"), ExtResource("6_t80tp"), ExtResource("7_ddfv5"), ExtResource("8_e6dp3"), ExtResource("9_xa6qt"), ExtResource("12_3oqgu"), ExtResource("10_xwlje")])
+dragon_coin_achievement = ExtResource("1_ajcdh")

@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=3 uid="uid://rd7kkammpfnx"]
+
+[ext_resource type="Script" uid="uid://c4a3a3cqogh3y" path="res://Scripts/HeldObjects/koopa_shell.gd" id="1_fbnir"]
+[ext_resource type="Texture2D" uid="uid://bett63ahefijn" path="res://Assets/Sprites/Enemys/Koopas/KoopaShells/Red.png" id="2_t3jcj"]
+[ext_resource type="Texture2D" uid="uid://co6xhpf1gp8ml" path="res://Assets/Sprites/Enemys/Koopas/Masks/Red.png" id="3_a620s"]
+[ext_resource type="AudioStream" uid="uid://jv0kf12d575x" path="res://Assets/Audio/SFX/bump.wav" id="5_mqj8e"]
+[ext_resource type="Script" uid="uid://cib3wkgoiw57u" path="res://Scripts/Classes/water_bouyancy.gd" id="6_2lyov"]
+[ext_resource type="PackedScene" uid="uid://xqivdp4tj0se" path="res://Instances/Particles/Player/skid.tscn" id="6_2xpyt"]
+
+[sub_resource type="Animation" id="Animation_iyk6p"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yp8y6"]
+resource_name = "IdleEntity"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_70ygd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_noby3"]
+resource_name = "Spin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_jcph4"]
+resource_name = "SpinEntity"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qffy5"]
+_data = {
+&"Idle": SubResource("Animation_iyk6p"),
+&"IdleEntity": SubResource("Animation_yp8y6"),
+&"RESET": SubResource("Animation_70ygd"),
+&"Spin": SubResource("Animation_noby3"),
+&"SpinEntity": SubResource("Animation_jcph4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2goxi"]
+size = Vector2(10, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dsix"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l7c5"]
+radius = 6.0
+
+[node name="KoopaShell" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 4
+floor_constant_speed = true
+floor_snap_length = 2.0
+script = ExtResource("1_fbnir")
+can_destroy = true
+destructable = true
+land_bounce = false
+player_can_destroy = true
+respawn_entity_scene = "res://Instances/Prefabs/Enemies/shellless_koopa.tscn"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_t3jcj")
+hframes = 5
+
+[node name="Animations" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_qffy5")
+}
+speed_scale = 1.5
+
+[node name="AutumnSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+texture = ExtResource("3_a620s")
+hframes = 5
+
+[node name="Animations" type="AnimationPlayer" parent="AutumnSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_qffy5")
+}
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_2goxi")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_2dsix")
+
+[node name="Bounce" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mqj8e")
+volume_db = -15.0
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="KoopaPickupRange" type="Area2D" parent="Node2D"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/KoopaPickupRange"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_8l7c5")
+
+[node name="Skid" parent="." instance=ExtResource("6_2xpyt")]
+visible = false
+emitting = false
+texture = null
+process_material = null
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("6_2lyov")
+hitbox = NodePath("../Hitbox")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]
+[connection signal="area_entered" from="Node2D/KoopaPickupRange" to="." method="_on_koopa_pickup_range_area_entered"]

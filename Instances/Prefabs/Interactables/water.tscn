@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bw8btch38g6bx"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/water.gd" id="1_xbt2h"]
+[ext_resource type="Texture2D" uid="uid://dklv404ufc3bd" path="res://Assets/Sprites/Objects/Water/Water1.png" id="2_bxvwa"]
+[ext_resource type="Texture2D" uid="uid://dcd8t088togot" path="res://Assets/Sprites/Objects/Water/Water2.png" id="3_01juk"]
+[ext_resource type="Texture2D" uid="uid://c4tmec7eyx110" path="res://Assets/Sprites/Objects/Water/Water3.png" id="4_tt0ix"]
+[ext_resource type="Texture2D" uid="uid://bgu0kyb41bn0k" path="res://Assets/Sprites/Objects/Water/Water4.png" id="5_i6wh4"]
+[ext_resource type="Texture2D" uid="uid://b7pq3cnro620l" path="res://Assets/Sprites/Objects/Water/OldWater/1.png" id="6_tgtqw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7olc"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Water" type="CollisionShape2D"]
+process_mode = 3
+shape = SubResource("RectangleShape2D_h7olc")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+script = ExtResource("1_xbt2h")
+top_textures = Array[Texture2D]([ExtResource("2_bxvwa"), ExtResource("3_01juk"), ExtResource("4_tt0ix"), ExtResource("5_i6wh4")])
+water_colour = Color(0, 0.501961, 1, 0.470588)
+
+[node name="Hitbox" type="Area2D" parent="."]
+process_mode = 3
+position = Vector2(0, 8)
+collision_layer = 65535
+collision_mask = 65535
+priority = 5
+gravity_point_center = Vector2(-16, 0)
+gravity_direction = Vector2(-16, 0)
+
+[node name="WaterRest" type="ColorRect" parent="."]
+z_index = 3
+offset_left = -204.0
+offset_top = -99.0
+offset_right = -204.0
+offset_bottom = -99.0
+color = Color(0, 0.501961, 1, 0.470588)
+
+[node name="Line2D" type="Line2D" parent="."]
+visibility_layer = 2
+z_index = 3
+texture_repeat = 2
+texture = ExtResource("6_tgtqw")
+texture_mode = 1
+
+[node name="Collision" type="StaticBody2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

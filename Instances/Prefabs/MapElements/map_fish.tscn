@@ -1,0 +1,193 @@
+[gd_scene load_steps=21 format=3 uid="uid://coc8ltviv15gh"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/map_fish.gd" id="1_iy5q8"]
+[ext_resource type="Texture2D" uid="uid://b5lqdhy5665i4" path="res://Assets/Sprites/Map/MapSprites/Fish.png" id="2_earqb"]
+[ext_resource type="Texture2D" uid="uid://dquk7ojl0b1kd" path="res://Assets/Sprites/Map/MapSprites/FishSplash.png" id="3_qiw3u"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="4_lkv57"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1syj"]
+atlas = ExtResource("2_earqb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc83o"]
+atlas = ExtResource("2_earqb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_og7gq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1syj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc83o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_vpuhp"]
+resource_name = "JumpUp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fish:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -48), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fish:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Splash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [&"", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ompkd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fish:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fish:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w0vsq"]
+_data = {
+"JumpUp": SubResource("Animation_vpuhp"),
+"RESET": SubResource("Animation_ompkd")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtu8t"]
+atlas = ExtResource("3_qiw3u")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mcd1"]
+atlas = ExtResource("3_qiw3u")
+region = Rect2(16, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmen1"]
+atlas = ExtResource("3_qiw3u")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c40un"]
+atlas = ExtResource("3_qiw3u")
+region = Rect2(16, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx0lj"]
+atlas = ExtResource("3_qiw3u")
+region = Rect2(0, 0, 2, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_edju5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtu8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mcd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmen1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c40un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx0lj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_vvoeu"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.25098, 0.533333, 0.972549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n6yg0"]
+gradient = SubResource("Gradient_vvoeu")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_kppg5"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.188235, 0.690196, 0.690196, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7nftr"]
+gradient = SubResource("Gradient_kppg5")
+width = 16
+height = 16
+
+[node name="MapFish" type="Node2D"]
+z_index = 5
+script = ExtResource("1_iy5q8")
+
+[node name="Fish" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_og7gq")
+autoplay = "default"
+frame_progress = 0.728703
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w0vsq")
+}
+
+[node name="Splash" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_edju5")
+frame = 4
+frame_progress = 1.0
+
+[node name="AutumnSprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = SubResource("GradientTexture2D_n6yg0")
+script = ExtResource("4_lkv57")
+autumn_texture = SubResource("GradientTexture2D_7nftr")

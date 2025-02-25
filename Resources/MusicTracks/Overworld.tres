@@ -1,0 +1,49 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://cwraguncjdkmy"]
+
+[ext_resource type="AudioStream" uid="uid://p8466jng7a4x" path="res://Assets/Audio/BGM/SMW/Overworld.mp3" id="1_ynm1e"]
+[ext_resource type="AudioStream" uid="uid://7h4lf8sgwpm4" path="res://Assets/Audio/BGM/SMW/OverworldYoshi.mp3" id="2_htqhf"]
+
+[resource]
+clip_count = 4
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_ynm1e")
+clip_0/auto_advance = 0
+clip_1/name = &"Yoshi"
+clip_1/stream = ExtResource("2_htqhf")
+clip_1/auto_advance = 0
+clip_2/name = &"Hurry"
+clip_2/auto_advance = 0
+clip_3/name = &"HurryYoshi"
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(0, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(1, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(2, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(3, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}

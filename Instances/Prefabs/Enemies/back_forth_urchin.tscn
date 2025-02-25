@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://blct8auw0i70c"]
+
+[ext_resource type="Script" uid="uid://bovqcmpcq4dhq" path="res://Scripts/Classes/Enemies/back_forth_urchin.gd" id="1_dmvoq"]
+[ext_resource type="Texture2D" uid="uid://r4gsksmo08u3" path="res://Assets/Sprites/Enemys/UrchinBody.png" id="2_c62fl"]
+[ext_resource type="Texture2D" uid="uid://cd0xp111rugej" path="res://Assets/Sprites/Enemys/UrchinEyes.png" id="3_5mobt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v737n"]
+atlas = ExtResource("2_c62fl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j04rf"]
+atlas = ExtResource("2_c62fl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4opa"]
+atlas = ExtResource("2_c62fl")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vb8jh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v737n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j04rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4opa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j04rf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc4yv"]
+atlas = ExtResource("3_5mobt")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pdif"]
+atlas = ExtResource("3_5mobt")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cwd53"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_mc4yv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pdif")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qploe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tqg0x"]
+radius = 14.0
+
+[node name="BackForthUrchin" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_dmvoq")
+gib_type = 2
+ice_size = Vector2(2, 2)
+can_swim = true
+spiky_top = true
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vb8jh")
+autoplay = "default"
+frame_progress = 0.0108776
+
+[node name="Eyes" type="AnimatedSprite2D" parent="Body"]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_cwd53")
+autoplay = "default"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_qploe")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tqg0x")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-2.38419e-07, -2.38419e-07)
+scale = Vector2(1.6, 1.6)

@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://71f4ap0r57du"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/SpikeTop.gd" id="1_fipvm"]
+[ext_resource type="Texture2D" uid="uid://glkpwvcfvh15" path="res://Assets/Sprites/Enemys/SpikeTop.png" id="2_xaj5u"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_cx5lq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdipi"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl3ul"]
+atlas = ExtResource("2_xaj5u")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6aou"]
+atlas = ExtResource("2_xaj5u")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrrjk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl3ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6aou")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ords8"]
+atlas = ExtResource("2_xaj5u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5teoo"]
+atlas = ExtResource("2_xaj5u")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_afk1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ords8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5teoo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6aoo"]
+size = Vector2(12, 12)
+
+[node name="SpikeTop" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_fipvm")
+move_speed = 25
+movement_direction = -1
+can_rotate = true
+visual_rotation_offset = Vector2(1, -1)
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_spin_kill = false
+can_fire_damage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xdipi")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+physics_interpolation_mode = 2
+sprite_frames = SubResource("SpriteFrames_rrrjk")
+autoplay = "default"
+frame_progress = 0.704752
+offset = Vector2(0, -4)
+script = ExtResource("3_cx5lq")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_afk1l"), SubResource("SpriteFrames_rrrjk")])
+settings_value = "spiketop"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_v6aoo")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1.07288e-06, 5.96046e-08)
+scale = Vector2(1.1, 1.1)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

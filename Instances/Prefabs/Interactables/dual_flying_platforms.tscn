@@ -1,0 +1,178 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2st4ami7l52a"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/dual_flying_platforms.gd" id="1_skwf1"]
+[ext_resource type="Texture2D" uid="uid://d2i07lhi7kx7s" path="res://Assets/Sprites/Objects/FlyingHammerBroPlatform.png" id="3_c2ko2"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="4_me480"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2070m"]
+atlas = ExtResource("4_me480")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij8h6"]
+atlas = ExtResource("4_me480")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yce1a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2070m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij8h6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdld6"]
+size = Vector2(48, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh4wd"]
+size = Vector2(48, 16)
+
+[sub_resource type="Animation" id="Animation_jhsd2"]
+resource_name = "Move"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 15, 20),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -128), Vector2(0, 128), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Platform2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4.995, 15, 20.0133),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(88, 4), Vector2(88, 128), Vector2(88, -128), Vector2(88, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_pia4f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Platform2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(88, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxydm"]
+_data = {
+"Move": SubResource("Animation_jhsd2"),
+"RESET": SubResource("Animation_pia4f")
+}
+
+[node name="DualFlyingPlatforms" type="Node2D"]
+script = ExtResource("1_skwf1")
+
+[node name="Platform1" type="AnimatableBody2D" parent="."]
+
+[node name="Wings" type="AnimatedSprite2D" parent="Platform1"]
+position = Vector2(-35, -20)
+sprite_frames = SubResource("SpriteFrames_yce1a")
+autoplay = "default"
+centered = false
+
+[node name="Wings2" type="AnimatedSprite2D" parent="Platform1"]
+position = Vector2(19, -20)
+sprite_frames = SubResource("SpriteFrames_yce1a")
+autoplay = "default"
+centered = false
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="Platform1"]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform1/Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_gdld6")
+
+[node name="Collision" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_lh4wd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+position = Vector2(-16, 0)
+texture = ExtResource("3_c2ko2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Platform1"]
+texture = ExtResource("3_c2ko2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Platform1"]
+position = Vector2(16, 0)
+texture = ExtResource("3_c2ko2")
+
+[node name="Platform2" type="AnimatableBody2D" parent="."]
+position = Vector2(88, 4)
+
+[node name="Wings" type="AnimatedSprite2D" parent="Platform2"]
+position = Vector2(-35, -20)
+sprite_frames = SubResource("SpriteFrames_yce1a")
+autoplay = "default"
+centered = false
+
+[node name="Wings2" type="AnimatedSprite2D" parent="Platform2"]
+position = Vector2(19, -20)
+sprite_frames = SubResource("SpriteFrames_yce1a")
+autoplay = "default"
+centered = false
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="Platform2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2/Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_gdld6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+position = Vector2(-16, 0)
+texture = ExtResource("3_c2ko2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Platform2"]
+texture = ExtResource("3_c2ko2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Platform2"]
+position = Vector2(16, 0)
+texture = ExtResource("3_c2ko2")
+
+[node name="Collision" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_lh4wd")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cxydm")
+}
+speed_scale = 2.0
+
+[connection signal="area_entered" from="Platform1/Hitbox" to="." method="hitbox_hit"]
+[connection signal="area_entered" from="Platform2/Hitbox" to="." method="hitbox_hit"]

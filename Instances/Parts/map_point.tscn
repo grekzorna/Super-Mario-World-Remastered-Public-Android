@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://4xhrug5ojmca"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="1_ccwy2"]
+
+[node name="MapPoint" type="Node2D"]
+script = ExtResource("1_ccwy2")
+
+[connection signal="level_cleared" from="." to="." method="clear_level"]
+[connection signal="special_clear" from="." to="." method="clear_special"]

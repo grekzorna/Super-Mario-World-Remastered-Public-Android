@@ -1,0 +1,155 @@
+[gd_scene load_steps=18 format=3 uid="uid://dm7exbyvtd2fw"]
+
+[ext_resource type="Script" uid="uid://cismf3lpwbay7" path="res://Scripts/Classes/Blocks/spin_block.gd" id="1_y2xfy"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="2_qw12g"]
+[ext_resource type="Texture2D" uid="uid://bp2noccv2ehqo" path="res://Assets/Sprites/Objects/SpinBlock.png" id="3_b4bm5"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="4_sxn0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13n01"]
+atlas = ExtResource("2_qw12g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwm2a"]
+atlas = ExtResource("3_b4bm5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4ypv"]
+atlas = ExtResource("3_b4bm5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_beff5"]
+atlas = ExtResource("3_b4bm5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtqay"]
+atlas = ExtResource("3_b4bm5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmubk"]
+atlas = ExtResource("3_b4bm5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rug0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13n01")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwm2a")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4ypv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_beff5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtqay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmubk")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_hdlf3"]
+resource_name = "Hit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r6v5o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7rs7"]
+_data = {
+&"Hit": SubResource("Animation_hdlf3"),
+&"RESET": SubResource("Animation_r6v5o")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c6ht"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iojqh"]
+size = Vector2(11, 4.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mypwg"]
+
+[node name="SpinBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+disable_mode = 1
+collision_layer = 16399
+collision_mask = 0
+script = ExtResource("1_y2xfy")
+visuals = NodePath("Sprite")
+coin_amount = 0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_2rug0")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_p7rs7")
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 1
+shape = SubResource("RectangleShape2D_1c6ht")
+debug_color = Color(0, 0.6, 0, 0.419608)
+
+[node name="ItemDispenser" parent="." instance=ExtResource("4_sxn0k")]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="SpinHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinHitbox"]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_iojqh")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+
+[node name="Shape" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mypwg")
+
+[connection signal="area_entered" from="SpinHitbox" to="." method="_on_area_2d_2_area_entered"]

@@ -1,0 +1,139 @@
+[gd_scene load_steps=16 format=3 uid="uid://cur3nqqms4k3j"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/climb_koopa.gd" id="1_2l4pm"]
+[ext_resource type="Texture2D" uid="uid://c384or1lms1st" path="res://Assets/Sprites/Enemys/ClimbingKoopa.png" id="2_8bkr0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66yl7"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rmnr"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32ib0"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(32, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vg45f"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(48, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21x74"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(32, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whrrk"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuqvw"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms4vq"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n2ha"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(16, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8qtd"]
+atlas = ExtResource("2_8bkr0")
+region = Rect2(0, 64, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5406p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66yl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rmnr")
+}],
+"loop": true,
+"name": &"GreenClimbBack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32ib0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vg45f")
+}],
+"loop": true,
+"name": &"GreenClimbFront",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21x74")
+}],
+"loop": true,
+"name": &"GreenTurn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whrrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuqvw")
+}],
+"loop": true,
+"name": &"RedClimbBack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ms4vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6n2ha")
+}],
+"loop": true,
+"name": &"RedClimbFront",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8qtd")
+}],
+"loop": true,
+"name": &"RedTurn",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghv74"]
+size = Vector2(8, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhubj"]
+size = Vector2(12, 25)
+
+[node name="ClimbKoopa" type="CharacterBody2D"]
+z_as_relative = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_2l4pm")
+yoshi_behavior = "Swallow"
+gib_type = 1
+z_index_dependant = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_5406p")
+animation = &"RedTurn"
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -12)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ghv74")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17.5)
+shape = SubResource("RectangleShape2D_nhubj")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

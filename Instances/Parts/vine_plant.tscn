@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmie715ocubk5"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/vine_plant.gd" id="1_bdj81"]
+[ext_resource type="Texture2D" uid="uid://ceejal8cq7p4y" path="res://Assets/Sprites/Objects/VinePlantSheet.png" id="2_b5kmy"]
+[ext_resource type="Texture2D" uid="uid://exnnxhxqw6qk" path="res://Assets/Sprites/Objects/AutumnVinePlant.png" id="2_uw6ja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwmg3"]
+atlas = ExtResource("2_uw6ja")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3imnu"]
+atlas = ExtResource("2_uw6ja")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dewo"]
+atlas = ExtResource("2_b5kmy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq3k6"]
+atlas = ExtResource("2_b5kmy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okyhb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwmg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3imnu")
+}],
+"loop": true,
+"name": &"autumn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dewo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq3k6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="VinePlant" type="Node2D"]
+physics_interpolation_mode = 2
+z_index = -5
+script = ExtResource("1_bdj81")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_okyhb")
+autoplay = "default"
+frame_progress = 0.491023
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 16)
+target_position = Vector2(0, -8)
+collision_mask = 4

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://w4f6o73pn865"]
+
+[ext_resource type="PackedScene" uid="uid://bcx2s1mpy8wes" path="res://Instances/Prefabs/Enemies/bullet_bill.tscn" id="1_2t8vx"]
+
+[node name="DiagonalBulletBillRush" type="Node2D"]
+
+[node name="BulletBill" parent="." instance=ExtResource("1_2t8vx")]
+position = Vector2(-136, 136)
+direction_vector = Vector2(1, -1)
+
+[node name="BulletBill2" parent="." instance=ExtResource("1_2t8vx")]
+position = Vector2(-136, -136)
+direction_vector = Vector2(1, 1)
+
+[node name="BulletBill3" parent="." instance=ExtResource("1_2t8vx")]
+position = Vector2(136, -136)
+direction_vector = Vector2(-1, 1)
+
+[node name="BulletBill4" parent="." instance=ExtResource("1_2t8vx")]
+position = Vector2(136, 136)
+direction_vector = Vector2(-1, -1)

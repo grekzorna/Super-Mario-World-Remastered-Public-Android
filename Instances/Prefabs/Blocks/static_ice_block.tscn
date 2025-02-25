@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp03xdbnftkuw"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="1_omnbh"]
+[ext_resource type="Texture2D" uid="uid://bmdgvms3k86gt" path="res://Assets/Sprites/Objects/StaticIceBlock.png" id="2_nato5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5e5f"]
+atlas = ExtResource("2_nato5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jrkc"]
+atlas = ExtResource("2_nato5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fub1"]
+size = Vector2(16, 16)
+
+[node name="StaticIceBlock" type="StaticBody2D"]
+collision_layer = 133
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_p5e5f")
+script = ExtResource("1_omnbh")
+textures = Array[Texture2D]([SubResource("AtlasTexture_p5e5f"), SubResource("AtlasTexture_0jrkc")])
+settings_value = "iceblock"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_4fub1")

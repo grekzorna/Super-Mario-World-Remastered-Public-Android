@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2g4kwwqiqgbo"]
+
+[ext_resource type="Script" uid="uid://c4ohtfjwshdd" path="res://Scripts/Classes/Enemies/goombrat.gd" id="1_emkiq"]
+[ext_resource type="Texture2D" uid="uid://dn0trp46qgheh" path="res://Assets/Sprites/Enemys/Goombrat.png" id="2_22n16"]
+[ext_resource type="Script" path="res://Scripts/Classes/ledge_detection.gd" id="3_j43mn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr86c"]
+atlas = ExtResource("2_22n16")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3lam"]
+atlas = ExtResource("2_22n16")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyutp"]
+atlas = ExtResource("2_22n16")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_28px7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr86c")
+}],
+"loop": true,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3lam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyutp")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e4iv"]
+size = Vector2(7, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_askt2"]
+size = Vector2(11, 15)
+
+[node name="Goombrat" type="CharacterBody2D"]
+editor_description = "Sprites by Enzo999 & Jojota, Thanks!!! <3"
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_emkiq")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_28px7")
+animation = &"Walk"
+autoplay = "Walk"
+frame_progress = 0.265144
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.75)
+shape = SubResource("RectangleShape2D_0e4iv")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_askt2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -9)
+
+[node name="LedgeDetectionCast" type="RayCast2D" parent="."]
+position = Vector2(-6, -8)
+target_position = Vector2(0, 16)
+script = ExtResource("3_j43mn")
+ray_length = 16
+metadata/_custom_type_script = ExtResource("3_j43mn")

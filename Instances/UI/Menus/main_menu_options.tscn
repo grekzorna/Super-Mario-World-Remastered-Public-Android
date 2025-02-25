@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://djn6v47x0bta5"]
+
+[ext_resource type="Script" path="res://Scripts/UI/main_menu_options.gd" id="1_3jer0"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="1_a1swk"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="2_vnwht"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2sfla"]
+
+[sub_resource type="FontVariation" id="FontVariation_yvix0"]
+base_font = ExtResource("1_a1swk")
+
+[sub_resource type="Animation" id="Animation_7rd5l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 348)]
+}
+
+[sub_resource type="Animation" id="Animation_cdgv5"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 348), Vector2(0, 188)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kh12m"]
+_data = {
+"RESET": SubResource("Animation_7rd5l"),
+"Show": SubResource("Animation_cdgv5")
+}
+
+[node name="MainMenuOptions" type="Node"]
+script = ExtResource("1_3jer0")
+
+[node name="Pointer" type="CenterContainer" parent="."]
+offset_left = 120.0
+offset_top = 220.0
+offset_right = 120.0
+offset_bottom = 220.0
+rotation = 1.5708
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="Pointer"]
+layout_mode = 2
+texture = ExtResource("2_vnwht")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 78.0
+offset_right = 480.0
+offset_bottom = 148.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Settings" type="Label" parent="HBoxContainer"]
+material = SubResource("ShaderMaterial_2sfla")
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.721569, 0.682353, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 13
+theme_override_fonts/font = SubResource("FontVariation_yvix0")
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Play" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.611765, 0.858824, 0.262745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_a1swk")
+text = "Play Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Extras" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.576471, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_a1swk")
+text = "Extras"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Quit" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.705882, 0.12549, 0.164706, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_a1swk")
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kh12m")
+}

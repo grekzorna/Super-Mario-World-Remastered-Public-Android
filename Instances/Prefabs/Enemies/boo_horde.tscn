@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn7uw0nsc3kcs"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/boo_horde.gd" id="1_lgajp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wa2h"]
+size = Vector2(1808, 256)
+
+[node name="BooHorde" type="Node2D"]
+script = ExtResource("1_lgajp")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5wa2h")

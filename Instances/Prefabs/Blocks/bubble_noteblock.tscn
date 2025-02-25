@@ -1,0 +1,285 @@
+[gd_scene load_steps=29 format=3 uid="uid://cjdoqhc2us1nx"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/bubble_noteblock.gd" id="1_d4ta7"]
+[ext_resource type="Texture2D" uid="uid://bxv24po2088fh" path="res://Assets/Sprites/Objects/BubbleNoteBlocks.png" id="2_4xqr2"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_byfwq"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="4_xrthk"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/player_jump_disable_area.gd" id="5_lrrbs"]
+[ext_resource type="Texture2D" uid="uid://gmhqni2dgd7c" path="res://Assets/Sprites/Objects/Bubbles.png" id="6_pgnaf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dtbw"]
+atlas = ExtResource("6_pgnaf")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjwue"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcht3"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1o7g"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fkgy"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dbqn7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjwue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcht3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1o7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fkgy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ljsa"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upots"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1gds"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rllq"]
+atlas = ExtResource("2_4xqr2")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udsmr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ljsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upots")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1gds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rllq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4kmj"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q11c5"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emt5p"]
+size = Vector2(16, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugg1s"]
+size = Vector2(16, 4)
+
+[sub_resource type="Animation" id="Animation_ix1dd"]
+resource_name = "Down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0cjna"]
+resource_name = "Left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(4, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6pbkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tk5eo"]
+resource_name = "Right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8, 0), Vector2(-4, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pji3c"]
+resource_name = "Up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8), Vector2(0, -4), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"launch_node"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Collision:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8c4g"]
+_data = {
+"Down": SubResource("Animation_ix1dd"),
+"Left": SubResource("Animation_0cjna"),
+"RESET": SubResource("Animation_6pbkx"),
+"Right": SubResource("Animation_tk5eo"),
+"Up": SubResource("Animation_pji3c")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5s2t6"]
+size = Vector2(7.5, 2)
+
+[node name="BubbleNoteblock" type="AnimatableBody2D"]
+editor_description = "Sprites by Hot Cross Bun! <3"
+collision_layer = 5
+collision_mask = 11
+sync_to_physics = false
+script = ExtResource("1_d4ta7")
+new_bubble_texture = SubResource("AtlasTexture_4dtbw")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dbqn7")
+autoplay = "default"
+script = ExtResource("3_byfwq")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_dbqn7"), SubResource("SpriteFrames_udsmr")])
+settings_value = "bubble"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_x4kmj")
+one_way_collision = true
+
+[node name="Collision2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_q11c5")
+
+[node name="Hitboxes" type="Node2D" parent="."]
+
+[node name="Up" type="Area2D" parent="Hitboxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Up"]
+position = Vector2(0, -8.5)
+shape = SubResource("RectangleShape2D_emt5p")
+
+[node name="Down" type="Area2D" parent="Hitboxes"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Down"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_ugg1s")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t8c4g")
+}
+speed_scale = 1.5
+
+[node name="ItemDispenser" parent="." instance=ExtResource("4_xrthk")]
+
+[node name="JumpDisableArea" type="Area2D" parent="."]
+script = ExtResource("5_lrrbs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpDisableArea"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_5s2t6")
+debug_color = Color(1, 0.6, 0, 0.419608)
+
+[connection signal="area_entered" from="Hitboxes/Up" to="." method="_on_up_area_entered"]
+[connection signal="area_exited" from="Hitboxes/Up" to="." method="_on_up_area_exited"]
+[connection signal="animation_finished" from="Animations" to="." method="_on_animations_animation_finished"]
+[connection signal="animation_started" from="Animations" to="." method="_on_animations_animation_started"]

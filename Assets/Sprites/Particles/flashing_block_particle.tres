@@ -1,0 +1,29 @@
+[gd_resource type="AnimatedTexture" load_steps=9 format=3 uid="uid://c66t6shi30mul"]
+
+[ext_resource type="Texture2D" uid="uid://dph7rwd3vp3y7" path="res://Assets/Sprites/Particles/FlashingBlockParticles/1.png" id="1_tw72o"]
+[ext_resource type="Texture2D" uid="uid://dalkggkomqtf7" path="res://Assets/Sprites/Particles/FlashingBlockParticles/2.png" id="2_p5nq6"]
+[ext_resource type="Texture2D" uid="uid://ct16b306e0ec7" path="res://Assets/Sprites/Particles/FlashingBlockParticles/3.png" id="3_lw17o"]
+[ext_resource type="Texture2D" uid="uid://du0xjlc6jc4e6" path="res://Assets/Sprites/Particles/FlashingBlockParticles/4.png" id="4_1iu8b"]
+[ext_resource type="Texture2D" uid="uid://dd80c3c3u12dj" path="res://Assets/Sprites/Particles/FlashingBlockParticles/5.png" id="5_6udn7"]
+[ext_resource type="Texture2D" uid="uid://qoca3t3kqrlb" path="res://Assets/Sprites/Particles/FlashingBlockParticles/6.png" id="6_ak1ga"]
+[ext_resource type="Texture2D" uid="uid://f6jrb3pgt1l0" path="res://Assets/Sprites/Particles/FlashingBlockParticles/7.png" id="7_j0uf4"]
+[ext_resource type="Texture2D" uid="uid://xbidgne8y5vt" path="res://Assets/Sprites/Particles/FlashingBlockParticles/8.png" id="8_3ky11"]
+
+[resource]
+frames = 8
+speed_scale = 10.0
+frame_0/texture = ExtResource("1_tw72o")
+frame_1/texture = ExtResource("2_p5nq6")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_lw17o")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("4_1iu8b")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("5_6udn7")
+frame_4/duration = 1.0
+frame_5/texture = ExtResource("6_ak1ga")
+frame_5/duration = 1.0
+frame_6/texture = ExtResource("7_j0uf4")
+frame_6/duration = 1.0
+frame_7/texture = ExtResource("8_3ky11")
+frame_7/duration = 1.0

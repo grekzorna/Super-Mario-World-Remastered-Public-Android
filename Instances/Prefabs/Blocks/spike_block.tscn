@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7xfucsqeugl4"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/SpikeBlock.gd" id="1_rvdwi"]
+[ext_resource type="Texture2D" uid="uid://blhlgnauxyww0" path="res://Assets/Sprites/Objects/SpikeBlock.png" id="2_hrsdb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ot0s"]
+atlas = ExtResource("2_hrsdb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54wti"]
+atlas = ExtResource("2_hrsdb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pl3hy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ot0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54wti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slwpr"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65uxp"]
+size = Vector2(17, 17)
+
+[node name="SpikeBlock" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_rvdwi")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pl3hy")
+autoplay = "default"
+frame_progress = 0.320856
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_slwpr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_65uxp")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

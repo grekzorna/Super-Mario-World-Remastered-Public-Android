@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4auqcj8idxmh"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/spike_ball.gd" id="1_x6j34"]
+[ext_resource type="Texture2D" uid="uid://dutxnbt2ugmtr" path="res://Assets/Sprites/Enemys/SpikeBall.png" id="2_odfex"]
+[ext_resource type="Texture2D" uid="uid://dtpy8pr5aj3ko" path="res://Assets/Sprites/Enemys/SpikeBallChain.png" id="3_q0l0l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwc16"]
+radius = 12.0
+
+[sub_resource type="Animation" id="Animation_0bg8b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5rmbe"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3s2uq"]
+_data = {
+"RESET": SubResource("Animation_0bg8b"),
+"Spin": SubResource("Animation_5rmbe")
+}
+
+[node name="SpikeBall" type="CharacterBody2D"]
+script = ExtResource("1_x6j34")
+enemy_height = 1
+gib_type = 2
+spiky_top = true
+can_lava_swim = true
+can_slide_damage = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Chain1" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("3_q0l0l")
+
+[node name="Chain2" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("3_q0l0l")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -56)
+texture = ExtResource("2_odfex")
+
+[node name="Hitbox" type="Area2D" parent="Sprite"]
+
+[node name="Collision" type="CollisionShape2D" parent="Sprite/Hitbox"]
+shape = SubResource("CircleShape2D_fwc16")
+
+[node name="RotationJoint" type="Node2D" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="RotationJoint"]
+libraries = {
+"": SubResource("AnimationLibrary_3s2uq")
+}
+autoplay = "Spin"
+speed_scale = 0.2
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -56)
+remote_path = NodePath("../../Sprite")
+update_rotation = false
+update_scale = false
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -32)
+remote_path = NodePath("../../Chain2")
+update_rotation = false
+update_scale = false
+
+[node name="RemoteTransform2D3" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -16)
+remote_path = NodePath("../../Chain1")
+update_rotation = false
+update_scale = false
+
+[connection signal="area_entered" from="Sprite/Hitbox" to="." method="check_hit"]

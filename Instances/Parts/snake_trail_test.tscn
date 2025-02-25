@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp74rg2q6gn7d"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/snake_trail_test.gd" id="1_lapy7"]
+[ext_resource type="Texture2D" uid="uid://bo16br4kyhvqn" path="res://Assets/Sprites/Objects/Cloud.png" id="2_xj4s0"]
+
+[node name="SnakeTrailTest" type="Node2D"]
+position = Vector2(32, 56)
+script = ExtResource("1_lapy7")
+
+[node name="Point1" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+top_level = true
+position = Vector2(97, 70)
+texture = ExtResource("2_xj4s0")
+
+[node name="Point2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+top_level = true
+position = Vector2(92, 71)
+texture = ExtResource("2_xj4s0")
+
+[node name="Point3" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+top_level = true
+position = Vector2(83, 73)
+texture = ExtResource("2_xj4s0")
+
+[node name="Point4" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+top_level = true
+position = Vector2(80, 74)
+texture = ExtResource("2_xj4s0")
+
+[node name="Point5" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(72, 76)
+texture = ExtResource("2_xj4s0")

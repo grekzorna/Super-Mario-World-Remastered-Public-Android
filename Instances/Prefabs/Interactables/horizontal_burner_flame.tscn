@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://drwoo4wu0o6lv"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/burner_flame.gd" id="1_4ggoc"]
+[ext_resource type="Texture2D" uid="uid://b1slbhxy78d4q" path="res://Assets/Sprites/Objects/BulletBillLauncher.png" id="1_usnbh"]
+[ext_resource type="Texture2D" uid="uid://doqy61uoq3rs8" path="res://Assets/Sprites/Objects/BurnerFlame.png" id="2_dhhth"]
+
+[sub_resource type="Animation" id="Animation_ao7ui"]
+resource_name = "Loop"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flame:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 2, 3, 0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flame/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_sound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8lpr7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flame:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flame:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flame/Hitbox:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53flx"]
+_data = {
+"Loop": SubResource("Animation_ao7ui"),
+"RESET": SubResource("Animation_8lpr7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mldmw"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ghit8"]
+size = Vector2(40, 10)
+
+[node name="Horizontal" type="StaticBody2D"]
+script = ExtResource("1_4ggoc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_usnbh")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_53flx")
+}
+autoplay = "Loop"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mldmw")
+
+[node name="Flame" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_dhhth")
+offset = Vector2(0, -32)
+hframes = 6
+frame = 4
+
+[node name="Hitbox" type="Area2D" parent="Flame"]
+visible = false
+rotation = 1.5708
+monitoring = false
+
+[node name="Shape" type="CollisionShape2D" parent="Flame/Hitbox"]
+position = Vector2(-28, 0)
+shape = SubResource("RectangleShape2D_ghit8")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-27, 0)
+scale = Vector2(3.7, 1)
+
+[connection signal="area_entered" from="Flame/Hitbox" to="." method="_on_hitbox_area_entered"]

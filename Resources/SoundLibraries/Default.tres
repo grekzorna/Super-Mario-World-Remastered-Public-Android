@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="SoundLibrary" load_steps=18 format=3 uid="uid://ceqaqufmindu"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/SoundLibrary.gd" id="1_alyut"]
+[ext_resource type="AudioStream" uid="uid://bclwpypkvd01f" path="res://Assets/Audio/SFX/1up.wav" id="2_napxs"]
+[ext_resource type="AudioStream" uid="uid://biel2wg8xdks" path="res://Assets/Audio/SFX/small_jump.wav" id="2_nutgm"]
+[ext_resource type="AudioStream" uid="uid://clrlrt20q18f5" path="res://Assets/Audio/SFX/big_jump.wav" id="3_rx71h"]
+[ext_resource type="AudioStream" uid="uid://wnxfsex80kk1" path="res://Assets/Audio/SFX/powerup.wav" id="4_1leu1"]
+[ext_resource type="AudioStream" uid="uid://bnds5qks67xjb" path="res://Assets/Audio/SFX/bullet.wav" id="4_7b2eo"]
+[ext_resource type="AudioStream" uid="uid://jv0kf12d575x" path="res://Assets/Audio/SFX/bump.wav" id="5_84d25"]
+[ext_resource type="AudioStream" uid="uid://b4cr31k4dbubm" path="res://Assets/Audio/SFX/pipe.wav" id="5_fujjc"]
+[ext_resource type="AudioStream" uid="uid://budll4hj0e7dr" path="res://Assets/Audio/SFX/fireball.wav" id="6_5xqb0"]
+[ext_resource type="AudioStream" uid="uid://dwvq84j5kra3f" path="res://Assets/Audio/SFX/kick.wav" id="7_8hx63"]
+[ext_resource type="AudioStream" uid="uid://c5t4v2hmyvxw1" path="res://Assets/Audio/SFX/coin.wav" id="7_fu13j"]
+[ext_resource type="AudioStream" uid="uid://hrkf87phw8t5" path="res://Assets/Audio/SFX/spin.wav" id="8_b6p4n"]
+[ext_resource type="AudioStream" uid="uid://c8bagk4mai3po" path="res://Assets/Audio/SFX/player_die.wav" id="8_dypks"]
+[ext_resource type="AudioStream" uid="uid://becngwmmobyj4" path="res://Assets/Audio/SFX/cape-fly.wav" id="9_omrnv"]
+[ext_resource type="AudioStream" uid="uid://booglpc8gm1to" path="res://Assets/Audio/BGM/SMW/PlayerDie.mp3" id="10_ggpkv"]
+[ext_resource type="AudioStream" uid="uid://bnidchtwfpyi1" path="res://Assets/Audio/SFX/shatter.wav" id="14_43h82"]
+[ext_resource type="AudioStream" uid="uid://ca2fpdoe1u17r" path="res://Assets/Audio/SFX/air_twirl_mm_placeholder.wav" id="17_ur7hv"]
+
+[resource]
+script = ExtResource("1_alyut")
+sounds = {
+"1_up": ExtResource("2_napxs"),
+"air_twirl": ExtResource("17_ur7hv"),
+"big_jump": ExtResource("3_rx71h"),
+"bullet": ExtResource("4_7b2eo"),
+"bump": ExtResource("5_84d25"),
+"capefly": ExtResource("9_omrnv"),
+"coin": ExtResource("7_fu13j"),
+"fast_death": ExtResource("8_dypks"),
+"fireball": ExtResource("6_5xqb0"),
+"full_death": ExtResource("10_ggpkv"),
+"kick": ExtResource("7_8hx63"),
+"pipe": ExtResource("5_fujjc"),
+"powerdown": ExtResource("5_fujjc"),
+"powerup": ExtResource("4_1leu1"),
+"shatter": ExtResource("14_43h82"),
+"small_jump": ExtResource("2_nutgm"),
+"spin": ExtResource("8_b6p4n"),
+"stomp_attack": ExtResource("7_8hx63")
+}

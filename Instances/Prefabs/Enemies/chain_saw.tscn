@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1pgr380yit57"]
+
+[ext_resource type="PackedScene" uid="uid://c8mn8iem7ys5m" path="res://Instances/Prefabs/Interactables/rail_follower.tscn" id="1_8oni1"]
+[ext_resource type="PackedScene" uid="uid://b37ck0cwxcin6" path="res://Instances/Parts/saw.tscn" id="2_b8e2t"]
+[ext_resource type="PackedScene" uid="uid://cv6xjedrokkrh" path="res://Instances/Particles/Misc/steam_particles.tscn" id="4_35h80"]
+[ext_resource type="AudioStream" uid="uid://b50se8jyi838f" path="res://Assets/Audio/SFX/saw.wav" id="4_j8q8c"]
+
+[node name="ChainSaw" instance=ExtResource("1_8oni1")]
+collision_layer = 0
+move_speed = 64
+starting_direction = -1
+
+[node name="Saw" parent="." index="2" instance=ExtResource("2_b8e2t")]
+yoshi_behavior = "None"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="3"]
+position = Vector2(0, -17)
+scale = Vector2(1, 2.55)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("4_j8q8c")
+volume_db = -20.0
+autoplay = true
+bus = &"SFX"
+
+[node name="SteamParticles" parent="." index="5" instance=ExtResource("4_35h80")]
+position = Vector2(3, -4)

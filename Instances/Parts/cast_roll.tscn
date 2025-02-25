@@ -1,0 +1,2735 @@
+[gd_scene load_steps=161 format=3 uid="uid://d37cfenfdhrii"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Levels/cast_roll.gd" id="1_4vaof"]
+[ext_resource type="AudioStream" uid="uid://blkd47dsaquui" path="res://Assets/Audio/BGM/SMW/CastRoll.mp3" id="2_wmcjs"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_1v6sc"]
+[ext_resource type="Texture2D" uid="uid://c0ot6aelhsebg" path="res://Assets/Sprites/Enemys/ParaBomb.png" id="4_7fskx"]
+[ext_resource type="Texture2D" uid="uid://em5tj6tt4vtx" path="res://Assets/Sprites/Enemys/ParaGaloomba.png" id="5_5c53s"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="6_5gcek"]
+[ext_resource type="Texture2D" uid="uid://bwwebuttgtpcu" path="res://Assets/Sprites/Objects/Parachute.png" id="6_15hid"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="6_wl6o1"]
+[ext_resource type="Texture2D" uid="uid://c61kan8ofhtrw" path="res://Assets/Sprites/Objects/LakituCloud.png" id="7_mkw2q"]
+[ext_resource type="Texture2D" uid="uid://btp5drb0pxhaq" path="res://Assets/Sprites/Enemys/Lakitu.png" id="8_lugwj"]
+[ext_resource type="Texture2D" uid="uid://cc38oksw2dkdu" path="res://Assets/Sprites/Items/1up.png" id="9_0n54i"]
+[ext_resource type="Texture2D" uid="uid://042fmrcnjvl4" path="res://Assets/Sprites/Objects/LakituFishingRod.png" id="10_dgt0d"]
+[ext_resource type="Texture2D" uid="uid://k5hiuv20y0wf" path="res://Assets/Sprites/Enemys/SpinyBall.png" id="11_f717k"]
+[ext_resource type="Texture2D" uid="uid://b45eu2m0gmfnk" path="res://Assets/Sprites/Enemys/Spiny.png" id="12_t5ujp"]
+[ext_resource type="Texture2D" uid="uid://bprbyvo7k13gh" path="res://Assets/Sprites/Enemys/BobOmb.png" id="13_uc1dm"]
+[ext_resource type="Texture2D" uid="uid://nunvv78a4msc" path="res://Assets/Sprites/Enemys/Wiggler.png" id="14_24i0n"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/OverhaulAutumnNode.gd" id="15_ayoty"]
+[ext_resource type="Texture2D" uid="uid://dy6nj13yqxp48" path="res://Assets/Sprites/Enemys/FlyingHammerBro.png" id="15_kw8as"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="15_tn7ae"]
+[ext_resource type="Texture2D" uid="uid://w2bbnlyjvu4f" path="res://Assets/Sprites/Enemys/AutumnParaGaloomba.png" id="15_vki27"]
+[ext_resource type="Texture2D" uid="uid://d2i07lhi7kx7s" path="res://Assets/Sprites/Objects/FlyingHammerBroPlatform.png" id="16_dmj0p"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="17_higiq"]
+[ext_resource type="Texture2D" uid="uid://crc88oi1j3kp6" path="res://Assets/Sprites/Enemys/WigglerFlower.png" id="17_kf723"]
+[ext_resource type="Texture2D" uid="uid://beblkrdkt1240" path="res://Assets/Sprites/Objects/HammerBroHammer.png" id="18_pomyg"]
+[ext_resource type="Texture2D" uid="uid://dtsgfutk8w5h1" path="res://Assets/Sprites/Enemys/Koopas/Shell-less Koopa/Green.png" id="19_8j76j"]
+[ext_resource type="Texture2D" uid="uid://dkmu4383uev33" path="res://Assets/Sprites/Enemys/FlyingKoopaCape.png" id="20_jgfel"]
+[ext_resource type="Texture2D" uid="uid://dxeqpojk5p8j1" path="res://Assets/Sprites/Enemys/Koopas/Shell-less Koopa/Red.png" id="21_yygdw"]
+[ext_resource type="Texture2D" uid="uid://b0rm0evveqoc0" path="res://Assets/Sprites/Enemys/JumpingPiranhaPlant.png" id="22_vbyyn"]
+[ext_resource type="Texture2D" uid="uid://jk3qqcnhmx5v" path="res://Assets/Sprites/Enemys/VolcanoPlant.png" id="23_d30w2"]
+[ext_resource type="Texture2D" uid="uid://ya60ikb60oki" path="res://Assets/Sprites/Enemys/VolcanoPlantBullet.png" id="24_7wlv5"]
+[ext_resource type="Texture2D" uid="uid://ddycifroc2bbo" path="res://Assets/Sprites/Enemys/ChuckSheet.png" id="25_feqlt"]
+[ext_resource type="Texture2D" uid="uid://yt1aen27defg" path="res://Assets/Sprites/Enemys/SumoBro.png" id="26_pd6pd"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="27_mioa2"]
+[ext_resource type="Texture2D" uid="uid://ln411yfoat7y" path="res://Assets/Sprites/Enemys/SumoBroFlame.png" id="27_qsvv3"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="28_13s03"]
+[ext_resource type="Texture2D" uid="uid://cc2jrvshst0v6" path="res://Assets/Sprites/Enemys/PokeyBody.png" id="29_6yx4p"]
+[ext_resource type="Texture2D" uid="uid://ceuxd3inp0gou" path="res://Assets/Sprites/Enemys/AutumnJumpingPiranhaPlant.png" id="29_n6evx"]
+[ext_resource type="Texture2D" uid="uid://bmqoigivfo5ay" path="res://Assets/Sprites/Enemys/PokeyHead.png" id="30_wxmiy"]
+[ext_resource type="Texture2D" uid="uid://cnn1hi0sii0ys" path="res://Assets/Sprites/Enemys/MontyMoleSheet.png" id="31_eajca"]
+[ext_resource type="Texture2D" uid="uid://ccpeo7tn2vqbk" path="res://Assets/Sprites/Particles/BlockBreak.png" id="32_ucdkx"]
+[ext_resource type="Texture2D" uid="uid://ddkwqa7tiqu17" path="res://Assets/Sprites/Enemys/BulletBill.png" id="33_ecrkf"]
+[ext_resource type="Texture2D" uid="uid://dwdxfiisy3idf" path="res://Assets/Sprites/Particles/Puff.png" id="34_da7xi"]
+[ext_resource type="Texture2D" uid="uid://b1slbhxy78d4q" path="res://Assets/Sprites/Objects/BulletBillLauncher.png" id="35_wel57"]
+[ext_resource type="Texture2D" uid="uid://bkg0tjhq1ika4" path="res://Assets/Sprites/Tilesets/BulletBillLaunchers.png" id="36_c32aj"]
+[ext_resource type="Texture2D" uid="uid://bmv2lit3j16iy" path="res://Assets/Sprites/Enemys/AutumnPokey.png" id="37_jldi0"]
+[ext_resource type="Texture2D" uid="uid://bvece5pas0vsw" path="res://Assets/Sprites/Enemys/RexSheet.png" id="37_k3u4i"]
+[ext_resource type="Texture2D" uid="uid://bp2noccv2ehqo" path="res://Assets/Sprites/Objects/SpinBlock.png" id="38_k21cy"]
+[ext_resource type="Texture2D" uid="uid://eu46060ono18" path="res://Assets/Sprites/Particles/SkidDust.png" id="39_olld4"]
+[ext_resource type="Texture2D" uid="uid://d4feyc1jxin73" path="res://Assets/Sprites/Enemys/MegaMole.png" id="40_egsap"]
+[ext_resource type="Texture2D" uid="uid://oe8123mt0hx7" path="res://Assets/Sprites/Enemys/BanzaiBill.png" id="41_u73sy"]
+[ext_resource type="Texture2D" uid="uid://jp5odqstoe1a" path="res://Assets/Sprites/Enemys/DinoRhino.png" id="42_837lr"]
+[ext_resource type="Texture2D" uid="uid://glkpwvcfvh15" path="res://Assets/Sprites/Enemys/SpikeTop.png" id="42_p8dys"]
+[ext_resource type="Texture2D" uid="uid://b3ru6sntc42ge" path="res://Assets/Sprites/Enemys/DinoTorch.png" id="43_8pare"]
+[ext_resource type="Texture2D" uid="uid://cpxjdef220p2h" path="res://Assets/Sprites/Enemys/Swooper.png" id="43_cgc4d"]
+[ext_resource type="Texture2D" uid="uid://rh45bjveta70" path="res://Assets/Sprites/Enemys/PidgetBill.png" id="44_6brum"]
+[ext_resource type="Texture2D" uid="uid://byxkv67io2n55" path="res://Assets/Sprites/Enemys/DinoTorchFlame.png" id="44_ahx4j"]
+[ext_resource type="Texture2D" uid="uid://b4jb1gsdw5cyw" path="res://Assets/Sprites/Enemys/Koopas/KoopaTroopas/Red.png" id="45_k65qr"]
+[ext_resource type="Texture2D" uid="uid://qdnjaj4gqtgf" path="res://Assets/Sprites/Enemys/Koopas/KoopaTroopas/Green.png" id="46_xcqwr"]
+[ext_resource type="Texture2D" uid="uid://cq7i6325k58s6" path="res://Assets/Sprites/Enemys/Koopas/KoopaTroopas/Blue.png" id="47_3lv4p"]
+[ext_resource type="Texture2D" uid="uid://2mc6wgg38e1x" path="res://Assets/Sprites/Enemys/Koopas/KoopaTroopas/Yellow.png" id="48_isve6"]
+[ext_resource type="Texture2D" uid="uid://sbmmvynxkgek" path="res://Assets/Sprites/Objects/Lava/Underground/1.png" id="51_rg6tq"]
+[ext_resource type="Texture2D" uid="uid://4hc3r3tc4oqc" path="res://Assets/Sprites/Enemys/BuzzyBeetle.png" id="52_n2pcf"]
+[ext_resource type="Texture2D" uid="uid://blyx23l05it6i" path="res://Assets/Sprites/Enemys/Blargg.png" id="53_y2i8l"]
+[ext_resource type="Texture2D" uid="uid://b7h8f1i0evtqv" path="res://Assets/Sprites/Enemys/Blurp.png" id="54_uhgow"]
+[ext_resource type="Texture2D" uid="uid://dq2lx3776ssrd" path="res://Assets/Sprites/Enemys/Porcupuffer.png" id="55_hv6ed"]
+[ext_resource type="Texture2D" uid="uid://cwbjusv0dbdab" path="res://Assets/Sprites/Enemys/Koopas/MaskedKoopas/Red.png" id="55_wnt35"]
+[ext_resource type="Texture2D" uid="uid://r4gsksmo08u3" path="res://Assets/Sprites/Enemys/UrchinBody.png" id="56_qf8uh"]
+[ext_resource type="Texture2D" uid="uid://cd0xp111rugej" path="res://Assets/Sprites/Enemys/UrchinEyes.png" id="57_0htb8"]
+[ext_resource type="Texture2D" uid="uid://jdnhuy5rfgpe" path="res://Assets/Sprites/Enemys/Koopas/MaskedKoopas/Green.png" id="57_rn442"]
+[ext_resource type="Texture2D" uid="uid://bjgxvkir7upqw" path="res://Assets/Sprites/Enemys/RipVanFish.png" id="58_et5aa"]
+[ext_resource type="Texture2D" uid="uid://cqb0m3atj0y2n" path="res://Assets/Sprites/Enemys/TorpedoTed.png" id="59_3wt73"]
+[ext_resource type="Texture2D" uid="uid://dmhmsidafayn8" path="res://Assets/Sprites/Enemys/Koopas/MaskedKoopas/Blue.png" id="59_py67i"]
+[ext_resource type="Texture2D" uid="uid://btiiftn1fye00" path="res://Assets/Sprites/Enemys/TorpedoHand.png" id="60_uemx3"]
+[ext_resource type="Texture2D" uid="uid://huv46sxbkiop" path="res://Assets/Sprites/Enemys/Koopas/MaskedKoopas/Yellow.png" id="61_8nh47"]
+[ext_resource type="Texture2D" uid="uid://vodvfu57o7av" path="res://Assets/Sprites/Enemys/Boos.png" id="61_sp8r6"]
+[ext_resource type="Texture2D" uid="uid://gmaobs7yyv34" path="res://Assets/Sprites/Enemys/FishinBoo.png" id="62_6xjpf"]
+[ext_resource type="Texture2D" uid="uid://cts25abqr6f4e" path="res://Assets/Sprites/Objects/FishinBooRod.png" id="63_yv7x7"]
+[ext_resource type="Texture2D" uid="uid://rfwv0drr0er4" path="res://Assets/Sprites/Enemys/BigBoo.png" id="64_8p0hv"]
+[ext_resource type="Texture2D" uid="uid://bonmac6vfoh0y" path="res://Assets/Sprites/Enemys/Eerie.png" id="65_hlug8"]
+[ext_resource type="Texture2D" uid="uid://c28dbypvwp2m7" path="res://Assets/Sprites/Objects/FishingBooFire.png" id="66_jqb20"]
+[ext_resource type="Texture2D" uid="uid://defkyp7fwqb6w" path="res://Assets/Sprites/Enemys/DryBones.png" id="67_b7xxe"]
+[ext_resource type="Texture2D" uid="uid://gnpgcoj65akp" path="res://Assets/Sprites/Objects/DrybonesBone.png" id="68_dat0o"]
+[ext_resource type="Texture2D" uid="uid://xqvyen7wh4hy" path="res://Assets/Sprites/Enemys/LilSparky.png" id="69_qllf5"]
+[ext_resource type="Texture2D" uid="uid://cmeyna4pi8uug" path="res://Assets/Sprites/Enemys/BonyBeetle.png" id="70_dk01d"]
+[ext_resource type="Texture2D" uid="uid://c34g204uvqkjp" path="res://Assets/Sprites/Enemys/Thwomp.png" id="71_1kjk4"]
+[ext_resource type="Texture2D" uid="uid://cddrtrf7j0vbx" path="res://Assets/Sprites/Enemys/Thwimp.png" id="72_0oxuy"]
+[ext_resource type="Texture2D" uid="uid://c0cbmsiedhxlo" path="res://Assets/Sprites/Enemys/HotHeadBody.png" id="73_0qpk1"]
+[ext_resource type="Texture2D" uid="uid://oep00thvgum6" path="res://Assets/Sprites/Enemys/HotHeadEyes.png" id="74_r772m"]
+[ext_resource type="Texture2D" uid="uid://dutxnbt2ugmtr" path="res://Assets/Sprites/Enemys/SpikeBall.png" id="75_81etr"]
+[ext_resource type="Texture2D" uid="uid://dtpy8pr5aj3ko" path="res://Assets/Sprites/Enemys/SpikeBallChain.png" id="76_hmndu"]
+[ext_resource type="Texture2D" uid="uid://bd4msmkp1uu6s" path="res://Assets/Sprites/Objects/SpinningSaw.png" id="77_4800o"]
+[ext_resource type="PackedScene" uid="uid://bw8btch38g6bx" path="res://Instances/Prefabs/Interactables/water.tscn" id="78_pn3ae"]
+[ext_resource type="Texture2D" uid="uid://bhhh7d1h2opuu" path="res://Assets/Sprites/Enemys/FishBone.png" id="80_fhb3c"]
+[ext_resource type="Texture2D" uid="uid://ba4r0q88hpany" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorSheet.png" id="81_vf1ca"]
+[ext_resource type="Texture2D" uid="uid://dvkac66pa143" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorWheel.png" id="82_bt1ji"]
+[ext_resource type="Texture2D" uid="uid://cl73du6wg7ynx" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorPlatform.png" id="83_wvwca"]
+[ext_resource type="Texture2D" uid="uid://ccerggv4md23s" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorFireball.png" id="84_b3uya"]
+[ext_resource type="Texture2D" uid="uid://c2r06g7vxmrap" path="res://Assets/Sprites/Enemys/MechaKoopa.png" id="85_rjvsk"]
+[ext_resource type="Texture2D" uid="uid://cv1endebosmk3" path="res://Assets/Sprites/Characters/Bosses/Bowser/Bowser.png" id="88_053p7"]
+[ext_resource type="Texture2D" uid="uid://ckuxc3i2qkhgk" path="res://Assets/Sprites/Characters/Bosses/Bowser/ClownCopterBase.png" id="89_vynhq"]
+[ext_resource type="Texture2D" uid="uid://dfwkclvrdcq22" path="res://Assets/Sprites/Characters/Bosses/Bowser/ClownCopterNeutralFace.png" id="90_av23m"]
+[ext_resource type="Texture2D" uid="uid://cbo8xk7f57yv0" path="res://Assets/Sprites/Enemys/Magikoopa.png" id="91_2arxj"]
+[ext_resource type="Texture2D" uid="uid://qw646uqh5g36" path="res://Assets/Sprites/Characters/Bosses/Bowser/ClownCopterPropeller.png" id="91_lf1n0"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="92_65gyy"]
+[ext_resource type="Texture2D" uid="uid://bskbso75u18nt" path="res://Assets/Sprites/Characters/Bosses/Morton.png" id="92_eohtp"]
+[ext_resource type="Texture2D" uid="uid://d10locfdswlic" path="res://Assets/Sprites/Enemys/MagikoopaProjectile.png" id="93_s1j51"]
+[ext_resource type="Texture2D" uid="uid://juk5m0pnhk24" path="res://Assets/Sprites/Characters/Bosses/Roy.png" id="93_tdesx"]
+[ext_resource type="Texture2D" uid="uid://buejae8ol3lwe" path="res://Assets/Sprites/Characters/Bosses/Wendy.png" id="94_pdmg0"]
+[ext_resource type="Texture2D" uid="uid://blivo46chqeue" path="res://Assets/Sprites/Characters/Bosses/Lemmy.png" id="95_otudd"]
+[ext_resource type="Texture2D" uid="uid://be2waf8cvjrpv" path="res://Assets/Sprites/Characters/Bosses/IggyKoopa.png" id="96_5wcdb"]
+[ext_resource type="Texture2D" uid="uid://bi464ds6figpg" path="res://Assets/Sprites/Objects/Water/OldWater/2.png" id="96_odok7"]
+[ext_resource type="Texture2D" uid="uid://duxm0wnfg21u8" path="res://Assets/Sprites/Characters/Bosses/Larry.png" id="97_8ixjb"]
+[ext_resource type="Texture2D" uid="uid://h45u4uketfma" path="res://Assets/Sprites/Characters/Bosses/Ludwig.png" id="98_uakgk"]
+[ext_resource type="Texture2D" uid="uid://xrxk36n7kd0w" path="res://Assets/Sprites/Tilesets/Pipes.png" id="99_o42la"]
+[ext_resource type="PackedScene" uid="uid://qxbhbjvatqar" path="res://Instances/Parts/the_end.tscn" id="100_m82q2"]
+[ext_resource type="Texture2D" uid="uid://bsb0eqm28ondh" path="res://Assets/Sprites/Objects/Lava/Castle/1.png" id="101_5rpja"]
+[ext_resource type="Texture2D" uid="uid://cog48xbb58dpp" path="res://Assets/Sprites/Characters/Bosses/Bowser/BowserClassic.png" id="106_juend"]
+[ext_resource type="Texture2D" uid="uid://ce8ne305ujll5" path="res://Assets/Sprites/Characters/Bosses/Bowser/BowserGBA.png" id="107_tlnrv"]
+
+[sub_resource type="Animation" id="Animation_oyf84"]
+resource_name = "Enter"
+length = 0.6
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Cutscene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5661),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ou24b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stq3u"]
+_data = {
+&"Enter": SubResource("Animation_oyf84"),
+&"RESET": SubResource("Animation_ou24b")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fpofp"]
+blend_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eocdr"]
+atlas = ExtResource("4_7fskx")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejkhx"]
+atlas = ExtResource("4_7fskx")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1mmn"]
+atlas = ExtResource("6_15hid")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wts4f"]
+atlas = ExtResource("6_15hid")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkd4m"]
+atlas = ExtResource("6_15hid")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2pkta"]
+atlas = ExtResource("6_15hid")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxs4f"]
+atlas = ExtResource("5_5c53s")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g7lu"]
+atlas = ExtResource("5_5c53s")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1363p"]
+atlas = ExtResource("9_0n54i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57qig"]
+atlas = ExtResource("9_0n54i")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6hio"]
+atlas = ExtResource("9_0n54i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8m0e"]
+atlas = ExtResource("13_uc1dm")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hhy8"]
+atlas = ExtResource("13_uc1dm")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="FontVariation" id="FontVariation_jtnya"]
+base_font = ExtResource("6_wl6o1")
+spacing_top = -3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnges"]
+atlas = ExtResource("44_6brum")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emre5"]
+atlas = ExtResource("44_6brum")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyxld"]
+atlas = ExtResource("42_p8dys")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np44r"]
+atlas = ExtResource("42_p8dys")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd6t0"]
+atlas = ExtResource("42_p8dys")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va24e"]
+atlas = ExtResource("67_b7xxe")
+region = Rect2(0, 0, 192, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msi36"]
+atlas = ExtResource("67_b7xxe")
+region = Rect2(0, 32, 192, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al31u"]
+atlas = ExtResource("91_2arxj")
+region = Rect2(0, 32, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxhjb"]
+atlas = ExtResource("91_2arxj")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76u0a"]
+atlas = ExtResource("91_2arxj")
+region = Rect2(0, 64, 96, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lxfn"]
+resource_local_to_scene = true
+size = Vector2(160, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alwfd"]
+atlas = ExtResource("80_fhb3c")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h28n3"]
+atlas = ExtResource("80_fhb3c")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7pmh"]
+atlas = ExtResource("92_eohtp")
+region = Rect2(0, 0, 160, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dunqa"]
+atlas = ExtResource("92_eohtp")
+region = Rect2(0, 32, 160, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwrsk"]
+atlas = ExtResource("93_tdesx")
+region = Rect2(0, 32, 160, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0vrs"]
+atlas = ExtResource("93_tdesx")
+region = Rect2(0, 0, 160, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_optl4"]
+atlas = ExtResource("98_uakgk")
+region = Rect2(0, 0, 320, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdaaj"]
+atlas = ExtResource("98_uakgk")
+region = Rect2(0, 64, 320, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yauc"]
+atlas = ExtResource("99_o42la")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="FontVariation" id="FontVariation_41qtm"]
+base_font = ExtResource("6_wl6o1")
+spacing_top = -3
+
+[sub_resource type="Animation" id="Animation_lpmq8"]
+resource_name = "Appear"
+length = 6.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4.5, 5.5),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2fox6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_413hb"]
+_data = {
+&"Appear": SubResource("Animation_lpmq8"),
+&"RESET": SubResource("Animation_2fox6")
+}
+
+[node name="CastRoll" type="Node"]
+physics_interpolation_mode = 2
+script = ExtResource("1_4vaof")
+debug_test = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wmcjs")
+bus = &"Music"
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_stq3u")
+}
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(-64, -223)
+metadata/_edit_lock_ = true
+
+[node name="BG" type="ColorRect" parent="CanvasGroup"]
+visibility_layer = 4
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="1" type="Node2D" parent="CanvasGroup"]
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/1"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/1/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -176.0
+offset_right = 168.0
+offset_bottom = -88.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/1/Top"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 200.0
+offset_top = -184.0
+offset_right = 272.0
+offset_bottom = -80.0
+
+[node name="TileMap" parent="CanvasGroup/1/Top/ColorRect2" instance=ExtResource("3_1v6sc")]
+position = Vector2(-184, 186)
+layer_0/tile_data = PackedInt32Array(-393204, 786432, 0, -393203, 262145, 3, -458739, 327681, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Top"]
+z_index = 1
+position = Vector2(87, -138)
+texture = SubResource("AtlasTexture_eocdr")
+flip_h = true
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_eocdr"), SubResource("AtlasTexture_ejkhx")])
+settings_value = "bobomb"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D"]
+position = Vector2(8, -16)
+texture = SubResource("AtlasTexture_j1mmn")
+flip_h = true
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_j1mmn"), SubResource("AtlasTexture_wts4f")])
+settings_value = "parachute"
+
+[node name="VariationSprite" type="Sprite2D" parent="CanvasGroup/1/Top"]
+position = Vector2(129, -138)
+texture = SubResource("AtlasTexture_qkd4m")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_qkd4m"), SubResource("AtlasTexture_2pkta")])
+settings_value = "parachute"
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/1/Top"]
+z_index = 1
+position = Vector2(137, -123)
+texture = SubResource("AtlasTexture_uxs4f")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_2g7lu"), SubResource("AtlasTexture_uxs4f")])
+settings_value = "galoomba"
+
+[node name="Label" type="Label" parent="CanvasGroup/1/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -176.0
+offset_right = 296.0
+offset_bottom = -168.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "fishin'lakitu"
+uppercase = true
+
+[node name="Label4" type="Label" parent="CanvasGroup/1/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -96.0
+offset_right = 296.0
+offset_bottom = -88.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "lakitu"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/1/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -168.0
+offset_right = 136.0
+offset_bottom = -160.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "para-bomb"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/1/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 104.0
+offset_top = -112.0
+offset_right = 192.0
+offset_bottom = -104.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "para-goomba"
+uppercase = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/1/Top"]
+z_index = 1
+position = Vector2(243, -143)
+texture = ExtResource("7_mkw2q")
+hframes = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D3"]
+show_behind_parent = true
+position = Vector2(1, -11)
+texture = ExtResource("8_lugwj")
+flip_h = true
+hframes = 5
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D3"]
+position = Vector2(22, 48)
+texture = SubResource("AtlasTexture_1363p")
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_57qig"), SubResource("AtlasTexture_n6hio")])
+settings_value = "1up"
+
+[node name="Line2D" type="Line2D" parent="CanvasGroup/1/Top/Sprite2D3"]
+points = PackedVector2Array(22, -24, 22, 40)
+width = 1.0
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D3"]
+show_behind_parent = true
+position = Vector2(14, -17)
+texture = ExtResource("10_dgt0d")
+flip_h = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/1/Top"]
+z_index = 1
+position = Vector2(229, -113)
+texture = ExtResource("7_mkw2q")
+hframes = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D4"]
+show_behind_parent = true
+position = Vector2(-1, -8)
+texture = ExtResource("8_lugwj")
+hframes = 5
+frame = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/1/Top/Sprite2D4"]
+position = Vector2(-14, -28)
+texture = ExtResource("11_f717k")
+
+[node name="ConditionalReplaceNode" type="Node" parent="CanvasGroup/1/Top" node_paths=PackedStringArray("nodes_to_delete")]
+script = ExtResource("15_ayoty")
+nodes_to_delete = [NodePath("../Sprite2D2")]
+metadata/_custom_type_script = ExtResource("15_ayoty")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Top/ConditionalReplaceNode"]
+position = Vector2(137, -123)
+texture = ExtResource("15_vki27")
+hframes = 2
+frame = 1
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/1"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/1/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 96.0
+offset_top = -64.0
+offset_right = 256.0
+offset_bottom = 8.0
+
+[node name="TileMap" parent="CanvasGroup/1/Bottom/ColorRect" instance=ExtResource("3_1v6sc")]
+position = Vector2(-184, 184)
+layer_0/tile_data = PackedInt32Array(-393204, 786432, 0, -393203, 262145, 3, -458739, 589824, 3, -524276, 655360, 0, -524275, 655360, 0, -524274, 655360, 0, -524273, 655360, 0, -524272, 655360, 0, -524271, 655360, 0, -524270, 655360, 0, -524269, 655360, 0, -524268, 655360, 0, -524267, 720896, 0, -458741, 524288, 3, -458740, 589824, 3, -458738, 589824, 3, -458737, 589824, 3, -458736, 589824, 3, -458735, 589824, 3, -458734, 589824, 3, -458733, 589824, 3, -458732, 589824, 3, -458731, 720896, 3)
+
+[node name="TileMap2" parent="CanvasGroup/1/Bottom/ColorRect" instance=ExtResource("3_1v6sc")]
+position = Vector2(-176, 184)
+layer_0/tile_data = PackedInt32Array(-393204, 786432, 0, -393203, 262145, 3, -458739, 589824, 3, -524277, 524288, 0, -524276, 655360, 0, -524275, 655360, 0, -524274, 655360, 0, -524273, 655360, 0, -524272, 655360, 0, -524271, 655360, 0, -524270, 655360, 0, -524269, 655360, 0, -524268, 655360, 0, -524267, 720896, 0, -458741, 524288, 3, -458740, 589824, 3, -458738, 589824, 3, -458737, 589824, 3, -458736, 589824, 3, -458735, 589824, 3, -458734, 589824, 3, -458733, 589824, 3, -458732, 589824, 3, -458731, 720896, 3, -655345, 786432, 0, -720880, 786432, 0, -786415, 786432, 0, -655344, 851968, 0, -720879, 851968, 0, -589808, 589824, 2, -589807, 589824, 2, -655343, 589824, 2, -720878, 589824, 2, -655342, 589824, 2, -589806, 589824, 2, -720877, 196609, 1, -655341, 196609, 1, -589805, 196609, 1, -786413, 196609, 1, -786414, 589824, 2, -589809, 262145, 268435457, -655348, 524293, 0, -589812, 524293, 1, -655347, 589829, 0, -589811, 589829, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Bottom"]
+z_index = 1
+position = Vector2(128, -48)
+texture = ExtResource("12_t5ujp")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/1/Bottom"]
+z_index = 1
+position = Vector2(183, -17)
+texture = SubResource("AtlasTexture_q8m0e")
+hframes = 3
+vframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_q8m0e"), SubResource("AtlasTexture_2hhy8")])
+settings_value = "bobomb"
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/1/Bottom"]
+z_index = 1
+position = Vector2(208, -17)
+texture = ExtResource("14_24i0n")
+hframes = 4
+vframes = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/1/Bottom/Sprite2D3"]
+show_behind_parent = true
+position = Vector2(8, 0)
+texture = ExtResource("14_24i0n")
+hframes = 4
+vframes = 2
+frame = 2
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/1/Bottom/Sprite2D3/Sprite2D4"]
+show_behind_parent = true
+position = Vector2(8, -1)
+texture = ExtResource("14_24i0n")
+hframes = 4
+vframes = 2
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/1/Bottom/Sprite2D3/Sprite2D4/Sprite2D6"]
+show_behind_parent = true
+position = Vector2(8, 1)
+texture = ExtResource("14_24i0n")
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/1/Bottom/Sprite2D3/Sprite2D4/Sprite2D6/Sprite2D5"]
+show_behind_parent = true
+position = Vector2(8, 0)
+texture = ExtResource("14_24i0n")
+hframes = 4
+vframes = 2
+frame = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/1/Bottom/Sprite2D3"]
+position = Vector2(2, -12)
+texture = ExtResource("17_kf723")
+
+[node name="Label" type="Label" parent="CanvasGroup/1/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 112.0
+offset_top = -64.0
+offset_right = 216.0
+offset_bottom = -56.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "spiny"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/1/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 232.0
+offset_top = -32.0
+offset_right = 336.0
+offset_bottom = -24.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "wiggler"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/1/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 160.0
+offset_right = 264.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "bob-omb"
+uppercase = true
+
+[node name="2" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/2"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/2/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -152.0
+offset_right = 152.0
+offset_bottom = -96.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/2/Top"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 176.0
+offset_top = -176.0
+offset_right = 272.0
+offset_bottom = -80.0
+
+[node name="TileMap" parent="CanvasGroup/2/Top/ColorRect2" instance=ExtResource("3_1v6sc")]
+z_index = 1
+position = Vector2(0, 8)
+layer_1/tile_data = PackedInt32Array(262146, 65537, 4, 262147, 131073, 4, 262148, 131073, 4, 262149, 131073, 4, 262150, 196609, 4, 327682, 65537, 6, 327683, 131073, 6, 327684, 131073, 6, 327685, 131073, 6, 327686, 196609, 6)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(112, -133)
+texture = ExtResource("15_kw8as")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(104, -113)
+texture = ExtResource("16_dmj0p")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(120, -113)
+texture = ExtResource("16_dmj0p")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(133, -121)
+texture = ExtResource("17_higiq")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(91, -121)
+texture = ExtResource("17_higiq")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(88, -137)
+rotation = -0.455531
+texture = ExtResource("18_pomyg")
+hframes = 2
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(212, -129)
+texture = ExtResource("19_8j76j")
+vframes = 9
+frame = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Top/Sprite2D7"]
+position = Vector2(0, -5)
+texture = ExtResource("20_jgfel")
+hframes = 6
+vframes = 2
+frame = 8
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(204, -161)
+texture = ExtResource("19_8j76j")
+vframes = 9
+frame = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Top/Sprite2D8"]
+position = Vector2(0, -5)
+texture = ExtResource("20_jgfel")
+hframes = 6
+vframes = 2
+frame = 8
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(244, -153)
+texture = ExtResource("21_yygdw")
+vframes = 9
+frame = 7
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Top/Sprite2D9"]
+position = Vector2(0, -5)
+texture = ExtResource("20_jgfel")
+hframes = 6
+vframes = 2
+frame = 3
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasGroup/2/Top"]
+z_index = 1
+position = Vector2(236, -111)
+texture = ExtResource("21_yygdw")
+hframes = 2
+vframes = 9
+frame = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Top/Sprite2D10"]
+position = Vector2(10, 0)
+texture = ExtResource("20_jgfel")
+hframes = 6
+vframes = 2
+
+[node name="Label5" type="Label" parent="CanvasGroup/2/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 56.0
+offset_top = -165.0
+offset_right = 168.0
+offset_bottom = -146.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "amazing flyin'
+hammer brother"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label6" type="Label" parent="CanvasGroup/2/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 180.0
+offset_top = -141.0
+offset_right = 292.0
+offset_bottom = -122.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "super koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/2"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/2/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -64.0
+offset_right = 152.0
+offset_bottom = 16.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/2/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 168.0
+offset_top = -64.0
+offset_right = 280.0
+offset_bottom = 16.0
+
+[node name="TileMap" parent="CanvasGroup/2/Bottom/ColorRect2" instance=ExtResource("3_1v6sc")]
+position = Vector2(8, 8)
+layer_0/tile_data = PackedInt32Array(196608, 524288, 4, 196609, 655360, 4, 196610, 655360, 4, 196611, 655360, 4, 196612, 655360, 4, 196613, 655360, 4, 196614, 655360, 4, 196615, 720896, 4, 262144, 524288, 5, 262145, 589824, 6, 262146, 589824, 6, 262147, 589824, 6, 262148, 589824, 6, 262149, 589824, 6, 262150, 589824, 6, 262151, 720896, 6, 327680, 524288, 7, 327681, 589824, 7, 327682, 589824, 7, 327683, 589824, 7, 327684, 589824, 7, 327685, 589824, 7, 327686, 589824, 7, 327687, 720896, 7, 262139, 786437, 0, 327675, 786437, 1, 262140, 851973, 0, 327676, 851973, 1)
+layer_1/tile_data = PackedInt32Array(-65534, 65537, 4, -65533, 131073, 4, -65532, 131073, 4, -65531, 131073, 4, -65530, 131073, 4, -65529, 196609, 4, 2, 65537, 5, 3, 131073, 5, 4, 131073, 5, 5, 131073, 5, 6, 131073, 5, 7, 196609, 5, 65538, 65537, 5, 65539, 131073, 5, 65540, 131073, 5, 65541, 131073, 5, 65542, 131073, 5, 65543, 196609, 5, 131074, 65537, 5, 131075, 131073, 5, 131076, 131073, 5, 131077, 131073, 5, 131078, 196609, 5, 131079, 196609, 6, 196610, 65537, 6, 196611, 131073, 6, 196612, 131073, 6, 196613, 131073, 6, 196614, 196609, 6)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Bottom"]
+z_index = 1
+position = Vector2(112, -45)
+texture = ExtResource("22_vbyyn")
+hframes = 2
+vframes = 2
+frame = 3
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("29_n6evx")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/2/Bottom"]
+z_index = 1
+position = Vector2(200, -15)
+texture = ExtResource("23_d30w2")
+hframes = 4
+frame = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/2/Bottom/Sprite2D2"]
+position = Vector2(-14, -21)
+texture = ExtResource("24_7wlv5")
+hframes = 2
+frame = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/2/Bottom/Sprite2D2"]
+position = Vector2(-4, -25)
+texture = ExtResource("24_7wlv5")
+hframes = 2
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/2/Bottom/Sprite2D2"]
+position = Vector2(5, -25)
+texture = ExtResource("24_7wlv5")
+hframes = 2
+frame = 1
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/2/Bottom/Sprite2D2"]
+position = Vector2(15, -21)
+texture = ExtResource("24_7wlv5")
+hframes = 2
+frame = 1
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/2/Bottom"]
+z_index = 1
+position = Vector2(252, -25)
+texture = ExtResource("25_feqlt")
+flip_h = true
+hframes = 16
+vframes = 8
+frame = 16
+
+[node name="Label4" type="Label" parent="CanvasGroup/2/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_top = 3.0
+offset_right = 256.0
+offset_bottom = 22.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "volcano
+lotus"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label5" type="Label" parent="CanvasGroup/2/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 211.0
+offset_top = -53.0
+offset_right = 315.0
+offset_bottom = -34.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "chargin'
+chuck"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label6" type="Label" parent="CanvasGroup/2/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 56.0
+offset_top = -29.0
+offset_right = 160.0
+offset_bottom = -10.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "jumping
+pirhana plant"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ConditionalReplaceNode" type="Node" parent="CanvasGroup/2/Bottom" node_paths=PackedStringArray("nodes_to_delete")]
+script = ExtResource("15_ayoty")
+nodes_to_delete = [NodePath("../Label6")]
+
+[node name="Label6" type="Label" parent="CanvasGroup/2/Bottom/ConditionalReplaceNode"]
+visibility_layer = 4
+z_index = 1
+offset_left = 56.0
+offset_top = -29.0
+offset_right = 160.0
+offset_bottom = -10.0
+theme_override_fonts/font = SubResource("FontVariation_jtnya")
+text = "jumping
+pumpkin plant"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="3" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/3"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/3/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -176.0
+offset_right = 136.0
+offset_bottom = -48.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/3/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 160.0
+offset_top = -152.0
+offset_right = 288.0
+offset_bottom = -48.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(100, -153)
+texture = ExtResource("26_pd6pd")
+hframes = 6
+frame = 5
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(87, -103)
+texture = ExtResource("27_qsvv3")
+hframes = 3
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(119, -103)
+texture = ExtResource("27_qsvv3")
+hframes = 3
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(104, -103)
+texture = ExtResource("27_qsvv3")
+hframes = 3
+frame = 2
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(88, -129)
+texture = ExtResource("28_13s03")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(104, -129)
+texture = ExtResource("28_13s03")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(120, -129)
+texture = ExtResource("28_13s03")
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(194, -78)
+texture = ExtResource("29_6yx4p")
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("37_jldi0")
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(193, -93)
+texture = ExtResource("29_6yx4p")
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("37_jldi0")
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(194, -108)
+texture = ExtResource("29_6yx4p")
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("37_jldi0")
+
+[node name="Sprite2D11" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(193, -123)
+texture = ExtResource("30_wxmiy")
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("37_jldi0")
+
+[node name="Sprite2D12" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(242, -125)
+texture = ExtResource("31_eajca")
+hframes = 7
+frame = 2
+
+[node name="Sprite2D13" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(270, -113)
+texture = ExtResource("31_eajca")
+flip_h = true
+hframes = 7
+frame = 1
+
+[node name="Sprite2D14" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(252, -111)
+texture = ExtResource("32_ucdkx")
+flip_h = true
+
+[node name="Sprite2D15" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(235, -112)
+texture = ExtResource("32_ucdkx")
+flip_h = true
+
+[node name="Sprite2D16" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(226, -124)
+texture = ExtResource("32_ucdkx")
+flip_h = true
+
+[node name="Sprite2D17" type="Sprite2D" parent="CanvasGroup/3/Top"]
+z_index = 1
+position = Vector2(255, -125)
+texture = ExtResource("32_ucdkx")
+flip_h = true
+
+[node name="TileMap" parent="CanvasGroup/3/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(32, -7)
+layer_0/tile_data = PackedInt32Array(-327678, 65537, 0, -327677, 131073, 0, -327676, 131073, 0, -327675, 196609, 0, -262142, 65537, 1, -262141, 131073, 1, -262140, 131073, 1, -262139, 196609, 1, -196606, 65537, 2, -196605, 131073, 2, -196604, 131073, 2, -196603, 196609, 2, -393205, 524288, 0, -393204, 655360, 0, -393203, 655360, 0, -393202, 655360, 0, -393201, 720896, 0, -327669, 524288, 1, -327668, 589824, 2, -327667, 589824, 2, -327666, 589824, 2, -327665, 720896, 2, -262133, 327680, 1, -262132, 589824, 2, -262131, 589824, 2, -262130, 589824, 2, -262129, 720896, 2, -196597, 589824, 3, -196596, 589824, 3, -196595, 589824, 3, -196594, 589824, 3, -196593, 720896, 3, -262134, 655360, 0, -196598, 589824, 3, -262135, 65537, 0, -196599, 65537, 1)
+
+[node name="Label" type="Label" parent="CanvasGroup/3/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 56.0
+offset_top = -168.0
+offset_right = 160.0
+offset_bottom = -160.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "sumo brother"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/3/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 216.0
+offset_top = -144.0
+offset_right = 320.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "monty mole"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/3/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 176.0
+offset_top = -88.0
+offset_right = 280.0
+offset_bottom = -80.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "pokey"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/3"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/3/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 112.0
+offset_top = -32.0
+offset_right = 216.0
+offset_bottom = 24.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/3/Bottom"]
+position = Vector2(188, -17)
+texture = ExtResource("33_ecrkf")
+flip_h = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/3/Bottom"]
+position = Vector2(172, -17)
+texture = ExtResource("34_da7xi")
+hframes = 5
+frame = 1
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/3/Bottom"]
+position = Vector2(152, -16)
+texture = ExtResource("35_wel57")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/3/Bottom"]
+position = Vector2(152, 0)
+texture = ExtResource("36_c32aj")
+hframes = 3
+vframes = 2
+
+[node name="Label" type="Label" parent="CanvasGroup/3/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_right = 256.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "bullet bill"
+uppercase = true
+
+[node name="TileMap" parent="CanvasGroup/3/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(65542, 524288, 0, 65543, 655360, 0, 65544, 655360, 0, 65545, 655360, 0, 65546, 655360, 0, 65547, 720896, 0, 131078, 524288, 3, 131079, 589824, 3, 131080, 589824, 3, 131081, 589824, 3, 131082, 589824, 3, 131083, 720896, 3)
+layer_1/tile_data = PackedInt32Array(-131066, 65537, 0, -131065, 196609, 0, -65530, 65537, 1, -65529, 196609, 1, 6, 65537, 1, 7, 196609, 1, 65542, 65537, 2, 65543, 196609, 2, -131061, 65537, 0, -131060, 131073, 0, -131059, 196609, 0, -65525, 65537, 1, -65524, 131073, 1, -65523, 196609, 1, 11, 65537, 1, 12, 131073, 1, 13, 196609, 1, 65547, 65537, 1, 65548, 131073, 1, 65549, 196609, 1, 131083, 65537, 2, 131084, 131073, 2, 131085, 196609, 2)
+
+[node name="ConditionalReplaceNode" type="Node" parent="CanvasGroup/3/Bottom" node_paths=PackedStringArray("nodes_to_delete")]
+script = ExtResource("15_ayoty")
+nodes_to_delete = [NodePath("../Label"), NodePath("../Sprite2D")]
+
+[node name="VariationSprite" type="Sprite2D" parent="CanvasGroup/3/Bottom/ConditionalReplaceNode"]
+position = Vector2(188, -16)
+texture = SubResource("AtlasTexture_cnges")
+flip_h = true
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_emre5"), SubResource("AtlasTexture_cnges")])
+settings_value = "pidget"
+
+[node name="Label" type="Label" parent="CanvasGroup/3/Bottom/ConditionalReplaceNode"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_right = 256.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "pidget bill"
+uppercase = true
+
+[node name="4" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/4"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/4/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 128.0
+offset_top = -168.0
+offset_right = 272.0
+offset_bottom = -80.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(160, -136)
+texture = ExtResource("37_k3u4i")
+flip_h = true
+hframes = 6
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(197, -113)
+texture = ExtResource("37_k3u4i")
+hframes = 6
+frame = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(152, -112)
+texture = ExtResource("38_k21cy")
+hframes = 4
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(168, -112)
+texture = ExtResource("38_k21cy")
+hframes = 4
+
+[node name="TileMap" parent="CanvasGroup/4/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-393203, 262145, 268435465, -393202, 131073, 9, -393201, 196609, 9, -327667, 65537, 10, -327666, 131073, 10, -327665, 196609, 10, -458739, 786432, 8, -458738, 851968, 8, -458737, 196609, 9, -524274, 786432, 8, -524273, 262145, 11, -589809, 327681, 10)
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(208, -109)
+texture = ExtResource("39_olld4")
+hframes = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(212, -113)
+texture = ExtResource("39_olld4")
+hframes = 4
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/4/Top"]
+position = Vector2(216, -117)
+texture = ExtResource("39_olld4")
+hframes = 4
+frame = 2
+
+[node name="Label" type="Label" parent="CanvasGroup/4/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 184.0
+offset_top = -136.0
+offset_right = 288.0
+offset_bottom = -128.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "rex"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/4"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/4/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 88.0
+offset_top = -64.0
+offset_right = 144.0
+offset_bottom = 8.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/4/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 160.0
+offset_top = -64.0
+offset_right = 272.0
+offset_bottom = 16.0
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/4/Bottom"]
+z_as_relative = false
+position = Vector2(112, -40)
+texture = ExtResource("40_egsap")
+flip_h = true
+hframes = 2
+
+[node name="TileMap" parent="CanvasGroup/4/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-65533, 65537, 8, -65532, 131073, 8, -65531, 131073, 8, -65530, 131073, 8, -65529, 196609, 8, 3, 65537, 9, 4, 131073, 9, 5, 131073, 9, 6, 131073, 9, 7, 196609, 9, 65539, 65537, 10, 65540, 131073, 10, 65541, 131073, 10, 65542, 131073, 10, 65543, 196609, 10, 65547, 65537, 8, 65548, 131073, 8, 65549, 131073, 8, 65550, 196609, 8, 131083, 65537, 10, 131084, 131073, 10, 131085, 131073, 10, 131086, 196609, 10)
+layer_1/tile_data = PackedInt32Array(-262131, 65537, 8, -262130, 131073, 8, -262129, 196609, 8, -196595, 65537, 9, -196594, 131073, 9, -196593, 196609, 9, -131059, 65537, 9, -131058, 131073, 9, -131057, 196609, 9, -65523, 65537, 9, -65522, 131073, 9, -65521, 196609, 9, 13, 65537, 9, 14, 131073, 9, 15, 196609, 9, 65549, 65537, 10, 65550, 131073, 10, 65551, 196609, 10)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/4/Bottom"]
+position = Vector2(208, -24)
+texture = ExtResource("41_u73sy")
+
+[node name="Label" type="Label" parent="CanvasGroup/4/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 72.0
+offset_top = -72.0
+offset_right = 176.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "mega mole"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/4/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 176.0
+offset_right = 280.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "banzai bill
+"
+uppercase = true
+
+[node name="5" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/5"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/5/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 80.0
+offset_top = -168.0
+offset_right = 192.0
+offset_bottom = -64.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/5/Top"]
+position = Vector2(105, -124)
+texture = ExtResource("42_837lr")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/5/Top"]
+position = Vector2(148, -96)
+texture = ExtResource("43_8pare")
+flip_h = true
+hframes = 3
+vframes = 2
+frame = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/5/Top/Sprite2D2"]
+position = Vector2(0, -27)
+texture = ExtResource("44_ahx4j")
+hframes = 4
+frame = 3
+
+[node name="TileMap" parent="CanvasGroup/5/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-327673, 65537, 4, -327672, 131073, 4, -327671, 196609, 4, -262137, 65537, 6, -262136, 131073, 6, -262135, 196609, 6)
+layer_1/tile_data = PackedInt32Array(-458745, 327681, 4, -393212, 917504, 5, -393211, 983040, 5, -393210, 1048576, 5, -393209, 196609, 5, -327676, 65537, 5, -327675, 131073, 5, -327674, 131073, 5, -327673, 196609, 5, -262140, 65537, 6, -262139, 131073, 6, -262138, 131073, 6, -262137, 196609, 6, -458746, 917504, 5)
+
+[node name="Label" type="Label" parent="CanvasGroup/5/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -152.0
+offset_right = 168.0
+offset_bottom = -144.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "dino-rhino"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/5/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 120.0
+offset_top = -80.0
+offset_right = 224.0
+offset_bottom = -72.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "dino-torch"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/5"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/5/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 128.0
+offset_top = -48.0
+offset_right = 272.0
+offset_bottom = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/5/Bottom"]
+position = Vector2(216, -24)
+texture = ExtResource("45_k65qr")
+flip_h = true
+hframes = 4
+frame = 3
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("55_wnt35")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/5/Bottom"]
+position = Vector2(248, -24)
+texture = ExtResource("46_xcqwr")
+flip_h = true
+hframes = 4
+frame = 1
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("57_rn442")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/5/Bottom"]
+position = Vector2(184, -24)
+texture = ExtResource("47_3lv4p")
+hframes = 4
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("59_py67i")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/5/Bottom"]
+position = Vector2(152, -24)
+texture = ExtResource("48_isve6")
+hframes = 4
+frame = 1
+script = ExtResource("6_5gcek")
+autumn_texture = ExtResource("61_8nh47")
+
+[node name="Label" type="Label" parent="CanvasGroup/5/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 176.0
+offset_right = 280.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "koopas"
+uppercase = true
+
+[node name="TileMap" parent="CanvasGroup/5/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(7, 524288, 4, 8, 655360, 4, 9, 655360, 4, 10, 655360, 4, 11, 655360, 4, 12, 655360, 4, 13, 655360, 4, 14, 655360, 4, 15, 655360, 4, 16, 655360, 4, 17, 720896, 4, 65543, 524288, 7, 65544, 589824, 7, 65545, 589824, 7, 65546, 589824, 7, 65547, 589824, 7, 65548, 589824, 7, 65549, 589824, 7, 65550, 589824, 7, 65551, 589824, 7, 65552, 589824, 7, 65553, 720896, 7)
+layer_1/tile_data = PackedInt32Array(-196600, 65537, 4, -196599, 196609, 4, -131064, 65537, 5, -131063, 196609, 5, -65528, 65537, 5, -65527, 196609, 5, 8, 65537, 6, 9, 196609, 6, -196595, 65537, 4, -196594, 131073, 4, -196593, 196609, 4, -131059, 65537, 5, -131058, 131073, 5, -131057, 196609, 5, -65523, 65537, 5, -65522, 131073, 5, -65521, 196609, 5, 13, 65537, 6, 14, 131073, 6, 15, 196609, 6)
+
+[node name="ConditionalReplaceNode" type="Node" parent="CanvasGroup/5/Bottom" node_paths=PackedStringArray("nodes_to_delete")]
+script = ExtResource("15_ayoty")
+nodes_to_delete = [NodePath("../Label")]
+
+[node name="Label2" type="Label" parent="CanvasGroup/5/Bottom/ConditionalReplaceNode"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_right = 256.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "mask koopas"
+uppercase = true
+
+[node name="6" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/6"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/6/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -168.0
+offset_right = 128.0
+offset_bottom = -88.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/6/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 144.0
+offset_top = -168.0
+offset_right = 256.0
+offset_bottom = -96.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/6/Top"]
+position = Vector2(80, -144)
+texture = SubResource("AtlasTexture_lyxld")
+hframes = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_np44r"), SubResource("AtlasTexture_qd6t0")])
+settings_value = "spiketop"
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/6/Top"]
+position = Vector2(113, -140)
+rotation = 0.785398
+texture = SubResource("AtlasTexture_lyxld")
+hframes = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_np44r"), SubResource("AtlasTexture_qd6t0")])
+settings_value = "spiketop"
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/6/Top"]
+position = Vector2(119, -121)
+rotation = 1.5708
+texture = SubResource("AtlasTexture_lyxld")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_np44r"), SubResource("AtlasTexture_qd6t0")])
+settings_value = "spiketop"
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/6/Top"]
+position = Vector2(87, -97)
+rotation = 3.14159
+texture = SubResource("AtlasTexture_np44r")
+flip_h = true
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_np44r"), SubResource("AtlasTexture_qd6t0")])
+settings_value = "spiketop"
+
+[node name="TileMap" parent="CanvasGroup/6/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-524284, 524290, 0, -524283, 589826, 0, -524282, 720898, 0, -458748, 524290, 3, -458747, 589826, 3, -458746, 720898, 3, -458737, 917506, 2, -458736, 983042, 2, -524274, 983042, 2, -524273, 1048578, 2, -524272, 720898, 2, -524275, 917506, 2, -589813, 917506, 2, -589812, 983042, 2, -589811, 1048578, 2, -589810, 589826, 2, -589809, 589826, 2, -589808, 720898, 2, -655351, 917506, 2, -655350, 983042, 2, -655349, 1048578, 2, -655348, 589826, 2, -655347, 589826, 2, -655346, 589826, 2, -655345, 589826, 2, -655344, 720898, 2, -720887, 524290, 0, -720886, 589826, 0, -720885, 589826, 0, -720884, 589826, 0, -720883, 589826, 0, -720882, 589826, 0, -720881, 589826, 0, -720880, 720898, 0)
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/6/Top"]
+position = Vector2(200, -132)
+texture = ExtResource("43_cgc4d")
+hframes = 3
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/6/Top"]
+z_index = -2
+position = Vector2(222, -123)
+texture = ExtResource("43_cgc4d")
+hframes = 3
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/6/Top"]
+z_index = -2
+position = Vector2(176, -108)
+texture = ExtResource("43_cgc4d")
+hframes = 3
+frame = 1
+
+[node name="Label" type="Label" parent="CanvasGroup/6/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -160.0
+offset_right = 168.0
+offset_bottom = -152.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "spike top"
+uppercase = true
+
+[node name="Label2" type="Label" parent="CanvasGroup/6/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 184.0
+offset_top = -160.0
+offset_right = 288.0
+offset_bottom = -152.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "swoopers"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/6"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/6/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 96.0
+offset_top = -72.0
+offset_right = 248.0
+offset_bottom = 8.0
+
+[node name="TileMap" parent="CanvasGroup/6/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-131067, 524290, 0, -131066, 589826, 0, -131065, 589826, 0, -131064, 720898, 0, -65531, 524290, 1, -65530, 589826, 2, -65529, 589826, 2, -65528, 720898, 2, 5, 524290, 1, 6, 589826, 2, 7, 589826, 2, 8, 720898, 2, 65541, 524290, 3, 65542, 589826, 3, 65543, 589826, 3, 65544, 720898, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(152, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(168, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(184, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(200, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(216, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(232, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(240, 0)
+texture = ExtResource("51_rg6tq")
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(112, -48)
+texture = ExtResource("52_n2pcf")
+hframes = 2
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+position = Vector2(136, -48)
+texture = ExtResource("52_n2pcf")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasGroup/6/Bottom"]
+z_index = -1
+position = Vector2(217, -21)
+texture = ExtResource("53_y2i8l")
+hframes = 3
+frame = 2
+
+[node name="Label2" type="Label" parent="CanvasGroup/6/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 72.0
+offset_top = -72.0
+offset_right = 176.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "buzzy beetle"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/6/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -48.0
+offset_right = 296.0
+offset_bottom = -40.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "blargg"
+uppercase = true
+
+[node name="7" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/7"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/7/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -176.0
+offset_right = 272.0
+offset_bottom = -80.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/7/Top"]
+position = Vector2(96, -136)
+texture = ExtResource("54_uhgow")
+hframes = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/7/Top"]
+position = Vector2(104, -120)
+texture = ExtResource("54_uhgow")
+hframes = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/7/Top"]
+position = Vector2(104, -152)
+texture = ExtResource("54_uhgow")
+hframes = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/7/Top"]
+position = Vector2(144, -120)
+texture = ExtResource("55_hv6ed")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/7/Top"]
+position = Vector2(216, -137)
+texture = ExtResource("56_qf8uh")
+flip_h = true
+hframes = 3
+frame = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/7/Top/Sprite2D5"]
+position = Vector2(0, -4)
+texture = ExtResource("57_0htb8")
+vframes = 2
+
+[node name="TileMap" parent="CanvasGroup/7/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-458741, 524290, 0, -458740, 589826, 0, -458739, 589826, 0, -458738, 589826, 0, -458737, 720898, 0, -393205, 524290, 3, -393204, 589826, 3, -393203, 589826, 3, -393202, 589826, 3, -393201, 720898, 3, -720885, 524290, 0, -720884, 589826, 0, -720883, 589826, 0, -720882, 589826, 0, -720881, 720898, 0, -655349, 524290, 3, -655348, 589826, 3, -655347, 589826, 3, -655346, 589826, 3, -655345, 720898, 3)
+
+[node name="Label2" type="Label" parent="CanvasGroup/7/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 80.0
+offset_top = -168.0
+offset_right = 184.0
+offset_bottom = -160.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "blurps"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/7/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -160.0
+offset_right = 296.0
+offset_bottom = -152.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "urchin"
+uppercase = true
+
+[node name="Label4" type="Label" parent="CanvasGroup/7/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 104.0
+offset_top = -96.0
+offset_right = 208.0
+offset_bottom = -88.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "porcu-puffer"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/7"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/7/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -56.0
+offset_right = 144.0
+offset_bottom = 16.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/7/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 168.0
+offset_top = -64.0
+offset_right = 280.0
+offset_bottom = 8.0
+
+[node name="TileMap" parent="CanvasGroup/7/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(4, 589826, 0, 5, 589826, 0, 6, 720898, 0, 65540, 589826, 3, 65541, 589826, 3, 65542, 720898, 3, 3, 524290, 0, 65539, 524290, 3, -196597, 65558, 0, -131061, 65558, 1, -196596, 131094, 0, -131060, 131094, 1, -262130, 65558, 0, -196594, 65558, 1, -262129, 131094, 0, -196593, 131094, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(92, -16)
+texture = ExtResource("58_et5aa")
+hframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(132, -25)
+texture = ExtResource("58_et5aa")
+flip_h = true
+hframes = 4
+frame = 3
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(124, -49)
+texture = ExtResource("58_et5aa")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(232, -1)
+texture = ExtResource("59_3wt73")
+flip_h = true
+vframes = 2
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(242, -25)
+texture = ExtResource("59_3wt73")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(192, -17)
+texture = ExtResource("60_uemx3")
+flip_h = true
+hframes = 2
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(242, -34)
+texture = ExtResource("60_uemx3")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(208, -1)
+texture = ExtResource("34_da7xi")
+flip_h = true
+hframes = 5
+frame = 1
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(200, -1)
+texture = ExtResource("34_da7xi")
+flip_h = true
+hframes = 5
+frame = 2
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasGroup/7/Bottom"]
+position = Vector2(192, -1)
+texture = ExtResource("34_da7xi")
+flip_h = true
+hframes = 5
+frame = 3
+
+[node name="Label4" type="Label" parent="CanvasGroup/7/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -8.0
+offset_right = 168.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "rip van fish"
+uppercase = true
+
+[node name="Label5" type="Label" parent="CanvasGroup/7/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -56.0
+offset_right = 296.0
+offset_bottom = -48.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "torpedo ted"
+uppercase = true
+
+[node name="8" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/8"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/8/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 80.0
+offset_top = -168.0
+offset_right = 160.0
+offset_bottom = -88.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/8/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 192.0
+offset_top = -176.0
+offset_right = 272.0
+offset_bottom = -96.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/8/Top"]
+position = Vector2(126, -123)
+texture = ExtResource("61_sp8r6")
+flip_h = true
+hframes = 2
+vframes = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/8/Top"]
+position = Vector2(136, -138)
+texture = ExtResource("61_sp8r6")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/8/Top"]
+position = Vector2(148, -151)
+texture = ExtResource("61_sp8r6")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 3
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/8/Top"]
+position = Vector2(121, -106)
+texture = ExtResource("61_sp8r6")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/8/Top"]
+position = Vector2(233, -107)
+texture = ExtResource("7_mkw2q")
+hframes = 4
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/8/Top/Sprite2D6"]
+show_behind_parent = true
+position = Vector2(-1, -16)
+texture = ExtResource("62_6xjpf")
+hframes = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/8/Top/Sprite2D6"]
+show_behind_parent = true
+position = Vector2(13, -14)
+texture = ExtResource("63_yv7x7")
+flip_h = true
+
+[node name="Line2D" type="Line2D" parent="CanvasGroup/8/Top/Sprite2D6"]
+points = PackedVector2Array(20, -20, 20, 11)
+width = 1.0
+
+[node name="TileMap" parent="CanvasGroup/8/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-458746, 11, 0, -458745, 65547, 0, -458744, 65547, 0, -458743, 65547, 0, -458740, 65547, 0, -458739, 65547, 0, -458738, 65547, 0, -458737, 131083, 0, -393204, 327691, 0, -393209, 327691, 0)
+
+[node name="Label2" type="Label" parent="CanvasGroup/8/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 80.0
+offset_top = -160.0
+offset_right = 184.0
+offset_bottom = -152.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "boo buddies"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/8/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 192.0
+offset_top = -152.0
+offset_right = 296.0
+offset_bottom = -144.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "fishin'boo"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/8"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/8/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -64.0
+offset_right = 160.0
+offset_bottom = 16.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/8/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 176.0
+offset_top = -72.0
+offset_right = 272.0
+offset_bottom = -8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(115, -19)
+texture = ExtResource("64_8p0hv")
+hframes = 5
+frame = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(198, -49)
+texture = ExtResource("65_hlug8")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(216, -54)
+texture = ExtResource("65_hlug8")
+flip_h = true
+hframes = 2
+frame = 1
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(234, -48)
+texture = ExtResource("65_hlug8")
+flip_h = true
+hframes = 2
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(254, -54)
+texture = ExtResource("66_jqb20")
+flip_h = true
+hframes = 4
+frame = 2
+
+[node name="Line2D" type="Line2D" parent="CanvasGroup/8/Bottom"]
+position = Vector2(233, -72)
+points = PackedVector2Array(20, 0, 20, 11)
+width = 1.0
+
+[node name="TileMap" parent="CanvasGroup/8/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, 8)
+layer_0/tile_data = PackedInt32Array(-262137, 327691, 1, -196601, 327691, 1, -131065, 327691, 1, -65529, 327691, 1, 7, 327691, 1, -327668, 327691, 1, -262132, 327691, 1, -196596, 327691, 1, -131060, 327691, 1, -65524, 327691, 1, -131058, 327691, 1, -65522, 327691, 1, -196595, 11, 0, -196594, 65547, 0, -196593, 131083, 0, -327673, 327691, 0)
+
+[node name="Label2" type="Label" parent="CanvasGroup/8/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 168.0
+offset_bottom = -56.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "the big boo"
+uppercase = true
+
+[node name="Label3" type="Label" parent="CanvasGroup/8/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 200.0
+offset_top = -32.0
+offset_right = 304.0
+offset_bottom = -24.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "eeries"
+uppercase = true
+
+[node name="9" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/9"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/9/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -176.0
+offset_right = 280.0
+offset_bottom = -112.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/9/Top"]
+position = Vector2(96, -152)
+texture = SubResource("AtlasTexture_va24e")
+flip_h = true
+hframes = 6
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_va24e"), SubResource("AtlasTexture_msi36")])
+settings_value = "drybones"
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/9/Top"]
+position = Vector2(123, -163)
+rotation = -1.5708
+texture = ExtResource("68_dat0o")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/9/Top"]
+position = Vector2(170, -157)
+texture = ExtResource("69_qllf5")
+flip_h = true
+hframes = 2
+vframes = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/9/Top"]
+position = Vector2(229, -128)
+texture = ExtResource("70_dk01d")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="TileMap" parent="CanvasGroup/9/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-458743, 13, 0, -458742, 131085, 0, -524281, 65549, 0, -524280, 131085, 0, -458745, 65549, 1, -458744, 131085, 1, -524284, 65549, 0, -458748, 65549, 1, -524283, 65549, 0, -524282, 65549, 0, -458747, 65549, 1, -458746, 65549, 1, -458739, 13, 0, -458738, 65549, 0, -458737, 131085, 0, -589808, 13, 0, -524272, 13, 1, -589807, 65549, 0, -524271, 65549, 1, -458736, 13, 1, -458735, 65549, 1, -720885, 13, 1, -655349, 13, 2, -720884, 65549, 1, -655348, 65549, 2, -720883, 131085, 1, -655347, 131085, 2)
+
+[node name="Label6" type="Label" parent="CanvasGroup/9/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 136.0
+offset_top = -176.0
+offset_right = 240.0
+offset_bottom = -168.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "lil sparky"
+uppercase = true
+
+[node name="Label7" type="Label" parent="CanvasGroup/9/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -128.0
+offset_right = 168.0
+offset_bottom = -120.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "dry bones"
+uppercase = true
+
+[node name="Label8" type="Label" parent="CanvasGroup/9/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 184.0
+offset_top = -144.0
+offset_right = 288.0
+offset_bottom = -136.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "bony beetle"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/9"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/9/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 96.0
+offset_top = -96.0
+offset_right = 160.0
+offset_bottom = 16.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/9/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 176.0
+offset_top = -96.0
+offset_right = 272.0
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/9/Bottom"]
+position = Vector2(192, -78)
+texture = ExtResource("71_1kjk4")
+hframes = 3
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/9/Bottom"]
+position = Vector2(244, -46)
+texture = ExtResource("72_0oxuy")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/9/Bottom"]
+position = Vector2(136, -37)
+texture = ExtResource("73_0qpk1")
+hframes = 2
+frame = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/9/Bottom/Sprite2D7"]
+position = Vector2(-4, -4)
+texture = ExtResource("74_r772m")
+hframes = 2
+
+[node name="TileMap" parent="CanvasGroup/9/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-196602, 13, 0, -131066, 13, 2, -196601, 131085, 0, -131065, 131085, 2, -393207, 13, 1, -327671, 13, 2, -393210, 65549, 2, -393209, 65549, 2, -393208, 131085, 2, -65523, 13, 0, 13, 13, 1, -65522, 65549, 0, 14, 65549, 1, -65521, 65549, 0, -65520, 65549, 0, 15, 65549, 1, 16, 65549, 1, -327667, 13, 2, -327666, 65549, 2, -327665, 131085, 2, -327664, 13, 2, -393203, 13, 1, -393202, 65549, 1, -393201, 131085, 1, -393200, 13, 1)
+
+[node name="Label3" type="Label" parent="CanvasGroup/9/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 224.0
+offset_top = -32.0
+offset_right = 328.0
+offset_bottom = -24.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "thwimp"
+uppercase = true
+
+[node name="Label4" type="Label" parent="CanvasGroup/9/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 168.0
+offset_top = -56.0
+offset_right = 272.0
+offset_bottom = -48.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "thwomp"
+uppercase = true
+
+[node name="Label5" type="Label" parent="CanvasGroup/9/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 120.0
+offset_top = -16.0
+offset_right = 224.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "hothead"
+uppercase = true
+
+[node name="10" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/10"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/10/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 72.0
+offset_top = -168.0
+offset_right = 200.0
+offset_bottom = -80.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasGroup/10/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 208.0
+offset_top = -168.0
+offset_right = 296.0
+offset_bottom = -80.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(116, -113)
+texture = ExtResource("75_81etr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/10/Top/Sprite2D"]
+position = Vector2(-16, -16)
+texture = ExtResource("76_hmndu")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/10/Top/Sprite2D"]
+position = Vector2(-27, -27)
+texture = ExtResource("76_hmndu")
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/10/Top/Sprite2D"]
+position = Vector2(-38, -38)
+texture = ExtResource("76_hmndu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(147, -138)
+texture = ExtResource("77_4800o")
+hframes = 2
+frame = 1
+
+[node name="TileMap" parent="CanvasGroup/10/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(120, -120)
+layer_0/tile_data = PackedInt32Array(-131075, 65549, 2, -131074, 131085, 2, -65534, 13, 0, 2, 13, 1, 65538, 13, 2, -65533, 65549, 0, 3, 65549, 1, 65539, 65549, 2, -65532, 65549, 0, 4, 65549, 1, 65540, 65549, 2, -65531, 65549, 0, -65530, 65549, 0, -65529, 65549, 0, -65528, 65549, 0, -65527, 65549, 0, -65526, 65549, 0, -65525, 65549, 0, 5, 65549, 1, 6, 65549, 1, 7, 65549, 1, 8, 65549, 1, 9, 65549, 1, 10, 65549, 1, 65541, 65549, 2, 65542, 65549, 2, 65543, 65549, 2, 65544, 65549, 2, 65545, 65549, 2, 65546, 65549, 2)
+
+[node name="Label6" type="Label" parent="CanvasGroup/10/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 136.0
+offset_top = -168.0
+offset_right = 240.0
+offset_bottom = -160.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "grinder"
+uppercase = true
+
+[node name="Label7" type="Label" parent="CanvasGroup/10/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 64.0
+offset_top = -96.0
+offset_right = 168.0
+offset_bottom = -88.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "ball'n'chain"
+uppercase = true
+
+[node name="Label8" type="Label" parent="CanvasGroup/10/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 224.0
+offset_top = -128.0
+offset_right = 328.0
+offset_bottom = -120.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "magikoopa"
+uppercase = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(264, -152)
+texture = SubResource("AtlasTexture_al31u")
+hframes = 3
+frame = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_wxhjb"), SubResource("AtlasTexture_al31u"), SubResource("AtlasTexture_76u0a")])
+settings_value = "magikoopa"
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(248, -152)
+texture = ExtResource("92_65gyy")
+hframes = 6
+frame = 1
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(240, -160)
+texture = ExtResource("92_65gyy")
+hframes = 6
+frame = 1
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(237, -156)
+texture = ExtResource("92_65gyy")
+hframes = 6
+frame = 1
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(226, -144)
+texture = ExtResource("92_65gyy")
+hframes = 6
+frame = 1
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(222, -142)
+texture = ExtResource("92_65gyy")
+hframes = 6
+frame = 1
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/10/Top"]
+position = Vector2(217, -149)
+texture = ExtResource("93_s1j51")
+hframes = 3
+frame = 1
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/10"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/10/Bottom"]
+clip_children = 2
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 80.0
+offset_top = -64.0
+offset_right = 272.0
+offset_bottom = 16.0
+
+[node name="TileMap" parent="CanvasGroup/10/Bottom" instance=ExtResource("3_1v6sc")]
+position = Vector2(160, -120)
+layer_0/tile_data = PackedInt32Array(327675, 65549, 0, 393211, 65549, 1, 327676, 131085, 0, 393212, 131085, 1, 458747, 65549, 1, 458748, 131085, 1, 524283, 65549, 1, 524284, 131085, 1, 589819, 65549, 1, 589820, 131085, 1)
+
+[node name="Water" parent="CanvasGroup/10/Bottom" instance=ExtResource("78_pn3ae")]
+process_mode = 4
+z_index = -4
+position = Vector2(192, -12)
+shape = SubResource("RectangleShape2D_4lxfn")
+top_textures = Array[Texture2D]([ExtResource("96_odok7")])
+water_colour = Color(0.282353, 0.282353, 0.533333, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/10/Bottom"]
+position = Vector2(140, -18)
+texture = SubResource("AtlasTexture_alwfd")
+hframes = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_alwfd"), SubResource("AtlasTexture_h28n3")])
+settings_value = "fishbone"
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/10/Bottom"]
+position = Vector2(172, -26)
+texture = SubResource("AtlasTexture_alwfd")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_alwfd"), SubResource("AtlasTexture_h28n3")])
+settings_value = "fishbone"
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/10/Bottom"]
+position = Vector2(194, -18)
+texture = SubResource("AtlasTexture_alwfd")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_alwfd"), SubResource("AtlasTexture_h28n3")])
+settings_value = "fishbone"
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/10/Bottom"]
+position = Vector2(180, -2)
+texture = SubResource("AtlasTexture_alwfd")
+hframes = 2
+frame = 1
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_alwfd"), SubResource("AtlasTexture_h28n3")])
+settings_value = "fishbone"
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/10/Bottom"]
+position = Vector2(228, -21)
+texture = SubResource("AtlasTexture_alwfd")
+hframes = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_alwfd"), SubResource("AtlasTexture_h28n3")])
+settings_value = "fishbone"
+
+[node name="Label6" type="Label" parent="CanvasGroup/10/Bottom"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_top = -56.0
+offset_right = 256.0
+offset_bottom = -48.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "fishbone"
+uppercase = true
+
+[node name="11" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/11"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/11/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 112.0
+offset_top = -168.0
+offset_right = 240.0
+offset_bottom = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(136, -120)
+texture = ExtResource("81_vf1ca")
+hframes = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(216, -120)
+texture = ExtResource("81_vf1ca")
+flip_h = true
+hframes = 3
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(176, -153)
+texture = ExtResource("81_vf1ca")
+hframes = 3
+frame = 1
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(176, -81)
+texture = ExtResource("81_vf1ca")
+flip_h = true
+hframes = 3
+frame = 1
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/11/Top"]
+z_index = -1
+position = Vector2(176, -96)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("82_bt1ji")
+
+[node name="Sprite2D6" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(136, -96)
+texture = ExtResource("83_wvwca")
+
+[node name="Sprite2D7" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(176, -56)
+texture = ExtResource("83_wvwca")
+
+[node name="Sprite2D8" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(216, -96)
+texture = ExtResource("83_wvwca")
+
+[node name="Sprite2D9" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(176, -130)
+texture = ExtResource("83_wvwca")
+
+[node name="Sprite2D10" type="Sprite2D" parent="CanvasGroup/11/Top"]
+
+[node name="ReznorFireball" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(152, -146)
+rotation = -1.5708
+texture = ExtResource("84_b3uya")
+
+[node name="ReznorFireball2" type="Sprite2D" parent="CanvasGroup/11/Top"]
+position = Vector2(216, -50)
+rotation = 1.5708
+texture = ExtResource("84_b3uya")
+
+[node name="TileMap" parent="CanvasGroup/11/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-131065, 65544, 2, -131064, 65544, 2, -131063, 65544, 2, -131062, 65544, 2, -131061, 65544, 2, -131060, 65544, 2, -131059, 65544, 2, -131058, 65544, 2, -196601, 65544, 1, -196600, 131080, 1, -196595, 131080, 1, -196594, 196616, 1, -196599, 131080, 1, -196598, 131080, 1, -196597, 131080, 1, -196596, 131080, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasGroup/11/Top"]
+offset_left = 112.0
+offset_top = -8.0
+offset_right = 240.0
+offset_bottom = 8.0
+texture = ExtResource("101_5rpja")
+stretch_mode = 1
+
+[node name="Label6" type="Label" parent="CanvasGroup/11/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_top = -104.0
+offset_right = 200.0
+offset_bottom = -96.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "reznor"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/11"]
+
+[node name="12" type="Node2D" parent="CanvasGroup"]
+visible = false
+position = Vector2(64, 223)
+
+[node name="Top" type="Node2D" parent="CanvasGroup/12"]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasGroup/12/Top"]
+visibility_layer = 4
+material = SubResource("CanvasItemMaterial_fpofp")
+offset_left = 112.0
+offset_top = -120.0
+offset_right = 240.0
+offset_bottom = -40.0
+
+[node name="TileMap" parent="CanvasGroup/12/Top" instance=ExtResource("3_1v6sc")]
+position = Vector2(0, -8)
+layer_0/tile_data = PackedInt32Array(-262138, 327693, 1610612736, -262137, 262157, 0, -262136, 262157, 0, -262135, 262157, 0, -262134, 196621, 1342177280, -196602, 196621, 1, -196601, 262157, 1, -196600, 262157, 1, -196599, 262157, 1, -196598, 327693, 1, -131066, 196621, 1610612736, -131065, 262157, 536870912, -131064, 262157, 536870912, -131063, 262157, 536870912, -131062, 196621, 805306368, -262131, 196621, 0, -262130, 262157, 0, -262129, 196621, 1342177280, -196595, 196621, 1, -196594, 262157, 1, -196593, 327693, 1, -131059, 196621, 1610612736, -131058, 262157, 536870912, -131057, 196621, 805306368)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/12/Top"]
+position = Vector2(184, -48)
+texture = ExtResource("101_5rpja")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasGroup/12/Top"]
+position = Vector2(200, -48)
+texture = ExtResource("101_5rpja")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasGroup/12/Top"]
+position = Vector2(229, -88)
+texture = ExtResource("85_rjvsk")
+hframes = 4
+vframes = 2
+
+[node name="Sprite2D4" type="Sprite2D" parent="CanvasGroup/12/Top"]
+position = Vector2(164, -88)
+texture = ExtResource("85_rjvsk")
+flip_h = true
+hframes = 4
+vframes = 2
+frame = 3
+
+[node name="Sprite2D5" type="Sprite2D" parent="CanvasGroup/12/Top"]
+position = Vector2(128, -88)
+texture = ExtResource("85_rjvsk")
+hframes = 4
+vframes = 2
+frame = 5
+
+[node name="Label6" type="Label" parent="CanvasGroup/12/Top"]
+visibility_layer = 4
+z_index = 1
+offset_left = 136.0
+offset_top = -104.0
+offset_right = 224.0
+offset_bottom = -96.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "mechakoopas"
+uppercase = true
+
+[node name="Bottom" type="Node2D" parent="CanvasGroup/12"]
+
+[node name="Guide" type="Sprite2D" parent="CanvasGroup"]
+visible = false
+modulate = Color(0.344076, 0.344076, 0.344076, 1)
+z_index = 1
+z_as_relative = false
+position = Vector2(240, 135)
+
+[node name="LevelBG" parent="." instance=ExtResource("27_mioa2")]
+position = Vector2(0, -8)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(176, -88)
+
+[node name="Final" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Final"]
+z_index = 6
+position = Vector2(183, -168)
+texture = ExtResource("88_053p7")
+hframes = 6
+vframes = 2
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([ExtResource("106_juend"), ExtResource("107_tlnrv"), ExtResource("88_053p7")])
+settings_value = "bowser"
+
+[node name="Sprite2D" type="Sprite2D" parent="Final/Sprite2D"]
+show_behind_parent = true
+position = Vector2(-2, 54)
+texture = ExtResource("89_vynhq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Final/Sprite2D/Sprite2D"]
+position = Vector2(0, -12)
+texture = ExtResource("90_av23m")
+vframes = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="Final/Sprite2D/Sprite2D"]
+position = Vector2(-1, 32)
+texture = ExtResource("91_lf1n0")
+vframes = 4
+
+[node name="Sprite2D2" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(109, -148)
+texture = SubResource("AtlasTexture_i7pmh")
+flip_h = true
+hframes = 5
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_i7pmh"), SubResource("AtlasTexture_dunqa")])
+settings_value = "koopalings"
+
+[node name="Sprite2D3" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(240, -148)
+texture = SubResource("AtlasTexture_hwrsk")
+hframes = 5
+frame = 3
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_o0vrs"), SubResource("AtlasTexture_hwrsk")])
+settings_value = "koopalings"
+
+[node name="Sprite2D4" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(269, -92)
+texture = ExtResource("94_pdmg0")
+hframes = 8
+vframes = 2
+frame = 5
+
+[node name="Sprite2D5" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(78, -92)
+texture = ExtResource("95_otudd")
+hframes = 8
+vframes = 2
+frame = 3
+
+[node name="Sprite2D6" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(112, -30)
+texture = ExtResource("96_5wcdb")
+flip_h = true
+hframes = 4
+vframes = 4
+
+[node name="Sprite2D8" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(240, -28)
+texture = ExtResource("97_8ixjb")
+hframes = 4
+vframes = 4
+frame = 2
+
+[node name="Sprite2D7" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(184, -16)
+texture = SubResource("AtlasTexture_optl4")
+flip_h = true
+hframes = 10
+vframes = 2
+frame = 7
+script = ExtResource("15_tn7ae")
+textures = Array[Texture2D]([SubResource("AtlasTexture_optl4"), SubResource("AtlasTexture_bdaaj")])
+settings_value = "koopalings"
+
+[node name="Sprite2D9" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(82, -68)
+texture = SubResource("AtlasTexture_3yauc")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Final"]
+z_index = 1
+position = Vector2(269, -68)
+texture = SubResource("AtlasTexture_3yauc")
+
+[node name="Label6" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 152.0
+offset_top = -72.0
+offset_right = 240.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("6_wl6o1")
+text = "bowser"
+uppercase = true
+
+[node name="Label7" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 80.0
+offset_top = -125.0
+offset_right = 144.0
+offset_bottom = -106.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "morton
+koopa jr"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label8" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 224.0
+offset_top = -125.0
+offset_right = 264.0
+offset_bottom = -112.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "roy
+koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label9" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 240.0
+offset_top = -54.0
+offset_right = 296.0
+offset_bottom = -38.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "wendy
+o.koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label10" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 232.0
+offset_top = -5.0
+offset_right = 272.0
+offset_bottom = 11.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "larry
+koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label11" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 149.0
+offset_top = 3.0
+offset_right = 221.0
+offset_bottom = 19.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "ludwig
+von koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label12" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 96.0
+offset_top = -5.0
+offset_right = 136.0
+offset_bottom = 11.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "iggy
+koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Label13" type="Label" parent="Final"]
+visibility_layer = 4
+z_index = 1
+offset_left = 72.0
+offset_top = -54.0
+offset_right = 112.0
+offset_bottom = -38.0
+theme_override_fonts/font = SubResource("FontVariation_41qtm")
+text = "lemmy
+koopa"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Animation" type="AnimationPlayer" parent="Final"]
+libraries = {
+&"": SubResource("AnimationLibrary_413hb")
+}
+
+[node name="TheEnd" parent="." instance=ExtResource("100_m82q2")]
+
+[editable path="CanvasGroup/10/Bottom/Water"]

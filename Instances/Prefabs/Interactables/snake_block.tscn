@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://i0170l24sf0p"]
+
+[ext_resource type="Texture2D" uid="uid://cev2l7hc0cglr" path="res://Assets/Sprites/Objects/SnakeBlock.png" id="1_da6lg"]
+[ext_resource type="Script" uid="uid://cg22l5oo87vfj" path="res://Scripts/LevelElements/snake_block.gd" id="1_sl4nm"]
+[ext_resource type="AudioStream" uid="uid://b50se8jyi838f" path="res://Assets/Audio/SFX/saw.wav" id="3_w5pgn"]
+[ext_resource type="Script" uid="uid://ccrvbkmrhkog6" path="res://Scripts/Classes/VariationSprite.gd" id="3_yruax"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="4_kiq7n"]
+[ext_resource type="Texture2D" uid="uid://3pgeyxvjbjjm" path="res://icon.png" id="6_07org"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ln4xm"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnejk"]
+size = Vector2(112, 2)
+
+[node name="SnakeBlock" type="Node2D"]
+script = ExtResource("1_sl4nm")
+
+[node name="Front" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Front"]
+z_index = 1
+texture = ExtResource("1_da6lg")
+script = ExtResource("3_yruax")
+textures = Array[Texture2D]([ExtResource("4_kiq7n"), ExtResource("1_da6lg")])
+settings_value = "snakeblock"
+
+[node name="Collision" type="CollisionShape2D" parent="Front"]
+visible = false
+shape = SubResource("RectangleShape2D_ln4xm")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="Front"]
+stream = ExtResource("3_w5pgn")
+bus = &"SFX"
+
+[node name="Back" type="StaticBody2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Back"]
+z_index = 1
+texture = ExtResource("1_da6lg")
+script = ExtResource("3_yruax")
+textures = Array[Texture2D]([ExtResource("4_kiq7n"), ExtResource("1_da6lg")])
+settings_value = "snakeblock"
+
+[node name="Collision" type="CollisionShape2D" parent="Back"]
+visible = false
+shape = SubResource("RectangleShape2D_ln4xm")
+
+[node name="Line2D" type="Line2D" parent="."]
+top_level = true
+width = 1.0
+default_color = Color(0.0431373, 1, 0, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_gnejk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_07org")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="spawn_blocks"]
+[connection signal="timeout" from="Timer" to="." method="remove_block"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

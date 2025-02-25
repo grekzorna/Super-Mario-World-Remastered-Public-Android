@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bpbr7svkwm37d"]
+
+[ext_resource type="Texture2D" uid="uid://b1v4v753akkc8" path="res://Assets/Sprites/AchievementIcons/46585.png" id="1_70xrh"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_hawl6"]
+
+[resource]
+script = ExtResource("1_hawl6")
+title = "Sweet Greed"
+description = "Collect all Dragon Coins in all eligible levels in Chocolate Island"
+icon = ExtResource("1_70xrh")

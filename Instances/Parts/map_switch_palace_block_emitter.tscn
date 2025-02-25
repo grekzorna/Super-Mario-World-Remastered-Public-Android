@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://vt52mhjlbsbf"]
+
+[ext_resource type="PackedScene" uid="uid://b30lrtbdc5dh2" path="res://Instances/Prefabs/MapElements/map_switch_palace_block_particle.tscn" id="1_1hxaa"]
+
+[sub_resource type="GDScript" id="GDScript_b0qxu"]
+script/source = "extends Node2D
+
+@export_enum(\"Yellow\", \"Green\", \"Blue\", \"Red\") var colour := 0
+
+static var count := 0
+
+func _ready() -> void:
+	SoundManager.play_sfx(\"res://Assets/Audio/SFX/map-menu.wav\", self)
+	count += 1
+	for i in get_children():
+		i.colour = colour
+	await get_tree().create_timer(0.3, false).timeout
+	if count < 8:
+		var self_node = load(scene_file_path).instantiate()
+		self_node.colour = colour
+		add_sibling(self_node)
+	await get_tree().create_timer(0.3 * 8).timeout
+	count = 0
+	queue_free()
+"
+
+[node name="MapSwitchPalaceBlockEmitter" type="Node2D"]
+script = SubResource("GDScript_b0qxu")
+
+[node name="MapSwitchPalaceBlockParticle" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(0, 8)
+
+[node name="MapSwitchPalaceBlockParticle2" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(6, 6)
+direction_vector = Vector2(1, 1)
+
+[node name="MapSwitchPalaceBlockParticle3" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(8, 0)
+direction_vector = Vector2(1, 0)
+
+[node name="MapSwitchPalaceBlockParticle4" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(6, -6)
+direction_vector = Vector2(1, -1)
+
+[node name="MapSwitchPalaceBlockParticle5" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(0, -8)
+direction_vector = Vector2(0, -1)
+
+[node name="MapSwitchPalaceBlockParticle6" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(-6, -6)
+direction_vector = Vector2(-1, -1)
+
+[node name="MapSwitchPalaceBlockParticle7" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(-8, 0)
+direction_vector = Vector2(-1, 0)
+
+[node name="MapSwitchPalaceBlockParticle8" parent="." instance=ExtResource("1_1hxaa")]
+position = Vector2(-6, 6)
+direction_vector = Vector2(-1, 1)

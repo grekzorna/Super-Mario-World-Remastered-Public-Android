@@ -1,0 +1,421 @@
+[gd_scene load_steps=35 format=3 uid="uid://d2vxrjxcmfur4"]
+
+[ext_resource type="Script" uid="uid://ce4ghcx5t7p6f" path="res://Scripts/LevelElements/ending_peach_cutscene.gd" id="1_hbwsx"]
+[ext_resource type="Texture2D" uid="uid://di2i5id8vbt5g" path="res://Assets/Sprites/Characters/Peach/Modern.png" id="2_63e2t"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="2_h321y"]
+[ext_resource type="Script" uid="uid://6j5n2wv3uif1" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_exs4h"]
+[ext_resource type="FontFile" uid="uid://lfpsqjjnmb8i" path="res://Assets/Sprites/UI/Font.png" id="4_g6s0y"]
+[ext_resource type="Texture2D" uid="uid://dmv3vhp47jrsm" path="res://Assets/Sprites/Characters/Peach/SNES.png" id="4_gtho1"]
+[ext_resource type="Texture2D" uid="uid://crv4topsehlnq" path="res://Assets/Sprites/Characters/Peach/GBA.png" id="5_t7mgp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3318i"]
+atlas = ExtResource("5_t7mgp")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6fru"]
+atlas = ExtResource("5_t7mgp")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5r4g"]
+atlas = ExtResource("5_t7mgp")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12nep"]
+atlas = ExtResource("5_t7mgp")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr4ek"]
+atlas = ExtResource("5_t7mgp")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ih2gy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3318i")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6fru")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5r4g")
+}],
+"loop": true,
+"name": &"Kiss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12nep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr4ek")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owc4m"]
+atlas = ExtResource("4_gtho1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoaah"]
+atlas = ExtResource("4_gtho1")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2j23"]
+atlas = ExtResource("4_gtho1")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sewk"]
+atlas = ExtResource("4_gtho1")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxv0g"]
+atlas = ExtResource("4_gtho1")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkpjd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owc4m")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoaah")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2j23")
+}],
+"loop": true,
+"name": &"Kiss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sewk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxv0g")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4q8v"]
+atlas = ExtResource("2_63e2t")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etfb5"]
+atlas = ExtResource("2_63e2t")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho2bt"]
+atlas = ExtResource("2_63e2t")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xik6"]
+atlas = ExtResource("2_63e2t")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saueh"]
+atlas = ExtResource("2_63e2t")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7fjq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4q8v")
+}],
+"loop": true,
+"name": &"Fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etfb5")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho2bt")
+}],
+"loop": true,
+"name": &"Kiss",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xik6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saueh")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y1w1i"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1t61v"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 16.0
+emission_ring_radius = 16.0
+emission_ring_inner_radius = 8.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[sub_resource type="Animation" id="Animation_6jt8h"]
+resource_name = "Fall"
+length = 1.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-48.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"Fall", &"Idle"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glimmer:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Glimmer:amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_h7jge"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glimmer:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glimmer:amount")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_toclk"]
+_data = {
+&"Fall": SubResource("Animation_6jt8h"),
+&"RESET": SubResource("Animation_h7jge")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_gme88"]
+base_font = ExtResource("4_g6s0y")
+spacing_space = -3
+
+[sub_resource type="Animation" id="Animation_ybm47"]
+resource_name = "Animated"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 124]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(10, 12.2, 15),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c73de"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqngo"]
+_data = {
+&"Animated": SubResource("Animation_ybm47"),
+&"RESET": SubResource("Animation_c73de")
+}
+
+[node name="EndingPeachCutscene" type="Node2D"]
+script = ExtResource("1_hbwsx")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_ih2gy")
+animation = &"Idle"
+autoplay = "Fall"
+script = ExtResource("3_exs4h")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_mkpjd"), SubResource("SpriteFrames_ih2gy"), SubResource("SpriteFrames_q7fjq")])
+settings_value = "peach"
+
+[node name="Glimmer" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_y1w1i")
+position = Vector2(0, -16)
+emitting = false
+texture = ExtResource("2_h321y")
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1t61v")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_toclk")
+}
+autoplay = "Fall"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EndingSpeech" type="Label" parent="CanvasLayer"]
+top_level = true
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0888889
+offset_left = -103.0
+offset_right = 104.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_fonts/font = SubResource("FontVariation_gme88")
+text = "The adventure is over.
+Mario and co, 
+the Princess, Yoshi,
+and his friends are going
+to take a vacation."
+horizontal_alignment = 3
+vertical_alignment = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/EndingSpeech"]
+libraries = {
+&"": SubResource("AnimationLibrary_hqngo")
+}

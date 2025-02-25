@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://eackggo8jief"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/dry_bones_bone.gd" id="1_kqhw6"]
+[ext_resource type="Texture2D" uid="uid://tou47qmal44a" path="res://Assets/Sprites/Enemys/DryBoneBone.png" id="2_km3w8"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_yfbar"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5obw"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ara3"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir7et"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypl4w"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ulgj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5obw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ara3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir7et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypl4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hogt"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_himps"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckvko"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6kta"]
+atlas = ExtResource("2_km3w8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i33mr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hogt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_himps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckvko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6kta")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s23e2"]
+radius = 5.0
+
+[node name="DryBonesBone" type="CharacterBody2D"]
+script = ExtResource("1_kqhw6")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7ulgj")
+autoplay = "default"
+frame_progress = 0.124197
+script = ExtResource("3_yfbar")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_i33mr"), SubResource("SpriteFrames_7ulgj")])
+settings_value = "drybones"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_s23e2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

@@ -1,0 +1,174 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccdtuen8kcq14"]
+
+[ext_resource type="Script" uid="uid://cb5y54gb3t6qg" path="res://Scripts/HeldObjects/baby_yoshi.gd" id="1_x8ni6"]
+[ext_resource type="Texture2D" uid="uid://b3etbiskxr24p" path="res://Assets/Sprites/Characters/Yoshi/BabyYoshis/Green.png" id="2_dvilb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu1pn"]
+size = Vector2(48, 10)
+
+[sub_resource type="Animation" id="Animation_2vwns"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/ObjectPoint:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/ObjectPoint:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cin7t"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5pcvg"]
+resource_name = "Swallow"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_fhe4f"]
+resource_name = "Eat"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/ObjectPoint:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, 0), Vector2(8, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/ObjectPoint:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d527h"]
+_data = {
+&"Eat": SubResource("Animation_fhe4f"),
+&"Idle": SubResource("Animation_cin7t"),
+&"RESET": SubResource("Animation_2vwns"),
+&"Swallow": SubResource("Animation_5pcvg")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmydh"]
+size = Vector2(10, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_86qau"]
+
+[node name="BabyYoshi" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_x8ni6")
+directional_sprite = true
+yoshi_can_eat = false
+kickable = false
+reward_life = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_dvilb")
+flip_h = true
+hframes = 4
+
+[node name="EatBox" type="Area2D" parent="Sprite"]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/EatBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_bu1pn")
+
+[node name="ObjectPoint" type="RemoteTransform2D" parent="Sprite"]
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d527h")
+}
+speed_scale = 2.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_gmydh")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_86qau")
+
+[connection signal="area_entered" from="Sprite/EatBox" to="." method="_on_eat_box_area_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

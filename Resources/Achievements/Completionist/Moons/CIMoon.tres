@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://2ha4vlih28ad"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_byqxp"]
+[ext_resource type="Texture2D" uid="uid://dqejntwve4l4y" path="res://Assets/Sprites/AchievementIcons/46556.png" id="1_dd86k"]
+
+[resource]
+script = ExtResource("1_byqxp")
+title = "Lunaddiction"
+description = "Collect the 3-Up Moon in Chocolate Island"
+icon = ExtResource("1_dd86k")

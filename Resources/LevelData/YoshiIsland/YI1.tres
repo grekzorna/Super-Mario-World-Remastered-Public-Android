@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://d0e5e7384ax1s"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_af6la"]
+
+[resource]
+script = ExtResource("1_af6la")
+level_title = "Yoshi's Island 1"
+level_scene_path = "res://Instances/Levels/YoshiIsland/YI1.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+has_dragon_coins = true
+dragon_coin_amount = 5
+map_point_warp = "Level1"
+map_scene_warp = "res://Instances/Levels/Maps/YoshiIsland.tscn"

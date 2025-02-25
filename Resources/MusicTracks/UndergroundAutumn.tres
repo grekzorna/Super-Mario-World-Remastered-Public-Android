@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://bxdhxtjyth7kw"]
+
+[ext_resource type="AudioStream" uid="uid://c7igsvk7n08kb" path="res://Assets/Audio/BGM/SMW/AutumnUnderground.mp3" id="1_jbyeh"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Autumn Underground"
+clip_0/stream = ExtResource("1_jbyeh")
+clip_0/auto_advance = 0
+metadata/Name = "Underground Reprise"
+metadata/Artist = "MakerK6"

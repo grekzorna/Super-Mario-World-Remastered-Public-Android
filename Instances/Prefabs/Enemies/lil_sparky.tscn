@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://be1ig7axs00s2"]
+
+[ext_resource type="Script" uid="uid://cagsjebwmuxja" path="res://Scripts/Classes/Enemies/SpikeTop.gd" id="1_u83os"]
+[ext_resource type="Texture2D" uid="uid://xqvyen7wh4hy" path="res://Assets/Sprites/Enemys/LilSparky.png" id="2_42put"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdipi"]
+size = Vector2(15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t13n1"]
+atlas = ExtResource("2_42put")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5pyu"]
+atlas = ExtResource("2_42put")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cfhq"]
+atlas = ExtResource("2_42put")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btbyc"]
+atlas = ExtResource("2_42put")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tcft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t13n1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5pyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cfhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btbyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jw0j8"]
+radius = 6.0
+
+[node name="LilSparky" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_u83os")
+move_speed = 48
+movement_direction = -1
+spiky_top = true
+can_lava_swim = true
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xdipi")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8tcft")
+autoplay = "default"
+frame_progress = 0.149891
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_jw0j8")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1.07288e-06, 5.96046e-08)
+scale = Vector2(1.1, 1.1)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

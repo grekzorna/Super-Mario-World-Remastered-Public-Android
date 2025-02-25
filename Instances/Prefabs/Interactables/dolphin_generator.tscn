@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://n2xb4hkivrw3"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/dolphin_generator.gd" id="1_2en8b"]
+
+[node name="DolphinGenerator" type="CollisionShape2D"]
+debug_color = Color(1, 0.6, 0, 0.419608)
+script = ExtResource("1_2en8b")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+visible = false
+debug_color = Color(1, 0.6, 0.701961, 0.419608)

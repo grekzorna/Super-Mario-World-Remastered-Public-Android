@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://c5koqr8eq8j14"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="2_p4tq4"]
+
+[resource]
+script = ExtResource("2_p4tq4")
+level_title = "Forest Secret Area"
+level_scene_path = "res://Instances/Levels/IllusionForest/fsa.tscn"
+has_secret_exit = false
+has_dragon_coins = true
+dragon_coin_amount = 5
+map_point_warp = "Levels/SecretArea"
+map_scene_warp = "res://Instances/Levels/Maps/IllusionForest.tscn"

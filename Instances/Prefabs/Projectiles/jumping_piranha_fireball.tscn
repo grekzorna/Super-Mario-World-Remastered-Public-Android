@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://cjrojn2a0r7c1"]
+
+[ext_resource type="Script" uid="uid://611cftnenaqw" path="res://Scripts/Projectile/jumping_piranha_fireball.gd" id="1_wm11c"]
+[ext_resource type="Texture2D" uid="uid://dnkq23lwhn0dq" path="res://Assets/Sprites/Items/DefaultFireball.png" id="2_hl38x"]
+[ext_resource type="Script" uid="uid://6j5n2wv3uif1" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_y0frk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47lhi"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3utn"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(16, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhivj"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(32, 8, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1spw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47lhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3utn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhivj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tb6m"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etdwa"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbvi8"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsmey"]
+atlas = ExtResource("2_hl38x")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jmiec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tb6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etdwa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbvi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsmey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apgxp"]
+radius = 2.0
+
+[node name="JumpingPiranhaFireball" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_wm11c")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v1spw")
+autoplay = "default"
+frame_progress = 0.635957
+script = ExtResource("3_y0frk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_jmiec"), SubResource("SpriteFrames_v1spw")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_apgxp")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

@@ -1,0 +1,144 @@
+[gd_scene load_steps=12 format=3 uid="uid://cg3ndwo0s7wnf"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/Bosses/BallMan.gd" id="1_64u6b"]
+[ext_resource type="Texture2D" uid="uid://be2waf8cvjrpv" path="res://Assets/Sprites/Characters/Bosses/IggyKoopa.png" id="2_h6xsn"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_7qr4n"]
+[ext_resource type="Resource" uid="uid://cj37emlm4nqyj" path="res://Resources/Achievements/Progression/Castle1.tres" id="4_xbbus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5r10"]
+size = Vector2(11, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmi6t"]
+size = Vector2(20, 12)
+
+[sub_resource type="Animation" id="Animation_bfuq4"]
+resource_name = "Ball"
+length = 1.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.8, 1, 1.15, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 8, 9, 10, 11, 12, 9, 10, 8, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_ball"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tre08"]
+resource_name = "Hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 4, 5, 6, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_onb0h"]
+resource_name = "Idle"
+length = 0.15
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_265db"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jiwgy"]
+_data = {
+"Ball": SubResource("Animation_bfuq4"),
+"Hurt": SubResource("Animation_tre08"),
+"Idle": SubResource("Animation_onb0h"),
+"RESET": SubResource("Animation_265db")
+}
+
+[node name="Iggy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+floor_max_angle = 1.55334
+floor_snap_length = 8.0
+platform_on_leave = 2
+platform_floor_layers = 4294901764
+script = ExtResource("1_64u6b")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_b5r10")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2, -6)
+shape = SubResource("RectangleShape2D_rmi6t")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("3_7qr4n")
+achievement = ExtResource("4_xbbus")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_h6xsn")
+hframes = 4
+vframes = 4
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jiwgy")
+}
+autoplay = "Idle"
+
+[connection signal="defeated" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

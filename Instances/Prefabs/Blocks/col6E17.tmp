@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc8q1aphapb0g"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/coloured_switch_block.gd" id="1_i4ggs"]
+[ext_resource type="Texture2D" uid="uid://cq6t1omqk30bt" path="res://Assets/Sprites/Bonus/ColouredSwitchBlocks.png" id="2_qhqxn"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="3_u75hn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kkkm"]
+size = Vector2(16, 16)
+
+[node name="ColouredSwitchBlock" type="StaticBody2D" node_paths=PackedStringArray("visuals")]
+script = ExtResource("1_i4ggs")
+enable_head_hits = true
+enable_side_hits = true
+enable_top_hits = true
+visuals = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_qhqxn")
+hframes = 2
+vframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4kkkm")
+
+[node name="ItemDispenser" parent="." instance=ExtResource("3_u75hn")]

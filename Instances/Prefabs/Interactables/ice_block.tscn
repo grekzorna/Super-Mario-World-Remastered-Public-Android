@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://bgilswu2pl8kf"]
+
+[ext_resource type="Script" uid="uid://cg3q7ice3bom8" path="res://Scripts/Interactables/ice_block.gd" id="1_iogd5"]
+[ext_resource type="Texture2D" uid="uid://o2hbgrbgbb57" path="res://Assets/Sprites/Objects/IceBlocks/1.png" id="3_lur8m"]
+[ext_resource type="Texture2D" uid="uid://cebir1f8440yb" path="res://Assets/Sprites/Objects/IcePlayerCrack.png" id="3_nvjxn"]
+[ext_resource type="Texture2D" uid="uid://c57esqma87fd" path="res://Assets/Sprites/Objects/IceBlocks/2.png" id="4_nhjuu"]
+[ext_resource type="Texture2D" uid="uid://cmjkpge8bhsfx" path="res://Assets/Sprites/Objects/IceBlocks/3.png" id="5_op83d"]
+[ext_resource type="Texture2D" uid="uid://3exctlomeq12" path="res://Assets/Sprites/Objects/IceBlocks/4.png" id="6_um5ds"]
+[ext_resource type="Script" uid="uid://cib3wkgoiw57u" path="res://Scripts/Classes/water_bouyancy.gd" id="7_mpgn4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w07ns"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55brv"]
+resource_local_to_scene = true
+size = Vector2(16, 3)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_y5hv4"]
+frames = 4
+speed_scale = 10.0
+frame_0/texture = ExtResource("3_lur8m")
+frame_0/duration = 10.0
+frame_1/texture = ExtResource("4_nhjuu")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("5_op83d")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("6_um5ds")
+frame_3/duration = 1.0
+
+[node name="IceBlock" type="CharacterBody2D"]
+collision_layer = 133
+collision_mask = 148
+floor_constant_speed = true
+floor_max_angle = 1.309
+platform_floor_layers = 0
+script = ExtResource("1_iogd5")
+ground_friction = 0
+destructable = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_w07ns")
+
+[node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
+
+[node name="Crack" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.584314)
+z_index = 1
+position = Vector2(0, -16)
+texture = ExtResource("3_nvjxn")
+hframes = 3
+
+[node name="PlayerJumpHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerJumpHitbox"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_55brv")
+debug_color = Color(0.956863, 0.6, 0.701961, 0.419608)
+
+[node name="Visuals" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+texture = SubResource("AnimatedTexture_y5hv4")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("7_mpgn4")
+hitbox = NodePath("../PlayerJumpHitbox")
+metadata/_custom_type_script = ExtResource("7_mpgn4")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="PlayerJumpHitbox" to="." method="_on_player_jump_hitbox_area_entered"]

@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamInteractive" format=3 uid="uid://qp7mw5m1n0gl"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Options Menu"
+clip_0/auto_advance = 0
+metadata/Name = "Mario Kart DS - Settings Theme"
+metadata/Artist = "Fyre150"

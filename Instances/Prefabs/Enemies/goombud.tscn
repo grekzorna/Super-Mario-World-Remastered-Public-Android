@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtjfc8ut1mlae"]
+
+[ext_resource type="Script" uid="uid://omdpdytk6u0y" path="res://Scripts/Classes/Enemies/goombud.gd" id="1_65tcm"]
+[ext_resource type="Texture2D" uid="uid://y8uoxqn0l0tu" path="res://Assets/Sprites/Enemys/Goombud.png" id="2_le63k"]
+[ext_resource type="Script" path="res://Scripts/Classes/ledge_detection.gd" id="3_le63k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdl6y"]
+atlas = ExtResource("2_le63k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axxud"]
+atlas = ExtResource("2_le63k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljwto"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdl6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axxud")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_me86s"]
+size = Vector2(9, 10.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnroe"]
+size = Vector2(12, 12)
+
+[node name="Goombud" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 8.0
+script = ExtResource("1_65tcm")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_ljwto")
+autoplay = "default"
+frame_progress = 0.20533
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5.25)
+shape = SubResource("RectangleShape2D_me86s")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_fnroe")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-2.84217e-14, -16)
+scale = Vector2(2.4, 1.7)
+
+[node name="LedgeDetectionCast" type="RayCast2D" parent="."]
+position = Vector2(-7, -8)
+target_position = Vector2(0, 16)
+script = ExtResource("3_le63k")
+ray_length = 16
+metadata/_custom_type_script = ExtResource("3_le63k")

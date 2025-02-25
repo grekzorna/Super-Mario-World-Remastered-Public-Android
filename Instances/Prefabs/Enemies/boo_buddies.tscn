@@ -1,0 +1,216 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5wysbplj7id8"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/boo_buddies.gd" id="1_gb1gw"]
+[ext_resource type="Texture2D" uid="uid://vodvfu57o7av" path="res://Assets/Sprites/Enemys/Boos.png" id="1_t7xka"]
+
+[sub_resource type="Animation" id="Animation_mdnlp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_lk6sm"]
+resource_name = "Rotate"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_synpj"]
+_data = {
+"RESET": SubResource("Animation_mdnlp"),
+"Rotate": SubResource("Animation_lk6sm")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fmvf"]
+atlas = ExtResource("1_t7xka")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1exsc"]
+atlas = ExtResource("1_t7xka")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yp3n"]
+atlas = ExtResource("1_t7xka")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvjpp"]
+atlas = ExtResource("1_t7xka")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kkbyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fmvf")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1exsc")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yp3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvjpp")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o4wpv"]
+radius = 5.09902
+
+[node name="BooBuddies" type="Node2D"]
+script = ExtResource("1_gb1gw")
+
+[node name="RotationJoint" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationJoint"]
+libraries = {
+"": SubResource("AnimationLibrary_synpj")
+}
+autoplay = "Rotate"
+speed_scale = 0.6
+
+[node name="Boos" type="Node" parent="."]
+
+[node name="Boo1" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.0779534
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo1"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo1/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo2" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo2"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo2/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo3" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo3"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo3/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo4" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo4"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo4/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo5" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo5"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo5/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo6" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo6"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo6/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo7" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo7"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo7/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo8" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo8"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo8/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo9" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo9"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo9/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[node name="Boo10" type="AnimatedSprite2D" parent="Boos"]
+sprite_frames = SubResource("SpriteFrames_kkbyy")
+animation = &"3"
+frame_progress = 0.218709
+
+[node name="Hitbox" type="Area2D" parent="Boos/Boo10"]
+
+[node name="Shape" type="CollisionShape2D" parent="Boos/Boo10/Hitbox"]
+shape = SubResource("CircleShape2D_o4wpv")
+
+[connection signal="area_entered" from="Boos/Boo1/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo2/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo3/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo4/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo5/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo6/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo7/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo8/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo9/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Boos/Boo10/Hitbox" to="." method="_on_hitbox_area_entered"]

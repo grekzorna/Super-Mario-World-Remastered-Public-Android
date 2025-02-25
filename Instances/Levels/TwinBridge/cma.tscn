@@ -1,0 +1,113 @@
+[gd_scene load_steps=18 format=3 uid="uid://diif3it3cyxce"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_gff4p"]
+[ext_resource type="AudioStream" uid="uid://cwraguncjdkmy" path="res://Resources/MusicTracks/Overworld.tres" id="2_pluik"]
+[ext_resource type="AudioStream" uid="uid://3hfyhq451bma" path="res://Resources/MusicTracks/OverworldAutumn.tres" id="3_81q8g"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="3_fxquu"]
+[ext_resource type="Texture2D" uid="uid://7kikbr4s27w5" path="res://Assets/Sprites/Backgrounds/Overworld/Rocks/Rock7.png" id="5_6s7vb"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="6_nhbvk"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="8_oy7x4"]
+[ext_resource type="Texture2D" uid="uid://cia2lhl6b16ys" path="res://Assets/LevelGuides/Level 0C1.png" id="11_703eo"]
+[ext_resource type="PackedScene" uid="uid://dwcgvaei6jt52" path="res://Instances/Prefabs/Items/peach_coin.tscn" id="11_qdkt2"]
+[ext_resource type="PackedScene" uid="uid://bw8btch38g6bx" path="res://Instances/Prefabs/Interactables/water.tscn" id="12_67c6k"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="13_dh6cf"]
+[ext_resource type="PackedScene" uid="uid://hn3b0qewuae3" path="res://Instances/Prefabs/Enemies/porcupuffer.tscn" id="13_umv2a"]
+[ext_resource type="Texture2D" uid="uid://b15ff2wk2mfia" path="res://Assets/Sprites/Backgrounds/Overworld/Rocks/RocksAutumn.png" id="14_s01kd"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="14_w06pg"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iynf3"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8nfoh"]
+resource_local_to_scene = true
+size = Vector2(1024, 64)
+
+[node name="CMA" type="Node"]
+script = ExtResource("1_gff4p")
+level_music = ExtResource("2_pluik")
+autumn_music = ExtResource("3_81q8g")
+camera_left_end_position = 960
+
+[node name="LevelBG" parent="." instance=ExtResource("3_fxquu")]
+main_texture = ExtResource("5_6s7vb")
+
+[node name="Player" parent="." instance=ExtResource("6_nhbvk")]
+material = SubResource("ShaderMaterial_iynf3")
+position = Vector2(-16, -32)
+
+[node name="TileMap" parent="." instance=ExtResource("8_oy7x4")]
+layer_0/tile_data = PackedInt32Array(-65540, 10, 2, -65539, 65546, 2, -131069, 65546, 2, -131068, 131082, 2, -65538, 65546, 2, -65537, 65546, 2, -131072, 65546, 2, -131071, 65546, 2, -131070, 65546, 2, -3, 196618, 0, -2, 262154, 0, 65533, 196618, 0, 65534, 262154, 0, 131069, 196618, 0, 131070, 262154, 0, 196605, 196618, 0, 196606, 262154, 0, -65534, 262154, 0, 2, 262154, 0, 65538, 262154, 0, 131074, 262154, 0, -65533, 327690, 0, 3, 327690, 0, 65539, 327690, 0, 131075, 327690, 0, -1, 262154, 0, 65535, 262154, 0, 131071, 262154, 0, 196607, 262154, 0, -65536, 262154, 0, 0, 262154, 0, 65536, 262154, 0, 131072, 262154, 0, -65535, 262154, 0, 1, 262154, 0, 65537, 262154, 0, 131073, 262154, 0, -327681, 917509, 0, -393216, 983045, 0, -1310675, 393221, 0, -1310674, 458757, 0, -1572819, 262149, 1, -1572818, 327685, 1, -1507283, 262149, 1, -1507282, 327685, 1, -1441747, 262149, 1, -1441746, 327685, 1, -1376211, 262149, 1, -1376210, 327685, 1, -1507329, 786437, 1, -1572864, 851973, 1, -1441793, 786437, 1, -1507328, 851973, 1, -1376257, 786437, 1, -1441792, 851973, 1, -1310721, 786437, 1, -1376256, 851973, 1, -1245185, 786437, 1, -1310720, 851973, 1, -1179649, 786437, 1, -1245184, 851973, 1, -1114113, 786437, 1, -1179648, 851973, 1, -1048577, 786437, 1, -1114112, 851973, 1, -983041, 786437, 1, -1048576, 851973, 1, -917505, 786437, 1, -983040, 851973, 1, -851969, 786437, 1, -917504, 851973, 1, -786433, 786437, 1, -851968, 851973, 1, -720897, 786437, 1, -786432, 851973, 1, -655361, 786437, 1, -720896, 851973, 1, -589825, 786437, 1, -655360, 851973, 1, -524289, 786437, 1, -589824, 851973, 1, -458753, 786437, 1, -524288, 851973, 1, -393217, 786437, 1, -458752, 851973, 1, -262138, 15, 196608, -262137, 15, 196608, -196597, 15, 196608, -196596, 15, 196608, -262128, 15, 196608, -262127, 15, 196608, -196587, 15, 196608, -196586, 15, 196608, -262118, 15, 196608, -262117, 15, 196608, -196577, 15, 196608, -196576, 15, 196608, -262108, 15, 196608, -262107, 15, 196608)
+
+[node name="LevelGuide" type="Sprite2D" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+z_index = -10
+position = Vector2(-64, -384)
+texture = ExtResource("11_703eo")
+centered = false
+
+[node name="Water" parent="." instance=ExtResource("12_67c6k")]
+position = Vector2(448, 32)
+shape = SubResource("RectangleShape2D_8nfoh")
+current_speed = Vector2(-64, 0)
+
+[node name="Porcupuffer" parent="." instance=ExtResource("13_umv2a")]
+position = Vector2(216, 8)
+
+[node name="Porcupuffer2" parent="." instance=ExtResource("13_umv2a")]
+position = Vector2(488, 8)
+
+[node name="PipeArea" parent="." instance=ExtResource("14_w06pg")]
+position = Vector2(736, -304)
+enter_direction = "Up"
+exit_only = true
+
+[node name="PipeArea2" parent="." instance=ExtResource("14_w06pg")]
+position = Vector2(0, -80)
+enter_direction = "Up"
+level_scene = "res://Instances/Levels/TwinBridge/cm.tscn"
+pipe_id = 1
+
+[node name="PeachCoin" parent="." instance=ExtResource("11_qdkt2")]
+position = Vector2(864, -40)
+
+[node name="LevelBG2" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("13_dh6cf")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("14_s01kd")
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)

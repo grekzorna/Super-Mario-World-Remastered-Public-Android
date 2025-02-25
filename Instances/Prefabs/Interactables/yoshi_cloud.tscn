@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://ca8her5utqkwc"]
+
+[ext_resource type="Script" uid="uid://dp0eqb6j3mhke" path="res://Scripts/Interactables/yoshi_cloud.gd" id="1_aqacq"]
+[ext_resource type="Texture2D" uid="uid://b8fxca8extedr" path="res://Assets/Sprites/Objects/YoshiCloud.png" id="2_605un"]
+[ext_resource type="Script" uid="uid://bn5kyth8eyxbb" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_byggk"]
+[ext_resource type="Resource" uid="uid://5uwmw7cl0kfi" path="res://Resources/Achievements/General/YoshiEggLay.tres" id="4_fgdam"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn6fn"]
+atlas = ExtResource("2_605un")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtqbj"]
+atlas = ExtResource("2_605un")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8mde"]
+atlas = ExtResource("2_605un")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld4ii"]
+atlas = ExtResource("2_605un")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_41eiw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn6fn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtqbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8mde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld4ii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="YoshiCloud" type="Node2D"]
+script = ExtResource("1_aqacq")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_41eiw")
+autoplay = "default"
+frame_progress = 0.255293
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("3_byggk")
+achievement = ExtResource("4_fgdam")
+
+[connection signal="life_dispensed" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="timeout" from="Timer" to="." method="summon_coin"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://coe6rxpfl4if8"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/online_player_display.gd" id="1_7a8u7"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_uuvnx"]
+[ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="3_e31cf"]
+
+[node name="OnlinePlayerDisplay" type="Node2D"]
+process_mode = 3
+visible = false
+script = ExtResource("1_7a8u7")
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = -72.0
+offset_top = -48.0
+offset_right = 72.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("2_uuvnx")
+text = "username"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerSpriteDisplay" parent="." instance=ExtResource("3_e31cf")]
+modulate = Color(1, 1, 1, 0.666667)
+animating = true

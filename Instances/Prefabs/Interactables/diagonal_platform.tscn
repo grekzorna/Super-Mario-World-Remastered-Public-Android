@@ -1,0 +1,128 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxer6g57kgdaj"]
+
+[ext_resource type="Texture2D" uid="uid://dryi8o3h7c0of" path="res://Assets/Sprites/Objects/DiagonalPlatform.png" id="1_f172h"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="2_h1iut"]
+[ext_resource type="Texture2D" uid="uid://8yeo6diowfm3" path="res://Assets/Sprites/Objects/AutumnDiagonalPlatform.png" id="3_amt1s"]
+
+[sub_resource type="GDScript" id="GDScript_t1ut7"]
+script/source = "extends Node2D
+
+@export_enum(\"Left\", \"Right\") var direction := \"Right\"
+
+func _ready() -> void:
+	$Animation.play(direction)
+"
+
+[sub_resource type="Animation" id="Animation_ifmie"]
+resource_name = "Left"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, -64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Platform:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_oybfb"]
+resource_name = "Right"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-64, 64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Platform:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_af834"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Platform:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2w0cx"]
+_data = {
+&"RESET": SubResource("Animation_af834"),
+&"Left": SubResource("Animation_ifmie"),
+&"Right": SubResource("Animation_oybfb")
+}
+
+[node name="DiagonalPlatform" type="Node2D"]
+script = SubResource("GDScript_t1ut7")
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+sync_to_physics = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platform"]
+polygon = PackedVector2Array(-16, 16, 16, -16, 16, 16)
+one_way_collision = true
+
+[node name="Sprite" type="Sprite2D" parent="Platform"]
+texture = ExtResource("1_f172h")
+script = ExtResource("2_h1iut")
+autumn_texture = ExtResource("3_amt1s")
+overhaul_only = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2w0cx")
+}
+autoplay = "Left"

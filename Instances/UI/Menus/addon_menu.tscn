@@ -1,0 +1,270 @@
+[gd_scene load_steps=13 format=3 uid="uid://bnbbv5ih1pk8k"]
+
+[ext_resource type="Texture2D" uid="uid://dhhr68mhkpj4q" path="res://Assets/Sprites/UI/PlayPanel.png" id="1_s787k"]
+[ext_resource type="Script" path="res://Scripts/UI/addons_menu.gd" id="1_ucsa6"]
+[ext_resource type="Texture2D" uid="uid://bgoq2m25h31w0" path="res://Assets/Sprites/UI/QuitBG.png" id="2_hm6d7"]
+[ext_resource type="Texture2D" uid="uid://c8f637ol3ffnw" path="res://Assets/Sprites/UI/QuitPanel.png" id="3_c5wqe"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="4_lkk5f"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="5_utg2y"]
+[ext_resource type="AudioStream" uid="uid://btg4lpxa0vjwj" path="res://Assets/Audio/BGM/SMW/Athletic.mp3" id="6_23or8"]
+
+[sub_resource type="Shader" id="Shader_la184"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jivwq"]
+shader = SubResource("Shader_la184")
+shader_parameter/motion = Vector2(-8, -8)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="Animation" id="Animation_0xsn7"]
+resource_name = "Appear"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 3.8, 4),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(337, 271), Vector2(337, 234), Vector2(337, 234), Vector2(337, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_dxxlb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(337, 271)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gldib"]
+_data = {
+"Appear": SubResource("Animation_0xsn7"),
+"RESET": SubResource("Animation_dxxlb")
+}
+
+[node name="AddonsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ucsa6")
+
+[node name="Panel" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 272.0
+texture = ExtResource("1_s787k")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="BG" type="TextureRect" parent="Panel"]
+material = SubResource("ShaderMaterial_jivwq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hm6d7")
+stretch_mode = 1
+
+[node name="Header" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 16.0
+texture = ExtResource("3_c5wqe")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("4_lkk5f")
+text = " Addons"
+vertical_alignment = 1
+uppercase = true
+
+[node name="ListContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+scroll_vertical_custom_step = 16.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="ListContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="ListContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 464.0
+offset_bottom = 216.0
+
+[node name="NoLevelError" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = -16.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lkk5f")
+text = "Currently, addons are not supported. Godot's way of loading in custom pck files, is completely broken. so this menu is basically useless until that issue gets fixed.
+
+Super sorry.
+
+If you really really want to play with mods, the best way to do so is through an xdelta patch or similar.
+
+thanks for the interest!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+
+[node name="RefreshNotification" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 337.0
+offset_top = 271.0
+offset_right = 480.0
+offset_bottom = 309.0
+texture = ExtResource("3_c5wqe")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Text" type="Label" parent="RefreshNotification"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -4.0
+offset_right = 60.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lkk5f")
+text = "List Refreshed!"
+autowrap_mode = 3
+uppercase = true
+
+[node name="Animation" type="AnimationPlayer" parent="RefreshNotification"]
+libraries = {
+"": SubResource("AnimationLibrary_gldib")
+}
+
+[node name="Arrow" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 24.0
+offset_right = 248.0
+offset_bottom = 24.0
+use_top_left = true
+
+[node name="Texture" type="TextureRect" parent="Arrow"]
+layout_mode = 2
+texture = ExtResource("5_utg2y")
+
+[node name="LoadingText" type="Label" parent="."]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -4.0
+offset_right = 116.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lkk5f")
+text = "Loading Level, Please wait..."
+uppercase = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_23or8")
+volume_db = -15.0
+autoplay = true
+bus = &"Music"

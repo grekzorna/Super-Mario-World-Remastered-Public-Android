@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv6xjedrokkrh"]
+
+[ext_resource type="Texture2D" uid="uid://eu46060ono18" path="res://Assets/Sprites/Particles/SkidDust.png" id="1_7gr4t"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n1va1"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_brcuu"]
+particle_flag_disable_z = true
+initial_velocity_max = 8.0
+gravity = Vector3(0, -64, 0)
+damping_max = 6.944
+anim_speed_min = 0.5
+anim_speed_max = 1.0
+
+[node name="SteamParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_n1va1")
+amount = 6
+texture = ExtResource("1_7gr4t")
+process_material = SubResource("ParticleProcessMaterial_brcuu")

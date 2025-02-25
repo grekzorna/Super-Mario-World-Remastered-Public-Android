@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://73to0m1f3iu"]
+
+[ext_resource type="Script" path="res://Scripts/UI/input_binding_node.gd" id="1_21sk6"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_eacoy"]
+[ext_resource type="Texture2D" uid="uid://bcangd8r1ey2a" path="res://Assets/Sprites/UI/InputButtons/Xbox/AButton.png" id="3_7e3vq"]
+[ext_resource type="Texture2D" uid="uid://da8l451dfxjkg" path="res://Assets/Sprites/UI/SliderTab.png" id="4_gaj8e"]
+
+[node name="OptionNode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 104.0
+offset_bottom = 16.0
+script = ExtResource("1_21sk6")
+input_action = "spin_jump"
+
+[node name="Container" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 216.0
+offset_bottom = 8.0
+
+[node name="Title" type="Label" parent="Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eacoy")
+text = "JUmp:"
+uppercase = true
+
+[node name="ControllerButton" type="TextureRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("3_7e3vq")
+
+[node name="Border" type="NinePatchRect" parent="Container"]
+layout_mode = 2
+texture = ExtResource("4_gaj8e")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_eacoy")
+uppercase = true

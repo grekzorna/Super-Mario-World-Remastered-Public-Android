@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://ces5m3jubfs86"]
+
+[sub_resource type="GDScript" id="GDScript_8dw3h"]
+script/source = "extends Node
+
+var can_skip := true
+
+func _ready() -> void:
+	await get_tree().create_timer(10, false).timeout
+	TransitionManager.transition_to_menu(\"res://Instances/UI/Menus/disclaimer.tscn\", self)
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed(\"ui_accept\") and can_skip:
+		can_skip = false
+		TransitionManager.transition_to_menu(\"res://Instances/UI/Menus/disclaimer.tscn\", self)
+"
+
+[sub_resource type="Animation" id="Animation_n8xe3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fpylr"]
+resource_name = "new_animation"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2okap"]
+_data = {
+&"RESET": SubResource("Animation_n8xe3"),
+&"new_animation": SubResource("Animation_fpylr")
+}
+
+[node name="Node" type="Node"]
+script = SubResource("GDScript_8dw3h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = 0.0333333
+anchor_top = 0.0592593
+anchor_right = 0.966667
+anchor_bottom = 0.948148
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "What you are playing is a beta build of the game, intended for testing and debugging. Things WILL change or be removed.
+
+You WILL find bugs. Please report them on the discord server, or the github page, as soon as you encounter them, and can reliably reproduce them.
+
+Please do not distribute these testing builds.
+
+Thanks <3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2okap")
+}
+autoplay = "new_animation"

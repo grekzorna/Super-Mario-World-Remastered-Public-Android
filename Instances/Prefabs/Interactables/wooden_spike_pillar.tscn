@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4qc0wkruubu8"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/wooden_spike_pillar.gd" id="1_1rqhx"]
+[ext_resource type="Texture2D" uid="uid://bncjiaeo6lgs1" path="res://Assets/Sprites/Objects/PointSpikePillar.png" id="2_opt2v"]
+
+[sub_resource type="GDScript" id="GDScript_w71lm"]
+script/source = "extends Node2D
+
+@export var invert := false
+
+func _ready() -> void:
+	if invert:
+		global_position.y += 48
+		$AnimationPlayer.play(\"new_animation_2\")
+	else:
+		$AnimationPlayer.play(\"new_animation\")
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xru6s"]
+size = Vector2(16, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5o1r"]
+radius = 3.16228
+
+[sub_resource type="Animation" id="Animation_qiegj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ufoy2"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 0.7, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 48), Vector2(0, 48), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hvhjg"]
+resource_name = "new_animation_2"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 0.7, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 48), Vector2(0, 0), Vector2(0, 0), Vector2(0, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jf3rm"]
+_data = {
+&"RESET": SubResource("Animation_qiegj"),
+&"new_animation": SubResource("Animation_ufoy2"),
+&"new_animation_2": SubResource("Animation_hvhjg")
+}
+
+[node name="WoodenSpikePillar" type="Node2D"]
+z_index = -4
+script = SubResource("GDScript_w71lm")
+
+[node name="WoodenSpikePillar" type="StaticBody2D" parent="."]
+collision_layer = 5
+script = ExtResource("1_1rqhx")
+
+[node name="Sprite" type="Sprite2D" parent="WoodenSpikePillar"]
+texture = ExtResource("2_opt2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WoodenSpikePillar"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_xru6s")
+
+[node name="Area2D" type="Area2D" parent="WoodenSpikePillar"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WoodenSpikePillar/Area2D"]
+position = Vector2(0, 37)
+shape = SubResource("CircleShape2D_j5o1r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../WoodenSpikePillar")
+libraries = {
+&"": SubResource("AnimationLibrary_jf3rm")
+}
+
+[connection signal="area_entered" from="WoodenSpikePillar/Area2D" to="WoodenSpikePillar" method="_on_hitbox_area_entered"]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8miwffol82xe"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/airshipbg.gd" id="1_5uf7t"]
+[ext_resource type="Texture2D" uid="uid://c88p36h8locqo" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds.png" id="2_tnxes"]
+[ext_resource type="Texture2D" uid="uid://buvcn5uxos8br" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds2.png" id="3_pwpw3"]
+
+[sub_resource type="Environment" id="Environment_nwuvy"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.91
+glow_strength = 1.02
+glow_bloom = 0.03
+glow_blend_mode = 0
+adjustment_enabled = true
+
+[node name="AirshipBG" type="Node2D"]
+z_index = -20
+script = ExtResource("1_5uf7t")
+
+[node name="Clouds" type="Parallax2D" parent="."]
+modulate = Color(0.376471, 0.376471, 0.545098, 1)
+scroll_scale = Vector2(0.5, 1)
+scroll_offset = Vector2(0, -384)
+repeat_size = Vector2(512, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Clouds"]
+offset_right = 512.0
+offset_bottom = 432.0
+color = Color(0.462291, 0.462291, 0.462291, 1)
+
+[node name="Cloud" type="Sprite2D" parent="Clouds"]
+texture = ExtResource("2_tnxes")
+centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+top_level = true
+z_as_relative = false
+position = Vector2(-24, -456)
+color = Color(0.717647, 0.721569, 0.847059, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nwuvy")
+
+[node name="CloudsFG" type="Node2D" parent="."]
+z_index = 10
+
+[node name="ParallaxLayer" type="Parallax2D" parent="CloudsFG"]
+scroll_scale = Vector2(1.25, 1)
+scroll_offset = Vector2(0, -305)
+repeat_size = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="CloudsFG/ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.392157)
+texture = ExtResource("3_pwpw3")
+centered = false

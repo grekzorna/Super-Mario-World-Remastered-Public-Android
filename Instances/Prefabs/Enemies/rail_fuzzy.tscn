@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://64qxm11ocqr2"]
+
+[ext_resource type="PackedScene" uid="uid://c8mn8iem7ys5m" path="res://Instances/Prefabs/Interactables/rail_follower.tscn" id="1_m0bjr"]
+[ext_resource type="PackedScene" uid="uid://dsb1qnbspjwp7" path="res://Instances/Prefabs/Enemies/fuzzy.tscn" id="2_27hln"]
+
+[node name="RailFuzzy" instance=ExtResource("1_m0bjr")]
+collision_layer = 0
+move_speed = 64
+
+[node name="Fuzzy" parent="." index="2" instance=ExtResource("2_27hln")]

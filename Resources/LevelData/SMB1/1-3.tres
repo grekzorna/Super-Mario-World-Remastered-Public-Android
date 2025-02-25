@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://cgwy1xhjpavm0"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_y0u64"]
+
+[resource]
+script = ExtResource("1_y0u64")
+level_title = "1-3"
+level_scene_path = "res://Instances/Levels/SMBW1/1_3.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = false
+dragon_coin_amount = 5
+counts_as_exit = true
+map_point_warp = ""
+map_scene_warp = ""

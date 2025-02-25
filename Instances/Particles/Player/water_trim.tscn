@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cou3wnl6ujk74"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/CustomParticle.gd" id="1_etrgc"]
+[ext_resource type="Texture2D" uid="uid://d1jnk6ch46es3" path="res://Assets/Sprites/Particles/WaterTrim.png" id="2_4vius"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bi3qc"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_48ep6"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="WaterSplash" type="Node2D"]
+script = ExtResource("1_etrgc")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bi3qc")
+position = Vector2(0, -8)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_48ep6")
+texture = ExtResource("2_4vius")
+lifetime = 0.4

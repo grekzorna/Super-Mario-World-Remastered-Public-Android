@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=13 format=3 uid="uid://bbbdicik3lu1r"]
+
+[ext_resource type="Texture2D" uid="uid://bgd457gedcuns" path="res://Assets/Sprites/Characters/Toad/HUDIcon.png" id="1_cufvb"]
+[ext_resource type="Texture2D" uid="uid://b1fg7bn181afk" path="res://Assets/Sprites/Characters/Toad/HUDTitle.png" id="2_y31ex"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="3_odo35"]
+[ext_resource type="Texture2D" uid="uid://cdu26cn1b0da4" path="res://Assets/Sprites/Characters/Toad/Ending.png" id="4_0mgs7"]
+[ext_resource type="Texture2D" uid="uid://dgbo3t71wv3bn" path="res://Assets/Sprites/Characters/Toad/FireworkMask.png" id="4_gx6mu"]
+[ext_resource type="SpriteFrames" uid="uid://6ef0hopfef6p" path="res://Resources/PlayerSpriteFrames/Toad/Map.tres" id="6_34ac1"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/CharacterResource.gd" id="6_e7w7q"]
+[ext_resource type="Texture2D" uid="uid://dapju4fhv02s3" path="res://Assets/Sprites/Characters/Toad/Big.png" id="7_8fgd8"]
+[ext_resource type="Resource" uid="uid://ceqaqufmindu" path="res://Resources/SoundLibraries/Default.tres" id="9_fksu1"]
+[ext_resource type="AudioStream" uid="uid://c5t4v2hmyvxw1" path="res://Assets/Audio/SFX/coin.wav" id="9_uwyqb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hefku"]
+atlas = ExtResource("7_8fgd8")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0fi0"]
+atlas = ExtResource("7_8fgd8")
+region = Rect2(224, 64, 32, 32)
+
+[resource]
+script = ExtResource("6_e7w7q")
+character_name = "Toad"
+base_character_scene = ExtResource("3_odo35")
+char_colour = Color(0.25098, 0.407843, 0.784314, 1)
+custom_properties = {
+"PhysicsStyle": "Toad"
+}
+sound_library = ExtResource("9_fksu1")
+character_id = 2
+power_sprite_extra_offsets = {
+"Cape": Vector2(0, 0),
+"PropellerBlade": Vector2(1, 1)
+}
+power_sprite_extra_replaces = {}
+power_state_script_replace = {}
+HUDTitle = ExtResource("2_y31ex")
+HUDLetter = ExtResource("1_cufvb")
+ending_portrait = ExtResource("4_0mgs7")
+ending_firework_mask = ExtResource("4_gx6mu")
+map_sprites = ExtResource("6_34ac1")
+selection_idle = SubResource("AtlasTexture_hefku")
+selection_selected = SubResource("AtlasTexture_o0fi0")
+selection_sfx = ExtResource("9_uwyqb")

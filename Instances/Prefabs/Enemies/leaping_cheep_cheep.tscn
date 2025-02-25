@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccevuf40fjqs8"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/leaping_cheep_cheep.gd" id="1_c6hvu"]
+[ext_resource type="Texture2D" uid="uid://b85m3u16gre6x" path="res://Assets/Sprites/Enemys/CheepCheep.png" id="2_ntrue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcqvx"]
+atlas = ExtResource("2_ntrue")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftugu"]
+atlas = ExtResource("2_ntrue")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2pdg3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcqvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftugu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14vmn"]
+size = Vector2(10, 10)
+
+[node name="LeapingCheepCheep" type="CharacterBody2D"]
+script = ExtResource("1_c6hvu")
+yoshi_behavior = "Swallow"
+gib_type = 1
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2pdg3")
+autoplay = "default"
+frame_progress = 0.844305
+flip_h = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 5)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_14vmn")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

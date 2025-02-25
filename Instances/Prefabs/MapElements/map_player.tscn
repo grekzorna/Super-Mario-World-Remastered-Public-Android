@@ -1,0 +1,350 @@
+[gd_scene load_steps=25 format=3 uid="uid://in27dksqeiu8"]
+
+[ext_resource type="Script" path="res://Scripts/UI/MapPlayer.gd" id="2_00dce"]
+[ext_resource type="Texture2D" uid="uid://brmyjpu415uu1" path="res://icon.png" id="2_n4dnc"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/map_player_yoshi.gdshader" id="3_mfgo0"]
+[ext_resource type="Texture2D" uid="uid://c3cfi2h02l6g4" path="res://Assets/Sprites/Map/Border.png" id="3_xqijj"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="6_l11bh"]
+[ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="6_pj6ow"]
+[ext_resource type="FontFile" uid="uid://lfpsqjjnmb8i" path="res://Assets/Sprites/UI/Font.png" id="7_srtfr"]
+[ext_resource type="PackedScene" uid="uid://b2csl8c7iofaw" path="res://Instances/UI/map_pause_menu.tscn" id="8_gxcod"]
+[ext_resource type="Texture2D" uid="uid://bcvnavba5hwa7" path="res://Assets/Sprites/Map/MapSprites/MapArrow.png" id="9_cjj2m"]
+[ext_resource type="AudioStream" uid="uid://b0mn27m5m8l3f" path="res://Assets/Audio/SFX/p-meter.wav" id="9_elflb"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="10_bk34v"]
+[ext_resource type="SpriteFrames" uid="uid://6ef0hopfef6p" path="res://Resources/PlayerSpriteFrames/Toad/Map.tres" id="10_mceca"]
+
+[sub_resource type="FontVariation" id="FontVariation_yd6yu"]
+base_font = ExtResource("7_srtfr")
+
+[sub_resource type="FontVariation" id="FontVariation_ws60o"]
+base_font = ExtResource("6_l11bh")
+spacing_glyph = 1
+
+[sub_resource type="Shader" id="Shader_4p58c"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebwg2"]
+shader = SubResource("Shader_4p58c")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 480.0
+shader_parameter/screen_height = 270.0
+
+[sub_resource type="Animation" id="Animation_s1ndt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
+}
+
+[sub_resource type="Animation" id="Animation_i51rl"]
+resource_name = "Enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.05, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yad6p"]
+_data = {
+&"Enter": SubResource("Animation_i51rl"),
+&"RESET": SubResource("Animation_s1ndt")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bneqe"]
+shader = ExtResource("10_bk34v")
+shader_parameter/og_1 = Color(1, 0, 1, 1)
+shader_parameter/og_2 = Color(0, 1, 0, 1)
+shader_parameter/og_3 = null
+shader_parameter/og_arm = Color(1, 0, 0, 1)
+shader_parameter/og_arm_2 = Color(1, 1, 0, 1)
+shader_parameter/colour_1 = null
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = Color(0, 0, 0, 1)
+shader_parameter/arm_2_colour = Color(0, 0, 0, 1)
+shader_parameter/alpha = 1.0
+shader_parameter/epsilon = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_831t0"]
+shader = ExtResource("3_mfgo0")
+shader_parameter/mask_1 = Color(1, 0, 1, 1)
+shader_parameter/mask_2 = Color(0.729412, 0, 0.729412, 1)
+shader_parameter/replace_1 = Color(1, 1, 0, 1)
+shader_parameter/replace_2 = Color(2.14182e-06, 0.56847, 7.70092e-07, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlihp"]
+resource_local_to_scene = true
+shader = ExtResource("3_mfgo0")
+shader_parameter/mask_1 = Color(1, 0, 1, 1)
+shader_parameter/mask_2 = Color(0.729412, 0, 0.729412, 1)
+shader_parameter/replace_1 = Color(0, 1, 0, 1)
+shader_parameter/replace_2 = Color(2.14182e-06, 0.56847, 7.70092e-07, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2sdf"]
+resource_local_to_scene = true
+shader = ExtResource("3_mfgo0")
+shader_parameter/mask_1 = Color(1, 0, 1, 1)
+shader_parameter/mask_2 = Color(0.729412, 0, 0.729412, 1)
+shader_parameter/replace_1 = Color(0, 1, 1, 1)
+shader_parameter/replace_2 = Color(2.14182e-06, 0.56847, 7.70092e-07, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4cwr"]
+
+[node name="PlayerVisual" type="Node2D"]
+z_index = 5
+y_sort_enabled = true
+script = ExtResource("2_00dce")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.75, 0.75)
+editor_draw_limits = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+visible = false
+texture = ExtResource("2_n4dnc")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Border" type="TextureRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xqijj")
+
+[node name="LevelTitle" type="Label" parent="HUD"]
+offset_left = 184.0
+offset_top = 35.0
+offset_right = 355.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_yd6yu")
+text = "Yoshi's Island 1"
+uppercase = true
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("8_gxcod")]
+visible = false
+
+[node name="Player1Sprite" parent="HUD" instance=ExtResource("6_pj6ow")]
+z_index = 2
+z_as_relative = false
+position = Vector2(64, 44)
+scale = Vector2(-1, 1)
+
+[node name="Player2Sprite" parent="HUD" instance=ExtResource("6_pj6ow")]
+z_index = 2
+z_as_relative = false
+position = Vector2(88, 44)
+scale = Vector2(-1, 1)
+
+[node name="Player3Sprite" parent="HUD" instance=ExtResource("6_pj6ow")]
+z_index = 2
+z_as_relative = false
+position = Vector2(112, 44)
+scale = Vector2(-1, 1)
+
+[node name="Player4Sprite" parent="HUD" instance=ExtResource("6_pj6ow")]
+z_index = 2
+z_as_relative = false
+position = Vector2(136, 44)
+scale = Vector2(-1, 1)
+
+[node name="CameraArrows" type="Node2D" parent="HUD"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/CameraArrows"]
+position = Vector2(244, 57)
+texture = ExtResource("9_cjj2m")
+flip_v = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="HUD/CameraArrows"]
+position = Vector2(244, 242)
+texture = ExtResource("9_cjj2m")
+
+[node name="Sprite2D3" type="Sprite2D" parent="HUD/CameraArrows"]
+position = Vector2(94, 135)
+rotation = 1.5708
+texture = ExtResource("9_cjj2m")
+
+[node name="Sprite2D4" type="Sprite2D" parent="HUD/CameraArrows"]
+position = Vector2(382, 135)
+rotation = 1.5708
+texture = ExtResource("9_cjj2m")
+flip_v = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 176.0
+offset_bottom = 56.0
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="LifeCount" type="Label" parent="HUD/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = SubResource("FontVariation_ws60o")
+text = "*5"
+
+[node name="Circle" type="ColorRect" parent="HUD"]
+z_index = 4096
+z_as_relative = false
+material = SubResource("ShaderMaterial_ebwg2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Circle"]
+libraries = {
+&"": SubResource("AnimationLibrary_yad6p")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player1Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 5
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_bneqe")
+sprite_frames = ExtResource("10_mceca")
+animation = &"YoshiWalkUp"
+frame_progress = 0.686279
+offset = Vector2(0, -12)
+
+[node name="TileChecks" type="Node2D" parent="Player1Sprite"]
+
+[node name="Water" type="RayCast2D" parent="Player1Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 1024
+hit_from_inside = true
+
+[node name="Climb" type="RayCast2D" parent="Player1Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 2048
+hit_from_inside = true
+
+[node name="Player2Sprite" type="AnimatedSprite2D" parent="."]
+visible = false
+top_level = true
+z_index = 5
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_831t0")
+position = Vector2(14, -5)
+animation = &""
+offset = Vector2(0, -12)
+
+[node name="TileChecks" type="Node2D" parent="Player2Sprite"]
+
+[node name="Water" type="RayCast2D" parent="Player2Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 1024
+hit_from_inside = true
+
+[node name="Climb" type="RayCast2D" parent="Player2Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 2048
+hit_from_inside = true
+
+[node name="Player3Sprite" type="AnimatedSprite2D" parent="."]
+visible = false
+top_level = true
+z_index = 5
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_dlihp")
+position = Vector2(-14, -5)
+animation = &""
+offset = Vector2(0, -12)
+
+[node name="TileChecks" type="Node2D" parent="Player3Sprite"]
+
+[node name="Water" type="RayCast2D" parent="Player3Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 1024
+hit_from_inside = true
+
+[node name="Climb" type="RayCast2D" parent="Player3Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 2048
+hit_from_inside = true
+
+[node name="Player4Sprite" type="AnimatedSprite2D" parent="."]
+visible = false
+top_level = true
+z_index = 5
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_v2sdf")
+position = Vector2(0, -13)
+animation = &""
+offset = Vector2(0, -12)
+
+[node name="TileChecks" type="Node2D" parent="Player4Sprite"]
+
+[node name="Water" type="RayCast2D" parent="Player4Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 1024
+hit_from_inside = true
+
+[node name="Climb" type="RayCast2D" parent="Player4Sprite/TileChecks"]
+target_position = Vector2(0, 1)
+collision_mask = 2048
+hit_from_inside = true
+
+[node name="SpritePositions" type="Node2D" parent="."]
+
+[node name="P2" type="Node2D" parent="SpritePositions"]
+position = Vector2(14, -5)
+
+[node name="P3" type="Node2D" parent="SpritePositions"]
+position = Vector2(-14, -5)
+
+[node name="P4" type="Node2D" parent="SpritePositions"]
+position = Vector2(0, -13)
+
+[node name="RunningSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_elflb")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_m4cwr")
+
+[node name="OnlineUpload" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.01
+autostart = true
+
+[connection signal="timeout" from="OnlineUpload" to="." method="_on_online_upload_timeout"]

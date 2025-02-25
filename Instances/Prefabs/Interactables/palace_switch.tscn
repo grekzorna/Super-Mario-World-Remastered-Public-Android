@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7063ss225g41"]
+
+[ext_resource type="Texture2D" uid="uid://bgv0s755tebkv" path="res://Assets/Sprites/Bonus/PalaceSwitches.png" id="1_2oet4"]
+[ext_resource type="Script" path="res://Scripts/Interactables/palace_switch.gd" id="1_ueuq1"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_1upry"]
+[ext_resource type="Resource" uid="uid://xiryx8x6ywcv" path="res://Resources/Achievements/Progression/AllSwitchPal.tres" id="4_cmvqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts2pe"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euu4s"]
+size = Vector2(20, 2)
+
+[node name="PalaceSwitch" type="StaticBody2D"]
+script = ExtResource("1_ueuq1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_2oet4")
+hframes = 4
+vframes = 2
+
+[node name="NormalCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ts2pe")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_euu4s")
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("3_1upry")
+achievement = ExtResource("4_cmvqj")
+
+[connection signal="all_switches_pressed" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

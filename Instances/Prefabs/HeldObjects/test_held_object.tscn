@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgdpt3o17y0ah"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/HeldObject.gd" id="1_xvq6k"]
+[ext_resource type="PackedScene" uid="uid://buynfqe32158d" path="res://Instances/Parts/drop_shadow.tscn" id="3_2ore8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxj7k"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20mcn"]
+size = Vector2(14, 14)
+
+[node name="TestHeldObject" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_xvq6k")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.125, 0.125)
+
+[node name="DropShadow" parent="Sprite" instance=ExtResource("3_2ore8")]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_sxj7k")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_20mcn")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

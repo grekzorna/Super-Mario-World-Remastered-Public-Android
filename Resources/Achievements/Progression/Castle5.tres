@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://clw5w8l7kchl7"]
+
+[ext_resource type="Texture2D" uid="uid://dfxbw682gdh5h" path="res://Assets/Sprites/AchievementIcons/46602.png" id="1_4rdps"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_ignc3"]
+
+[resource]
+script = ExtResource("2_ignc3")
+title = "Roy's Ploy Destroy-ed"
+description = "Defeat Roy Koopa of Castle #5"
+icon = ExtResource("1_4rdps")

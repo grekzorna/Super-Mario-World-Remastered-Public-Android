@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://kqw0gbmqpsig"]
+
+[ext_resource type="Texture2D" uid="uid://jxwu1txigkp3" path="res://Assets/Sprites/Items/PBalloon.png" id="1_gckms"]
+[ext_resource type="Script" path="res://Scripts/Classes/Items/p_balloon.gd" id="1_lr107"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_n45rb"]
+[ext_resource type="Resource" uid="uid://cb4p0q65nphga" path="res://Resources/Achievements/General/PBalloonGet.tres" id="4_dvt2w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78st0"]
+size = Vector2(8, 8)
+
+[node name="PBalloon" type="Node2D"]
+script = ExtResource("1_lr107")
+
+[node name="Balloon" type="Node2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Sprite" type="Sprite2D" parent="Balloon"]
+texture = ExtResource("1_gckms")
+
+[node name="Hitbox" type="Area2D" parent="Balloon"]
+
+[node name="Shape" type="CollisionShape2D" parent="Balloon/Hitbox"]
+shape = SubResource("RectangleShape2D_78st0")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("3_n45rb")
+achievement = ExtResource("4_dvt2w")
+
+[connection signal="grabbed" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="area_entered" from="Balloon/Hitbox" to="." method="balloon_get"]

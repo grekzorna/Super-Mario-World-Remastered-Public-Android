@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=13 format=3 uid="uid://cbysldwxxis61"]
+
+[ext_resource type="Texture2D" uid="uid://b2084jqi4n35n" path="res://Assets/Sprites/Characters/Mario/HUDIcon.png" id="1_4jxsr"]
+[ext_resource type="Script" uid="uid://bnrkbpmp03s5q" path="res://Scripts/Classes/Resources/CharacterResource.gd" id="1_5ln20"]
+[ext_resource type="Texture2D" uid="uid://ba65dunp68ehu" path="res://Assets/Sprites/Characters/Mario/HUDTitle.png" id="2_x2yft"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="3_07snm"]
+[ext_resource type="Texture2D" uid="uid://dbkkt3ti8w37r" path="res://Assets/Sprites/Characters/Mario/Ending.png" id="4_cuume"]
+[ext_resource type="Texture2D" uid="uid://dc3sp5eo1nipw" path="res://Assets/Sprites/Characters/Mario/FireworkMask.png" id="4_jdxbj"]
+[ext_resource type="SpriteFrames" uid="uid://d124ylm0askxf" path="res://Resources/PlayerSpriteFrames/Mario/Map.tres" id="5_gg1im"]
+[ext_resource type="Texture2D" uid="uid://b0px7xn2h3jc2" path="res://Assets/Sprites/Characters/Mario/Big.png" id="7_dwwq7"]
+[ext_resource type="AudioStream" uid="uid://c5t4v2hmyvxw1" path="res://Assets/Audio/SFX/coin.wav" id="9_4gv8a"]
+[ext_resource type="Resource" uid="uid://ceqaqufmindu" path="res://Resources/SoundLibraries/Default.tres" id="9_f8ptt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2krvb"]
+atlas = ExtResource("7_dwwq7")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fyjcq"]
+atlas = ExtResource("7_dwwq7")
+region = Rect2(128, 64, 32, 32)
+
+[resource]
+script = ExtResource("1_5ln20")
+character_name = "Mario"
+base_character_scene = ExtResource("3_07snm")
+char_colour = Color(0.882353, 0.192157, 0, 1)
+custom_properties = {
+"PhysicsStyle": "Mario"
+}
+sound_library = ExtResource("9_f8ptt")
+character_id = 0
+power_sprite_extra_offsets = {
+"Cape": Vector2(0, 0),
+"PropellerBlade": Vector2(0, 0)
+}
+power_sprite_extra_replaces = {}
+power_state_script_replace = {}
+HUDTitle = ExtResource("2_x2yft")
+HUDLetter = ExtResource("1_4jxsr")
+ending_portrait = ExtResource("4_cuume")
+ending_firework_mask = ExtResource("4_jdxbj")
+map_sprites = ExtResource("5_gg1im")
+selection_idle = SubResource("AtlasTexture_2krvb")
+selection_selected = SubResource("AtlasTexture_fyjcq")
+selection_sfx = ExtResource("9_4gv8a")

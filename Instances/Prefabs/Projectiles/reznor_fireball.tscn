@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6pyluc0tfka8"]
+
+[ext_resource type="Script" uid="uid://q6dnheg4wvy3" path="res://Scripts/Projectile/reznor_fireball.gd" id="1_paj38"]
+[ext_resource type="PackedScene" uid="uid://bpsdhhyetvdri" path="res://Instances/Parts/fire_breath_signel.tscn" id="2_q0ks7"]
+[ext_resource type="Texture2D" uid="uid://ccerggv4md23s" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorFireball.png" id="2_rukri"]
+[ext_resource type="Script" uid="uid://bqdfwdbvl65wk" path="res://Scripts/Classes/EnemyClass.gd" id="2_ulkcv"]
+
+[sub_resource type="Animation" id="Animation_gq8vs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_1hw58"]
+resource_name = "spinnn"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qexrv"]
+_data = {
+&"RESET": SubResource("Animation_gq8vs"),
+&"spinnn": SubResource("Animation_1hw58")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb3vn"]
+radius = 4.0
+
+[node name="ReznorFireball" type="CharacterBody2D"]
+script = ExtResource("1_paj38")
+yoshi_behavior = "Spit"
+gib_type = 2
+spit_item = ExtResource("2_q0ks7")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+metadata/_custom_type_script = ExtResource("2_ulkcv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_rukri")
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_qexrv")
+}
+autoplay = "spinnn"
+speed_scale = 2.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_eb3vn")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

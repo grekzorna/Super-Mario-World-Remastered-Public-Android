@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://bx61t3byehqm0"]
+
+[ext_resource type="Script" uid="uid://dkxl1eprai8bf" path="res://Scripts/Classes/Enemies/trace_urchin.gd" id="1_l3nu8"]
+[ext_resource type="Texture2D" uid="uid://r4gsksmo08u3" path="res://Assets/Sprites/Enemys/UrchinBody.png" id="2_g8nx0"]
+[ext_resource type="Texture2D" uid="uid://cd0xp111rugej" path="res://Assets/Sprites/Enemys/UrchinEyes.png" id="3_fs1iw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v737n"]
+atlas = ExtResource("2_g8nx0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j04rf"]
+atlas = ExtResource("2_g8nx0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4opa"]
+atlas = ExtResource("2_g8nx0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r2vwr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v737n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j04rf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4opa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j04rf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc4yv"]
+atlas = ExtResource("3_fs1iw")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pdif"]
+atlas = ExtResource("3_fs1iw")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bl2ol"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_mc4yv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pdif")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yr24o"]
+size = Vector2(26, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eadqc"]
+radius = 13.0384
+
+[node name="TraceUrchin" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_l3nu8")
+move_speed = 1
+gib_type = 2
+can_swim = true
+spiky_top = true
+can_slide_damage = false
+can_cape_damage = false
+can_fire_damage = false
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r2vwr")
+autoplay = "default"
+frame_progress = 0.704893
+
+[node name="Eyes" type="AnimatedSprite2D" parent="Body"]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_bl2ol")
+autoplay = "default"
+frame_progress = 0.979291
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yr24o")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_eadqc")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(1.7, 1.8)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

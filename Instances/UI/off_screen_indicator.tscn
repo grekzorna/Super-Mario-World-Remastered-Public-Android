@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://fy7m35t6tqtp"]
+
+[ext_resource type="Script" path="res://Scripts/UI/OffScreenIndicator.gd" id="1_7y4jo"]
+[ext_resource type="Texture2D" uid="uid://skqwt20akaxl" path="res://Assets/Sprites/UI/ItemBox.png" id="2_5albx"]
+
+[node name="OffScreenIndicator" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_7y4jo")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5albx")

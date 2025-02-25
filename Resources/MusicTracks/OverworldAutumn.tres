@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://3hfyhq451bma"]
+
+[ext_resource type="AudioStream" uid="uid://c773ob5dwdey8" path="res://Assets/Audio/BGM/SMW/AutumnOverworld.mp3" id="1_hb052"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Overworld Autumn"
+clip_0/stream = ExtResource("1_hb052")
+clip_0/auto_advance = 0
+metadata/Name = "Here We Go! (Pops Remix)"
+metadata/Artist = "lu9"

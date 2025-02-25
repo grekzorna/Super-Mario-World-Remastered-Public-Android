@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://blvsnpyqk688b"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/SideCollision.gd" id="1_yemsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qv3fu"]
+size = Vector2(0.1, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnwm8"]
+size = Vector2(0.1, 8)
+
+[node name="SideCollision" type="Node2D"]
+script = ExtResource("1_yemsr")
+
+[node name="Left" type="Area2D" parent="."]
+position = Vector2(-8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+shape = SubResource("RectangleShape2D_qv3fu")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="Right" type="Area2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+shape = SubResource("RectangleShape2D_xnwm8")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[connection signal="area_entered" from="Left" to="." method="_on_left_area_entered"]
+[connection signal="area_entered" from="Right" to="." method="_on_right_area_entered"]

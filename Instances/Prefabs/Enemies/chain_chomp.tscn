@@ -1,0 +1,265 @@
+[gd_scene load_steps=22 format=3 uid="uid://b0vwvk378ett0"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/chain_chomp.gd" id="1_lb0qy"]
+[ext_resource type="Texture2D" uid="uid://c2ufctbdrfopo" path="res://Assets/Sprites/Enemys/ChainChomp.png" id="2_wlj6w"]
+[ext_resource type="Texture2D" uid="uid://23r40e3jf2vn" path="res://Assets/Sprites/Enemys/ChainChompPost.png" id="3_3nd0o"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_mkmn5"]
+[ext_resource type="Texture2D" uid="uid://cxgpvx3hyop4v" path="res://Assets/Sprites/Enemys/ChainChompChain.png" id="4_jfmey"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="5_cudfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q46w3"]
+atlas = ExtResource("2_wlj6w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe32h"]
+atlas = ExtResource("2_wlj6w")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62m0b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q46w3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe32h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emglh"]
+atlas = ExtResource("2_wlj6w")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fcqs4"]
+atlas = ExtResource("2_wlj6w")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drgv7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emglh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fcqs4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vnqs"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sms6y"]
+radius = 6.08276
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yst4v"]
+atlas = ExtResource("3_3nd0o")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qaxr6"]
+atlas = ExtResource("3_3nd0o")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0mh1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d0ull"]
+size = Vector2(16, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gicv"]
+atlas = ExtResource("4_jfmey")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fc5n"]
+atlas = ExtResource("4_jfmey")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_h4gnc"]
+length = 12.0
+slide_on_slope = true
+
+[node name="ChainChomp" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_lb0qy")
+ropeLength = 32
+gravity = Vector2(0, 5)
+spiky_top = true
+can_slide_damage = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_62m0b")
+autoplay = "default"
+frame_progress = 0.562673
+script = ExtResource("3_mkmn5")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_62m0b"), SubResource("SpriteFrames_drgv7")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("3_mkmn5")
+
+[node name="RayCast2D" type="RayCast2D" parent="Sprite"]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 49)
+collision_mask = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_2vnqs")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_sms6y")
+
+[node name="Post" type="StaticBody2D" parent="."]
+top_level = true
+z_index = -2
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="Post"]
+position = Vector2(0, 1)
+texture = ExtResource("3_3nd0o")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_yst4v"), SubResource("AtlasTexture_qaxr6")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Post"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_m0mh1")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="Post"]
+position = Vector2(0, 9)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Post/Hitbox"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_d0ull")
+
+[node name="Chain" type="Node" parent="."]
+
+[node name="1" type="CharacterBody2D" parent="Chain"]
+visible = false
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/1"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/1"]
+position = Vector2(0, -12)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="2" type="CharacterBody2D" parent="Chain"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/2"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/2"]
+position = Vector2(0, -8)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="3" type="CharacterBody2D" parent="Chain"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/3"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/3"]
+position = Vector2(0, -8)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="4" type="CharacterBody2D" parent="Chain"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/4"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/4"]
+position = Vector2(0, -8)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="5" type="CharacterBody2D" parent="Chain"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/5"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/5"]
+position = Vector2(0, -8)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="6" type="CharacterBody2D" parent="Chain"]
+visible = false
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Chain/6"]
+texture = SubResource("AtlasTexture_5gicv")
+script = ExtResource("5_cudfj")
+textures = Array[Texture2D]([SubResource("AtlasTexture_5gicv"), SubResource("AtlasTexture_4fc5n")])
+settings_value = "chain_chomp"
+metadata/_custom_type_script = ExtResource("5_cudfj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain/6"]
+position = Vector2(0, -12)
+shape = SubResource("SeparationRayShape2D_h4gnc")
+one_way_collision = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-64, -64)
+rect = Rect2(0, 0, 128, 128)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Post/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

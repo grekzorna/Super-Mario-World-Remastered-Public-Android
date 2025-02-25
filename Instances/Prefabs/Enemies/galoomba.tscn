@@ -1,0 +1,162 @@
+[gd_scene load_steps=20 format=3 uid="uid://cm32wq57jbsyf"]
+
+[ext_resource type="Script" uid="uid://btmpdxk065hit" path="res://Scripts/Classes/Enemies/GoomboEnemy.gd" id="1_8j8lc"]
+[ext_resource type="Texture2D" uid="uid://djyr2ffecc8w4" path="res://Assets/Sprites/Enemys/GoomboSheet.png" id="2_b5xf2"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_agyqg"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="4_8mhf6"]
+[ext_resource type="Texture2D" uid="uid://cuu01o0iwv7p0" path="res://Assets/Sprites/Enemys/GaloombaAutumnSheet.png" id="4_tki60"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tphaq"]
+atlas = ExtResource("2_b5xf2")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5eb0"]
+atlas = ExtResource("2_b5xf2")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_guyhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tphaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5eb0")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dui40"]
+atlas = ExtResource("2_b5xf2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch0oj"]
+atlas = ExtResource("2_b5xf2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_052q4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dui40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch0oj")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1jkk"]
+atlas = ExtResource("4_8mhf6")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn6oc"]
+atlas = ExtResource("4_8mhf6")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x4a3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1jkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wn6oc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlaqm"]
+atlas = ExtResource("4_tki60")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxbup"]
+atlas = ExtResource("4_tki60")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r2x4p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hlaqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxbup")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_me86s"]
+size = Vector2(9, 10.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnroe"]
+size = Vector2(12, 12)
+
+[node name="Galoomba" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 8.0
+script = ExtResource("1_8j8lc")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_guyhh")
+animation = &"0"
+autoplay = "0"
+frame_progress = 0.47751
+script = ExtResource("3_agyqg")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_guyhh"), SubResource("SpriteFrames_052q4")])
+settings_value = "galoomba"
+metadata/_custom_type_script = ExtResource("3_agyqg")
+
+[node name="Wings" type="AnimatedSprite2D" parent="Sprite"]
+visible = false
+show_behind_parent = true
+position = Vector2(1, -8)
+sprite_frames = SubResource("SpriteFrames_x4a3y")
+autoplay = "default"
+frame_progress = 0.348438
+
+[node name="AutumnSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_r2x4p")
+autoplay = "default"
+frame_progress = 0.606709
+
+[node name="Wings" type="AnimatedSprite2D" parent="AutumnSprite"]
+visible = false
+show_behind_parent = true
+position = Vector2(1, -8)
+sprite_frames = SubResource("SpriteFrames_x4a3y")
+autoplay = "default"
+frame_progress = 0.348438
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -5.25)
+shape = SubResource("RectangleShape2D_me86s")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_fnroe")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-2.84217e-14, -16)
+scale = Vector2(2.4, 1.7)

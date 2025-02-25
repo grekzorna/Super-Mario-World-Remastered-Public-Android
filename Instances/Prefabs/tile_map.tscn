@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwavjbyw0v12l"]
+
+[ext_resource type="TileSet" uid="uid://b40euarkcv2yh" path="res://Resources/TileSets/Default.tres" id="1_mmxvl"]
+[ext_resource type="Script" uid="uid://dsvf7bjl7f2b4" path="res://Scripts/LevelElements/tile_map.gd" id="2_r664o"]
+
+[node name="TileMap" type="TileMap"]
+light_mask = 3
+tile_set = ExtResource("1_mmxvl")
+format = 2
+layer_0/name = "Terrain"
+layer_0/z_index = -1
+layer_1/name = "SemiSolid1"
+layer_1/z_index = -5
+layer_2/name = "Layer2"
+layer_2/z_index = -6
+layer_3/name = "Layer3"
+layer_3/z_index = -7
+layer_4/name = "Layer4"
+layer_4/z_index = -8
+layer_5/name = "Layer5"
+layer_5/z_index = -9
+script = ExtResource("2_r664o")
+one_way = true
+atlas_id = 3
+first_atlas_size = Vector2(12, 4)
+tiles_to_span = Vector2(1, 7)

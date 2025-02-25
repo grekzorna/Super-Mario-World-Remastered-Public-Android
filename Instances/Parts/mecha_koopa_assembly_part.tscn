@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfeyam1gwy5v1"]
+
+[ext_resource type="Script" path="res://Scripts/Parts/mecha_koopa_assembly_part.gd" id="1_0y3g8"]
+[ext_resource type="Texture2D" uid="uid://c0v3cl2iwn0tx" path="res://Assets/Sprites/Enemys/MechaKoopaParts/Head.png" id="1_ioxse"]
+[ext_resource type="Texture2D" uid="uid://5tvqsi5vpqe8" path="res://Assets/Sprites/Enemys/MechaKoopaParts/Body.png" id="2_vdxed"]
+[ext_resource type="Texture2D" uid="uid://bs655fo4ievu1" path="res://Assets/Sprites/Enemys/MechaKoopaParts/Feet.png" id="3_5yagn"]
+[ext_resource type="Texture2D" uid="uid://2t8mnvrmjnxf" path="res://Assets/Sprites/Enemys/MechaKoopaParts/Screw.png" id="4_855j0"]
+[ext_resource type="Texture2D" uid="uid://diuw0efq0t0ew" path="res://Assets/Sprites/Enemys/MechaKoopaParts/Guide.png" id="5_3hnnr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uaqt1"]
+
+[node name="MechaKoopaAssemblyPart" type="Node2D"]
+z_index = -2
+script = ExtResource("1_0y3g8")
+
+[node name="Parts" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Head" type="Sprite2D" parent="Parts"]
+visible = false
+position = Vector2(-5, 1)
+texture = ExtResource("1_ioxse")
+
+[node name="Body" type="Sprite2D" parent="Parts"]
+visible = false
+z_index = -1
+position = Vector2(2, 8)
+texture = ExtResource("2_vdxed")
+
+[node name="Feet" type="Sprite2D" parent="Parts"]
+position = Vector2(4, 12)
+texture = ExtResource("3_5yagn")
+
+[node name="Feet2" type="Sprite2D" parent="Parts/Feet"]
+show_behind_parent = true
+z_index = -2
+position = Vector2(-5, 0)
+texture = ExtResource("3_5yagn")
+
+[node name="Screw" type="Sprite2D" parent="Parts"]
+visible = false
+z_index = -2
+position = Vector2(11, 4)
+texture = ExtResource("4_855j0")
+
+[node name="Guide" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.385493, 0.385492, 0.385492, 1)
+z_index = -7
+texture = ExtResource("5_3hnnr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_uaqt1")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

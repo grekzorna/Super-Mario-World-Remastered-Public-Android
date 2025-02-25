@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://den5kogms88pd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/selectable_option_node.gd" id="1_p7qgv"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="3_mwwil"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_proyl"]
+
+[sub_resource type="Animation" id="Animation_451ts"]
+resource_name = "Flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(12, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s2bjd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtw70"]
+_data = {
+"Flash": SubResource("Animation_451ts"),
+"RESET": SubResource("Animation_s2bjd")
+}
+
+[node name="SelectableOptionNode" type="Control" node_paths=PackedStringArray("title")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.0777778
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p7qgv")
+title = NodePath("MarginContainer/Container/SettingTitle")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="TextureRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_mwwil")
+stretch_mode = 3
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Animation" type="AnimationPlayer" parent="MarginContainer/Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_dtw70")
+}
+autoplay = "Flash"
+
+[node name="Container" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SettingTitle" type="Label" parent="MarginContainer/Container"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 1.5
+theme_override_fonts/font = ExtResource("3_proyl")
+text = "    Setting Title:"
+horizontal_alignment = 2
+uppercase = true
+
+[node name="ValueContainer" type="HBoxContainer" parent="MarginContainer/Container"]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+
+[node name="Left" type="TextureRect" parent="MarginContainer/Container/ValueContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("3_mwwil")
+stretch_mode = 3
+
+[node name="Value" type="Label" parent="MarginContainer/Container/ValueContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("3_proyl")
+text = "(1920*"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Right" type="TextureRect" parent="MarginContainer/Container/ValueContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("3_mwwil")
+stretch_mode = 3
+flip_h = true

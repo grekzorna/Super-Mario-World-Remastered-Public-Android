@@ -1,0 +1,198 @@
+[gd_scene load_steps=23 format=3 uid="uid://dg56biujpnwrj"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/ShellClass.gd" id="1_iomgo"]
+[ext_resource type="Texture2D" uid="uid://dchkpqx8drmt5" path="res://Assets/Sprites/Enemys/BuzzyBeetleShell.png" id="2_hsuo8"]
+[ext_resource type="PackedScene" uid="uid://xqivdp4tj0se" path="res://Instances/Particles/Player/skid.tscn" id="3_2rajf"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_fd0v6"]
+[ext_resource type="Script" path="res://Scripts/Classes/water_bouyancy.gd" id="5_ymvjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfb0f"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rns5g"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xby4p"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcsrd"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2a1o"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ch6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfb0f")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rns5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xby4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcsrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2a1o")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgt43"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pk4fe"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nesgj"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6f810"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_immvd"]
+atlas = ExtResource("2_hsuo8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pgy8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgt43")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pk4fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nesgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6f810")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_immvd")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_hsrgp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ncayn"]
+resource_name = "Shake"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.436332, 0.436332]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o2ko8"]
+_data = {
+&"RESET": SubResource("Animation_hsrgp"),
+&"Shake": SubResource("Animation_ncayn")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rh4pd"]
+size = Vector2(8, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h8c3"]
+size = Vector2(14, 15)
+
+[node name="BuzzyBeetleShell" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 4
+slide_on_ceiling = false
+floor_constant_speed = true
+floor_snap_length = 2.0
+script = ExtResource("1_iomgo")
+can_fire_damage = false
+entity_present = true
+can_destroy = true
+destructable = true
+land_bounce = false
+respawn_entity_scene = "res://Instances/Prefabs/Enemies/buzzy_beetle.tscn"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_8ch6h")
+animation = &"Idle"
+script = ExtResource("3_fd0v6")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_pgy8v"), SubResource("SpriteFrames_8ch6h")])
+settings_value = "buzzybeetleshell"
+
+[node name="RespawnShake" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_o2ko8")
+}
+speed_scale = 2.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_rh4pd")
+
+[node name="Skid" parent="." instance=ExtResource("3_2rajf")]
+visible = false
+emitting = false
+texture = null
+process_material = null
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_0h8c3")
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("5_ymvjp")
+hitbox = NodePath("../Hitbox")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

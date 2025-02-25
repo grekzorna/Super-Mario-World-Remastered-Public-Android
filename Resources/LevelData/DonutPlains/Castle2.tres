@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://b5wg5boeyafax"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="2_04mm6"]
+[ext_resource type="Texture2D" uid="uid://biddoe7sc1f54" path="res://Assets/Sprites/UI/TextImages/Tower.png" id="2_qmbad"]
+
+[resource]
+script = ExtResource("2_04mm6")
+level_title = "#2 Morton's Castle"
+level_scene_path = "res://Instances/Levels/DonutPlains/castle_2a.tscn"
+start_cutscene_path = "res://Instances/Levels/Cutscenes/CastleEntrances/castle_2_entrance.tscn"
+has_secret_exit = false
+yoshi_allowed = false
+has_dragon_coins = true
+title_image = ExtResource("2_qmbad")
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = false
+map_point_warp = "DonutPlains/Castle2"
+map_scene_warp = "res://Instances/Levels/Maps/MainIsland.tscn"

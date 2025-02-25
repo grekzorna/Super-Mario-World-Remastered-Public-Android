@@ -1,0 +1,123 @@
+[gd_scene load_steps=12 format=3 uid="uid://dnh6ueroyyx8w"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/fire_flower.gd" id="1_723u7"]
+[ext_resource type="Resource" uid="uid://d3s1narr175by" path="res://Resources/PlayerPowerUpState/Ice.tres" id="2_gr62j"]
+[ext_resource type="Texture2D" uid="uid://b51rawfp56x8i" path="res://Assets/Sprites/Items/IceFlower.png" id="3_ymbdi"]
+[ext_resource type="Texture2D" uid="uid://dx5itw642ypa4" path="res://Assets/Sprites/Particles/IceShine.png" id="5_qkpgj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unpev"]
+size = Vector2(8, 3)
+
+[sub_resource type="Animation" id="Animation_eq6lj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_43vla"]
+resource_name = "new_animation"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(-1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dekmn"]
+_data = {
+"RESET": SubResource("Animation_eq6lj"),
+"new_animation": SubResource("Animation_43vla")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kyeo"]
+size = Vector2(12, 11)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hayxc"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g8doi"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 16.0
+emission_ring_radius = 16.0
+emission_ring_inner_radius = 8.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 2.0
+
+[node name="IceFlower" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_723u7")
+power = ExtResource("2_gr62j")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_unpev")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_ymbdi")
+
+[node name="Animations" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_dekmn")
+}
+autoplay = "new_animation"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_8kyeo")
+
+[node name="IceAmbience" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_hayxc")
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_g8doi")
+texture = ExtResource("5_qkpgj")
+randomness = 0.5

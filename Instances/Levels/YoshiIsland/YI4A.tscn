@@ -1,0 +1,89 @@
+[gd_scene load_steps=16 format=3 uid="uid://byn57108yfqyj"]
+
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_2ay23"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="2_uxcyd"]
+[ext_resource type="AudioStream" uid="uid://bri2wlqh6tcj3" path="res://Resources/MusicTracks/Athletic.tres" id="2_vyeeo"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="3_g6g6f"]
+[ext_resource type="AudioStream" uid="uid://dhdlx2rwva53m" path="res://Resources/MusicTracks/OverworldAutumnAlt.tres" id="3_tvunv"]
+[ext_resource type="PackedScene" uid="uid://wsiwhw5luv8e" path="res://Instances/Prefabs/Blocks/speaker_block.tscn" id="7_cedyh"]
+[ext_resource type="Texture2D" uid="uid://dyhb32akvv8c2" path="res://Assets/Sprites/UI/Messages/YI4 B.png" id="8_76tqe"]
+[ext_resource type="PackedScene" uid="uid://c8kxuerbuqk7p" path="res://Instances/Prefabs/goal_post.tscn" id="8_wegwk"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="9_4h3n8"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="9_6kaw7"]
+[ext_resource type="Texture2D" uid="uid://b6nwdirwxpnso" path="res://Assets/Sprites/Backgrounds/Overworld/Rocks/Rock8.png" id="11_guivm"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="13_a4xyt"]
+[ext_resource type="Texture2D" uid="uid://b15ff2wk2mfia" path="res://Assets/Sprites/Backgrounds/Overworld/Rocks/RocksAutumn.png" id="14_m5w7n"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vt14s"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="YI4A" type="Node"]
+script = ExtResource("1_2ay23")
+level_music = ExtResource("2_vyeeo")
+autumn_music = ExtResource("3_tvunv")
+camera_left_end_position = 448
+
+[node name="TileMap" parent="." instance=ExtResource("2_uxcyd")]
+layer_0/tile_data = PackedInt32Array(65532, 10, 2, 5, 131082, 2, 65533, 65546, 2, 1, 65546, 2, 2, 65546, 2, 3, 65546, 2, 4, 65546, 2, 131069, 196618, 0, 196605, 196618, 0, 65540, 327690, 0, 131076, 327690, 0, 131070, 262154, 0, 196606, 262154, 0, 131071, 262154, 0, 196607, 262154, 0, 131072, 262154, 0, 131073, 262154, 0, 65538, 262154, 0, 131074, 262154, 0, 65539, 262154, 0, 131075, 262154, 0, 65544, 262154, 0, 131080, 262154, 0, 65545, 262154, 0, 131081, 262154, 0, 65546, 262154, 0, 131082, 262154, 0, 65551, 262154, 0, 131087, 262154, 0, 65552, 262154, 0, 131088, 262154, 0, 65553, 262154, 0, 131089, 262154, 0, 65554, 262154, 0, 131090, 262154, 0, 65555, 262154, 0, 131091, 262154, 0, 65556, 262154, 0, 131092, 262154, 0, 65557, 262154, 0, 131093, 262154, 0, 65558, 262154, 0, 131094, 262154, 0, 65559, 262154, 0, 131095, 262154, 0, 65560, 262154, 0, 131096, 262154, 0, 65561, 262154, 0, 131097, 262154, 0, 65562, 327690, 0, 131098, 327690, 0, 65550, 196618, 0, 131086, 196618, 0, 65547, 327690, 0, 131083, 327690, 0, 65543, 196618, 0, 131079, 196618, 0, 6, 10, 2, 12, 131082, 2, 13, 10, 2, 7, 65546, 2, 8, 65546, 2, 9, 65546, 2, 10, 65546, 2, 11, 65546, 2, 14, 65546, 2, 15, 65546, 2, 16, 65546, 2, 17, 65546, 2, 18, 65546, 2, 19, 65546, 2, 20, 65546, 2, 21, 65546, 2, 22, 65546, 2, 23, 65546, 2, 24, 65546, 2, 25, 65546, 2, 26, 65546, 2, 27, 131082, 2, 65534, 65546, 2, 65535, 65546, 2, 0, 65546, 2, 65536, 262154, 0, 65537, 262154, 0, -65540, 131077, 2, -4, 131077, 3, -65539, 196613, 2, -3, 196613, 3)
+
+[node name="Player" parent="." instance=ExtResource("3_g6g6f")]
+material = SubResource("ShaderMaterial_vt14s")
+
+[node name="SpeakerBlock" parent="." instance=ExtResource("7_cedyh")]
+position = Vector2(40, -40)
+message = ExtResource("8_76tqe")
+
+[node name="GoalPost" parent="." instance=ExtResource("8_wegwk")]
+z_index = -1
+position = Vector2(168, 0)
+
+[node name="PipeArea" parent="." instance=ExtResource("9_6kaw7")]
+position = Vector2(-32, -16)
+enter_direction = "Left"
+exit_only = true
+
+[node name="StaticBG" parent="." instance=ExtResource("9_4h3n8")]
+main_texture = ExtResource("11_guivm")
+sky_colour = Color(0.596078, 0.878431, 0.878431, 1)
+
+[node name="AutumnLevelBG" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("13_a4xyt")]
+og_bg = NodePath("../StaticBG")
+main_texture = ExtResource("14_m5w7n")
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)

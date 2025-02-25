@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsjuewndu0ufu"]
+
+[ext_resource type="Texture2D" uid="uid://cidqlnxdnpkuh" path="res://Assets/Sprites/Thumbnails/Objects/QuestionBlock.png" id="1_waqxa"]
+
+[node name="PSwitch?BlockSecret" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.52549)
+texture = ExtResource("1_waqxa")

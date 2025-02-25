@@ -1,0 +1,27 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://doufgypk1hgny"]
+
+[ext_resource type="AudioStream" uid="uid://bbr22pk8fjnqj" path="res://Assets/Audio/BGM/SMW/Underground.mp3" id="3_v46yh"]
+[ext_resource type="AudioStream" uid="uid://da6nl0toot4yj" path="res://Assets/Audio/BGM/SMW/UndergroundYoshi.mp3" id="4_55lyt"]
+
+[resource]
+clip_count = 4
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("3_v46yh")
+clip_0/auto_advance = 0
+clip_1/name = &"Yoshi"
+clip_1/stream = ExtResource("4_55lyt")
+clip_1/auto_advance = 0
+clip_2/name = &"Hurry"
+clip_2/stream = ExtResource("3_v46yh")
+clip_2/auto_advance = 0
+clip_3/name = &"HurryYoshi"
+clip_3/stream = ExtResource("4_55lyt")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}

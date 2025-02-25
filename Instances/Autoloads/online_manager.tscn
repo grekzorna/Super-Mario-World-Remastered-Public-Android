@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8bl5soe0cu0s"]
+
+[ext_resource type="Script" path="res://Scripts/Autoload/OnlineManager.gd" id="1_f2vbn"]
+
+[node name="OnlineManager" type="Node"]
+script = ExtResource("1_f2vbn")
+
+[node name="ChatLog" type="CanvasLayer" parent="."]
+layer = 99
+
+[node name="Container" type="VBoxContainer" parent="ChatLog"]
+offset_right = 256.0
+offset_bottom = 270.0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ChatLog/Container"]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 2
+theme_override_constants/separation = -16
+
+[node name="Spacer" type="Control" parent="ChatLog/Container/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextEdit" type="TextEdit" parent="ChatLog/Container"]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+placeholder_text = "Message..."

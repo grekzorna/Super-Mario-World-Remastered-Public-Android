@@ -1,0 +1,107 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6g7cd22ssvio"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/bouncing_boo_trail.gd" id="1_qh4x1"]
+[ext_resource type="Texture2D" uid="uid://b2bjv1cuof6cx" path="res://Assets/Sprites/Enemys/Boos.png" id="2_2i1xc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1qdu"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iho7j"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhnsr"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86olb"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcjne"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhde7"]
+atlas = ExtResource("2_2i1xc")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m2mra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1qdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iho7j")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhnsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86olb")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcjne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhde7")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol3ar"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7hwt"]
+radius = 6.08276
+
+[node name="BouncingBooTrail" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_qh4x1")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m2mra")
+animation = &"2"
+autoplay = "1"
+frame_progress = 0.410399
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ol3ar")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_k7hwt")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="summon_trail_thing"]
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

@@ -1,0 +1,2124 @@
+[gd_scene load_steps=145 format=3 uid="uid://btxwvtu5512yf"]
+
+[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_lc53a"]
+[ext_resource type="PackedScene" uid="uid://b044hxmqs1ahv" path="res://Instances/Prefabs/MapElements/map_tilemap.tscn" id="2_clxms"]
+[ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="3_6l411"]
+[ext_resource type="Resource" uid="uid://3tpjwk78oca4" path="res://Resources/MapAreas/BowserValley.tres" id="5_443qw"]
+[ext_resource type="PackedScene" uid="uid://4xhrug5ojmca" path="res://Instances/Parts/map_point.tscn" id="5_ayl7n"]
+[ext_resource type="Texture2D" uid="uid://cm8lt6gfnd111" path="res://Assets/Sprites/Map/MapSprites/Pipe.png" id="6_515c1"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="7_578bg"]
+[ext_resource type="Resource" uid="uid://y03hju7bvqdm" path="res://Resources/LevelData/DonutPlains/DSH.tres" id="7_q7wft"]
+[ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="9_1jvdy"]
+[ext_resource type="Resource" uid="uid://cfttm6jihuytu" path="res://Resources/LevelData/DonutPlains/DS2.tres" id="10_6murh"]
+[ext_resource type="Resource" uid="uid://jqk34owisgt5" path="res://Resources/Achievements/Completionist/DragCoins/DPDragCoin.tres" id="10_cc2re"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="11_fesh3"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="12_gxdt6"]
+[ext_resource type="Resource" uid="uid://dd8ptitrvm1y5" path="res://Resources/LevelData/DonutPlains/DP1.tres" id="12_hac4q"]
+[ext_resource type="Texture2D" uid="uid://d2l8ip7s3fpeq" path="res://Assets/LevelGuides/BowserValleyMap.png" id="13_rq421"]
+[ext_resource type="Resource" uid="uid://d1nuh7ljhp57f" path="res://Resources/LevelData/DonutPlains/DP2.tres" id="13_xp8ab"]
+[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="14_3x1sk"]
+[ext_resource type="Resource" uid="uid://753cvn2b7d1a" path="res://Resources/LevelData/DonutPlains/GreenSwitchPalace.tres" id="14_x7wir"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV1.tres" id="15_08f8w"]
+[ext_resource type="Texture2D" uid="uid://cp3jbk5p4m2pj" path="res://Assets/Sprites/Map/MapSprites/BowserCastleMain.png" id="15_d1hek"]
+[ext_resource type="Resource" uid="uid://dlsnewsafo4s0" path="res://Resources/LevelData/BowserValley/BackDoor.tres" id="15_ele45"]
+[ext_resource type="PackedScene" uid="uid://b3o521ps1agca" path="res://Instances/Prefabs/MapElements/ghost_house_visual.tscn" id="15_k6f8b"]
+[ext_resource type="Resource" uid="uid://defxlsrvxw6sm" path="res://Resources/LevelData/DonutPlains/DGH.tres" id="15_vvmr3"]
+[ext_resource type="PackedScene" uid="uid://bxfqgskuvbumi" path="res://Instances/Prefabs/MapElements/castle_point_visual.tscn" id="16_5huon"]
+[ext_resource type="Resource" uid="uid://c12jh2e2j1qc0" path="res://Resources/LevelData/DonutPlains/DP3.tres" id="16_5mbo3"]
+[ext_resource type="Texture2D" uid="uid://cpa5iktrc6d1o" path="res://Assets/Sprites/Map/MapSprites/BowserCastleLava.png" id="16_ebw7o"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV2.tres" id="16_vi6ex"]
+[ext_resource type="Resource" uid="uid://botsaye235o5a" path="res://Resources/LevelData/BowserValley/VGH.tres" id="17_6pmup"]
+[ext_resource type="Resource" uid="uid://biasx5nlt1dc7" path="res://Resources/LevelData/DonutPlains/DP4.tres" id="17_k2x74"]
+[ext_resource type="Texture2D" uid="uid://ktercmdvmx4n" path="res://Assets/Sprites/Map/MapSprites/BowserSign.png" id="17_p5qbj"]
+[ext_resource type="Texture2D" uid="uid://c0unpe14aa60s" path="res://Assets/Sprites/Map/MapSprites/Bowser.png" id="18_7f7dp"]
+[ext_resource type="Resource" uid="uid://bonywbspphm3t" path="res://Resources/LevelData/ChocoIsland/CS.tres" id="18_eiigf"]
+[ext_resource type="AudioStream" uid="uid://i2hyhrts0o6w" path="res://Assets/Audio/BGM/SMW/BowserValley.mp3" id="18_qopfe"]
+[ext_resource type="Resource" uid="uid://b38frf7heim7l" path="res://Resources/LevelData/DonutPlains/DS1.tres" id="18_t7vv4"]
+[ext_resource type="Resource" uid="uid://dak6wg0oxdg73" path="res://Resources/LevelData/BowserValley/BVF.tres" id="19_vmvwj"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV3.tres" id="19_xxm3n"]
+[ext_resource type="Resource" uid="uid://b5wg5boeyafax" path="res://Resources/LevelData/DonutPlains/Castle2.tres" id="20_djl2o"]
+[ext_resource type="Resource" uid="uid://crjs6f1owoibj" path="res://Resources/LevelData/ChocoIsland/GhostShip.tres" id="20_oxvo2"]
+[ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV4.tres" id="20_uifvj"]
+[ext_resource type="Resource" uid="uid://dcn8c0gcfeadu" path="res://Resources/LevelData/BowserValley/Castle7.tres" id="21_0wpcx"]
+[ext_resource type="Resource" uid="uid://cjuiit3d7gbw4" path="res://Resources/LevelData/DonutPlains/Airship2.tres" id="21_e3vl1"]
+[ext_resource type="Resource" uid="uid://bvmyr6ic1e116" path="res://Resources/LevelData/BowserValley/FrontDoor.tres" id="21_f63c7"]
+[ext_resource type="Texture2D" uid="uid://bu3d8smurasys" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/VanillaDomePathTiles1.png" id="22_j8ks7"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="23_dviol"]
+[ext_resource type="Texture2D" uid="uid://cfjxfyui6adav" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/VanillaDomeAutumnPathTiles1.png" id="24_a1tax"]
+[ext_resource type="PackedScene" uid="uid://bdkivqa6mhx1l" path="res://Instances/Prefabs/MapElements/star_road_warp.tscn" id="28_fho1b"]
+[ext_resource type="Texture2D" uid="uid://c5tvd2tdu0k23" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/VanillaDomePathTiles2.png" id="29_0agn3"]
+[ext_resource type="Resource" uid="uid://bmgxn05dv6ddt" path="res://Resources/LevelData/StarRoad/SR4.tres" id="29_5eyfw"]
+[ext_resource type="PackedScene" uid="uid://c5mqg48l62p7b" path="res://Instances/Prefabs/MapElements/red_large_map_point.tscn" id="30_mic1o"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="30_ou8yp"]
+[ext_resource type="Texture2D" uid="uid://y51800jlobd7" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/VanillaDomeAutumnPathTiles2.png" id="31_4x6hs"]
+[ext_resource type="PackedScene" uid="uid://cm7ivyv7adsjr" path="res://Instances/Prefabs/MapElements/red_map_point_visual.tscn" id="35_fle3d"]
+[ext_resource type="PackedScene" uid="uid://umsxjfxiymvn" path="res://Instances/Prefabs/MapElements/fortress_point_visual.tscn" id="37_y5mm6"]
+
+[sub_resource type="Curve2D" id="Curve2D_jy0y6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 88, 0, 0, 0, 0, 72, 56)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_8hg1n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4utfg"]
+resource_name = "Travel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ygw35"]
+_data = {
+"RESET": SubResource("Animation_8hg1n"),
+"Travel": SubResource("Animation_4utfg")
+}
+
+[sub_resource type="Resource" id="Resource_y28j0"]
+script = ExtResource("23_dviol")
+area_name = "Donut Plains"
+music = ExtResource("18_qopfe")
+levels = Array[ExtResource("11_fesh3")]([ExtResource("12_hac4q"), ExtResource("13_xp8ab"), ExtResource("14_x7wir"), ExtResource("15_vvmr3"), ExtResource("16_5mbo3"), ExtResource("17_k2x74"), ExtResource("18_t7vv4"), ExtResource("10_6murh"), ExtResource("7_q7wft"), ExtResource("20_djl2o"), ExtResource("21_e3vl1")])
+dragon_coin_achievement = ExtResource("10_cc2re")
+
+[sub_resource type="Curve2D" id="Curve2D_yk0u1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 56, 0, 0, 0, 0, 8, 24)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_8ifru"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../DS2")
+route_path = SubResource("Curve2D_yk0u1")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_h03ku"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 8, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_knjsh"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../DPSHWarp")
+route_path = SubResource("Curve2D_h03ku")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Curve2D" id="Curve2D_2mvaw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 24, 0, 0, 0, 0, 40, 24)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_fol3o"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../DP3Warp")
+route_path = SubResource("Curve2D_2mvaw")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_55o6h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 40, 24, 0, 0, 0, 0, 8, 24)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_va4po"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../DS2")
+route_path = SubResource("Curve2D_55o6h")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Curve2D" id="Curve2D_ti37s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 184, 120, 0, 0, 0, 0, 152, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_e2woy"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley2")
+route_path = SubResource("Curve2D_ti37s")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_vrc2j"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 240, 152, 0.15749, 15.749, -0.15749, -15.749, 240, 144, 0, 0, 0, 0, 208, 120, 0, 0, 0, 0, 184, 120)
+}
+point_count = 4
+
+[sub_resource type="Resource" id="Resource_o2qpj"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../EntranceWarp")
+route_path = SubResource("Curve2D_vrc2j")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Curve2D" id="Curve2D_vu2kq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 120, 0, 0, 0, 0, 152, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_4t4ko"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../VF")
+route_path = SubResource("Curve2D_vu2kq")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_55xqo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 120, 0, 0, 0, 0, 120, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_c2ruo"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../VGH")
+route_path = SubResource("Curve2D_55xqo")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_7nc7i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 184, 120, 0, 0, 0, 0, 152, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_l3cti"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley1")
+route_path = SubResource("Curve2D_7nc7i")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_wo5q0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 120, 0, 0, 0, 0, 120, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_mhdkj"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Castle7")
+route_path = SubResource("Curve2D_wo5q0")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_1gi1g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 120, 0, 0, 0, 0, 72, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_xi3ub"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley3")
+route_path = SubResource("Curve2D_1gi1g")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_3nmhi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 120, 0, 0, 0, 0, 120, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ugvb3"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley2")
+route_path = SubResource("Curve2D_3nmhi")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_whxa7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 120, 0, 0, 0, 0, 72, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_g1ohd"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley4")
+route_path = SubResource("Curve2D_whxa7")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_jjoof"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 120, 0, 0, 0, 0, 72, 120)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ty7qh"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../VGH")
+route_path = SubResource("Curve2D_jjoof")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_7le2s"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 88, 0, 0, 0, 0, 72, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_qmwsu"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../StarRoadWarp")
+route_path = SubResource("Curve2D_7le2s")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Resource" id="Resource_u7dc3"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley3")
+route_path = SubResource("Curve2D_whxa7")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_y0bi7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 88, 0, 0, 0, 0, 120, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ord2m"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Castle7")
+route_path = SubResource("Curve2D_y0bi7")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_yc2gw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 88, 0, 0, 0, 0, 120, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_8a2um"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../FrontDoor")
+route_path = SubResource("Curve2D_yc2gw")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_pex04"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 88, 0, 0, 0, 0, 120, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_e4jvs"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley4")
+route_path = SubResource("Curve2D_pex04")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Resource" id="Resource_4t5gt"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../VGH")
+route_path = SubResource("Curve2D_wo5q0")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_m1b2j"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 88, 0, 0, 0, 0, 152, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_s4daf"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../BackDoor")
+route_path = SubResource("Curve2D_m1b2j")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_tv6fd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 120, 0, 0, 0, 0, 152, 88)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_flkec"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley2")
+route_path = SubResource("Curve2D_tv6fd")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_bq50u"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 56, 0, 0, 0, 0, 120, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_v5uig"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../StarRoadWarp")
+route_path = SubResource("Curve2D_bq50u")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_utei0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 88, 0, 0, 0, 0, 120, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_rty1b"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Castle7")
+route_path = SubResource("Curve2D_utei0")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvnhk"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(0, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juitl"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(72, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cv16"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(144, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns6c4"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(0, 56, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwllg"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(72, 56, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u1xl"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(144, 56, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4uuq"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(0, 112, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsvtd"]
+atlas = ExtResource("15_d1hek")
+region = Rect2(72, 112, 72, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_by3nh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvnhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juitl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cv16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ns6c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwllg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u1xl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4uuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsvtd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7458"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(0, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v46g"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(72, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_031l1"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(144, 0, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq0nt"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(0, 56, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh04a"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(72, 56, 72, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_up42u"]
+atlas = ExtResource("16_ebw7o")
+region = Rect2(144, 56, 72, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yh2qm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7458")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8v46g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_031l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sq0nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh04a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_up42u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8tyf2"]
+atlas = ExtResource("17_p5qbj")
+region = Rect2(0, 0, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_th2c7"]
+atlas = ExtResource("17_p5qbj")
+region = Rect2(0, 8, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpxpb"]
+atlas = ExtResource("17_p5qbj")
+region = Rect2(0, 16, 32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co8ws"]
+atlas = ExtResource("17_p5qbj")
+region = Rect2(0, 24, 32, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eh78w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8tyf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_th2c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpxpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co8ws")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Curve2D" id="Curve2D_harwt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 152, 88, 0, 0, 0, 0, 152, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_rg7fh"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../VF")
+route_path = SubResource("Curve2D_harwt")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_1ewjq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 200, 152, 0, 0, 0, 0, 120, 152)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_d8gra"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../ChocoSecret")
+route_path = SubResource("Curve2D_1ewjq")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Curve2D" id="Curve2D_pycq6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 120, 152, 0, 0, 0, 0, 72, 152)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ky7bs"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../ChocoExitWarp")
+route_path = SubResource("Curve2D_pycq6")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Resource" id="Resource_f67fv"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../ChocoWarp")
+route_path = SubResource("Curve2D_1ewjq")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Resource" id="Resource_lwytc"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../ChocoSecret")
+route_path = SubResource("Curve2D_pycq6")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = true
+
+[sub_resource type="Animation" id="Animation_37qlm"]
+resource_name = "Fly"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(80, 16), Vector2(168, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_h4r31"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(80, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ota21"]
+_data = {
+"Fly": SubResource("Animation_37qlm"),
+"RESET": SubResource("Animation_h4r31")
+}
+
+[sub_resource type="Animation" id="Animation_4ff8n"]
+resource_name = "Float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_bcq4f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bixnf"]
+_data = {
+"Float": SubResource("Animation_4ff8n"),
+"RESET": SubResource("Animation_bcq4f")
+}
+
+[sub_resource type="Resource" id="Resource_4uowk"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley1")
+route_path = SubResource("Curve2D_vrc2j")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_sag0c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 88, 0, 0, 0, 0, 72, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_6vv0n"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../Valley4")
+route_path = SubResource("Curve2D_sag0c")
+reverse_path = true
+unlock_speed = 0.2
+route_unlocked = false
+
+[sub_resource type="Curve2D" id="Curve2D_7xafe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 56, 0, 0, 0, 0, 120, 56)
+}
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_866d1"]
+script = ExtResource("7_578bg")
+destination_point = NodePath("../FrontDoor")
+route_path = SubResource("Curve2D_7xafe")
+reverse_path = false
+unlock_speed = 0.2
+route_unlocked = false
+
+[node name="ValleyOfBowser" type="Control" node_paths=PackedStringArray("starting_point")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lc53a")
+starting_point = NodePath("MainEntranceReturn")
+camera_lock = true
+camera_lock_position = Vector2(104, 90)
+cam_limit_left = null
+cam_limit_right = null
+cam_limit_top = null
+cam_limit_bottom = null
+
+[node name="MapTilemap" parent="." instance=ExtResource("2_clxms")]
+z_index = -4
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 65538, 0, 2, 2, 0, 3, 65538, 0, 4, 2, 0, 5, 2, 0, 6, 131074, 0, 65536, 2, 0, 65537, 2, 0, 65538, 2, 0, 65539, 2, 0, 65540, 65538, 0, 65541, 65538, 0, 65542, 262146, 0, 65543, 327682, 0, 131072, 393218, 0, 131073, 458754, 0, 131074, 524290, 0, 131075, 524290, 0, 131076, 2, 0, 131077, 2, 0, 131078, 65538, 0, 131079, 589826, 0, 196608, 2, 1, 196609, 65538, 1, 196610, 131074, 1, 196611, 131074, 1, 196612, 2, 0, 196613, 65538, 0, 196614, 2, 0, 196615, 131074, 0, 196631, 196610, 1, 196632, 262146, 1, 196633, 262146, 1, 196634, 327682, 1, 196635, 393218, 1, 262144, 458754, 1, 262145, 524290, 1, 262146, 2, 0, 262147, 2, 0, 262148, 589826, 1, 262149, 2, 2, 262150, 65538, 2, 262151, 131074, 2, 262167, 196610, 2, 262168, 2, 0, 262169, 2, 0, 262170, 65538, 0, 262171, 262146, 0, 327680, 458754, 1, 327681, 524290, 1, 327682, 2, 0, 327683, 2, 0, 327684, 262146, 2, 327685, 327682, 2, 327686, 327682, 2, 327687, 393218, 2, 327688, 458754, 2, 327689, 458754, 2, 327690, 458754, 2, 327691, 458754, 2, 327692, 458754, 2, 327693, 458754, 2, 327694, 458754, 2, 327695, 458754, 2, 327696, 458754, 2, 327697, 458754, 2, 327698, 458754, 2, 327699, 458754, 2, 327700, 458754, 2, 327701, 458754, 2, 327702, 458754, 2, 327703, 524290, 2, 327704, 2, 0, 327705, 65538, 0, 327706, 2, 0, 327707, 65538, 0, 393216, 2, 0, 393217, 2, 0, 393218, 2, 0, 393219, 589826, 1, 393220, 589826, 2, 393221, 327682, 2, 393222, 327682, 2, 393223, 393218, 2, 393224, 2, 3, 393225, 65538, 3, 393226, 65538, 3, 393227, 2, 3, 393228, 65538, 3, 393229, 2, 3, 393230, 2, 3, 393231, 2, 3, 393232, 2, 3, 393233, 2, 3, 393234, 2, 3, 393235, 2, 3, 393236, 2, 3, 393237, 65538, 3, 393238, 65538, 3, 393239, 131074, 3, 393240, 196610, 3, 393241, 2, 0, 393242, 65538, 0, 393243, 2, 0, 458752, 2, 0, 458753, 2, 0, 458754, 589826, 1, 458755, 262146, 3, 458756, 393218, 2, 458757, 393218, 2, 458758, 327682, 3, 458759, 393218, 2, 458760, 65538, 3, 458761, 2, 3, 458762, 65538, 3, 458763, 2, 3, 458764, 65538, 3, 458765, 2, 3, 458766, 2, 3, 458767, 2, 3, 458768, 2, 3, 458769, 2, 3, 458770, 2, 3, 458771, 2, 3, 458772, 2, 3, 458773, 2, 3, 458774, 65538, 3, 458775, 327682, 2, 458776, 393218, 3, 458777, 458754, 3, 458778, 196610, 3, 458779, 2, 0, 524288, 2, 0, 524289, 2, 0, 524290, 131074, 0, 524291, 327682, 3, 524292, 393218, 2, 524293, 393218, 2, 524294, 327682, 3, 524295, 393218, 2, 524296, 2, 3, 524297, 65538, 3, 524298, 2, 3, 524299, 65538, 3, 524300, 2, 3, 524301, 2, 3, 524302, 524290, 3, 524303, 589826, 3, 524304, 2, 3, 524305, 65538, 3, 524306, 2, 3, 524307, 2, 3, 524308, 65538, 3, 524309, 2, 4, 524310, 65538, 4, 524311, 327682, 2, 524312, 327682, 2, 524313, 327682, 3, 524314, 131074, 4, 524315, 2, 2, 589824, 2, 0, 589825, 2, 0, 589826, 131074, 0, 589827, 327682, 3, 589828, 393218, 2, 589829, 393218, 2, 589830, 327682, 3, 589831, 393218, 2, 589832, 65538, 3, 589833, 2, 3, 589834, 65538, 3, 589835, 65538, 3, 589836, 2, 3, 589837, 65538, 3, 589838, 524290, 3, 589839, 589826, 3, 589840, 65538, 3, 589841, 2, 3, 589842, 2, 3, 589843, 2, 3, 589844, 2, 4, 589845, 196610, 4, 589846, 327682, 3, 589847, 327682, 2, 589848, 327682, 2, 589849, 327682, 3, 589850, 327682, 3, 589851, 327682, 2, 655360, 2, 0, 655361, 65538, 0, 655362, 262146, 0, 655363, 262146, 4, 655364, 393218, 2, 655365, 393218, 2, 655366, 327682, 3, 655367, 393218, 2, 655368, 327682, 4, 655369, 393218, 4, 655370, 458754, 4, 655371, 458754, 4, 655372, 458754, 4, 655373, 458754, 4, 655374, 524290, 4, 655375, 589826, 4, 655376, 2, 3, 655377, 65538, 3, 655378, 524290, 4, 655379, 589826, 4, 655380, 2, 5, 655381, 65538, 5, 655382, 131074, 5, 655383, 327682, 2, 655384, 327682, 2, 655385, 327682, 3, 655386, 327682, 3, 655387, 327682, 2, 720896, 65538, 0, 720897, 2, 0, 720898, 65538, 0, 720899, 131074, 0, 720900, 393218, 2, 720901, 393218, 2, 720902, 327682, 3, 720903, 393218, 2, 720904, 196610, 5, 720905, 262146, 5, 720906, 327682, 5, 720907, 327682, 5, 720908, 327682, 5, 720909, 327682, 5, 720910, 393218, 5, 720911, 393218, 5, 720912, 65538, 3, 720913, 2, 3, 720914, 393218, 5, 720915, 393218, 5, 720916, 2, 5, 720917, 458754, 5, 720918, 524290, 5, 720919, 589826, 5, 720920, 327682, 2, 720921, 327682, 3, 720922, 327682, 3, 720923, 327682, 2, 786432, 2, 0, 786433, 65538, 0, 786434, 589826, 1, 786435, 2, 6, 786436, 327682, 3, 786437, 327682, 2, 786438, 65538, 6, 786439, 131074, 6, 786440, 524290, 3, 786441, 589826, 3, 786442, 65538, 3, 786443, 2, 3, 786444, 65538, 3, 786445, 2, 3, 786446, 196610, 6, 786447, 262146, 6, 786448, 65538, 3, 786449, 65538, 3, 786450, 196610, 6, 786451, 262146, 6, 786452, 327682, 6, 786453, 393218, 6, 786454, 458754, 6, 786455, 524290, 6, 786456, 589826, 6, 786457, 2, 7, 786458, 327682, 3, 786459, 327682, 2, 851968, 2, 2, 851969, 2, 2, 851970, 262146, 3, 851971, 393218, 2, 851972, 65538, 7, 851973, 458754, 2, 851974, 131074, 7, 851975, 65538, 3, 851976, 524290, 3, 851977, 589826, 3, 851978, 2, 3, 851979, 65538, 3, 851980, 65538, 3, 851981, 65538, 3, 851982, 65538, 3, 851983, 65538, 3, 851984, 2, 3, 851985, 65538, 3, 851986, 65538, 3, 851987, 65538, 3, 851988, 65538, 3, 851989, 327682, 6, 851990, 196610, 7, 851991, 131074, 7, 851992, 65538, 3, 851993, 2, 3, 851994, 262146, 7, 851995, 327682, 2, 917504, 327682, 2, 917505, 327682, 3, 917506, 327682, 2, 917507, 393218, 2, 917508, 327682, 7, 917509, 65538, 3, 917510, 65538, 3, 917511, 65538, 3, 917512, 327682, 4, 917513, 393218, 4, 917514, 458754, 4, 917515, 458754, 4, 917516, 458754, 4, 917517, 458754, 4, 917518, 524290, 4, 917519, 589826, 4, 917520, 458754, 4, 917521, 458754, 4, 917522, 327682, 4, 917523, 393218, 4, 917524, 458754, 4, 917525, 458754, 4, 917526, 327682, 4, 917527, 393218, 4, 917528, 458754, 4, 917529, 458754, 4, 917530, 393218, 7, 917531, 458754, 2, 983040, 327682, 3, 983041, 393218, 2, 983042, 327682, 3, 983043, 393218, 2, 983044, 65538, 4, 983045, 458754, 7, 983046, 65538, 3, 983047, 2, 3, 983048, 196610, 5, 983049, 262146, 5, 983050, 327682, 5, 983051, 327682, 5, 983052, 327682, 5, 983053, 327682, 5, 983054, 393218, 5, 983055, 393218, 5, 983056, 327682, 5, 983057, 327682, 5, 983058, 196610, 5, 983059, 262146, 5, 983060, 327682, 5, 983061, 327682, 5, 983062, 196610, 5, 983063, 262146, 5, 983064, 327682, 5, 983065, 327682, 5, 983066, 524290, 7, 983067, 589826, 7, 1048576, 327682, 2, 1048577, 393218, 2, 1048578, 327682, 3, 1048579, 393218, 2, 1048580, 327682, 3, 1048581, 2, 8, 1048582, 458754, 7, 1048583, 65538, 3, 1048584, 2, 3, 1048585, 2, 3, 1048586, 2, 3, 1048587, 65538, 3, 1048588, 2, 3, 1048589, 2, 3, 1048590, 196610, 6, 1048591, 262146, 6, 1048592, 65538, 3, 1048593, 2, 3, 1048594, 2, 3, 1048595, 2, 3, 1048596, 2, 3, 1048597, 65538, 3, 1048598, 2, 3, 1048599, 2, 3, 1048600, 65538, 3, 1048601, 65538, 3, 1048602, 2, 3, 1048603, 65538, 8, 1114112, 327682, 3, 1114113, 327682, 3, 1114114, 327682, 2, 1114115, 393218, 2, 1114116, 131074, 5, 1114117, 589826, 5, 1114118, 2, 8, 1114119, 65538, 4, 1114120, 458754, 7, 1114121, 131074, 8, 1114122, 196610, 8, 1114123, 65538, 3, 1114124, 65538, 3, 1114125, 65538, 3, 1114126, 2, 3, 1114127, 65538, 3, 1114128, 2, 3, 1114129, 65538, 3, 1114130, 131074, 8, 1114131, 196610, 8, 1114132, 65538, 3, 1114133, 65538, 3, 1114134, 131074, 8, 1114135, 196610, 8, 1114136, 65538, 3, 1114137, 131074, 8, 1114138, 196610, 8, 1114139, 65538, 3, 1179648, 327682, 2, 1179649, 393218, 2, 1179650, 327682, 3, 1179651, 393218, 2, 1179652, 458754, 6, 1179653, 524290, 5, 1179654, 589826, 5, 1179655, 327682, 3, 1179656, 131074, 8, 1179657, 262146, 8, 1179658, 262146, 0, 1179659, 196610, 8, 1179660, 65538, 3, 1179661, 65538, 3, 1179662, 131074, 8, 1179663, 327682, 8, 1179664, 327682, 8, 1179665, 327682, 8, 1179666, 262146, 8, 1179667, 262146, 0, 1179668, 327682, 8, 1179669, 327682, 8, 1179670, 262146, 8, 1179671, 262146, 0, 1179672, 327682, 8, 1179673, 262146, 8, 1179674, 131074, 0, 1179675, 65538, 3, 1245184, 327682, 3, 1245185, 327682, 3, 1245186, 327682, 2, 1245187, 393218, 2, 1245188, 393218, 8, 1245189, 458754, 6, 1245190, 524290, 5, 1245191, 131074, 8, 1245192, 262146, 8, 1245193, 2, 0, 1245194, 2, 0, 1245195, 262146, 0, 1245196, 327682, 8, 1245197, 327682, 8, 1245198, 262146, 8, 1245199, 2, 0, 1245200, 2, 0, 1245201, 2, 0, 1245202, 2, 0, 1245203, 2, 0, 1245204, 2, 0, 1245205, 2, 0, 1245206, 2, 0, 1245207, 2, 0, 1245208, 2, 0, 1245209, 2, 0, 1245210, 262146, 0, 1245211, 327682, 8, 1310720, 327682, 2, 1310721, 393218, 2, 1310722, 327682, 3, 1310723, 65538, 5, 1310724, 458754, 5, 1310725, 458754, 805306373, 1310726, 131074, 8, 1310727, 262146, 8, 1310728, 2, 0, 1310729, 2, 0, 1310730, 2, 0, 1310731, 2, 0, 1310732, 2, 0, 1310733, 65538, 0, 1310734, 2, 0, 1310735, 65538, 0, 1310736, 2, 0, 1310737, 2, 0, 1310738, 2, 0, 1310739, 2, 0, 1310740, 2, 0, 1310741, 2, 0, 1310742, 2, 0, 1310743, 2, 0, 1310744, 2, 0, 1310745, 2, 0, 1310746, 2, 0, 1310747, 2, 0, 917503, 2, 2, 983039, 327682, 3, 1048575, 327682, 268435458, 1114111, 327682, 3, 1179647, 327682, 268435458, 1245183, 327682, 3, 1310719, 327682, 268435458, 1376255, 327682, 3, 917502, 2, 2, 983038, 327682, 3, 1048574, 327682, 3, 1114110, 327682, 3, 1179646, 327682, 3, 1245182, 327682, 3, 1310718, 327682, 3, 1376254, 327682, 3, 917501, 2, 2, 983037, 327682, 3, 1048573, 327682, 3, 1114109, 327682, 3, 1179645, 327682, 3, 1245181, 327682, 3, 1310717, 327682, 3, 1376253, 327682, 3, 917500, 2, 2, 983036, 327682, 3, 1048572, 327682, 3, 1114108, 327682, 3, 1179644, 327682, 3, 1245180, 327682, 3, 1310716, 327682, 3, 1376252, 327682, 3, 917499, 2, 2, 983035, 327682, 3, 1048571, 327682, 3, 1114107, 327682, 3, 1179643, 327682, 3, 1245179, 327682, 3, 1310715, 327682, 3, 1376251, 327682, 3, 917498, 2, 2, 983034, 327682, 3, 1048570, 327682, 3, 1114106, 327682, 3, 1179642, 327682, 3, 1245178, 327682, 3, 1310714, 327682, 3, 1376250, 327682, 3, 917497, 2, 2, 983033, 327682, 3, 1048569, 327682, 3, 1114105, 327682, 3, 1179641, 327682, 3, 1245177, 327682, 3, 1310713, 327682, 3, 1376249, 327682, 3, 917496, 2, 2, 983032, 327682, 3, 1048568, 327682, 3, 1114104, 327682, 3, 1179640, 327682, 3, 1245176, 327682, 3, 1310712, 327682, 3, 1376248, 327682, 3, 917495, 2, 2, 983031, 327682, 3, 1048567, 327682, 3, 1114103, 327682, 3, 1179639, 327682, 3, 1245175, 327682, 3, 1310711, 327682, 3, 1376247, 327682, 3, 524316, 2, 2, 589852, 327682, 3, 655388, 327682, 3, 720924, 327682, 3, 786460, 327682, 3, 851996, 327682, 3, 917532, 458754, 2, 524317, 2, 2, 589853, 327682, 3, 655389, 327682, 3, 720925, 327682, 3, 786461, 327682, 3, 851997, 327682, 3, 917533, 458754, 2, 524318, 2, 2, 589854, 327682, 3, 655390, 327682, 3, 720926, 327682, 3, 786462, 327682, 3, 851998, 327682, 3, 917534, 458754, 2, 524319, 2, 2, 589855, 327682, 3, 655391, 327682, 3, 720927, 327682, 3, 786463, 327682, 3, 851999, 327682, 3, 917535, 458754, 2, 524320, 2, 2, 589856, 327682, 3, 655392, 327682, 3, 720928, 327682, 3, 786464, 327682, 3, 852000, 327682, 3, 917536, 458754, 2, 524321, 2, 2, 589857, 327682, 3, 655393, 327682, 3, 720929, 327682, 3, 786465, 327682, 3, 852001, 327682, 3, 917537, 458754, 2, 524322, 2, 2, 589858, 327682, 3, 655394, 327682, 3, 720930, 327682, 3, 786466, 327682, 3, 852002, 327682, 3, 917538, 458754, 2, 524323, 2, 2, 589859, 327682, 3, 655395, 327682, 3, 720931, 327682, 3, 786467, 327682, 3, 852003, 327682, 3, 917539, 458754, 2, 65527, 2, 0, 131063, 2, 0, 196599, 2, 0, 262135, 2, 0, 327671, 2, 0, 393207, 2, 0, 458743, 2, 0, 524279, 2, 0, 589815, 2, 0, 655351, 2, 0, 720887, 65538, 0, 786423, 2, 0, 851959, 65538, 0, 65528, 2, 0, 131064, 2, 0, 196600, 2, 0, 262136, 2, 0, 327672, 2, 0, 393208, 2, 0, 458744, 2, 0, 524280, 2, 0, 589816, 2, 0, 655352, 2, 0, 720888, 2, 0, 786424, 65538, 0, 851960, 2, 0, 65529, 2, 0, 131065, 2, 0, 196601, 2, 0, 262137, 2, 0, 327673, 2, 0, 393209, 2, 0, 458745, 2, 0, 524281, 2, 0, 589817, 2, 0, 655353, 2, 0, 720889, 2, 0, 786425, 2, 0, 851961, 2, 0, 65530, 2, 0, 131066, 2, 0, 196602, 2, 0, 262138, 2, 0, 327674, 65538, 0, 393210, 2, 0, 458746, 65538, 0, 524282, 2, 0, 589818, 2, 0, 655354, 2, 0, 720890, 2, 0, 786426, 2, 0, 851962, 2, 0, 65531, 2, 0, 131067, 2, 0, 196603, 2, 0, 262139, 65538, 0, 327675, 2, 0, 393211, 65538, 0, 458747, 2, 0, 524283, 65538, 0, 589819, 2, 0, 655355, 2, 0, 720891, 65538, 0, 786427, 2, 0, 851963, 2, 0, 65532, 2, 0, 131068, 2, 0, 196604, 2, 0, 262140, 2, 0, 327676, 2, 0, 393212, 2, 0, 458748, 2, 0, 524284, 2, 0, 589820, 2, 0, 655356, 65538, 0, 720892, 2, 0, 786428, 65538, 0, 851964, 2, 0, 65533, 2, 0, 131069, 65538, 0, 196605, 2, 0, 262141, 2, 0, 327677, 2, 0, 393213, 2, 0, 458749, 2, 0, 524285, 2, 0, 589821, 2, 0, 655357, 2, 0, 720893, 65538, 0, 786429, 2, 0, 851965, 2, 0, 65534, 2, 0, 131070, 2, 0, 196606, 65538, 0, 262142, 2, 0, 327678, 2, 0, 393214, 2, 0, 458750, 2, 0, 524286, 2, 0, 589822, 2, 0, 655358, 2, 0, 720894, 2, 0, 786430, 2, 0, 851966, 2, 0, 65535, 2, 0, 131071, 2, 0, 196607, 2, 0, 262143, 2, 0, 327679, 2, 0, 393215, 2, 0, 458751, 2, 0, 524287, 2, 0, 589823, 2, 0, 655359, 2, 0, 720895, 2, 0, 786431, 2, 0, 851967, 2, 0, 1376258, 65538, 5, 1441793, 65538, 5, 1376261, 589826, 536870917, 1441796, 589826, 536870917, 1507331, 589826, 536870917, 1376262, 131074, 268435456, 1441798, 131074, 268435456, 1507334, 131074, 268435456, 1572870, 131074, 268435456, 1638406, 131074, 268435456, 1703942, 131074, 268435456, 1769478, 131074, 268435456, 1835014, 131074, 268435456, 1441797, 2, 1342177288, 1507333, 2, 3, 1572869, 2, 3, 1572868, 2, 3, 1507332, 2, 1342177288, 1638404, 2, 3, 1638403, 65538, 1342177284, 1572867, 2, 1342177288, 1638405, 2, 3, 1703939, 65538, 1342177284, 1703940, 2, 3, 1703941, 2, 3, 1769477, 2, 3, 1769476, 2, 3, 1769475, 65538, 1342177284, 1441794, 458754, 5, 1376259, 458754, 5, 1441795, 458754, 805306373, 1376260, 458754, 805306373, 1507329, 458754, 5, 1572865, 458754, 6, 1638401, 458754, 6, 1703937, 458754, 6, 1769473, 458754, 6, 1572866, 131074, 1342177285, 1638402, 131074, 1342177285, 1703938, 131074, 1342177285, 1769474, 131074, 1342177285, 1507330, 458754, 805306373, 1376263, 2, 0, 1441799, 2, 0, 1507335, 65538, 0, 1572871, 2, 0, 1638407, 2, 0, 1703943, 2, 0, 1769479, 2, 0, 1835015, 2, 0, 1376264, 2, 0, 1441800, 65538, 0, 1507336, 2, 0, 1572872, 65538, 0, 1638408, 2, 0, 1703944, 2, 0, 1769480, 2, 0, 1835016, 2, 0, 1376265, 2, 0, 1441801, 2, 0, 1507337, 65538, 0, 1572873, 2, 0, 1638409, 2, 0, 1703945, 2, 0, 1769481, 2, 0, 1835017, 2, 0, 1376266, 2, 0, 1441802, 2, 0, 1507338, 2, 0, 1572874, 2, 0, 1638410, 2, 0, 1703946, 2, 0, 1769482, 2, 0, 1835018, 2, 0, 1376267, 2, 0, 1441803, 2, 0, 1507339, 2, 0, 1572875, 2, 0, 1638411, 2, 0, 1703947, 2, 0, 1769483, 2, 0, 1835019, 2, 0, 1376268, 2, 0, 1441804, 2, 0, 1507340, 2, 0, 1572876, 2, 0, 1638412, 2, 0, 1703948, 2, 0, 1769484, 2, 0, 1835020, 2, 0, 1376269, 2, 0, 1441805, 65538, 0, 1507341, 2, 0, 1572877, 2, 0, 1638413, 65538, 0, 1703949, 2, 0, 1769485, 2, 0, 1835021, 2, 0, 1376270, 65538, 0, 1441806, 2, 0, 1507342, 2, 0, 1572878, 65538, 0, 1638414, 2, 0, 1703950, 2, 0, 1769486, 2, 0, 1835022, 2, 0, 1376271, 2, 0, 1441807, 2, 0, 1507343, 65538, 0, 1572879, 2, 0, 1638415, 65538, 0, 1703951, 2, 0, 1769487, 2, 0, 1835023, 2, 0, 1376272, 2, 0, 1441808, 2, 0, 1507344, 2, 0, 1572880, 65538, 0, 1638416, 2, 0, 1703952, 2, 0, 1769488, 2, 0, 1835024, 2, 0, 1376273, 2, 0, 1441809, 2, 0, 1507345, 2, 0, 1572881, 2, 0, 1638417, 2, 0, 1703953, 2, 0, 1769489, 2, 0, 1835025, 2, 0, 1376274, 2, 0, 1441810, 2, 0, 1507346, 2, 0, 1572882, 2, 0, 1638418, 2, 0, 1703954, 2, 0, 1769490, 2, 0, 1835026, 2, 0, 1376275, 2, 0, 1441811, 2, 0, 1507347, 2, 0, 1572883, 2, 0, 1638419, 2, 0, 1703955, 2, 0, 1769491, 2, 0, 1835027, 2, 0, 1376276, 2, 0, 1441812, 65538, 0, 1507348, 2, 0, 1572884, 2, 0, 1638420, 2, 0, 1703956, 2, 0, 1769492, 2, 0, 1835028, 2, 0, 1376277, 65538, 0, 1441813, 2, 0, 1507349, 65538, 0, 1572885, 2, 0, 1638421, 2, 0, 1703957, 2, 0, 1769493, 2, 0, 1835029, 2, 0, 1376278, 2, 0, 1441814, 65538, 0, 1507350, 2, 0, 1572886, 2, 0, 1638422, 2, 0, 1703958, 2, 0, 1769494, 2, 0, 1835030, 2, 0, 1376279, 65538, 0, 1441815, 2, 0, 1507351, 65538, 0, 1572887, 2, 0, 1638423, 2, 0, 1703959, 2, 0, 1769495, 2, 0, 1835031, 2, 0, 1376280, 2, 0, 1441816, 65538, 0, 1507352, 2, 0, 1572888, 2, 0, 1638424, 2, 0, 1703960, 2, 0, 1769496, 2, 0, 1835032, 2, 0, 1376281, 2, 0, 1441817, 2, 0, 1507353, 2, 0, 1572889, 65538, 0, 1638425, 2, 0, 1703961, 2, 0, 1769497, 2, 0, 1835033, 2, 0, 1376282, 2, 0, 1441818, 2, 0, 1507354, 65538, 0, 1572890, 2, 0, 1638426, 65538, 0, 1703962, 2, 0, 1769498, 2, 0, 1835034, 2, 0, 1376283, 2, 0, 1441819, 2, 0, 1507355, 2, 0, 1572891, 2, 0, 1638427, 2, 0, 1703963, 2, 0, 1769499, 2, 0, 1835035, 2, 0, 1376257, 393218, 2, 1376256, 327682, 3, 1441792, 327682, 2, 1572864, 131074, 1073741829, 1638400, 131074, 1073741829, 1703936, 131074, 1073741829, 1769472, 131074, 1073741829, 1507328, 65538, 5, 1441783, 327682, 3, 1507319, 327682, 3, 1572855, 327682, 3, 1638391, 65538, 536870916, 1703927, 2, 268435459, 1769463, 2, 268435459, 1834999, 2, 268435459, 1441784, 327682, 3, 1507320, 327682, 3, 1572856, 327682, 3, 1638392, 65538, 536870916, 1703928, 2, 268435459, 1769464, 2, 268435459, 1835000, 2, 268435459, 1441785, 327682, 3, 1507321, 327682, 3, 1572857, 327682, 3, 1638393, 65538, 536870916, 1703929, 2, 268435459, 1769465, 2, 268435459, 1835001, 2, 268435459, 1441786, 327682, 3, 1507322, 327682, 3, 1572858, 327682, 3, 1638394, 65538, 536870916, 1703930, 2, 268435459, 1769466, 2, 268435459, 1835002, 2, 268435459, 1441787, 327682, 3, 1507323, 327682, 3, 1572859, 327682, 3, 1638395, 65538, 536870916, 1703931, 2, 268435459, 1769467, 2, 268435459, 1835003, 2, 268435459, 1441788, 327682, 3, 1507324, 327682, 3, 1572860, 327682, 3, 1638396, 65538, 536870916, 1703932, 2, 268435459, 1769468, 2, 268435459, 1835004, 2, 268435459, 1441789, 327682, 3, 1507325, 327682, 3, 1572861, 327682, 3, 1638397, 65538, 536870916, 1703933, 2, 268435459, 1769469, 2, 268435459, 1835005, 2, 268435459, 1441790, 327682, 3, 1507326, 327682, 3, 1572862, 327682, 3, 1638398, 65538, 536870916, 1703934, 2, 268435459, 1769470, 2, 268435459, 1835006, 2, 268435459, 1441791, 327682, 268435458, 1507327, 327682, 3, 1572863, 327682, 268435458, 1703935, 65538, 1073741828, 1769471, 65538, 1073741828, 1835007, 65538, 1073741828, 327708, 2, 0, 393244, 2, 0, 458780, 2, 0, 458781, 2, 0, 458782, 65538, 0, 458783, 2, 0, 458784, 2, 0, 458785, 2, 0, 458786, 65538, 0, 458787, 2, 0, 393250, 65538, 0, 393249, 2, 0, 393248, 2, 0, 393247, 65538, 0, 393246, 2, 0, 393245, 65538, 0, 327709, 2, 0, 327710, 65538, 0, 327711, 2, 0, 327712, 2, 0, 327713, 2, 0, 327714, 65538, 0, 327715, 2, 0, 393251, 65538, 0, 1245213, 458754, 1610612740, 1245214, 327682, 1610612741, 1310749, 458754, 1610612740, 1310750, 327682, 1610612741, 1376285, 458754, 1610612740, 1376286, 327682, 1610612741, 1441821, 458754, 1610612740, 1441822, 327682, 1610612741, 1507357, 458754, 1610612740, 1507358, 327682, 1610612741, 1572893, 458754, 1610612740, 1572894, 327682, 1610612741, 1638429, 458754, 1610612740, 1638430, 327682, 1610612741, 1703965, 458754, 1610612740, 1703966, 327682, 1610612741, 1769501, 458754, 1610612740, 1769502, 327682, 1610612741, 1245212, 196610, 8, 1310748, 131074, 0, 1376284, 131074, 0, 1441820, 131074, 0, 1507356, 131074, 0, 1572892, 131074, 0, 1638428, 131074, 0, 1703964, 131074, 0, 1769500, 131074, 0, 1835036, 131074, 0, 983068, 393218, 7, 1048604, 524290, 7, 1114140, 2, 3, 1179676, 2, 3, 983069, 2, 3, 1048605, 524290, 1073741831, 1114141, 524290, 1879048199, 1179677, 524290, 3, 983070, 2, 3, 1048606, 2, 3, 1114142, 65538, 1073741832, 1179678, 589826, 3, 983071, 2, 3, 1048607, 65538, 3, 1114143, 2, 3, 1179679, 2, 3, 983072, 65538, 3, 1048608, 2, 3, 1114144, 2, 3, 1179680, 2, 3, 983073, 2, 3, 1048609, 2, 3, 1114145, 2, 3, 1179681, 2, 3, 983074, 2, 3, 1048610, 2, 3, 1114146, 2, 3, 1179682, 65538, 3, 983075, 2, 3, 1048611, 2, 3, 1114147, 2, 3, 1179683, 2, 3, 1245215, 65538, 3, 1310751, 2, 3, 1376287, 65538, 3, 1441823, 2, 3, 1507359, 2, 3, 1572895, 2, 3, 1638431, 65538, 3, 1703967, 2, 3, 1769503, 65538, 3, 1245216, 2, 3, 1310752, 65538, 3, 1376288, 2, 3, 1441824, 2, 3, 1507360, 2, 3, 1572896, 2, 3, 1638432, 2, 3, 1703968, 65538, 3, 1769504, 2, 3, 1245217, 65538, 3, 1310753, 2, 3, 1376289, 2, 3, 1441825, 2, 3, 1507361, 2, 3, 1572897, 65538, 3, 1638433, 2, 3, 1703969, 2, 3, 1769505, 2, 3, 1245218, 2, 3, 1310754, 2, 3, 1376290, 2, 3, 1441826, 2, 3, 1507362, 65538, 3, 1572898, 2, 3, 1638434, 65538, 3, 1703970, 2, 3, 1769506, 2, 3, 1245219, 2, 3, 1310755, 2, 3, 1376291, 2, 3, 1441827, 2, 3, 1507363, 2, 3, 1572899, 65538, 3, 1638435, 2, 3, 1703971, 2, 3, 1769507, 2, 3, 262172, 262146, 1, 262173, 262146, 1, 262174, 262146, 1, 262175, 262146, 1, 262176, 262146, 1, 262177, 262146, 1, 262178, 262146, 1, 262179, 262146, 1, 1638399, 2, 1073741832)
+layer_2/tile_data = PackedInt32Array(1245187, 10, 1, 1245185, 10, 1, 1179650, 10, 0, 1048576, 10, 0, 983043, 10, 0, 917506, 10, 1, 786438, 10, 1, 720903, 10, 0, 589829, 10, 0, 524292, 10, 1, 393222, 10, 0, 458775, 10, 0, 589851, 10, 0, 655384, 10, 1, 720923, 10, 1, 720921, 10, 0, 786461, 10, 0, 589858, 10, 0, 720928, 10, 1, 1179646, 10, 1, 1441786, 10, 0, 1048568, 10, 0, 1245177, 10, 1, 1572863, 10, 1, 1572856, 10, 1, 1048572, 10, 1)
+
+[node name="MapMario" type="Path2D" parent="."]
+z_index = 2
+curve = SubResource("Curve2D_jy0y6")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="MapMario"]
+position = Vector2(72, 88)
+rotates = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MapMario/PathFollow2D"]
+libraries = {
+"": SubResource("AnimationLibrary_ygw35")
+}
+
+[node name="MarioPoint" type="Node2D" parent="MapMario/PathFollow2D"]
+
+[node name="PlayerVisual" parent="." instance=ExtResource("3_6l411")]
+position = Vector2(152, 160)
+
+[node name="DPSHWarp" parent="." instance=ExtResource("5_ayl7n")]
+position = Vector2(8, 56)
+point_type = "Warp"
+current_area = SubResource("Resource_y28j0")
+map_warp = "res://Instances/Levels/Maps/MainIsland.tscn"
+warp_point_name = "DonutPlains/BowserValleyPipeReturn"
+
+[node name="Pipe" type="Sprite2D" parent="DPSHWarp"]
+top_level = true
+position = Vector2(40, 24)
+texture = ExtResource("6_515c1")
+
+[node name="DPSHReturn" parent="." node_paths=PackedStringArray("normal_path_tiles") instance=ExtResource("5_ayl7n")]
+position = Vector2(8, 56)
+current_area = SubResource("Resource_y28j0")
+level = ExtResource("7_q7wft")
+special_route_direction = "None"
+up_route = SubResource("Resource_8ifru")
+normal_path_tiles = NodePath("Path")
+
+[node name="Path" type="Node" parent="DPSHReturn"]
+
+[node name="1" type="Sprite2D" parent="DPSHReturn/Path"]
+z_index = -1
+position = Vector2(8, 44)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="2" type="Sprite2D" parent="DPSHReturn/Path"]
+z_index = -1
+position = Vector2(8, 36)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="3" type="Node2D" parent="DPSHReturn/Path"]
+z_index = -1
+position = Vector2(8, 24)
+
+[node name="A" type="Sprite2D" parent="DPSHReturn/Path/3"]
+position = Vector2(-4, 4)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="B" type="Sprite2D" parent="DPSHReturn/Path/3"]
+position = Vector2(4, 4)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 21
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="C" type="Sprite2D" parent="DPSHReturn/Path/3"]
+position = Vector2(-4, -4)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="D" type="Sprite2D" parent="DPSHReturn/Path/3"]
+position = Vector2(4, -4)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 13
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="DS2" parent="." node_paths=PackedStringArray("normal_path_tiles") instance=ExtResource("5_ayl7n")]
+position = Vector2(8, 24)
+point_type = "Level"
+current_area = SubResource("Resource_y28j0")
+level = ExtResource("10_6murh")
+unlock_route_direction = "Right"
+down_route = SubResource("Resource_knjsh")
+right_route = SubResource("Resource_fol3o")
+normal_path_tiles = NodePath("Path")
+
+[node name="StandardMapPointVisual" parent="DS2" instance=ExtResource("9_1jvdy")]
+
+[node name="Path" type="Node" parent="DS2"]
+
+[node name="1" type="Sprite2D" parent="DS2/Path"]
+z_index = -1
+position = Vector2(20, 24)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="2" type="Sprite2D" parent="DS2/Path"]
+z_index = -1
+position = Vector2(28, 24)
+texture = ExtResource("22_j8ks7")
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("24_a1tax")
+
+[node name="DP3Warp" parent="." instance=ExtResource("5_ayl7n")]
+position = Vector2(40, 24)
+point_type = "Warp"
+current_area = SubResource("Resource_y28j0")
+map_warp = "res://Instances/Levels/Maps/MainIsland.tscn"
+warp_point_name = "DonutPlains/BowserValleyPipe2Return"
+
+[node name="Pipe" type="Sprite2D" parent="DP3Warp"]
+top_level = true
+position = Vector2(8, 56)
+texture = ExtResource("6_515c1")
+
+[node name="DP3Return" parent="." instance=ExtResource("5_ayl7n")]
+position = Vector2(40, 24)
+current_area = SubResource("Resource_y28j0")
+left_route = SubResource("Resource_va4po")
+
+[node name="LevelBG" parent="." instance=ExtResource("12_gxdt6")]
+main_texture = null
+sky_colour = Color(0, 0, 0, 1)
+enable_thunder = true
+
+[node name="BowserValleyMap" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+texture = ExtResource("13_rq421")
+centered = false
+
+[node name="Valley1" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
+position = Vector2(184, 120)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("15_08f8w")
+unlock_route_direction = "Left"
+left_route = SubResource("Resource_e2woy")
+right_route = SubResource("Resource_o2qpj")
+normal_path_tiles = NodePath("Path")
+
+[node name="StandardMapPointVisual" parent="Valley1" instance=ExtResource("9_1jvdy")]
+
+[node name="Path" type="Node" parent="Valley1"]
+
+[node name="1" type="Node2D" parent="Valley1/Path"]
+z_index = -1
+position = Vector2(168, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley1/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley1/Path/1"]
+position = Vector2(0, 8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="Valley1/Path"]
+z_index = -1
+position = Vector2(160, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley1/Path/2"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley1/Path/2"]
+position = Vector2(0, 8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="3" type="Node2D" parent="Valley1/Path"]
+z_index = -1
+position = Vector2(144, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley1/Path/3"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley1/Path/3"]
+position = Vector2(0, 8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley1/Path/3"]
+position = Vector2(8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 13
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley1/Path/3"]
+position = Vector2(8, 8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 21
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Valley2" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles", "special_path_tiles")]
+position = Vector2(152, 120)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("16_vi6ex")
+unlock_route_direction = "Left"
+up_route = SubResource("Resource_4t4ko")
+left_route = SubResource("Resource_c2ruo")
+right_route = SubResource("Resource_l3cti")
+normal_path_tiles = NodePath("Path")
+special_path_tiles = NodePath("SecretPath")
+
+[node name="SecretPath" type="Node" parent="Valley2"]
+
+[node name="Node2D" type="Node2D" parent="Valley2/SecretPath"]
+position = Vector2(144, 104)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley2/SecretPath/Node2D"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley2/SecretPath/Node2D"]
+position = Vector2(8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Path" type="Node" parent="Valley2"]
+
+[node name="1" type="Node2D" parent="Valley2/Path"]
+z_index = -1
+position = Vector2(136, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley2/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley2/Path/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley2/Path/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley2/Path/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="RedLargeMapPoint" parent="Valley2" instance=ExtResource("30_mic1o")]
+
+[node name="VGH" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles", "special_path_tiles")]
+position = Vector2(120, 120)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("17_6pmup")
+unlock_route_direction = "Left"
+up_route = SubResource("Resource_mhdkj")
+left_route = SubResource("Resource_xi3ub")
+right_route = SubResource("Resource_ugvb3")
+normal_path_tiles = NodePath("Path")
+special_path_tiles = NodePath("SecretPath")
+
+[node name="GhostHouseVisual" parent="VGH" instance=ExtResource("15_k6f8b")]
+
+[node name="SecretPath" type="Node" parent="VGH"]
+
+[node name="1" type="Node2D" parent="VGH/SecretPath"]
+position = Vector2(120, 112)
+
+[node name="Sprite2D" type="Sprite2D" parent="VGH/SecretPath/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VGH/SecretPath/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Path" type="Node" parent="VGH"]
+
+[node name="1" type="Node2D" parent="VGH/Path"]
+z_index = -1
+position = Vector2(104, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="VGH/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VGH/Path/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="VGH/Path/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="VGH/Path/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="VGH/Path"]
+z_index = -1
+position = Vector2(88, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="VGH/Path/2"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VGH/Path/2"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="VGH/Path/2"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="VGH/Path/2"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="3" type="Node2D" parent="VGH/Path"]
+z_index = -1
+position = Vector2(72, 120)
+
+[node name="Sprite2D" type="Sprite2D" parent="VGH/Path/3"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 21
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VGH/Path/3"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="VGH/Path/3"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="VGH/Path/3"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 13
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Valley3" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
+position = Vector2(72, 120)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("19_xxm3n")
+up_route = SubResource("Resource_g1ohd")
+right_route = SubResource("Resource_ty7qh")
+normal_path_tiles = NodePath("Path")
+
+[node name="StandardMapPointVisual" parent="Valley3" instance=ExtResource("9_1jvdy")]
+
+[node name="Path" type="Node" parent="Valley3"]
+
+[node name="1" type="Node2D" parent="Valley3/Path"]
+z_index = -1
+position = Vector2(72, 104)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley3/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley3/Path/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley3/Path/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley3/Path/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="Valley3/Path"]
+z_index = -1
+position = Vector2(72, 88)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley3/Path/2"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 21
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley3/Path/2"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 13
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley3/Path/2"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley3/Path/2"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Valley4" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles", "special_path_tiles")]
+position = Vector2(72, 88)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("20_uifvj")
+unlock_route_direction = "Right"
+up_route = SubResource("Resource_qmwsu")
+down_route = SubResource("Resource_u7dc3")
+right_route = SubResource("Resource_ord2m")
+normal_path_tiles = NodePath("Path")
+special_path_tiles = NodePath("SecretPath")
+
+[node name="Path" type="Node" parent="Valley4"]
+
+[node name="1" type="Node2D" parent="Valley4/Path"]
+position = Vector2(88, 88)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley4/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley4/Path/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley4/Path/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley4/Path/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="Valley4/Path"]
+position = Vector2(104, 88)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley4/Path/2"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley4/Path/2"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley4/Path/2"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley4/Path/2"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="SecretPath" type="Node" parent="Valley4"]
+
+[node name="1" type="Node2D" parent="Valley4/SecretPath"]
+position = Vector2(72, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="Valley4/SecretPath/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Valley4/SecretPath/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Valley4/SecretPath/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Valley4/SecretPath/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="RedMapPointVisual" parent="Valley4" instance=ExtResource("35_fle3d")]
+
+[node name="Castle7" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
+position = Vector2(120, 88)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("21_0wpcx")
+up_route = SubResource("Resource_8a2um")
+left_route = SubResource("Resource_e4jvs")
+down_route = SubResource("Resource_4t5gt")
+normal_path_tiles = NodePath("Path")
+
+[node name="CastlePointVisual" parent="Castle7" instance=ExtResource("16_5huon")]
+
+[node name="Path" type="Node" parent="Castle7"]
+
+[node name="1" type="Node2D" parent="Castle7/Path"]
+z_index = -1
+position = Vector2(120, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="Castle7/Path/1"]
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Castle7/Path/1"]
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Castle7/Path/1"]
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Castle7/Path/1"]
+position = Vector2(-8, 0)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="VF" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
+position = Vector2(152, 88)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("19_vmvwj")
+up_route = SubResource("Resource_s4daf")
+down_route = SubResource("Resource_flkec")
+normal_path_tiles = NodePath("Path")
+
+[node name="Path" type="Node" parent="VF"]
+
+[node name="1" type="Node2D" parent="VF/Path"]
+position = Vector2(152, 80)
+
+[node name="Sprite2D" type="Sprite2D" parent="VF/Path/1"]
+z_index = -1
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VF/Path/1"]
+z_index = -1
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="VF/Path"]
+position = Vector2(152, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="VF/Path/2"]
+z_index = -1
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VF/Path/2"]
+z_index = -1
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="3" type="Node2D" parent="VF/Path"]
+position = Vector2(152, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="VF/Path/3"]
+z_index = -1
+position = Vector2(-8, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="VF/Path/3"]
+z_index = -1
+position = Vector2(0, -8)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="FortressVisual" parent="VF" instance=ExtResource("37_y5mm6")]
+
+[node name="FrontDoor" type="Node2D" parent="."]
+position = Vector2(120, 56)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("21_f63c7")
+left_route = SubResource("Resource_v5uig")
+down_route = SubResource("Resource_rty1b")
+
+[node name="Castle" type="AnimatedSprite2D" parent="FrontDoor"]
+top_level = true
+position = Vector2(124, 36)
+sprite_frames = SubResource("SpriteFrames_by3nh")
+autoplay = "default"
+frame_progress = 0.976678
+
+[node name="Lava" type="AnimatedSprite2D" parent="FrontDoor"]
+top_level = true
+z_index = -1
+position = Vector2(124, 36)
+sprite_frames = SubResource("SpriteFrames_yh2qm")
+autoplay = "default"
+frame_progress = 0.230704
+
+[node name="Sprite" type="AnimatedSprite2D" parent="FrontDoor"]
+top_level = true
+position = Vector2(128, 32)
+sprite_frames = SubResource("SpriteFrames_eh78w")
+autoplay = "default"
+frame_progress = 0.0172386
+
+[node name="BackDoor" type="Node2D" parent="."]
+position = Vector2(152, 56)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("15_ele45")
+down_route = SubResource("Resource_rg7fh")
+
+[node name="ChocoWarpReturn" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles", "special_path_tiles")]
+position = Vector2(200, 152)
+script = ExtResource("14_3x1sk")
+current_area = ExtResource("5_443qw")
+level_unlocked = true
+special_completed = true
+level_completed = true
+unlock_route_direction = "Left"
+special_route_direction = "Left"
+left_route = SubResource("Resource_d8gra")
+normal_path_tiles = NodePath("../ChocoSecret/Node")
+special_path_tiles = NodePath("../ChocoSecret/Node")
+
+[node name="ChocoWarp" type="Node2D" parent="."]
+position = Vector2(200, 152)
+script = ExtResource("14_3x1sk")
+point_type = "Warp"
+current_area = ExtResource("5_443qw")
+map_warp = "res://Instances/Levels/Maps/MainIsland.tscn"
+warp_point_name = "ChocoIsland/BowserValleyWarpReturn"
+
+[node name="Sprite2D" type="Sprite2D" parent="ChocoWarp"]
+top_level = true
+position = Vector2(200, 152)
+texture = ExtResource("6_515c1")
+
+[node name="ChocoSecret" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
+position = Vector2(120, 152)
+script = ExtResource("14_3x1sk")
+point_type = "Level"
+current_area = ExtResource("5_443qw")
+level = ExtResource("18_eiigf")
+unlock_route_direction = "Left"
+left_route = SubResource("Resource_ky7bs")
+right_route = SubResource("Resource_f67fv")
+normal_path_tiles = NodePath("Node")
+
+[node name="StandardMapPointVisual" parent="ChocoSecret" instance=ExtResource("9_1jvdy")]
+
+[node name="Node" type="Node" parent="ChocoSecret"]
+
+[node name="Node2D" type="Node2D" parent="ChocoSecret/Node"]
+
+[node name="ChocoExitWarp" type="Node2D" parent="."]
+position = Vector2(72, 152)
+script = ExtResource("14_3x1sk")
+point_type = "Warp"
+current_area = ExtResource("5_443qw")
+map_warp = "res://Instances/Levels/Maps/MainIsland.tscn"
+warp_point_name = "ChocoIsland/BowserValleyExitWarpReturn"
+
+[node name="Sprite2D" type="Sprite2D" parent="ChocoExitWarp"]
+top_level = true
+position = Vector2(72, 152)
+texture = ExtResource("6_515c1")
+
+[node name="ChocoExitWarpReturn" type="Node2D" parent="."]
+position = Vector2(72, 152)
+script = ExtResource("14_3x1sk")
+current_area = ExtResource("5_443qw")
+right_route = SubResource("Resource_lwytc")
+
+[node name="Bowser" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(80, 16)
+texture = ExtResource("18_7f7dp")
+flip_h = true
+
+[node name="Animations" type="AnimationPlayer" parent="Bowser"]
+libraries = {
+"": SubResource("AnimationLibrary_ota21")
+}
+autoplay = "Fly"
+
+[node name="Animations2" type="AnimationPlayer" parent="Bowser"]
+libraries = {
+"": SubResource("AnimationLibrary_bixnf")
+}
+autoplay = "Float"
+
+[node name="MainEntranceReturn" type="Node2D" parent="."]
+position = Vector2(240, 152)
+script = ExtResource("14_3x1sk")
+point_type = "Move"
+current_area = ExtResource("5_443qw")
+level = ExtResource("20_oxvo2")
+up_route = SubResource("Resource_4uowk")
+
+[node name="Path" type="Node" parent="MainEntranceReturn"]
+
+[node name="1" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(240, 216)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/1"]
+position = Vector2(-8, -72)
+scale = Vector2(1, 10)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 16
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainEntranceReturn/Path/1"]
+position = Vector2(0, -72)
+scale = Vector2(1, 10)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 17
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="2" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(240, 208)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/2"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 14
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainEntranceReturn/Path/2"]
+position = Vector2(0, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 15
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="3" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(232, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/3"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 7
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainEntranceReturn/Path/3"]
+position = Vector2(0, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 8
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/3"]
+position = Vector2(-8, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 3
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="4" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(224, 200)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/4"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 28
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/4"]
+position = Vector2(-8, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 25
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="5" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(216, 192)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/5"]
+position = Vector2(-8, -68)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 28
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/5"]
+position = Vector2(-8, -76)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 25
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="6" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(208, 192)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/6"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/6"]
+position = Vector2(-8, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="7" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(200, 192)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/7"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 6
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/7"]
+position = Vector2(-8, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 2
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="8" type="Node2D" parent="MainEntranceReturn/Path"]
+z_index = -1
+position = Vector2(184, 192)
+
+[node name="Sprite2D" type="Sprite2D" parent="MainEntranceReturn/Path/8"]
+position = Vector2(-8, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D2" type="Sprite2D" parent="MainEntranceReturn/Path/8"]
+position = Vector2(0, -72)
+texture = ExtResource("29_0agn3")
+centered = false
+flip_h = true
+hframes = 6
+vframes = 6
+frame = 20
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D3" type="Sprite2D" parent="MainEntranceReturn/Path/8"]
+position = Vector2(-8, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2D4" type="Sprite2D" parent="MainEntranceReturn/Path/8"]
+position = Vector2(0, -80)
+texture = ExtResource("29_0agn3")
+centered = false
+flip_h = true
+hframes = 6
+vframes = 6
+frame = 11
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="EntranceWarp" type="Node2D" parent="." node_paths=PackedStringArray("return_point")]
+position = Vector2(240, 152)
+script = ExtResource("14_3x1sk")
+point_type = "Warp"
+current_area = ExtResource("5_443qw")
+map_warp = "res://Instances/Levels/Maps/MainIsland.tscn"
+warp_point_name = "BowserValleyEntrance/ValleyWarpReturn"
+return_point = NodePath("../MainEntranceReturn")
+
+[node name="StarRoadWarp" parent="." node_paths=PackedStringArray("special_path_tiles") instance=ExtResource("28_fho1b")]
+position = Vector2(72, 56)
+current_area = ExtResource("5_443qw")
+map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
+warp_point_name = "StarRoadWarp5"
+level = ExtResource("29_5eyfw")
+special_route_direction = "Right"
+down_route = SubResource("Resource_6vv0n")
+right_route = SubResource("Resource_866d1")
+special_path_tiles = NodePath("Path")
+
+[node name="Path" type="Node" parent="StarRoadWarp"]
+
+[node name="1" type="Node2D" parent="StarRoadWarp/Path"]
+
+[node name="Sprite" type="Sprite2D" parent="StarRoadWarp/Path/1"]
+position = Vector2(80, 56)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite2" type="Sprite2D" parent="StarRoadWarp/Path/1"]
+position = Vector2(88, 56)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite3" type="Sprite2D" parent="StarRoadWarp/Path/1"]
+position = Vector2(96, 56)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")
+
+[node name="Sprite4" type="Sprite2D" parent="StarRoadWarp/Path/1"]
+position = Vector2(104, 56)
+texture = ExtResource("29_0agn3")
+centered = false
+hframes = 6
+vframes = 6
+frame = 12
+script = ExtResource("30_ou8yp")
+autumn_texture = ExtResource("31_4x6hs")

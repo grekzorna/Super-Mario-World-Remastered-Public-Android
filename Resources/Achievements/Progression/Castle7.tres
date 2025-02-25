@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cg5aswibykewj"]
+
+[ext_resource type="Texture2D" uid="uid://d2p0mdxvimlrq" path="res://Assets/Sprites/AchievementIcons/46604.png" id="1_idyb5"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_pf5t6"]
+
+[resource]
+script = ExtResource("2_pf5t6")
+title = "Larry in the Airy"
+description = "Defeat Larry Koopa of Castle #7"
+icon = ExtResource("1_idyb5")

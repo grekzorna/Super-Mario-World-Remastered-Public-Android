@@ -1,0 +1,91 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3xeimqewyj6"]
+
+[ext_resource type="Texture2D" uid="uid://37jqrksiobiu" path="res://Assets/Sprites/Objects/Conveyor.png" id="1_anjlo"]
+[ext_resource type="Script" path="res://Scripts/Interactables/conveyor_slope.gd" id="1_nomlb"]
+[ext_resource type="Texture2D" uid="uid://dn33ff5gfbt1b" path="res://Assets/Sprites/Objects/ConveyorEngine.png" id="3_rhuc3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60yev"]
+atlas = ExtResource("1_anjlo")
+region = Rect2(0, 0, 8, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tavtn"]
+atlas = ExtResource("1_anjlo")
+region = Rect2(8, 0, 8, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y817a"]
+atlas = ExtResource("1_anjlo")
+region = Rect2(16, 0, 8, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csfbk"]
+atlas = ExtResource("1_anjlo")
+region = Rect2(24, 0, 8, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s82nv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60yev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tavtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y817a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csfbk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75ygv"]
+atlas = ExtResource("3_rhuc3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i03xb"]
+atlas = ExtResource("3_rhuc3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q8jv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75ygv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i03xb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="ConveyorSlope" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+constant_linear_velocity = Vector2(16, 0)
+script = ExtResource("1_nomlb")
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_s82nv")
+autoplay = "default"
+frame_progress = 0.673351
+speed_scale = 16.0
+
+[node name="Motor1" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q8jv8")
+autoplay = "default"
+frame_progress = 0.957802
+offset = Vector2(-8, 8)
+
+[node name="Motor2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q8jv8")
+autoplay = "default"
+frame_progress = 0.133331
+offset = Vector2(8, 8)

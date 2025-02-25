@@ -1,0 +1,262 @@
+[gd_scene load_steps=28 format=3 uid="uid://b6ixrnf5q1y38"]
+
+[ext_resource type="Texture2D" uid="uid://btp5drb0pxhaq" path="res://Assets/Sprites/Enemys/Lakitu.png" id="1_6cmfq"]
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/flying_lakitu.gd" id="1_xmowk"]
+[ext_resource type="PackedScene" uid="uid://x4x6v8br1brx" path="res://Instances/Prefabs/Enemies/spiny_ball.tscn" id="2_ihndm"]
+[ext_resource type="Texture2D" uid="uid://c61kan8ofhtrw" path="res://Assets/Sprites/Objects/LakituCloud.png" id="2_sykw6"]
+[ext_resource type="PackedScene" uid="uid://bimrxpg5a4yrk" path="res://Instances/Prefabs/Items/1_up.tscn" id="3_v4tn4"]
+[ext_resource type="Texture2D" uid="uid://042fmrcnjvl4" path="res://Assets/Sprites/Objects/LakituFishingRod.png" id="4_cs32u"]
+[ext_resource type="Texture2D" uid="uid://bt2kv28ai7fp6" path="res://Assets/Sprites/Objects/LakituCloudOld.png" id="7_lxfpd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5do64"]
+atlas = ExtResource("2_sykw6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0qg3"]
+atlas = ExtResource("2_sykw6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhlnc"]
+atlas = ExtResource("2_sykw6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q3lc"]
+atlas = ExtResource("2_sykw6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_67pk2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5do64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0qg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhlnc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6q3lc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_75mhb"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1qcqp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mghbd"]
+resource_name = "ThrowShell"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1e-05, 1e-05),
+"update": 0,
+"values": [0, 2, 2, 4, 4]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw_item"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h54jb"]
+_data = {
+&"Idle": SubResource("Animation_75mhb"),
+&"RESET": SubResource("Animation_1qcqp"),
+&"ThrowShell": SubResource("Animation_mghbd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbppb"]
+size = Vector2(10, 23.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cy8c2"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7prbb"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofnad"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rab7p"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjq2q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cy8c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7prbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofnad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rab7p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exvrk"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luf70"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adgls"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5itj"]
+atlas = ExtResource("7_lxfpd")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k32x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exvrk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luf70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adgls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e5itj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="FlyingLakitu" type="CharacterBody2D" node_paths=PackedStringArray("fishing_item")]
+script = ExtResource("1_xmowk")
+attack_item = ExtResource("2_ihndm")
+fishing_item = NodePath("1Up")
+enemy_height = 8
+gib_type = 1
+can_silver_switch = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_6cmfq")
+flip_h = true
+hframes = 5
+
+[node name="Cloud" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_67pk2")
+autoplay = "default"
+frame_progress = 0.45374
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h54jb")
+}
+autoplay = "Idle"
+
+[node name="1Up" parent="." instance=ExtResource("3_v4tn4")]
+physics_interpolation_mode = 2
+position = Vector2(-21, 53)
+static_movement = true
+
+[node name="FishingLine" type="Sprite2D" parent="1Up"]
+z_index = -1
+position = Vector2(9, -68)
+texture = ExtResource("4_cs32u")
+
+[node name="Line2D" type="Line2D" parent="1Up/FishingLine"]
+points = PackedVector2Array(-8, -8, -8, 59)
+width = 1.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -11.25)
+shape = SubResource("RectangleShape2D_lbppb")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-1.90735e-06, 12)
+scale = Vector2(3.9, 6)
+
+[node name="OldCloud" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_bjq2q")
+autoplay = "default"
+frame_progress = 0.115989
+
+[node name="Back" type="AnimatedSprite2D" parent="OldCloud"]
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, 2)
+sprite_frames = SubResource("SpriteFrames_3k32x")
+autoplay = "default"
+frame_progress = 0.740841
+
+[connection signal="killed" from="." to="." method="summon_cloud"]
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

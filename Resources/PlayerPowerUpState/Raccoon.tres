@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=6 format=3 uid="uid://b77ts4uymaydg"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_jg101"]
+[ext_resource type="Texture2D" uid="uid://crmurtfi85f4g" path="res://Assets/Sprites/Items/RaccoonLeaf.png" id="1_m38dt"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="2_mcy8t"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Raccoon.gd" id="3_4fhdw"]
+[ext_resource type="AudioStream" uid="uid://caqa6rcxaen6y" path="res://Assets/Audio/SFX/transform.wav" id="4_q72n1"]
+
+[resource]
+script = ExtResource("1_jg101")
+state_name = "Raccoon"
+sprite_frame_name = "Raccoon"
+power_script = ExtResource("3_4fhdw")
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = true
+power_down = ExtResource("2_mcy8t")
+power_sfx_override = ExtResource("4_q72n1")
+power_tier = 2
+item_sprite = ExtResource("1_m38dt")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

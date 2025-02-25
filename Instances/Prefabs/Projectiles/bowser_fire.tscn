@@ -1,0 +1,118 @@
+[gd_scene load_steps=16 format=3 uid="uid://bto30t4vr2ufy"]
+
+[ext_resource type="Texture2D" uid="uid://di25oxrpvmmvp" path="res://Assets/Sprites/Enemys/BowserFire.png" id="1_2swx5"]
+[ext_resource type="Script" uid="uid://dqqilusbcraq1" path="res://Scripts/Classes/Enemies/bowser_fire.gd" id="1_konrq"]
+[ext_resource type="Script" uid="uid://6j5n2wv3uif1" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="2_4tk43"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3pyd"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54lxm"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq6mq"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jiv2u"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svdfi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3pyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54lxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq6mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jiv2u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bocrv"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_680ox"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_soj7g"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoagi"]
+atlas = ExtResource("1_2swx5")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m1lbm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bocrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_680ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_soj7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoagi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mu5yi"]
+size = Vector2(8, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01g0v"]
+size = Vector2(7, 4.5)
+
+[node name="BowserFire" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_konrq")
+gib_type = 2
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_svdfi")
+autoplay = "default"
+script = ExtResource("2_4tk43")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_svdfi"), SubResource("SpriteFrames_m1lbm")])
+settings_value = "bowserflame"
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 5)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_mu5yi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.75)
+shape = SubResource("RectangleShape2D_01g0v")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

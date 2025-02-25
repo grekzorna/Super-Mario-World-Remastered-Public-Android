@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://b37ck0cwxcin6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/EnemyClass.gd" id="1_tn60s"]
+[ext_resource type="Texture2D" uid="uid://dujv88uuthjuy" path="res://Assets/Sprites/Enemys/ChainSaw.png" id="2_qeiog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhkw3"]
+size = Vector2(10, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ntr1"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(0, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebrpe"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(16, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1x61"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(32, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvv1p"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(48, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgl05"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(64, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmbo7"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(80, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8uq1"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(96, 0, 16, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6bpe"]
+atlas = ExtResource("2_qeiog")
+region = Rect2(112, 0, 16, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_prpep"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ntr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebrpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1x61")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvv1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgl05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmbo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8uq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6bpe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Saw" type="CharacterBody2D"]
+position = Vector2(0, -18)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_tn60s")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_slide_damage = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_mhkw3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_prpep")
+autoplay = "default"
+frame_progress = 0.252374
+
+[connection signal="area_entered" from="Area2D" to="." method="check_hit"]

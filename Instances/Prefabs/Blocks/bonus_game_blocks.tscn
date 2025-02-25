@@ -1,0 +1,148 @@
+[gd_scene load_steps=14 format=3 uid="uid://dfw1qkipfwo1h"]
+
+[ext_resource type="Script" uid="uid://rbj8addnobhs" path="res://Scripts/LevelGimicks/bonus_game_blocks.gd" id="1_0buyd"]
+[ext_resource type="Script" uid="uid://do7lnrfojsd5g" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="1_c3ax2"]
+[ext_resource type="Texture2D" uid="uid://bkbejkxbboi6m" path="res://Assets/Sprites/Objects/BonusGameCorrect.png" id="2_bhumg"]
+[ext_resource type="Texture2D" uid="uid://hh434xllkh0v" path="res://Assets/Sprites/Objects/Question_Block_Sheet.png" id="3_e3ep8"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="4_ik0db"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="6_3lss7"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="7_li2s1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qwy3"]
+atlas = ExtResource("3_e3ep8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6eov"]
+atlas = ExtResource("3_e3ep8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_looic"]
+atlas = ExtResource("3_e3ep8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpnbs"]
+atlas = ExtResource("3_e3ep8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xnm87"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bhumg")
+}],
+"loop": true,
+"name": &"Correct",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qwy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6eov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_looic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpnbs")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ik0db")
+}],
+"loop": true,
+"name": &"Wrong",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d06tx"]
+size = Vector2(16, 16)
+
+[node name="BonusGameBlocks" type="Node2D"]
+script = ExtResource("1_0buyd")
+
+[node name="BlockA" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(-48, 0)
+collision_layer = 5
+script = ExtResource("1_c3ax2")
+visuals = NodePath("Sprite")
+enable_ground_pounds = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BlockA"]
+sprite_frames = SubResource("SpriteFrames_xnm87")
+animation = &"Wrong"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockA"]
+shape = SubResource("RectangleShape2D_d06tx")
+
+[node name="ItemDispenser" parent="BlockA" instance=ExtResource("6_3lss7")]
+
+[node name="Label" type="Label" parent="BlockA"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("7_li2s1")
+text = "1"
+
+[node name="BlockB" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+collision_layer = 5
+script = ExtResource("1_c3ax2")
+visuals = NodePath("Sprite")
+enable_ground_pounds = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BlockB"]
+sprite_frames = SubResource("SpriteFrames_xnm87")
+animation = &"Wrong"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockB"]
+shape = SubResource("RectangleShape2D_d06tx")
+
+[node name="ItemDispenser" parent="BlockB" instance=ExtResource("6_3lss7")]
+
+[node name="Label" type="Label" parent="BlockB"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("7_li2s1")
+text = "1"
+
+[node name="BlockC" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(48, 0)
+collision_layer = 5
+script = ExtResource("1_c3ax2")
+visuals = NodePath("Sprite")
+enable_ground_pounds = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="BlockC"]
+sprite_frames = SubResource("SpriteFrames_xnm87")
+animation = &"Wrong"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockC"]
+shape = SubResource("RectangleShape2D_d06tx")
+
+[node name="ItemDispenser" parent="BlockC" instance=ExtResource("6_3lss7")]
+
+[node name="Label" type="Label" parent="BlockC"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 32.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("7_li2s1")
+text = "1"
+
+[connection signal="block_hitted" from="BlockA" to="." method="_on_block_a_block_hitted"]
+[connection signal="block_hitted" from="BlockB" to="." method="_on_block_b_block_hitted"]
+[connection signal="block_hitted" from="BlockC" to="." method="_on_block_c_block_hitted"]

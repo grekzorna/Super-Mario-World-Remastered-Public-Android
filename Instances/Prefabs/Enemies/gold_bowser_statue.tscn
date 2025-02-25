@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://bajpm5vqhxsi7"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/gold_bowser_statue.gd" id="1_8ui47"]
+[ext_resource type="Texture2D" uid="uid://b68q2qxlv1ywa" path="res://Assets/Sprites/Enemys/GoldBowserStatue.png" id="2_x4vrn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3lwjy"]
+atlas = ExtResource("2_x4vrn")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noeo8"]
+atlas = ExtResource("2_x4vrn")
+region = Rect2(24, 0, 24, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ho4l3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3lwjy")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noeo8")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h6eq"]
+size = Vector2(18, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8f38x"]
+size = Vector2(10, 10)
+
+[node name="GoldBowserStatue" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_8ui47")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_ho4l3")
+animation = &"Idle"
+offset = Vector2(-4, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, -9.5)
+shape = SubResource("RectangleShape2D_6h6eq")
+
+[node name="JumpTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -12)
+scale = Vector2(1.35, 1.35)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_8f38x")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="JumpTimer" to="." method="spawn_fire"]
+[connection signal="timeout" from="JumpTimer" to="." method="jump"]

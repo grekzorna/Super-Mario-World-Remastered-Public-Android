@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvj18py33dsng"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/lava.gd" id="1_1l7dk"]
+[ext_resource type="Texture2D" uid="uid://sbmmvynxkgek" path="res://Assets/Sprites/Objects/Lava/Underground/1.png" id="2_bdjjm"]
+[ext_resource type="Texture2D" uid="uid://d26ckptdq7utl" path="res://Assets/Sprites/Objects/Lava/Underground/2.png" id="3_oyd8u"]
+[ext_resource type="Texture2D" uid="uid://bo8gsgy3r1jqo" path="res://Assets/Sprites/Objects/Lava/Underground/3.png" id="4_foms4"]
+[ext_resource type="Texture2D" uid="uid://bi17h28jveo4n" path="res://Assets/Sprites/Objects/Lava/Underground/4.png" id="5_nvtqe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7olc"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Lava" type="CollisionShape2D"]
+z_index = 5
+shape = SubResource("RectangleShape2D_h7olc")
+debug_color = Color(1, 0.6, 0, 0.0156863)
+script = ExtResource("1_1l7dk")
+line_textures = Array[Texture2D]([ExtResource("2_bdjjm"), ExtResource("3_oyd8u"), ExtResource("4_foms4"), ExtResource("5_nvtqe")])
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+width = 16.0
+texture_mode = 1
+
+[node name="WaterRest" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.690196, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

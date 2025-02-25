@@ -1,0 +1,146 @@
+[gd_scene load_steps=16 format=3 uid="uid://8uyqq4rf0cl1"]
+
+[ext_resource type="Texture2D" uid="uid://brpkusquyfnyu" path="res://Assets/Sprites/UI/MainBG.png" id="1_mplar"]
+[ext_resource type="Script" uid="uid://c0cjtqsi4ln15" path="res://Scripts/UI/settings_menu.gd" id="1_nelhb"]
+[ext_resource type="Texture2D" uid="uid://d2g1m7wul4xs3" path="res://Assets/Sprites/UI/TitleBorder.png" id="3_55l6k"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="5_skx6t"]
+[ext_resource type="PackedScene" uid="uid://cxa60on04noyg" path="res://Instances/UI/audio_settings.tscn" id="6_f8yi7"]
+[ext_resource type="FontFile" uid="uid://c5xts2bvjtjs3" path="res://Assets/Sprites/UI/HUD/CreditsFont.png" id="6_odc55"]
+[ext_resource type="PackedScene" uid="uid://cvprr1nf81boe" path="res://Instances/UI/display_settings.tscn" id="8_45wqw"]
+[ext_resource type="PackedScene" uid="uid://oeiqvupa2v30" path="res://Instances/UI/gameplay_settings.tscn" id="8_apeol"]
+[ext_resource type="PackedScene" uid="uid://cxn7al8iu8ux" path="res://Instances/UI/ability_settings.tscn" id="9_kq8w2"]
+[ext_resource type="PackedScene" uid="uid://bucglb4sqi4jx" path="res://Instances/UI/sprite_settings.tscn" id="10_j2cak"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="11_hsiay"]
+[ext_resource type="AudioStream" uid="uid://brm5imjbfu1ar" path="res://Assets/Audio/BGM/SMW/Options.mp3" id="12_g8p0s"]
+
+[sub_resource type="Shader" id="Shader_gqxou"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngf6n"]
+shader = SubResource("Shader_gqxou")
+shader_parameter/motion = Vector2(-4, -4)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wfewj"]
+
+[node name="OptionsMenu" type="Node" node_paths=PackedStringArray("sections")]
+process_mode = 3
+script = ExtResource("1_nelhb")
+sections = [NodePath("DisplaySettings"), NodePath("AudioSettings"), NodePath("GameplaySettings"), NodePath("AbilitySettings"), NodePath("SpriteSettings")]
+metadata/_edit_use_anchors_ = true
+
+[node name="BG" type="TextureRect" parent="."]
+z_index = -10
+material = SubResource("ShaderMaterial_ngf6n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_mplar")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Border" type="NinePatchRect" parent="."]
+z_index = -4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_55l6k")
+
+[node name="TitleHeader" type="HBoxContainer" parent="."]
+z_index = -4
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 464.0
+offset_bottom = 56.0
+
+[node name="TextureRect2" type="TextureRect" parent="TitleHeader"]
+z_index = -4
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("5_skx6t")
+stretch_mode = 3
+
+[node name="SettingsHeader" type="Label" parent="TitleHeader"]
+z_index = -4
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_odc55")
+text = "display"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TextureRect" type="TextureRect" parent="TitleHeader"]
+z_index = -4
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("5_skx6t")
+stretch_mode = 3
+flip_h = true
+
+[node name="HSeparator" type="HSeparator" parent="."]
+z_index = -4
+offset_left = 184.0
+offset_top = 40.0
+offset_right = 296.0
+offset_bottom = 48.0
+theme_override_styles/separator = SubResource("StyleBoxLine_wfewj")
+
+[node name="DisplaySettings" parent="." instance=ExtResource("8_45wqw")]
+anchor_left = 0.116667
+title = "Display"
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioSettings" parent="." node_paths=PackedStringArray("option_nodes") instance=ExtResource("6_f8yi7")]
+anchor_left = 0.116667
+option_nodes = [NodePath("VBoxContainer/SliderOption"), NodePath("VBoxContainer/SliderOption2"), NodePath("VBoxContainer/SliderOption3"), NodePath("VBoxContainer/SliderOption4"), null]
+title = "Audio"
+
+[node name="GameplaySettings" parent="." node_paths=PackedStringArray("option_nodes") instance=ExtResource("8_apeol")]
+grow_horizontal = 1
+grow_vertical = 1
+option_nodes = [NodePath("VBoxContainer/LevelLayout"), null, null, NodePath("VBoxContainer/AutumnStyle"), NodePath("VBoxContainer/CharacterPhysics"), null, null, null, null]
+title = "Gameplay"
+
+[node name="AbilitySettings" parent="." instance=ExtResource("9_kq8w2")]
+metadata/_edit_use_anchors_ = true
+
+[node name="SpriteSettings" parent="." instance=ExtResource("10_j2cak")]
+anchor_right = 0.85
+offset_right = 0.0
+offset_bottom = 0.0
+title = "Sprites"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="."]
+z_index = -1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -14.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("11_hsiay")
+text = "start / enter to apply  "
+vertical_alignment = 1
+uppercase = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_g8p0s")
+autoplay = true
+bus = &"Music"

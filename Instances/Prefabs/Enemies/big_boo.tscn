@@ -1,0 +1,111 @@
+[gd_scene load_steps=13 format=3 uid="uid://db8f5n61u6d7p"]
+
+[ext_resource type="Script" uid="uid://j24akqqf30ny" path="res://Scripts/Classes/Enemies/Boo.gd" id="1_65fv4"]
+[ext_resource type="Texture2D" uid="uid://rfwv0drr0er4" path="res://Assets/Sprites/Enemys/BigBoo.png" id="2_y166v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx0ix"]
+atlas = ExtResource("2_y166v")
+region = Rect2(144, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co1eh"]
+atlas = ExtResource("2_y166v")
+region = Rect2(216, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic2gj"]
+atlas = ExtResource("2_y166v")
+region = Rect2(288, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbta3"]
+atlas = ExtResource("2_y166v")
+region = Rect2(144, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpxua"]
+atlas = ExtResource("2_y166v")
+region = Rect2(72, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyf1u"]
+atlas = ExtResource("2_y166v")
+region = Rect2(0, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2uyg"]
+atlas = ExtResource("2_y166v")
+region = Rect2(72, 0, 72, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu8lp"]
+atlas = ExtResource("2_y166v")
+region = Rect2(144, 0, 72, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jouwp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vx0ix")
+}],
+"loop": true,
+"name": &"Chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 50.0,
+"texture": SubResource("AtlasTexture_co1eh")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ic2gj")
+}],
+"loop": true,
+"name": &"Hide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbta3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpxua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyf1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2uyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu8lp")
+}],
+"loop": false,
+"name": &"Turn",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hyidf"]
+radius = 24.0
+
+[node name="BigBoo" type="CharacterBody2D"]
+script = ExtResource("1_65fv4")
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_held_item_damage = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_jouwp")
+animation = &"Turn"
+frame = 4
+frame_progress = 1.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_hyidf")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(2.6226e-06, 0)
+scale = Vector2(3.2, 3.2)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

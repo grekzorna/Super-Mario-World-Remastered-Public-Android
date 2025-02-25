@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp23fp7phgons"]
+
+[sub_resource type="GDScript" id="GDScript_vg5qo"]
+script/source = "extends Node2D
+
+
+func _on_area_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		TransitionManager.transition_to_map(GameManager.current_map_path, GameManager.current_level, true)
+		get_tree().paused = true
+		queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iejkv"]
+size = Vector2(16, 64)
+
+[node name="LevelExitArea" type="Node2D"]
+script = SubResource("GDScript_vg5qo")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("RectangleShape2D_iejkv")
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]

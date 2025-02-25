@@ -1,0 +1,270 @@
+[gd_scene load_steps=18 format=3 uid="uid://oy234sejclbg"]
+
+[ext_resource type="Script" uid="uid://dvnlbxrd2icxn" path="res://Scripts/UI/main_hud.gd" id="1_bnu8d"]
+[ext_resource type="Texture2D" uid="uid://ba65dunp68ehu" path="res://Assets/Sprites/Characters/Mario/HUDTitle.png" id="2_jghvg"]
+[ext_resource type="Texture2D" uid="uid://b2084jqi4n35n" path="res://Assets/Sprites/Characters/Mario/HUDIcon.png" id="2_tygp4"]
+[ext_resource type="Texture2D" uid="uid://bmxg6clj8in1e" path="res://Assets/Sprites/Characters/Luigi/HUDIcon.png" id="3_iph54"]
+[ext_resource type="Texture2D" uid="uid://bgd457gedcuns" path="res://Assets/Sprites/Characters/Toad/HUDIcon.png" id="4_j4ty0"]
+[ext_resource type="Texture2D" uid="uid://dcvllrp6g1rlu" path="res://Assets/Sprites/Characters/Toadette/HUDIcon.png" id="5_eidut"]
+[ext_resource type="Texture2D" uid="uid://bp62wfmjw0ost" path="res://Assets/Sprites/UI/HUD/HUDX.png" id="6_uv1ti"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="8_2untf"]
+[ext_resource type="Texture2D" uid="uid://3kc61mbt1ywx" path="res://Assets/Sprites/UI/HUD/DinoCoin.png" id="8_wqrbj"]
+[ext_resource type="Texture2D" uid="uid://mjp1jtb61m4p" path="res://Assets/Sprites/UI/HUD/StarCount.png" id="9_7pqsa"]
+[ext_resource type="FontFile" uid="uid://c5xts2bvjtjs3" path="res://Assets/Sprites/UI/HUD/CreditsFont.png" id="11_etmql"]
+[ext_resource type="Texture2D" uid="uid://skqwt20akaxl" path="res://Assets/Sprites/UI/ItemBox.png" id="11_l4vyc"]
+[ext_resource type="Texture2D" uid="uid://dexhjackjngwp" path="res://Assets/Sprites/UI/StatusScreen/Icons/CoinEmpty.png" id="12_pfu2m"]
+[ext_resource type="Texture2D" uid="uid://bq4jmd560h3uy" path="res://Assets/Sprites/UI/HUD/TimeCount.png" id="13_nyqj4"]
+[ext_resource type="Texture2D" uid="uid://bbagurfomroyy" path="res://Assets/Sprites/UI/HUD/CoinCount.png" id="15_ghooh"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="16_orlug"]
+[ext_resource type="PackedScene" uid="uid://bt34b1nqv1wp1" path="res://Instances/UI/Menus/pause_menu.tscn" id="17_64u1n"]
+
+[node name="MainHUD" type="Control"]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_bnu8d")
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Lives" type="Control" parent="Container"]
+anchors_preset = 0
+anchor_left = 0.0625
+anchor_top = 0.25
+anchor_right = 0.21875
+anchor_bottom = 0.75
+
+[node name="PlayerTitle" type="TextureRect" parent="Container/Lives"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.5
+texture = ExtResource("2_jghvg")
+expand_mode = 1
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="MultiplayerLetters" type="HBoxContainer" parent="Container/Lives"]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.5
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Player1" type="TextureRect" parent="Container/Lives/MultiplayerLetters"]
+layout_mode = 2
+texture = ExtResource("2_tygp4")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Player2" type="TextureRect" parent="Container/Lives/MultiplayerLetters"]
+layout_mode = 2
+texture = ExtResource("3_iph54")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Player3" type="TextureRect" parent="Container/Lives/MultiplayerLetters"]
+layout_mode = 2
+texture = ExtResource("4_j4ty0")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Player4" type="TextureRect" parent="Container/Lives/MultiplayerLetters"]
+layout_mode = 2
+texture = ExtResource("5_eidut")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Lives"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="X" type="TextureRect" parent="Container/Lives/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_uv1ti")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="LifeCount" type="Label" parent="Container/Lives/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_2untf")
+text = "_"
+metadata/_edit_use_anchors_ = true
+
+[node name="StarPoints" type="HBoxContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.375
+anchor_bottom = 0.75
+offset_right = 4.0
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/StarPoints"]
+layout_mode = 2
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="DragonCoins" type="HBoxContainer" parent="Container/StarPoints/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="1" type="TextureRect" parent="Container/StarPoints/VBoxContainer/DragonCoins"]
+layout_mode = 2
+texture = ExtResource("8_wqrbj")
+
+[node name="2" type="TextureRect" parent="Container/StarPoints/VBoxContainer/DragonCoins"]
+layout_mode = 2
+texture = ExtResource("8_wqrbj")
+
+[node name="3" type="TextureRect" parent="Container/StarPoints/VBoxContainer/DragonCoins"]
+layout_mode = 2
+texture = ExtResource("8_wqrbj")
+
+[node name="4" type="TextureRect" parent="Container/StarPoints/VBoxContainer/DragonCoins"]
+layout_mode = 2
+texture = ExtResource("8_wqrbj")
+
+[node name="TextureRect" type="TextureRect" parent="Container/StarPoints/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 10
+texture = ExtResource("9_7pqsa")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Container/StarPoints"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("11_etmql")
+text = "00"
+vertical_alignment = 2
+
+[node name="PeachCoin" type="TextureRect" parent="Container/StarPoints"]
+layout_mode = 2
+size_flags_horizontal = 6
+texture = ExtResource("12_pfu2m")
+expand_mode = 5
+stretch_mode = 3
+
+[node name="ItemBox" type="Control" parent="Container"]
+anchors_preset = 0
+anchor_left = 0.428571
+anchor_right = 0.571429
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Container/ItemBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0546875
+anchor_right = 0.929687
+anchor_bottom = 1.0
+texture = ExtResource("11_l4vyc")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Time" type="Control" parent="Container"]
+layout_mode = 1
+anchor_left = 0.59375
+anchor_top = 0.25
+anchor_right = 0.6875
+anchor_bottom = 0.75
+
+[node name="TextureRect" type="TextureRect" parent="Container/Time"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+texture = ExtResource("13_nyqj4")
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Time"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Time/HBoxContainer"]
+modulate = Color(0.972549, 0.847059, 0.439216, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_2untf")
+text = "989"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Pad" type="Control" parent="Container/Time/HBoxContainer"]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="Score" type="Control" parent="Container"]
+layout_mode = 1
+anchor_left = 0.71875
+anchor_top = 0.25
+anchor_right = 0.9375
+anchor_bottom = 0.75
+
+[node name="Coins" type="HBoxContainer" parent="Container/Score"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="TextureRect" parent="Container/Score/Coins"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = ExtResource("15_ghooh")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Container/Score/Coins"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("8_2untf")
+text = "00"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreText" type="Label" parent="Container/Score"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("8_2untf")
+text = "0"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemBoxSprite" type="Sprite2D" parent="."]
+position = Vector2(240, 16)
+texture = ExtResource("16_orlug")
+
+[node name="PauseMenu" parent="." instance=ExtResource("17_64u1n")]
+layout_mode = 1

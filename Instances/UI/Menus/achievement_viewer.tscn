@@ -1,0 +1,227 @@
+[gd_scene load_steps=55 format=3 uid="uid://bk6j14k4vtp3s"]
+
+[ext_resource type="Script" path="res://Scripts/UI/achievement_viewer.gd" id="1_xclor"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="2_lmapp"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_qqw6k"]
+[ext_resource type="Texture2D" uid="uid://4yiaexlte0d5" path="res://Assets/Sprites/UI/PauseBoxInv.png" id="3_6v2up"]
+[ext_resource type="Resource" uid="uid://b6aroiq3p6ffx" path="res://Resources/Achievements/General/YoshiMount.tres" id="3_r63vm"]
+[ext_resource type="Texture2D" uid="uid://bjmklpmam0rwq" path="res://Assets/Sprites/UI/StatusScreen/Bar.png" id="3_ubti2"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="4_1t05c"]
+[ext_resource type="Resource" uid="uid://cjasg0rsxbilt" path="res://Resources/Achievements/General/DragCoin.tres" id="4_8o0qo"]
+[ext_resource type="Resource" uid="uid://dxe7pdxagxdk0" path="res://Resources/Achievements/General/CapeGet.tres" id="5_3w6vx"]
+[ext_resource type="Resource" uid="uid://cb4p0q65nphga" path="res://Resources/Achievements/General/PBalloonGet.tres" id="6_b8oap"]
+[ext_resource type="Resource" uid="uid://bop7qbrsma7ss" path="res://Resources/Achievements/General/LakituCloud.tres" id="7_q1p42"]
+[ext_resource type="Resource" uid="uid://6q8tf64pbkdi" path="res://Resources/Achievements/General/50StarFinish.tres" id="8_8cf57"]
+[ext_resource type="Resource" uid="uid://jhonajeybg8c" path="res://Resources/Achievements/General/PerfectBonus.tres" id="9_po8s0"]
+[ext_resource type="Resource" uid="uid://5uwmw7cl0kfi" path="res://Resources/Achievements/General/YoshiEggLay.tres" id="10_juxi8"]
+[ext_resource type="Resource" uid="uid://cj37emlm4nqyj" path="res://Resources/Achievements/Progression/Castle1.tres" id="11_ky6rx"]
+[ext_resource type="Resource" uid="uid://cytkmisj6omg6" path="res://Resources/Achievements/Progression/Castle2.tres" id="12_worfs"]
+[ext_resource type="Resource" uid="uid://cdxlwmj7u3grj" path="res://Resources/Achievements/Progression/Castle3.tres" id="13_qcbof"]
+[ext_resource type="Resource" uid="uid://c0u7ye8euyl74" path="res://Resources/Achievements/Progression/Castle4.tres" id="14_f2ic7"]
+[ext_resource type="Resource" uid="uid://clw5w8l7kchl7" path="res://Resources/Achievements/Progression/Castle5.tres" id="15_7ovve"]
+[ext_resource type="Resource" uid="uid://c1251lrkralpd" path="res://Resources/Achievements/Progression/Castle6.tres" id="16_0eigo"]
+[ext_resource type="Resource" uid="uid://cg5aswibykewj" path="res://Resources/Achievements/Progression/Castle7.tres" id="17_w4fgt"]
+[ext_resource type="Resource" uid="uid://due2pg4xeiycu" path="res://Resources/Achievements/Progression/Bowser.tres" id="18_36c6o"]
+[ext_resource type="Resource" uid="uid://dthnop5t133xo" path="res://Resources/Achievements/Progression/BooBoss.tres" id="19_yp7fd"]
+[ext_resource type="Resource" uid="uid://df3qb8tvj3tml" path="res://Resources/Achievements/Progression/VDRez.tres" id="20_ethxe"]
+[ext_resource type="Resource" uid="uid://xp0q0530wm27" path="res://Resources/Achievements/Progression/StarRoadReach.tres" id="21_f3o3e"]
+[ext_resource type="Resource" uid="uid://c0laybfq480x2" path="res://Resources/Achievements/Progression/SpWorldReach.tres" id="22_a1wbx"]
+[ext_resource type="Resource" uid="uid://xiryx8x6ywcv" path="res://Resources/Achievements/Progression/AllSwitchPal.tres" id="23_h1fwy"]
+[ext_resource type="Resource" uid="uid://buocthwtkeu0x" path="res://Resources/Achievements/Completionist/DragCoins/YIDragCoin.tres" id="24_rjycy"]
+[ext_resource type="Resource" uid="uid://jqk34owisgt5" path="res://Resources/Achievements/Completionist/DragCoins/DPDragCoin.tres" id="25_evhtn"]
+[ext_resource type="Resource" uid="uid://clji4vwaq4j6v" path="res://Resources/Achievements/Completionist/DragCoins/VDDragCoin.tres" id="26_262vb"]
+[ext_resource type="Resource" uid="uid://2rawvxdilisk" path="res://Resources/Achievements/Completionist/DragCoins/TBDragCoin.tres" id="27_oane5"]
+[ext_resource type="Resource" uid="uid://cxc8k446r115b" path="res://Resources/Achievements/Completionist/DragCoins/IFDragCoin.tres" id="28_q86xb"]
+[ext_resource type="Resource" uid="uid://bpbr7svkwm37d" path="res://Resources/Achievements/Completionist/DragCoins/CIDragCoin.tres" id="29_buoc7"]
+[ext_resource type="Resource" uid="uid://biht6nrn04bdg" path="res://Resources/Achievements/Completionist/DragCoins/BVDragCoin.tres" id="30_j86qg"]
+[ext_resource type="Resource" uid="uid://bavboweoqtcac" path="res://Resources/Achievements/Completionist/DragCoins/SRDragCoin.tres" id="31_aw37k"]
+[ext_resource type="Resource" uid="uid://bk1qvnc3fv4ad" path="res://Resources/Achievements/Completionist/Moons/YIMoon.tres" id="32_v70oa"]
+[ext_resource type="Resource" uid="uid://mjx8twljh4qk" path="res://Resources/Achievements/Completionist/Moons/DPMoon.tres" id="33_nh84r"]
+[ext_resource type="Resource" uid="uid://pkdhwmwkh60x" path="res://Resources/Achievements/Completionist/Moons/VDMoon.tres" id="34_jd6to"]
+[ext_resource type="Resource" uid="uid://eyo7xwexmme0" path="res://Resources/Achievements/Completionist/Moons/TBMoon.tres" id="35_eg23o"]
+[ext_resource type="Resource" uid="uid://bwcd5nhine8u6" path="res://Resources/Achievements/Completionist/Moons/IFMoon.tres" id="36_jd748"]
+[ext_resource type="Resource" uid="uid://2ha4vlih28ad" path="res://Resources/Achievements/Completionist/Moons/CIMoon.tres" id="37_q3rnt"]
+[ext_resource type="Resource" uid="uid://2cqtt0q8nodg" path="res://Resources/Achievements/Completionist/Moons/BVMoon.tres" id="38_0vf3m"]
+[ext_resource type="Resource" uid="uid://d25p2iwtebtp" path="res://Resources/Achievements/Completionist/AllExit.tres" id="39_fpsvv"]
+[ext_resource type="Resource" uid="uid://f6yqsm4exrcc" path="res://Resources/Achievements/Completionist/Autumn.tres" id="40_g0u8g"]
+[ext_resource type="Resource" uid="uid://crcrxbqtcb3ok" path="res://Resources/Achievements/Completionist/ForestFortSecret.tres" id="41_vbkyy"]
+[ext_resource type="Resource" uid="uid://tqtldxfew824" path="res://Resources/Achievements/Completionist/SpecialTheme.tres" id="42_bd5cj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dpxwb"]
+texture = ExtResource("3_6v2up")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ukvln"]
+texture = ExtResource("2_lmapp")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v4hyl"]
+texture = ExtResource("2_lmapp")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bs1g4"]
+texture = ExtResource("2_lmapp")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_fku6d"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_dpxwb")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_ukvln")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_v4hyl")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_bs1g4")
+
+[sub_resource type="Animation" id="Animation_j3xk7"]
+resource_name = "Open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 272), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(480, 270)]
+}
+
+[sub_resource type="Animation" id="Animation_nu663"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 272)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(480, 270)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fyelt"]
+_data = {
+"Open": SubResource("Animation_j3xk7"),
+"RESET": SubResource("Animation_nu663")
+}
+
+[node name="AchievementViewer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 272.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_xclor")
+achievements = Array[ExtResource("2_qqw6k")]([ExtResource("3_r63vm"), ExtResource("4_8o0qo"), ExtResource("5_3w6vx"), ExtResource("6_b8oap"), ExtResource("7_q1p42"), ExtResource("8_8cf57"), ExtResource("9_po8s0"), ExtResource("10_juxi8"), ExtResource("11_ky6rx"), ExtResource("12_worfs"), ExtResource("13_qcbof"), ExtResource("14_f2ic7"), ExtResource("15_7ovve"), ExtResource("16_0eigo"), ExtResource("17_w4fgt"), ExtResource("18_36c6o"), ExtResource("19_yp7fd"), ExtResource("20_ethxe"), ExtResource("21_f3o3e"), ExtResource("22_a1wbx"), ExtResource("23_h1fwy"), ExtResource("24_rjycy"), ExtResource("25_evhtn"), ExtResource("26_262vb"), ExtResource("27_oane5"), ExtResource("28_q86xb"), ExtResource("29_buoc7"), ExtResource("30_j86qg"), ExtResource("31_aw37k"), ExtResource("32_v70oa"), ExtResource("33_nh84r"), ExtResource("34_jd6to"), ExtResource("35_eg23o"), ExtResource("36_jd748"), ExtResource("37_q3rnt"), ExtResource("38_0vf3m"), ExtResource("39_fpsvv"), ExtResource("40_g0u8g"), ExtResource("41_vbkyy"), ExtResource("42_bd5cj")])
+
+[node name="Panel" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lmapp")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Header" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -235.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ubti2")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_1t05c")
+text = "Achievements"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_fku6d")
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fyelt")
+}

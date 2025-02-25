@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://rvbdukl3c4dh"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/SkullRaft.gd" id="1_4r2q2"]
+[ext_resource type="Texture2D" uid="uid://cncet6y7deqhn" path="res://Assets/Sprites/Objects/SkullRaft.png" id="2_krlp0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmjun"]
+atlas = ExtResource("2_krlp0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovqjd"]
+atlas = ExtResource("2_krlp0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hjryv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmjun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovqjd")
+}],
+"loop": true,
+"name": &"Moving",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ifnb2"]
+size = Vector2(14, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc2i2"]
+size = Vector2(64, 8)
+
+[node name="SkullRaft" type="Node2D"]
+script = ExtResource("1_4r2q2")
+
+[node name="Raft1" type="CharacterBody2D" parent="."]
+position = Vector2(24, -4)
+collision_layer = 5
+collision_mask = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 32.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Raft1"]
+sprite_frames = SubResource("SpriteFrames_hjryv")
+animation = &"Moving"
+frame = 1
+frame_progress = 0.836244
+
+[node name="Collision" type="CollisionShape2D" parent="Raft1"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ifnb2")
+
+[node name="Raft2" type="CharacterBody2D" parent="."]
+position = Vector2(8, -4)
+collision_layer = 5
+collision_mask = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 32.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Raft2"]
+sprite_frames = SubResource("SpriteFrames_hjryv")
+animation = &"Moving"
+frame = 1
+frame_progress = 0.836244
+
+[node name="Collision" type="CollisionShape2D" parent="Raft2"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ifnb2")
+
+[node name="Raft3" type="CharacterBody2D" parent="."]
+position = Vector2(-8, -4)
+collision_layer = 5
+collision_mask = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 32.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Raft3"]
+sprite_frames = SubResource("SpriteFrames_hjryv")
+animation = &"Moving"
+frame = 1
+frame_progress = 0.836244
+
+[node name="Collision" type="CollisionShape2D" parent="Raft3"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ifnb2")
+
+[node name="Raft4" type="CharacterBody2D" parent="."]
+position = Vector2(-24, -4)
+collision_layer = 5
+collision_mask = 64
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 32.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Raft4"]
+sprite_frames = SubResource("SpriteFrames_hjryv")
+animation = &"Moving"
+frame = 1
+frame_progress = 0.836244
+
+[node name="Collision" type="CollisionShape2D" parent="Raft4"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_ifnb2")
+
+[node name="ActivationArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivationArea"]
+visible = false
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_lc2i2")
+
+[connection signal="area_entered" from="ActivationArea" to="." method="_on_activation_area_area_entered"]

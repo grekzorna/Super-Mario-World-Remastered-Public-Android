@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=4 format=3 uid="uid://iwr4d0svdyne"]
+
+[ext_resource type="Texture2D" uid="uid://bxrk5wphws4xk" path="res://Assets/Sprites/Items/SuperBall.png" id="1_8i4sn"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_8wprj"]
+[ext_resource type="AudioStream" uid="uid://cv1acb2pj4hnq" path="res://Assets/Audio/SFX/SuperBallGet.wav" id="1_ykpc5"]
+
+[resource]
+script = ExtResource("1_8wprj")
+state_name = "SuperBall"
+sprite_frame_name = "SuperBall"
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = false
+power_sfx_override = ExtResource("1_ykpc5")
+power_tier = 2
+item_sprite = ExtResource("1_8i4sn")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

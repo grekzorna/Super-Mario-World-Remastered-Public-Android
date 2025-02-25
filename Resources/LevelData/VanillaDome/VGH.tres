@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://f5x6iir2n2tm"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_3hfuy"]
+[ext_resource type="Texture2D" uid="uid://b4okijb4d20c2" path="res://Assets/Sprites/UI/TextImages/GhostHouse.png" id="2_4bpq6"]
+
+[resource]
+script = ExtResource("1_3hfuy")
+level_title = "Vanilla Ghost House"
+level_scene_path = "res://Instances/Levels/VanillaDome/vgh.tscn"
+start_cutscene_path = "res://Instances/Levels/Cutscenes/ghost_house_entrance.tscn"
+has_secret_exit = false
+yoshi_allowed = false
+has_dragon_coins = true
+title_image = ExtResource("2_4bpq6")
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = false
+map_point_warp = "VGH"
+map_scene_warp = "res://Instances/Levels/Maps/VanillaDome.tscn"

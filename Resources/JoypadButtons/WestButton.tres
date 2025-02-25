@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="JoypadButton" load_steps=6 format=3 uid="uid://ctflvsmty37gn"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/GamepadButton.gd" id="1_knoo3"]
+[ext_resource type="Texture2D" uid="uid://b3uvs7g3geb7h" path="res://Assets/Sprites/UI/InputButtons/PS/SquareButton.png" id="1_oi4bi"]
+[ext_resource type="Texture2D" uid="uid://sggb01a4l3oy" path="res://Assets/Sprites/UI/InputButtons/Nintendo/YButton.png" id="3_u854x"]
+[ext_resource type="Texture2D" uid="uid://dfnlk3b668cql" path="res://Assets/Sprites/UI/InputButtons/Xbox/XButton.png" id="4_vqyiv"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ok5l0"]
+button_index = 2
+pressed = true
+
+[resource]
+script = ExtResource("1_knoo3")
+input_event = SubResource("InputEventJoypadButton_ok5l0")
+ps_texture = ExtResource("1_oi4bi")
+xbox_texture = ExtResource("4_vqyiv")
+switch_texture = ExtResource("3_u854x")

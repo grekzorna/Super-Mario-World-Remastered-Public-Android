@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxjcxrs55xie"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/chuck_football.gd" id="1_hteqj"]
+[ext_resource type="Texture2D" uid="uid://dqs6gaenw3vla" path="res://Assets/Sprites/Objects/ChuckFootball.png" id="2_wi7v6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_htghu"]
+size = Vector2(14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73mj6"]
+size = Vector2(12.1925, 11.8075)
+
+[node name="ChuckFootball" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_hteqj")
+gib_type = 1
+can_slide_damage = false
+can_silver_switch = false
+can_spin_kill = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-0.192503, -8.1925)
+texture = ExtResource("2_wi7v6")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_htghu")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-0.192503, -8.1925)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0.192503, 0.1925)
+shape = SubResource("RectangleShape2D_73mj6")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=16 format=3 uid="uid://pp4ydecer0j"]
+
+[ext_resource type="Resource" uid="uid://bpbr7svkwm37d" path="res://Resources/Achievements/Completionist/DragCoins/CIDragCoin.tres" id="1_038ue"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_051kk"]
+[ext_resource type="AudioStream" uid="uid://cxu116nlh1axh" path="res://Assets/Audio/BGM/SMW/AutumnMainIsland.mp3" id="1_cunny"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="2_gwwl5"]
+[ext_resource type="Resource" uid="uid://cdj504jeg1y2x" path="res://Resources/LevelData/ChocoIsland/CI1.tres" id="2_kx2jh"]
+[ext_resource type="Resource" uid="uid://fp2hryo8kdag" path="res://Resources/LevelData/ChocoIsland/CI2.tres" id="3_ichmg"]
+[ext_resource type="Resource" uid="uid://ttgbxm4kah5s" path="res://Resources/LevelData/ChocoIsland/CI3.tres" id="4_0fod4"]
+[ext_resource type="Resource" uid="uid://b4dytcf3di73q" path="res://Resources/LevelData/ChocoIsland/CI4.tres" id="5_qn0kq"]
+[ext_resource type="Resource" uid="uid://dqbxtajqx43wv" path="res://Resources/LevelData/ChocoIsland/CI5.tres" id="6_02fef"]
+[ext_resource type="Resource" uid="uid://c44rurkhgykln" path="res://Resources/LevelData/ChocoIsland/CGH.tres" id="7_fmf6p"]
+[ext_resource type="Resource" uid="uid://d1ko4ua5ucb83" path="res://Resources/LevelData/ChocoIsland/Castle6.tres" id="8_2ygy0"]
+[ext_resource type="Resource" uid="uid://bonywbspphm3t" path="res://Resources/LevelData/ChocoIsland/CS.tres" id="9_vgobf"]
+[ext_resource type="Resource" uid="uid://ukxr33c15hue" path="res://Resources/LevelData/ChocoIsland/CF.tres" id="9_wqk4a"]
+[ext_resource type="AudioStream" uid="uid://cu7uxj1ov3jl5" path="res://Assets/Audio/BGM/SMW/MainIsland.mp3" id="11_yehks"]
+[ext_resource type="Resource" uid="uid://crjs6f1owoibj" path="res://Resources/LevelData/ChocoIsland/GhostShip.tres" id="12_lwdpv"]
+
+[resource]
+script = ExtResource("2_gwwl5")
+area_name = "Chocolate Island"
+music = ExtResource("11_yehks")
+autumn_music = ExtResource("1_cunny")
+levels = Array[ExtResource("1_051kk")]([ExtResource("2_kx2jh"), ExtResource("3_ichmg"), ExtResource("4_0fod4"), ExtResource("5_qn0kq"), ExtResource("6_02fef"), ExtResource("9_vgobf"), ExtResource("7_fmf6p"), ExtResource("8_2ygy0"), ExtResource("9_wqk4a"), ExtResource("12_lwdpv")])
+dragon_coin_achievement = ExtResource("1_038ue")

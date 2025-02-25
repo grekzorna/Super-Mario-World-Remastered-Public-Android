@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxa60on04noyg"]
+
+[ext_resource type="Script" path="res://Scripts/UI/settings_section.gd" id="1_802pf"]
+[ext_resource type="PackedScene" uid="uid://xjo6vkm2mwwv" path="res://Instances/UI/slider_option_node.tscn" id="2_ruhfv"]
+
+[node name="AudioSettings" type="ScrollContainer" node_paths=PackedStringArray("option_nodes")]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.207407
+anchor_right = 0.883333
+anchor_bottom = 0.948148
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("1_802pf")
+option_nodes = [NodePath("VBoxContainer/SliderOption"), NodePath("VBoxContainer/SliderOption2"), NodePath("VBoxContainer/SliderOption3"), NodePath("VBoxContainer/SliderOption4"), NodePath("")]
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="SliderOption" parent="VBoxContainer" instance=ExtResource("2_ruhfv")]
+layout_mode = 2
+option_title = "Master"
+settings_value = "master_volume"
+
+[node name="SliderOption2" parent="VBoxContainer" instance=ExtResource("2_ruhfv")]
+layout_mode = 2
+option_title = "Music"
+settings_value = "music_volume"
+
+[node name="SliderOption3" parent="VBoxContainer" instance=ExtResource("2_ruhfv")]
+layout_mode = 2
+option_title = "SFX"
+settings_value = "sfx_volume"
+
+[node name="SliderOption4" parent="VBoxContainer" instance=ExtResource("2_ruhfv")]
+layout_mode = 2
+option_title = "UI"
+settings_value = "ui_volume"

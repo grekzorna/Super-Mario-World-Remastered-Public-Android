@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://ce143j53o61aq"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/BobOmbHeld.gd" id="1_giy1i"]
+[ext_resource type="Texture2D" uid="uid://bprbyvo7k13gh" path="res://Assets/Sprites/Enemys/BobOmb.png" id="2_w7eaf"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="3_sa83o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1cnj"]
+atlas = ExtResource("2_w7eaf")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xiaui"]
+atlas = ExtResource("2_w7eaf")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhyct"]
+size = Vector2(10, 8)
+
+[sub_resource type="Animation" id="Animation_606g4"]
+resource_name = "Flash"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_bycva"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e60u6"]
+_data = {
+"Flash": SubResource("Animation_606g4"),
+"RESET": SubResource("Animation_bycva")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhl3p"]
+size = Vector2(12, 9.5)
+
+[node name="BobOmbHeld" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_giy1i")
+directional_sprite = true
+can_destroy = true
+kick_bounce = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = SubResource("AtlasTexture_b1cnj")
+flip_h = true
+hframes = 3
+vframes = 2
+frame = 2
+script = ExtResource("3_sa83o")
+textures = Array[Texture2D]([SubResource("AtlasTexture_xiaui"), SubResource("AtlasTexture_b1cnj")])
+settings_value = "bobomb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_vhyct")
+
+[node name="FlashAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e60u6")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4.75)
+shape = SubResource("RectangleShape2D_hhl3p")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

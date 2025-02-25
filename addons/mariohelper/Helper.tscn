@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvbf3bbyvx48t"]
+
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="1_grq8x"]
+[ext_resource type="Script" path="res://addons/mariohelper/Helper.gd" id="1_pksr5"]
+
+[sub_resource type="Theme" id="Theme_4dj0c"]
+default_font = ExtResource("1_grq8x")
+
+[sub_resource type="SystemFont" id="SystemFont_m2nqj"]
+subpixel_positioning = 0
+
+[node name="Helper" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_4dj0c")
+script = ExtResource("1_pksr5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 536.0
+offset_bottom = 200.0
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 32
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 30
+columns = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_m2nqj")
+placeholder_text = "BASE SPRITE"
+
+[node name="Button" type="Button" parent="VBoxContainer/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "ADD FRAMES"
+
+[node name="Button" type="Button" parent="VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(98, 0)
+layout_mode = 2
+text = "ADD STARTING LEVEL NODES"
+autowrap_mode = 2
+
+[node name="Button2" type="Button" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "CLEAN EXPORT FILES"
+
+[node name="FIXUID" type="Button" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "UPDATE UID'S"
+
+[connection signal="pressed" from="VBoxContainer/GridContainer/VBoxContainer2/Button" to="." method="add_frames"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/FIXUID" to="." method="uid_fix"]

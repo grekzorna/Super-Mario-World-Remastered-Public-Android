@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://c34fvr4fmua5e"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/mega_mushroom.gd" id="1_vhtna"]
+[ext_resource type="Texture2D" uid="uid://b3sxcmggbdfbu" path="res://Assets/Sprites/Items/MegaMushroom.png" id="2_qi8fa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w65kk"]
+size = Vector2(32, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgldj"]
+size = Vector2(16, 8)
+
+[sub_resource type="Animation" id="Animation_6784e"]
+resource_name = "Grow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5ua87"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bp7o7"]
+_data = {
+"Grow": SubResource("Animation_6784e"),
+"RESET": SubResource("Animation_5ua87")
+}
+
+[node name="MegaMushroom" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_vhtna")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_qi8fa")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_w65kk")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_bgldj")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bp7o7")
+}
+autoplay = "Grow"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

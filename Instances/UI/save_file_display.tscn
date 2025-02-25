@@ -1,0 +1,266 @@
+[gd_scene load_steps=19 format=3 uid="uid://c544bwxw2pbgh"]
+
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="1_6xk8v"]
+[ext_resource type="Script" path="res://Scripts/UI/save_file_display.gd" id="2_7gynb"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_cvure"]
+[ext_resource type="PackedScene" uid="uid://bdxmrocmkp6tl" path="res://Instances/UI/save_egg_display.tscn" id="4_2t2xm"]
+[ext_resource type="Texture2D" uid="uid://ccp5uopuudw2" path="res://Assets/Sprites/Cutscenes/Eggs/2.png" id="7_fl86s"]
+[ext_resource type="Texture2D" uid="uid://vh01k4xog3td" path="res://Assets/Sprites/Cutscenes/Eggs/1.png" id="7_g74sm"]
+[ext_resource type="Texture2D" uid="uid://pd3elmy75lje" path="res://Assets/Sprites/Cutscenes/Eggs/3.png" id="8_p4yqq"]
+[ext_resource type="PackedScene" uid="uid://urn3bvyh3uen" path="res://Instances/UI/switch_block_display.tscn" id="9_i2egq"]
+[ext_resource type="Texture2D" uid="uid://c427mausifbwh" path="res://Assets/Sprites/Cutscenes/Eggs/4.png" id="9_ihljh"]
+[ext_resource type="Texture2D" uid="uid://5cmimk0ncms6" path="res://Assets/Sprites/UI/HUD/ExitCount.png" id="9_ngdt0"]
+[ext_resource type="Texture2D" uid="uid://ei7bb0cslr0p" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocks/Yellow.png" id="10_16jdl"]
+[ext_resource type="Texture2D" uid="uid://cu7fhps4rja6x" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocks/Green.png" id="11_amrrm"]
+[ext_resource type="Texture2D" uid="uid://s6ckxb3llxop" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocks/Blue.png" id="12_gk3t6"]
+[ext_resource type="Texture2D" uid="uid://cvufd0813pbce" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocks/Red.png" id="13_6tbbd"]
+[ext_resource type="Texture2D" uid="uid://bbagurfomroyy" path="res://Assets/Sprites/UI/HUD/CoinCount.png" id="16_a31e0"]
+[ext_resource type="Texture2D" uid="uid://of3r7x0jhsho" path="res://Assets/Sprites/UI/HUD/LivesCount.png" id="17_kvjsm"]
+[ext_resource type="Texture2D" uid="uid://brxwbw5xhl7em" path="res://Assets/Sprites/Objects/VersusCrown.png" id="17_s47x8"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jr82s"]
+color = Color(1, 1, 1, 1)
+grow_begin = 0.0
+grow_end = 0.0
+
+[node name="SaveFileDisplay" type="NinePatchRect"]
+offset_right = 72.0
+offset_bottom = 128.0
+texture = ExtResource("1_6xk8v")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("2_7gynb")
+
+[node name="FileTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "file a"
+autowrap_mode = 2
+uppercase = true
+
+[node name="Line" type="HSeparator" parent="FileTitle"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 8.0
+offset_right = 52.0
+offset_bottom = 12.0
+theme_override_styles/separator = SubResource("StyleBoxLine_jr82s")
+
+[node name="ValidFile" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 72.0
+offset_bottom = 128.0
+
+[node name="EggContainer" type="GridContainer" parent="ValidFile"]
+layout_mode = 0
+anchor_left = 0.111111
+anchor_top = 0.5625
+anchor_right = 0.902778
+anchor_bottom = 0.765625
+offset_right = 57.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 4
+columns = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="SaveEggDisplay" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("7_g74sm")
+
+[node name="SaveEggDisplay2" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("7_fl86s")
+
+[node name="SaveEggDisplay3" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("8_p4yqq")
+
+[node name="SaveEggDisplay4" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("9_ihljh")
+
+[node name="SaveEggDisplay5" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("7_g74sm")
+
+[node name="SaveEggDisplay6" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("7_fl86s")
+
+[node name="SaveEggDisplay7" parent="ValidFile/EggContainer" instance=ExtResource("4_2t2xm")]
+layout_mode = 2
+collected_texture = ExtResource("8_p4yqq")
+
+[node name="StarPoints" type="HBoxContainer" parent="ValidFile"]
+layout_mode = 0
+anchor_left = 0.111111
+anchor_top = 0.375
+anchor_right = 0.666667
+anchor_bottom = 0.5
+theme_override_constants/separation = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ValidFile/StarPoints"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("9_ngdt0")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ValidFile/StarPoints"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "96"
+vertical_alignment = 2
+
+[node name="SwitchBlocks" type="HBoxContainer" parent="ValidFile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0763889
+anchor_top = 0.8125
+anchor_right = 0.923611
+anchor_bottom = 0.9375
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -1
+metadata/_edit_use_anchors_ = true
+
+[node name="SwitchBlockDisplay" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
+layout_mode = 2
+full_texture = ExtResource("10_16jdl")
+
+[node name="SwitchBlockDisplay2" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
+layout_mode = 2
+full_texture = ExtResource("11_amrrm")
+id = 1
+
+[node name="SwitchBlockDisplay3" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
+layout_mode = 2
+full_texture = ExtResource("13_6tbbd")
+id = 2
+
+[node name="SwitchBlockDisplay4" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
+layout_mode = 2
+full_texture = ExtResource("12_gk3t6")
+id = 3
+
+[node name="Crown" type="TextureRect" parent="ValidFile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0625
+anchor_right = 1.0
+texture = ExtResource("17_s47x8")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Coins" type="Label" parent="ValidFile"]
+layout_mode = 0
+anchor_left = 0.333333
+anchor_top = 0.28125
+anchor_right = 0.555556
+anchor_bottom = 0.40625
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "10"
+vertical_alignment = 2
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ValidFile/Coins"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_bottom = 16.0
+texture = ExtResource("16_a31e0")
+
+[node name="Lives" type="Label" parent="ValidFile"]
+layout_mode = 0
+anchor_left = 0.333333
+anchor_top = 0.1875
+anchor_right = 0.555556
+anchor_bottom = 0.3125
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "10"
+vertical_alignment = 2
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ValidFile/Lives"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 8.0
+offset_bottom = 16.0
+texture = ExtResource("17_kvjsm")
+
+[node name="EmptyFile" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="EmptyFile"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -9.5
+offset_right = 32.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "NEW
+FILE"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="DeleteTag" type="NinePatchRect" parent="."]
+modulate = Color(1, 0, 0, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.992188
+anchor_right = 1.0
+anchor_bottom = 1.17969
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6xk8v")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="DeleteTag"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.5
+offset_top = -23.0
+offset_right = 35.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cvure")
+text = "delete save"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true

@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://ct4tb3oc2eqq5"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/yoshi_wings_pickup.gd" id="1_uv4s4"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="2_mn0jo"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="3_m3jhn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53xeb"]
+atlas = ExtResource("2_mn0jo")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blmar"]
+atlas = ExtResource("2_mn0jo")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y7low"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53xeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blmar")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pllv4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5xer0"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lveur"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 12.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 8.0
+emission_ring_cone_angle = 90.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[node name="YoshiWings" type="Node2D"]
+script = ExtResource("1_uv4s4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y7low")
+autoplay = "default"
+frame_progress = 0.230867
+
+[node name="Hitbox" type="Area2D" parent="Sprite"]
+
+[node name="Shape" type="CollisionShape2D" parent="Sprite/Hitbox"]
+shape = SubResource("CircleShape2D_pllv4")
+
+[node name="Glimmer" type="GPUParticles2D" parent="."]
+z_index = -1
+material = SubResource("CanvasItemMaterial_5xer0")
+randomness = 1.0
+texture = ExtResource("3_m3jhn")
+process_material = SubResource("ParticleProcessMaterial_lveur")
+
+[connection signal="area_entered" from="Sprite/Hitbox" to="." method="_on_hitbox_area_entered"]

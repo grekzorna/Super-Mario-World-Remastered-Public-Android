@@ -1,0 +1,30 @@
+[gd_resource type="AudioStreamInteractive" load_steps=5 format=3 uid="uid://b0r84r2h4c6jg"]
+
+[ext_resource type="AudioStream" uid="uid://dythtfgpf18yq" path="res://Assets/Audio/BGM/SMW/Underwater.mp3" id="1_dhhvj"]
+[ext_resource type="AudioStream" uid="uid://bnfuiq8df0xd7" path="res://Assets/Audio/BGM/SMW/UnderwaterYoshi.mp3" id="2_up2ot"]
+[ext_resource type="AudioStream" uid="uid://dythtfgpf18yq" path="res://Assets/Audio/BGM/SMW/Underwater.mp3" id="3_p7hh7"]
+[ext_resource type="AudioStream" uid="uid://dythtfgpf18yq" path="res://Assets/Audio/BGM/SMW/Underwater.mp3" id="4_ef22j"]
+
+
+[resource]
+clip_count = 4
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_dhhvj")
+clip_0/auto_advance = 0
+clip_1/name = &"Yoshi"
+clip_1/stream = ExtResource("2_up2ot")
+clip_1/auto_advance = 0
+clip_2/name = &"Hurry"
+clip_2/stream = ExtResource("3_p7hh7")
+clip_2/auto_advance = 0
+clip_3/name = &"HurryYoshi"
+clip_3/stream = ExtResource("4_ef22j")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4ufsodcxnhva"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/CustomParticle.gd" id="1_8qn5m"]
+[ext_resource type="Texture2D" uid="uid://dwdxfiisy3idf" path="res://Assets/Sprites/Particles/Puff.png" id="2_mmqwr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y0ya4"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kos7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[node name="CustomParticle" type="Node2D"]
+z_index = 10
+script = ExtResource("1_8qn5m")
+
+[node name="PuffTrail" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_y0ya4")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_1kos7")
+texture = ExtResource("2_mmqwr")
+one_shot = true

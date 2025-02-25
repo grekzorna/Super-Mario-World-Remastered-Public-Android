@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dxe7pdxagxdk0"]
+
+[ext_resource type="Texture2D" uid="uid://n5x74enf7a2m" path="res://Assets/Sprites/AchievementIcons/46577.png" id="1_7u3sa"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_je1dn"]
+
+[resource]
+script = ExtResource("1_je1dn")
+title = "I Believe I Can Fly"
+description = "Collect a Cape Feather"
+icon = ExtResource("1_7u3sa")

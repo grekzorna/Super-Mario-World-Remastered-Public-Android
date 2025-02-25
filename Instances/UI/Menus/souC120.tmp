@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0iqy4mn1p8t"]
+
+[sub_resource type="AudioStream" id="AudioStream_egeb3"]
+
+[node name="SoundTest" type="Node"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 56.0
+grow_horizontal = 2
+text = "Now Playing: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStream_egeb3")
+autoplay = true

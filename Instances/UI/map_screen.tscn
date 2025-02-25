@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://ktl2n87f76b3"]
+
+[ext_resource type="Texture2D" uid="uid://btu23v0vnuwcq" path="res://Assets/Sprites/Map/Map.png" id="1_1yfdb"]
+[ext_resource type="Texture2D" uid="uid://c1x1x04j8x1jv" path="res://Assets/Sprites/Map/Mario.png" id="2_yqsau"]
+
+[sub_resource type="Curve2D" id="Curve2D_pwfpd"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 56, 216, 0, 0, 0, 0, 57, 184, 0, 0, 0, 0, 62, 174, 0, 0, 0, 0, 72, 171, 0, 0, 0, 0, 88, 171, 0, 0, 0, 0, 111, 167, 0, 0, 0, 0, 138, 167, 0, 0, 0, 0, 152, 168, 0, 0, 0, 0, 171, 170, 0, 0, 0, 0, 183, 191, 0, 0, 0, 0, 184, 199, 0, 0, 0, 0, 214, 203, 0, 0, 0, 0, 215, 154)
+}
+point_count = 13
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4pqc"]
+atlas = ExtResource("2_yqsau")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fhc0"]
+atlas = ExtResource("2_yqsau")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2r66"]
+atlas = ExtResource("2_yqsau")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnjl7"]
+atlas = ExtResource("2_yqsau")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64h8e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4pqc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fhc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2r66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnjl7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MapScreen" type="Node"]
+
+[node name="Map" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1yfdb")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_pwfpd")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(56.1298, 211.847)
+progress = 4.15496
+rotates = false
+cubic_interp = false
+loop = false
+
+[node name="Mario" type="AnimatedSprite2D" parent="Path2D/PathFollow2D"]
+sprite_frames = SubResource("SpriteFrames_64h8e")
+autoplay = "default"
+frame_progress = 0.705304

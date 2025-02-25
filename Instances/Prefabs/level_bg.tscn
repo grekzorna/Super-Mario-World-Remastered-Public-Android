@@ -1,0 +1,347 @@
+[gd_scene load_steps=22 format=3 uid="uid://c1xol3wby2j0k"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/StaticBG.gd" id="1_lrqve"]
+[ext_resource type="Texture2D" uid="uid://crbjluupvxjmt" path="res://Assets/Sprites/Overworld/BG1.png" id="2_mtemm"]
+[ext_resource type="AudioStream" uid="uid://b078o78lrk41f" path="res://Assets/Audio/SFX/encore_rain.mp3" id="4_lqcdg"]
+[ext_resource type="AudioStream" uid="uid://dlmavmni76o5u" path="res://Assets/Audio/SFX/thunder.wav" id="4_xevh5"]
+[ext_resource type="Texture2D" uid="uid://bclrqvrusmt7m" path="res://Assets/Sprites/Backgrounds/Overworld/Rain.png" id="4_ytve7"]
+[ext_resource type="Texture2D" uid="uid://dlbqt537rt70r" path="res://Assets/Sprites/Particles/SnowFlake.png" id="5_xqu78"]
+[ext_resource type="Texture2D" uid="uid://b4h70tameaf31" path="res://Assets/Sprites/Map/AutumnLeaf.png" id="7_1x82a"]
+
+[sub_resource type="Animation" id="Animation_k1fi5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_k05jf"]
+resource_name = "thunder"
+length = 2.2
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ThunderSFX")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_xevh5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0981565, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.109804), Color(1, 1, 1, 0), Color(1, 1, 1, 0.109804), Color(1, 1, 1, 0), Color(1, 1, 1, 0.109804), Color(1, 1, 1, 0), Color(1, 1, 1, 0.109804), Color(1, 1, 1, 0), Color(1, 1, 1, 0.109804), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8wh1"]
+_data = {
+"RESET": SubResource("Animation_k1fi5"),
+"thunder": SubResource("Animation_k05jf")
+}
+
+[sub_resource type="Shader" id="Shader_se7tj"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7y1nu"]
+shader = SubResource("Shader_se7tj")
+shader_parameter/motion = Vector2(-128, -256)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_slw6q"]
+code = "shader_type canvas_item;
+
+uniform bool enabled = true;
+uniform float wave_speed = 3.0; //wave loop speed
+uniform float wave_freq = 10.0; //wave vertical freq
+uniform float wave_width = 1; //wave width 
+
+void fragment(){
+	if (enabled){
+		vec2 scale_UV = UV;
+		vec2 wave_uv_offset;
+		wave_uv_offset.x = cos((TIME*wave_speed)+UV.x+UV.y*wave_freq*2.0)*wave_width*0.01;
+		//COLOR = vec4(wave_uv_offset,0.0,1.0);
+		COLOR = texture(TEXTURE,scale_UV+wave_uv_offset);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w608r"]
+shader = SubResource("Shader_slw6q")
+shader_parameter/enabled = false
+shader_parameter/wave_speed = 3.0
+shader_parameter/wave_freq = 10.0
+shader_parameter/wave_width = 1.0
+
+[sub_resource type="Curve" id="Curve_dpe0r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0781893, 1), 0.0, 0.0, 0, 0, Vector2(0.946502, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dxj7w"]
+curve = SubResource("Curve_dpe0r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eh2su"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(240, 1, 1)
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_dxj7w")
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dq2an"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_aahbv"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0781893, 1), 0.0, 0.0, 0, 0, Vector2(0.946502, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cwatv"]
+curve = SubResource("Curve_aahbv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_goavy"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(120, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_cwatv")
+anim_offset_max = 1.0
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.0
+
+[node name="LevelBG" type="Node2D"]
+visibility_layer = 512
+script = ExtResource("1_lrqve")
+main_texture = ExtResource("2_mtemm")
+sky_colour = Color(0, 0.376471, 0.721569, 1)
+metadata/_edit_lock_ = true
+
+[node name="SkyLayer" type="Parallax2D" parent="."]
+visibility_layer = 512
+z_index = -55
+repeat_size = Vector2(512, 1536)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="ThunderFlash" type="ColorRect" parent="SkyLayer"]
+auto_translate_mode = 1
+modulate = Color(1, 1, 1, 0)
+visibility_layer = 512
+offset_right = 512.0
+offset_bottom = 9999.0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SkyLayer/ThunderFlash"]
+libraries = {
+"": SubResource("AnimationLibrary_f8wh1")
+}
+
+[node name="ThunderSFX" type="AudioStreamPlayer" parent="SkyLayer/ThunderFlash"]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="SkyColor" type="ColorRect" parent="SkyLayer"]
+auto_translate_mode = 1
+visibility_layer = 512
+z_index = -2
+offset_top = -999.0
+offset_right = 512.0
+offset_bottom = 537.0
+color = Color(0, 0.376471, 0.721569, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="SkyTexture" type="TextureRect" parent="SkyLayer"]
+auto_translate_mode = 1
+visible = false
+visibility_layer = 512
+z_index = -1
+offset_top = -999.0
+offset_right = 512.0
+offset_bottom = 537.0
+
+[node name="RainLayer" type="Parallax2D" parent="."]
+visible = false
+visibility_layer = 512
+repeat_size = Vector2(1024, 864)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="RainTexture" type="TextureRect" parent="RainLayer"]
+modulate = Color(1, 1, 1, 0.392157)
+visibility_layer = 512
+material = SubResource("ShaderMaterial_7y1nu")
+offset_right = 1024.0
+offset_bottom = 864.0
+texture = ExtResource("4_ytve7")
+stretch_mode = 1
+
+[node name="ThunderFlash" type="ColorRect" parent="RainLayer"]
+modulate = Color(1, 1, 1, 0)
+visibility_layer = 512
+offset_right = 1024.0
+offset_bottom = 864.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RainLayer/ThunderFlash"]
+libraries = {
+"": SubResource("AnimationLibrary_f8wh1")
+}
+
+[node name="ThunderSFX" type="AudioStreamPlayer" parent="RainLayer/ThunderFlash"]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="MainBGLayer" type="Parallax2D" parent="."]
+visibility_layer = 512
+z_index = -50
+scroll_scale = Vector2(0.7, 1)
+scroll_offset = Vector2(0, -384)
+repeat_size = Vector2(512, 0)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="MainTexture" type="Sprite2D" parent="MainBGLayer"]
+light_mask = 0
+visibility_layer = 512
+z_index = 8
+material = SubResource("ShaderMaterial_w608r")
+texture = ExtResource("2_mtemm")
+centered = false
+
+[node name="AnimatedMainTexture" type="AnimatedSprite2D" parent="MainBGLayer"]
+visibility_layer = 512
+z_index = 8
+centered = false
+
+[node name="AnimatedSpriteLayer" type="AnimatedSprite2D" parent="MainBGLayer"]
+light_mask = 0
+visibility_layer = 512
+z_index = 9
+
+[node name="MainFGLayer" type="Parallax2D" parent="."]
+modulate = Color(1, 1, 1, 0.3)
+visibility_layer = 512
+z_index = 10
+scroll_offset = Vector2(0, -192)
+repeat_size = Vector2(512, 0)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="MainTexture" type="Sprite2D" parent="MainFGLayer"]
+light_mask = 0
+visibility_layer = 512
+z_index = 8
+centered = false
+
+[node name="FGLayer" type="Parallax2D" parent="."]
+visibility_layer = 512
+z_index = 10
+scroll_offset = Vector2(0, -279)
+repeat_size = Vector2(512, 0)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="Texture" type="Sprite2D" parent="FGLayer"]
+visibility_layer = 512
+centered = false
+
+[node name="RainSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lqcdg")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="RainCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 2000)
+collision_mask = 255
+
+[node name="ThunderTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="SnowLayer" type="Parallax2D" parent="."]
+process_mode = 3
+visible = false
+visibility_layer = 512
+z_index = 10
+scroll_offset = Vector2(0, -304)
+repeat_size = Vector2(240, 609)
+repeat_times = 32
+screen_offset = Vector2(-568, -499.498)
+
+[node name="SnowParticles" type="GPUParticles2D" parent="SnowLayer"]
+z_index = -9
+position = Vector2(2296, 1728)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_eh2su")
+texture = ExtResource("5_xqu78")
+lifetime = 10.0
+preprocess = 10.0
+
+[node name="LeafLayer" type="Parallax2D" parent="."]
+process_mode = 3
+visible = false
+visibility_layer = 512
+z_index = 10
+scroll_offset = Vector2(-1920, -270)
+repeat_size = Vector2(480, 270)
+repeat_times = 8
+screen_offset = Vector2(-568, -499.498)
+
+[node name="LeafParticles" type="GPUParticles2D" parent="LeafLayer"]
+z_index = -9
+material = SubResource("CanvasItemMaterial_dq2an")
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_goavy")
+texture = ExtResource("7_1x82a")
+lifetime = 10.0
+preprocess = 10.0
+randomness = 1.0
+visibility_rect = Rect2(0, 0, 0, 0)
+
+[node name="Tint" type="CanvasModulate" parent="."]
+visible = false
+color = Color(1, 0.831373, 0.643137, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[connection signal="timeout" from="ThunderTimer" to="." method="thunder_flash"]

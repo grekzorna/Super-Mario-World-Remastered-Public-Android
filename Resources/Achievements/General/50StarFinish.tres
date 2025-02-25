@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://6q8tf64pbkdi"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_6fe76"]
+[ext_resource type="Texture2D" uid="uid://cene02rtr0p7j" path="res://Assets/Sprites/AchievementIcons/47084.png" id="1_ku13t"]
+
+[resource]
+script = ExtResource("1_6fe76")
+title = "Maximum Finish"
+description = "Cross the finish line at the end of the stage and collect the max 50 stars"
+icon = ExtResource("1_ku13t")

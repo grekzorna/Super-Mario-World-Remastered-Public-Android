@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=3 uid="uid://1tpqkxcq82r6"]
+
+[ext_resource type="Script" uid="uid://buyjkxywwf8gt" path="res://Scripts/Classes/Enemies/sumo_bro.gd" id="1_rvyb3"]
+[ext_resource type="Texture2D" uid="uid://yt1aen27defg" path="res://Assets/Sprites/Enemys/SumoBro.png" id="2_edwe0"]
+
+[sub_resource type="Animation" id="Animation_5ft3p"]
+resource_name = "Move"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_ywi1l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o6rur"]
+resource_name = "Stomp"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.55, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stomp"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uc6h0"]
+_data = {
+&"Move": SubResource("Animation_5ft3p"),
+&"RESET": SubResource("Animation_ywi1l"),
+&"Stomp": SubResource("Animation_o6rur")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8gdr"]
+size = Vector2(10, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u77gg"]
+size = Vector2(17, 16)
+
+[node name="SumoBro" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_rvyb3")
+ice_size = Vector2(4, 3)
+spiky_top = true
+can_cape_damage = false
+can_fire_damage = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_edwe0")
+hframes = 6
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uc6h0")
+}
+autoplay = "Stomp"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_h8gdr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_u77gg")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(2.38419e-07, -11)
+scale = Vector2(1.6, 1.3)
+
+[node name="LeftLedge" type="RayCast2D" parent="."]
+position = Vector2(-16, -8)
+target_position = Vector2(0, 16)
+collision_mask = 4
+
+[node name="RightLedge" type="RayCast2D" parent="."]
+position = Vector2(16, -8)
+target_position = Vector2(0, 16)
+collision_mask = 4
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

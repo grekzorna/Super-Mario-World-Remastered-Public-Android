@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2csl8c7iofaw"]
+
+[ext_resource type="Script" uid="uid://bs7n6ei81y1vt" path="res://Scripts/UI/MapPauseMenu.gd" id="1_d07ur"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="2_862bh"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_e5hg7"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="4_80lki"]
+[ext_resource type="PackedScene" uid="uid://buq5u2vf04i17" path="res://Instances/UI/Menus/player_amount_select.tscn" id="5_5pudp"]
+[ext_resource type="PackedScene" uid="uid://bxirkhurqoou5" path="res://Instances/UI/Menus/device_assigner.tscn" id="6_b1env"]
+[ext_resource type="PackedScene" uid="uid://bi6g06uvigns2" path="res://Instances/UI/Menus/player_select.tscn" id="7_fjug3"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d07ur")
+
+[node name="Box" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -38.5
+offset_right = 58.5
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_862bh")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 9
+
+[node name="Vbox" type="VBoxContainer" parent="Box/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_e5hg7")
+text = "Continue"
+uppercase = true
+
+[node name="PlayerSetup" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_e5hg7")
+text = "Player Setup"
+uppercase = true
+
+[node name="Save" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_e5hg7")
+text = "Save game"
+uppercase = true
+
+[node name="Label3" type="Label" parent="Box/MarginContainer/Vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_e5hg7")
+text = "Quit"
+uppercase = true
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 136.0
+texture = ExtResource("4_80lki")
+flip_h = true
+
+[node name="PlayerAmountSelect" parent="." instance=ExtResource("5_5pudp")]
+process_mode = 3
+visible = false
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="PlayerAmountSelect"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 272.0
+
+[node name="DeviceAssigner" parent="." instance=ExtResource("6_b1env")]
+process_mode = 3
+visible = false
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="DeviceAssigner"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 272.0
+
+[node name="CharacterSelect" parent="." instance=ExtResource("7_fjug3")]
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="CharacterSelect"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 272.0
+
+[connection signal="player_setup_selected" from="." to="PlayerAmountSelect" method="open"]
+[connection signal="cancelled" from="PlayerAmountSelect" to="." method="resume_game"]
+[connection signal="selected" from="PlayerAmountSelect" to="DeviceAssigner" method="open"]
+[connection signal="closed" from="DeviceAssigner" to="PlayerAmountSelect" method="open"]
+[connection signal="finished" from="DeviceAssigner" to="CharacterSelect" method="open"]

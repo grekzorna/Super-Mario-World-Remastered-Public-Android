@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw0ugp22md5ul"]
+
+[ext_resource type="Texture2D" uid="uid://cbllbsvb61cup" path="res://Assets/Sprites/Backgrounds/Underground/BG1.png" id="1_r8cdb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rvl2"]
+atlas = ExtResource("1_r8cdb")
+region = Rect2(0, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sseur"]
+atlas = ExtResource("1_r8cdb")
+region = Rect2(512, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88767"]
+atlas = ExtResource("1_r8cdb")
+region = Rect2(1024, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecp13"]
+atlas = ExtResource("1_r8cdb")
+region = Rect2(1536, 0, 512, 432)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4pjq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2rvl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sseur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88767")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecp13")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="VerticalUndergroundBG" type="Parallax2D"]
+visibility_layer = 2
+z_index = -100
+scroll_scale = Vector2(0.5, 0.05)
+scroll_offset = Vector2(0, -154)
+repeat_size = Vector2(512, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g4pjq")
+autoplay = "default"
+frame_progress = 0.795077
+centered = false

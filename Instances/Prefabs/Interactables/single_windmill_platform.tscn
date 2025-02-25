@@ -1,0 +1,109 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvdt1cn7f1g4w"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/WindmillPlatform.gd" id="1_onewu"]
+[ext_resource type="Texture2D" uid="uid://c7ui24bfgxrpp" path="res://Assets/Sprites/Objects/Platforms/WindmillPlatform.png" id="2_mjl8e"]
+[ext_resource type="Texture2D" uid="uid://cdnw3ie3b2qdw" path="res://Assets/Sprites/Objects/Platforms/WindmillBearing.png" id="3_ah0gq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfvix"]
+size = Vector2(48, 16)
+
+[sub_resource type="Animation" id="Animation_kfxdy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spin:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y4hbt"]
+resource_name = "Spin"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spin:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unrsp"]
+_data = {
+"RESET": SubResource("Animation_kfxdy"),
+"Spin": SubResource("Animation_y4hbt")
+}
+
+[node name="SingleWindmillPlatform" type="Node2D"]
+script = ExtResource("1_onewu")
+
+[node name="Platform1" type="AnimatableBody2D" parent="."]
+position = Vector2(0, 48)
+
+[node name="Collision" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_mfvix")
+one_way_collision = true
+
+[node name="Sprite" type="Sprite2D" parent="Platform1"]
+texture = ExtResource("2_mjl8e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_unrsp")
+}
+autoplay = "Spin"
+
+[node name="Spin" type="Node2D" parent="."]
+
+[node name="PlatformPosition" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, 48)
+remote_path = NodePath("../../Platform1")
+update_rotation = false
+update_scale = false
+
+[node name="BallPosition1" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, 16)
+remote_path = NodePath("../../Ball1")
+update_rotation = false
+update_scale = false
+
+[node name="BallPosition2" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, 32)
+remote_path = NodePath("../../Ball2")
+update_rotation = false
+update_scale = false
+
+[node name="BallPosition3" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, 48)
+remote_path = NodePath("../../Ball3")
+update_rotation = false
+update_scale = false
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+scale = Vector2(6.4, 6.4)
+
+[node name="Ball1" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 16)
+texture = ExtResource("3_ah0gq")
+
+[node name="Ball2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 32)
+texture = ExtResource("3_ah0gq")
+
+[node name="Ball3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 48)
+texture = ExtResource("3_ah0gq")

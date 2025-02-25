@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b30lrtbdc5dh2"]
+
+[ext_resource type="Script" uid="uid://dn3clufo1hq38" path="res://Scripts/Projectile/map_switch_palace_block_particle.gd" id="1_cnony"]
+[ext_resource type="Texture2D" uid="uid://bkvvbsjjx06sv" path="res://Assets/Sprites/Map/MapSprites/SwitchBlocks.png" id="2_amdq5"]
+
+[node name="MapSwitchPalaceBlockParticle" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_cnony")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 5
+texture = ExtResource("2_amdq5")
+hframes = 4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

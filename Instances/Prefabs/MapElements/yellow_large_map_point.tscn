@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx4jaixfu6pdf"]
+
+[ext_resource type="Texture2D" uid="uid://bgn7od8125w7v" path="res://Assets/Sprites/Map/MapSprites/LargeMapPoints.png" id="1_d5aqd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn2we"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58n82"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tj4to"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja8ek"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cql2"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfrja"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br3bv"]
+atlas = ExtResource("1_d5aqd")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpdbw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn2we")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58n82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tj4to")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja8ek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cql2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfrja")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br3bv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="YellowLargeMapPoint" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_wpdbw")
+autoplay = "default"
+frame_progress = 0.820247
+speed_scale = 2.0

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=8 format=3 uid="uid://btx7hj0d2vjhy"]
+
+[ext_resource type="Texture2D" uid="uid://4tonvcjbw2t5" path="res://Assets/Sprites/Items/CapeFeather.png" id="1_d5sk2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_gtmee"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="1_xkp3o"]
+[ext_resource type="AudioStream" uid="uid://b7lbr3patv4ao" path="res://Assets/Audio/SFX/cape-acquire.wav" id="2_laahd"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Cape.gd" id="3_chuhr"]
+[ext_resource type="PackedScene" uid="uid://cu5hpaqgpucrs" path="res://Instances/Parts/PowerupExtras/cape.tscn" id="6_pj2lx"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/CapeFly.gd" id="8_i7dob"]
+
+[resource]
+script = ExtResource("1_gtmee")
+state_name = "Cape"
+sprite_frame_name = "Big"
+power_script = ExtResource("3_chuhr")
+states = Array[Script]([ExtResource("8_i7dob")])
+hitbox_size = "Regular"
+transform_animation = true
+power_down = ExtResource("1_xkp3o")
+power_sfx_override = ExtResource("2_laahd")
+power_tier = 2
+item_sprite = ExtResource("1_d5sk2")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([ExtResource("6_pj2lx")])

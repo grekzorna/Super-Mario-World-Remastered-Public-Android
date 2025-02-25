@@ -1,0 +1,488 @@
+[gd_scene load_steps=54 format=3 uid="uid://cu5hpaqgpucrs"]
+
+[ext_resource type="Texture2D" uid="uid://craqj573u7gfh" path="res://Assets/Sprites/Items/CapeSheet.png" id="1_d4wke"]
+[ext_resource type="Script" path="res://Scripts/Parts/cape.gd" id="2_s2neu"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_il4nv"]
+animation = &"Down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dyaib"]
+animation = &"FaceBackwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kwwgr"]
+animation = &"FaceBackwardsMove"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ffs5c"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8grm7"]
+graph_offset = Vector2(-168, 21)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kwwgr")
+nodes/Animation/position = Vector2(-20, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ffs5c")
+nodes/TimeScale/position = Vector2(260, 100)
+nodes/output/position = Vector2(420, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hiuxk"]
+animation = &"FaceForward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pf7ko"]
+animation = &"Fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b5yoa"]
+animation = &"FallSpin"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_jtbi8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_pf7ko")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_b5yoa")
+blend_point_1/pos = 1.0
+min_space = 0.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w3nbx"]
+animation = &"Flip"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x4tr6"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdwe6"]
+animation = &"IdleYoshi"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_a7kt3"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_x4tr6")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_xdwe6")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v6gxa"]
+animation = &"Move"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kx0ow"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_juvjg"]
+graph_offset = Vector2(-435.653, 32.595)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_v6gxa")
+nodes/Animation/position = Vector2(-40, 100)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_kx0ow")
+nodes/TimeScale/position = Vector2(140, 140)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vqlrf"]
+animation = &"Spin"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ttkk1"]
+animation = &"Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t4o2o"]
+animation = &"YoshiTurnAround"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a78f6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wmbai"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0uc5n"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qselm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jm220"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ajs3k"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6w20w"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g1swv"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rksgn"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ucpia"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0q0bb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ja4a5"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nhjv2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b7um1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_if4a2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5pl44"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pgexp"]
+states/Down/node = SubResource("AnimationNodeAnimation_il4nv")
+states/Down/position = Vector2(450, 182)
+states/FaceBackwards/node = SubResource("AnimationNodeAnimation_dyaib")
+states/FaceBackwards/position = Vector2(-75, 100)
+states/FaceBackwardsMove/node = SubResource("AnimationNodeBlendTree_8grm7")
+states/FaceBackwardsMove/position = Vector2(-46, 203)
+states/FaceForward/node = SubResource("AnimationNodeAnimation_hiuxk")
+states/FaceForward/position = Vector2(200, 16)
+states/Fall/node = SubResource("AnimationNodeBlendSpace1D_jtbi8")
+states/Fall/position = Vector2(450, -7)
+states/Flip/node = SubResource("AnimationNodeAnimation_w3nbx")
+states/Flip/position = Vector2(111, 164)
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_a7kt3")
+states/Idle/position = Vector2(323, 100)
+states/Move/node = SubResource("AnimationNodeBlendTree_juvjg")
+states/Move/position = Vector2(639, 100)
+states/Spin/node = SubResource("AnimationNodeAnimation_vqlrf")
+states/Spin/position = Vector2(200, 182)
+states/Up/node = SubResource("AnimationNodeAnimation_ttkk1")
+states/Up/position = Vector2(450, 100)
+states/YoshiTurnAround/node = SubResource("AnimationNodeAnimation_t4o2o")
+states/YoshiTurnAround/position = Vector2(45, 26)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_a78f6"), "Idle", "Up", SubResource("AnimationNodeStateMachineTransition_wmbai"), "Down", "Idle", SubResource("AnimationNodeStateMachineTransition_0uc5n"), "Start", "Flip", SubResource("AnimationNodeStateMachineTransition_qselm"), "Start", "FaceBackwards", SubResource("AnimationNodeStateMachineTransition_jm220"), "Start", "FaceForward", SubResource("AnimationNodeStateMachineTransition_ajs3k"), "Fall", "Down", SubResource("AnimationNodeStateMachineTransition_6w20w"), "Up", "Fall", SubResource("AnimationNodeStateMachineTransition_g1swv"), "Start", "Spin", SubResource("AnimationNodeStateMachineTransition_rksgn"), "Spin", "Down", SubResource("AnimationNodeStateMachineTransition_ucpia"), "Spin", "Up", SubResource("AnimationNodeStateMachineTransition_0q0bb"), "Up", "Move", SubResource("AnimationNodeStateMachineTransition_ja4a5"), "Move", "Down", SubResource("AnimationNodeStateMachineTransition_nhjv2"), "Start", "YoshiTurnAround", SubResource("AnimationNodeStateMachineTransition_b7um1"), "Start", "FaceBackwardsMove", SubResource("AnimationNodeStateMachineTransition_if4a2"), "Move", "Up", SubResource("AnimationNodeStateMachineTransition_5pl44")]
+graph_offset = Vector2(-141, -39)
+
+[sub_resource type="Animation" id="Animation_vtqf6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.001153),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7qqda"]
+resource_name = "Move"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.598847),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_dgpq8"]
+resource_name = "FaceForward"
+length = 0.001
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_0xrfr"]
+resource_name = "Idle"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4tb3d"]
+resource_name = "Flip"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 28, 29]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gjds5"]
+resource_name = "Fall"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_idf63"]
+resource_name = "FaceBackwardsMove"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_rctqx"]
+resource_name = "Spin"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.102617),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6qiq4"]
+resource_name = "Up"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_3oepb"]
+resource_name = "Down"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_03m8x"]
+resource_name = "FaceBackwards"
+length = 0.001
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [26]
+}
+
+[sub_resource type="Animation" id="Animation_8gaip"]
+resource_name = "IdleYoshi"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_3sych"]
+resource_name = "FallSpin"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h4jmu"]
+resource_name = "YoshiTurnAround"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [34, 33]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cmogi"]
+_data = {
+&"RESET": SubResource("Animation_vtqf6"),
+&"FaceForward": SubResource("Animation_dgpq8"),
+&"Move": SubResource("Animation_7qqda"),
+&"Idle": SubResource("Animation_0xrfr"),
+&"Up": SubResource("Animation_6qiq4"),
+&"Fall": SubResource("Animation_gjds5"),
+&"Spin": SubResource("Animation_rctqx"),
+&"Flip": SubResource("Animation_4tb3d"),
+&"Down": SubResource("Animation_3oepb"),
+&"IdleYoshi": SubResource("Animation_8gaip"),
+&"FaceBackwards": SubResource("Animation_03m8x"),
+&"YoshiTurnAround": SubResource("Animation_h4jmu"),
+&"FallSpin": SubResource("Animation_3sych"),
+&"FaceBackwardsMove": SubResource("Animation_idf63")
+}
+
+[node name="Cape" type="Sprite2D"]
+z_index = -1
+use_parent_material = true
+position = Vector2(-2, 2)
+texture = ExtResource("1_d4wke")
+hframes = 18
+vframes = 2
+script = ExtResource("2_s2neu")
+extra_name = "Cape"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pgexp")
+anim_player = NodePath("../Animations")
+parameters/FaceBackwardsMove/TimeScale/scale = 1.0
+parameters/Fall/blend_position = 0.0
+parameters/Idle/blend_position = 0.0
+parameters/Move/TimeScale/scale = 1.0
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cmogi")
+}

@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://nvr12si261nm"]
+
+[ext_resource type="Script" uid="uid://d03ibq3lua88c" path="res://Scripts/Autoload/coop_manager.gd" id="1_mrw8q"]
+[ext_resource type="Texture2D" uid="uid://cob4xwhym8f0c" path="res://Assets/Sprites/Characters/OffScreenIcon.png" id="2_bx4ga"]
+
+[node name="CoopManager" type="Node"]
+process_mode = 3
+physics_interpolation_mode = 2
+script = ExtResource("1_mrw8q")
+
+[node name="Player1OffScreenIcon" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+texture = ExtResource("2_bx4ga")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Player1OffScreenIcon"]
+scale = Vector2(0.75, 0.75)
+
+[node name="Player2OffScreenIcon" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+texture = ExtResource("2_bx4ga")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Player2OffScreenIcon"]
+scale = Vector2(0.75, 0.75)
+
+[node name="Player3OffScreenIcon" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+texture = ExtResource("2_bx4ga")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Player3OffScreenIcon"]
+scale = Vector2(0.75, 0.75)
+
+[node name="Player4OffScreenIcon" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+texture = ExtResource("2_bx4ga")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Player4OffScreenIcon"]
+scale = Vector2(0.75, 0.75)
+
+[node name="CoopCamera" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+offset = Vector2(0, -16)
+enabled = false
+process_callback = 0
+limit_left = -64
+limit_bottom = 64
+limit_smoothed = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.05
+drag_top_margin = 0.6
+drag_right_margin = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="CameraTransform" type="RemoteTransform2D" parent="CoopCamera"]

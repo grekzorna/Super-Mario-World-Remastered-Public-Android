@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bmhtcgfsnsygo"]
+
+[ext_resource type="FontFile" uid="uid://den3r11imp63t" path="res://Assets/Sprites/UI/Messages/MessageFont.png" id="1_xqhg6"]
+
+[resource]
+base_font = ExtResource("1_xqhg6")
+spacing_top = -3

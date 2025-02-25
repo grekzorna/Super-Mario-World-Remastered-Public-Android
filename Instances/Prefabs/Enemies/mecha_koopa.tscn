@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://cv68ods63d8vn"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/mecha_koopa.gd" id="1_tgek5"]
+[ext_resource type="Texture2D" uid="uid://c2r06g7vxmrap" path="res://Assets/Sprites/Enemys/MechaKoopa.png" id="2_c440u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h41g0"]
+atlas = ExtResource("2_c440u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12ok1"]
+atlas = ExtResource("2_c440u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8bhu"]
+atlas = ExtResource("2_c440u")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugfhu"]
+atlas = ExtResource("2_c440u")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nkk8r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h41g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12ok1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8bhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugfhu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1iym2"]
+size = Vector2(16, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axyt7"]
+size = Vector2(20, 16)
+
+[node name="MechaKoopa" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_tgek5")
+yoshi_behavior = "Swallow"
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_nkk8r")
+autoplay = "default"
+frame_progress = 0.0866386
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_1iym2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_axyt7")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(1.43051e-06, -11)
+scale = Vector2(1.6, 1.3)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

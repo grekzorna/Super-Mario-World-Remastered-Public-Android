@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsrthsjbcppql"]
+
+[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_21j5v"]
+[ext_resource type="PackedScene" uid="uid://dvvlrrth1fxul" path="res://Instances/Prefabs/MapElements/map_mario.tscn" id="2_2e6ls"]
+[ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="3_umfqk"]
+[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="4_u1hsh"]
+[ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="5_uw3pi"]
+
+[node name="MapLevel" type="Node"]
+script = ExtResource("1_21j5v")
+
+[node name="MapMario" parent="." instance=ExtResource("2_2e6ls")]
+
+[node name="PlayerVisual" parent="." instance=ExtResource("3_umfqk")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -103.0
+offset_top = -38.0
+offset_right = 90.0
+offset_bottom = 91.0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -377.0
+offset_top = -187.0
+offset_right = 270.0
+offset_bottom = 274.0
+color = Color(0, 0.462745, 1, 1)
+
+[node name="Level1" type="Node2D" parent="."]
+position = Vector2(-62, -17)
+script = ExtResource("4_u1hsh")
+
+[node name="YellowMapPointVisual" parent="Level1" instance=ExtResource("5_uw3pi")]
+
+[node name="Level2" type="Node2D" parent="."]
+position = Vector2(0, -17)
+script = ExtResource("4_u1hsh")
+
+[node name="YellowMapPointVisual" parent="Level2" instance=ExtResource("5_uw3pi")]

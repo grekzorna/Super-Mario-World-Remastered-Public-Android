@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwwq1r32rbhcc"]
+
+[ext_resource type="PackedScene" uid="uid://bo8jpbrgr2pem" path="res://Instances/Prefabs/Interactables/spinning_saw.tscn" id="1_8uw0f"]
+[ext_resource type="Script" uid="uid://bflc88iohnrbv" path="res://Scripts/Classes/Enemies/running_saw.gd" id="1_68y17"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqbds"]
+size = Vector2(4, 4)
+
+[node name="RunningSaw" type="CharacterBody2D"]
+z_index = -6
+collision_layer = 0
+collision_mask = 4
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 8.0
+script = ExtResource("1_68y17")
+move_speed = 75
+
+[node name="SpinningSaw" parent="." instance=ExtResource("1_8uw0f")]
+play_sfx = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sqbds")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-4.76837e-07, -2.86102e-06)
+scale = Vector2(2.4, 2.4)

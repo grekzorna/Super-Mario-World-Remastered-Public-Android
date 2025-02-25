@@ -1,0 +1,126 @@
+[gd_scene load_steps=14 format=3 uid="uid://bx77y32dl3ewd"]
+
+[ext_resource type="Script" uid="uid://c22gmriwedt1v" path="res://Scripts/Classes/Enemies/monty_mole.gd" id="1_gwjx6"]
+[ext_resource type="Texture2D" uid="uid://cnn1hi0sii0ys" path="res://Assets/Sprites/Enemys/MontyMoleSheet.png" id="2_y7gvg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o25nm"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am30h"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cicui"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_luqm4"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agacy"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mycoh"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4r2f"]
+atlas = ExtResource("2_y7gvg")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_evyl6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o25nm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am30h")
+}],
+"loop": true,
+"name": &"BurrowSide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_luqm4")
+}],
+"loop": true,
+"name": &"BurrowTop",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agacy")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mycoh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4r2f")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aitrm"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ehm4"]
+size = Vector2(14, 14)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tmf3w"]
+radius = 144.0
+height = 560.0
+
+[node name="MontyMole" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_gwjx6")
+enemy_height = 12
+yoshi_behavior = "Swallow"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_evyl6")
+animation = &"Jump"
+frame_progress = 0.99439
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_aitrm")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -6)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_1ehm4")
+
+[node name="HidingHitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+collision_layer = 2
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HidingHitbox"]
+shape = SubResource("CapsuleShape2D_tmf3w")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="HidingHitbox" to="." method="_on_hiding_hitbox_area_entered"]

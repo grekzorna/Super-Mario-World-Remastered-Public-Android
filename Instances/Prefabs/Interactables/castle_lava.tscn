@@ -1,0 +1,16 @@
+[gd_scene load_steps=7 format=3 uid="uid://v8s0l6sl00vp"]
+
+[ext_resource type="PackedScene" uid="uid://cvj18py33dsng" path="res://Instances/Prefabs/Interactables/lava.tscn" id="1_e3kvl"]
+[ext_resource type="Texture2D" uid="uid://bsb0eqm28ondh" path="res://Assets/Sprites/Objects/Lava/Castle/1.png" id="2_ab64i"]
+[ext_resource type="Texture2D" uid="uid://v1iq4favryq6" path="res://Assets/Sprites/Objects/Lava/Castle/2.png" id="3_isudf"]
+[ext_resource type="Texture2D" uid="uid://kc8cr8xdwpfv" path="res://Assets/Sprites/Objects/Lava/Castle/3.png" id="4_0e07j"]
+[ext_resource type="Texture2D" uid="uid://ckyoxoilfluex" path="res://Assets/Sprites/Objects/Lava/Castle/4.png" id="5_uequu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_og4vq"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="CastleLava" instance=ExtResource("1_e3kvl")]
+shape = SubResource("RectangleShape2D_og4vq")
+lava_colour = Color(0.847059, 0, 0, 1)
+line_textures = Array[Texture2D]([ExtResource("2_ab64i"), ExtResource("3_isudf"), ExtResource("4_0e07j"), ExtResource("5_uequu")])

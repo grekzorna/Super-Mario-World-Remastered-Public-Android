@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bk1qvnc3fv4ad"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_drxw8"]
+[ext_resource type="Texture2D" uid="uid://dihgxrga8803t" path="res://Assets/Sprites/AchievementIcons/46561.png" id="1_t46cs"]
+
+[resource]
+script = ExtResource("1_drxw8")
+title = "Super Moonio"
+description = "Collect the 3-Up Moon in Yoshi's Island"
+icon = ExtResource("1_t46cs")

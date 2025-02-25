@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=7 format=3 uid="uid://dm0dxehb6mtoh"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_cm6ab"]
+[ext_resource type="Texture2D" uid="uid://duat2bnmi8itb" path="res://Assets/Sprites/Items/PropellerShroom.png" id="1_jyc6a"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="2_q4qd0"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Propeller.gd" id="3_h0pss"]
+[ext_resource type="PackedScene" uid="uid://c11hqq0o83u03" path="res://Instances/Prefabs/Items/propeller_blade.tscn" id="5_oowqd"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/PropellerFly.gd" id="5_s1oi2"]
+
+[resource]
+script = ExtResource("1_cm6ab")
+state_name = "Propeller"
+sprite_frame_name = "Propeller"
+power_script = ExtResource("3_h0pss")
+states = Array[Script]([ExtResource("5_s1oi2")])
+hitbox_size = "Regular"
+transform_animation = false
+power_down = ExtResource("2_q4qd0")
+power_tier = 2
+item_sprite = ExtResource("1_jyc6a")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([ExtResource("5_oowqd")])

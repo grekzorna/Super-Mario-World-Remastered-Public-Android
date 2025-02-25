@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://cin4qoyf0vrok"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/EncoreAdditions/sunset_bg.gd" id="1_mu6v3"]
+[ext_resource type="Texture2D" uid="uid://crbjluupvxjmt" path="res://Assets/Sprites/Overworld/BG1.png" id="2_p4v86"]
+[ext_resource type="Texture2D" uid="uid://dlftqi6u1b2f4" path="res://Assets/Sprites/Backgrounds/Overworld/NightSkyEncore.png" id="3_5mnh8"]
+[ext_resource type="Texture2D" uid="uid://c88p36h8locqo" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds.png" id="3_fxsat"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx2jx"]
+atlas = ExtResource("3_5mnh8")
+region = Rect2(0, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jlls"]
+atlas = ExtResource("3_5mnh8")
+region = Rect2(513, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bw00f"]
+atlas = ExtResource("3_5mnh8")
+region = Rect2(1026, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m7y8"]
+atlas = ExtResource("3_5mnh8")
+region = Rect2(1539, 0, 512, 432)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8c7l5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx2jx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jlls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bw00f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4m7y8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Environment" id="Environment_nwuvy"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 1.91
+glow_strength = 1.02
+glow_bloom = 0.03
+glow_blend_mode = 0
+adjustment_enabled = true
+
+[node name="NightBG" type="Node2D"]
+z_index = -18
+script = ExtResource("1_mu6v3")
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 1)
+scroll_offset = Vector2(0, -384)
+repeat_size = Vector2(512, 432)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer2"]
+z_index = -1
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_8c7l5")
+autoplay = "default"
+frame_progress = 0.775547
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="."]
+modulate = Color(0.376471, 0.376471, 0.545098, 1)
+scroll_scale = Vector2(0.5, 1)
+scroll_offset = Vector2(0, -384)
+repeat_size = Vector2(512, 0)
+
+[node name="Cloud" type="Sprite2D" parent="Clouds"]
+texture = ExtResource("3_fxsat")
+centered = false
+
+[node name="ParallaxLayer" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.7, 1)
+scroll_offset = Vector2(0, -384)
+repeat_size = Vector2(512, 0)
+
+[node name="MainTexture" type="Sprite2D" parent="ParallaxLayer"]
+self_modulate = Color(0.376471, 0.376471, 0.545098, 1)
+texture = ExtResource("2_p4v86")
+centered = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+top_level = true
+z_as_relative = false
+position = Vector2(-24, -456)
+color = Color(0.717647, 0.721569, 0.847059, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_nwuvy")

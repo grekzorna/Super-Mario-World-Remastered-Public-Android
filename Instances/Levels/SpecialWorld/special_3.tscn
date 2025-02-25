@@ -1,0 +1,1062 @@
+[gd_scene load_steps=94 format=3 uid="uid://mr50mcf10ixx"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_a08ed"]
+[ext_resource type="AudioStream" uid="uid://cwraguncjdkmy" path="res://Resources/MusicTracks/Overworld.tres" id="2_eob3f"]
+[ext_resource type="AudioStream" uid="uid://dhdlx2rwva53m" path="res://Resources/MusicTracks/OverworldAutumnAlt.tres" id="3_oo0km"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="3_pqsv2"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="6_7ibis"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="8_on1ep"]
+[ext_resource type="PackedScene" uid="uid://gvnml5jau7jl" path="res://Instances/Prefabs/Interactables/rail.tscn" id="12_xjpfo"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/on_off_rail_junction.gd" id="13_e4rv4"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="15_afrma"]
+[ext_resource type="PackedScene" uid="uid://cdbsvmplutv35" path="res://Instances/Prefabs/Items/cape_feather.tscn" id="16_seehu"]
+[ext_resource type="PackedScene" uid="uid://cr3lh62esdmi" path="res://Instances/Prefabs/Blocks/on_off_switch.tscn" id="16_yd428"]
+[ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="17_0l0gg"]
+[ext_resource type="PackedScene" uid="uid://c8kxuerbuqk7p" path="res://Instances/Prefabs/goal_post.tscn" id="17_erh7n"]
+[ext_resource type="PackedScene" uid="uid://doe0r2863k84n" path="res://Instances/Prefabs/Interactables/wooden_rail_platform.tscn" id="17_ff0n5"]
+[ext_resource type="PackedScene" uid="uid://ct4tb3oc2eqq5" path="res://Instances/Prefabs/Items/yoshi_wings.tscn" id="17_w1skt"]
+[ext_resource type="PackedScene" uid="uid://b1pgr380yit57" path="res://Instances/Prefabs/Enemies/chain_saw.tscn" id="18_6k4mp"]
+[ext_resource type="PackedScene" uid="uid://cgd06ufblvobl" path="res://Instances/Prefabs/Interactables/motor_rope.tscn" id="18_oqftt"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="19_d5eqx"]
+[ext_resource type="PackedScene" uid="uid://64qxm11ocqr2" path="res://Instances/Prefabs/Enemies/rail_fuzzy.tscn" id="19_sw74k"]
+[ext_resource type="PackedScene" uid="uid://cai8wb5qay3j8" path="res://Instances/Prefabs/checkpoint_gate.tscn" id="20_2tmg2"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/CoopLevelNode.gd" id="20_41lji"]
+[ext_resource type="PackedScene" uid="uid://cempplqp85non" path="res://Instances/Prefabs/Interactables/large_rail_platform.tscn" id="22_1100h"]
+[ext_resource type="PackedScene" uid="uid://dwcgvaei6jt52" path="res://Instances/Prefabs/Items/peach_coin.tscn" id="23_gdhea"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="24_pa7kn"]
+[ext_resource type="Texture2D" uid="uid://mplkklvyttc7" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/CylMountainsAutumn2.png" id="25_56mgq"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wr0c"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="Curve2D" id="Curve2D_mddhi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 200, -32, 0, 0, 0, 0, 336, -32)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_kjgeh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 336, -32, 0, 0, 0, 0, 384, -80)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_fvn17"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 336, -32, 0, 0, 0, 0, 384, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_guwlf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 384, -80, 0, 0, 0, 0, 736, -80)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_vmyp8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 736, -80, 0, 0, 0, 0, 816, -160)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_y73uh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 736, -80, 0, 0, 0, 0, 768, -48)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_kmy8t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 816, -160, 0, 0, 0, 0, 1040, -160)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_pvojb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1040, -160, 0, 0, 0, 0, 1072, -192)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_m0ay0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1040, -160, 0, 0, 0, 0, 1072, -128)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_s7jol"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1072, -192, 0, 0, 0, 0, 1200, -192)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_nx6xf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -192, 0, 0, 0, 0, 1312, -304)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hd05c"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -192, 0, 0, 0, 0, 1264, -128, 0, 0, 0, 0, 1792, -128)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_gyte4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1312, -304, 0, 0, 0, 0, 1312, -320, 15.6083, 0, -15.6083, 0, 1296, -336, 0, 0, 0, 0, 704, -336, 0, 0, 0, 0, 608, -240, 0, 0, 0, 0, 0, -240, 0, -16.0724, 0, 16.0724, -16, -224)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_b3ffs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 768, -48, 0, 0, 0, 0, 1056, -48)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_fwplq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1056, -48, 0, 0, 0, 0, 1072, -64)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_2mf76"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1056, -48, 0, 0, 0, 0, 1104, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_0ump5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1072, -64, 0, 0, 0, 0, 1200, -64)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_8n4rh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -64, 0, 0, 0, 0, 1264, -128, 0, 0, 0, 0, 1792, -128)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_trsp8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -64, 0, 0, 0, 0, 1264, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_meo5x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1792, -128, 0, 0, 0, 0, 1824, -160)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_xvm0r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1792, -128, 0, 0, 0, 0, 1824, -96)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ydno8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1824, -160, 0, 0, 0, 0, 2128, -160, 0.148651, -15.6083, -0.148651, 15.6083, 2144, -144)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_fbk77"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1824, -96, -15.8134, 0, 15.8134, 0, 2096, -96, 0, 0, 0, 0, 2112, -80)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_84wix"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 384, 16, 0, 0, 0, 0, 656, 16, 0, 0, 0, 0, 688, -16, 0, 0, 0, 0, 736, -16)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_tqg45"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 736, -16, 0, 0, 0, 0, 768, -48)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_mrmio"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 736, -16, 0, 0, 0, 0, 768, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_quw0p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 768, 16, 0, 0, 0, 0, 816, 16, -0.117984, 16.0459, 0.117984, -16.0459, 832, 0, 0, 0, 0, 0, 848, -16, 0.117984, -15.8099, -0.117984, 15.8099, 864, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_m1jcv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1104, 0, 0, 0, 0, 0, 1200, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_uoj0e"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, 0, 0, 0, 0, 0, 1264, -64)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_fmur3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, 0, 0, 0, 0, 0, 1216, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_cb1d4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1264, -64, 0, 0, 0, 0, 1344, -64, 0, 0, 0, 0, 1408, 0, 0, 0, 0, 0, 1664, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_0edkv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1664, 0, 0, 0, 0, 0, 1728, -64)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_28id7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1664, 0, 0, 0, 0, 0, 1680, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_e0n35"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1216, 16, -0.176777, -15.5564, 0.176777, 15.5564, 1232, 32)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_suwko"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1728, -64, 0, 0, 0, 0, 1728, -80, 15.368, 0.445449, -15.368, -0.445449, 1712, -96, 0, 0, 0, 0, 1392, -96, 0, -16.0362, 0, 16.0362, 1376, -80)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_emhob"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1680, 16, 0, 0, 0, 0, 1776, 16, 0, 0, 0, 0, 1808, -16, 0, 0, 0, 0, 2064, -16, 0, -15.102, 0, 15.102, 2080, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_cjh12"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1072, -128, 0, 0, 0, 0, 1200, -128)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_jggdc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -128, 0, 0, 0, 0, 1264, -192)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ao68n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1200, -128, 0, 0, 0, 0, 1264, -64)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_r541o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1264, -192, -16.0459, 0.471937, 16.0459, -0.471937, 1360, -192, 0, 0, 0, 0, 1376, -208, 0.471937, 16.5178, -0.471937, -16.5178, 1376, -288, 0, 0, 0, 0, 1392, -304, -16.2818, 0, 16.2818, 0, 1488, -304, 0, 0, 0, 0, 1504, -320)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_pimi2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 416, -48, 0.117984, -16.0459, -0.117984, 16.0459, 432, -32, 0, 0, 0, 0, 416, -16, 0, 16.0459, 0, -16.0459, 400, -32, 0, 0, 0, 0, 416, -48)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_hmfea"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 480, -160, -0.198425, -15.7748, 0.198425, 15.7748, 496, -144, 0, 0, 0, 0, 480, -128, 0.0992126, 15.874, -0.0992126, -15.874, 464, -144, 0, 0, 0, 0, 480, -160)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_jgo6r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 560, -144, -0.0936442, -16.3877, 0.0936442, 16.3877, 576, -128, 0, 0, 0, 0, 560, -112, 0.187288, 16.0132, -0.187288, -16.0132, 544, -128, 0, 0, 0, 0, 560, -144)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_s0q0j"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 496, -288, 0, 0, 0, 0, 512, -272, 0, 0, 0, 0, 496, -256, 0, 0, 0, 0, 480, -272, 0, 0, 0, 0, 496, -288)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_0f607"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 880, -208, 0, 0, 0, 0, 944, -208, -0.132433, -15.6271, 0.132433, 15.6271, 960, -192, 0, 0, 0, 0, 944, -176, 0, 0, 0, 0, 880, -176, 0.132433, 16.1568, -0.132433, -16.1568, 864, -192, 0, 0, 0, 0, 880, -208)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_fjgjx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 880, -128, 0, -32.203, 0, 32.203, 912, -96, 0, 0, 0, 0, 880, -64, -0.166855, 32.3699, 0.166855, -32.3699, 848, -96, 0, 0, 0, 0, 880, -128)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_t8c3f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1488, -208, -0.198425, -31.5496, 0.198425, 31.5496, 1520, -176, 0, 0, 0, 0, 1488, -144, 0, 32.1449, 0, -32.1449, 1456, -176, 0, 0, 0, 0, 1488, -208)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_2ln72"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1456, -48, 0, 0, 0, 0, 1520, -48, -0.187288, -16.856, 0.187288, 16.856, 1536, -32, 0, 0, 0, 0, 1520, -16, 0, 0, 0, 0, 1456, -16, 0, 16.1068, 0, -16.1068, 1440, -32, 0, 0, 0, 0, 1456, -48)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_hvv1k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1856, -192, 0, 0, 0, 0, 1888, -224, 0, 0, 0, 0, 1904, -208, 0, 0, 0, 0, 1872, -176, 0, 0, 0, 0, 1856, -192)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_i6qmx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1968, -224, 0, 0, 0, 0, 1984, -208, 0, 0, 0, 0, 1952, -176, 0, 0, 0, 0, 1936, -192, 0, 0, 0, 0, 1968, -224)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_4vj18"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1904, -64, 0.890899, -16.4816, -0.890899, 16.4816, 1920, -48, 0, 0, 0, 0, 1904, -32, 0.222725, 15.8134, -0.222725, -15.8134, 1888, -48, 0, 0, 0, 0, 1904, -64)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_cer1b"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1952, -64, 0.445449, -16.7043, -0.445449, 16.7043, 1968, -48, 0, 0, 0, 0, 1952, -32, 0, 16.7043, 0, -16.7043, 1936, -48, 0, 0, 0, 0, 1952, -64)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_5tjwm"]
+_data = {
+"points": PackedVector2Array(-16.2818, 0.471937, 16.2818, -0.471937, 2928, -112, 0, 0, 0, 0, 2944, -96, 0, 0, 0, 0, 2944, -16, 16.7538, 0, -16.7538, 0, 2928, 0, 0, 0, 0, 0, 2912, -16, 0, 0, 0, 0, 2912, -96, -16.0459, 0, 16.0459, 0, 2928, -112)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_87005"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3088, -96, 0, -16.0724, 0, 16.0724, 3104, -80, 0, 0, 0, 0, 3088, -64, 0, 16.0724, 0, -16.0724, 3072, -80, 0, 0, 0, 0, 3088, -96)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_13gub"]
+_data = {
+"points": PackedVector2Array(-32.3699, 0, 32.3699, 0, 3200, -112, 0, 0, 0, 0, 3232, -80, 0, 0, 0, 0, 3232, -48, 32.5367, -0.500565, -32.5367, 0.500565, 3200, -16, 0, 0, 0, 0, 3168, -48, 0, 0, 0, 0, 3168, -80, -32.0362, -0.166855, 32.0362, 0.166855, 3200, -112)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_v3p2q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3328, -64, 0.420923, -16.1354, -0.420923, 16.1354, 3344, -48, 0, 0, 0, 0, 3328, -32, -0.280616, 16.1354, 0.280616, -16.1354, 3312, -48, 0, 0, 0, 0, 3328, -64)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_hv2vr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3408, -96, -0.222725, -15.9248, 0.222725, 15.9248, 3424, -80, 0, 0, 0, 0, 3408, -64, 0, 0, 0, 0, 3392, -64, 0.111362, 16.2589, -0.111362, -16.2589, 3376, -80, 0, 0, 0, 0, 3392, -96, 0, 0, 0, 0, 3408, -96)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_n4mm6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3472, -64, 0, -15.8134, 0, 15.8134, 3488, -48, 0, 0, 0, 0, 3472, -32, 0.111362, 16.0362, -0.111362, -16.0362, 3456, -48, 0, 0, 0, 0, 3472, -64)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_vh1lj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3616, -80, 0.374577, -32.2136, -0.374577, 32.2136, 3648, -48, 0, 0, 0, 0, 3616, -16, 0, 31.839, 0, -31.839, 3584, -48, 0, 0, 0, 0, 3616, -80)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_8yotn"]
+_data = {
+"points": PackedVector2Array(-14.6835, -0.198425, 14.6835, 0.198425, 3856, -112, 0, 0, 0, 0, 3872, -96, 0, 0, 0, 0, 3872, -16, 16.0724, 0, -16.0724, 0, 3856, 0, 0, 0, 0, 0, 3840, -16, 0, 0, 0, 0, 3840, -96, -15.6756, -0.198425, 15.6756, 0.198425, 3856, -112)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_n2ohk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3984, -96, 0, -15.6756, 0, 15.6756, 4000, -80, 0, 0, 0, 0, 3984, -64, 0, 15.874, 0, -15.874, 3968, -80, 0, 0, 0, 0, 3984, -96)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_whd7f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4096, -128, 0.187288, -15.5449, -0.187288, 15.5449, 4112, -112, 0, 0, 0, 0, 4096, -96, 0.187288, 16.6687, -0.187288, -16.6687, 4080, -112, 0, 0, 0, 0, 4096, -128)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_htgy4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 2856, -144, 0, 0, 0, 0, 2984, -144)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_r16qc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3000, -112, 0, 0, 0, 0, 3144, -112)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_olxxl"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3256, -112, 0, 0, 0, 0, 3552, -112, 0, 15.8099, 0, -15.8099, 3568, -128)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_ddl1f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3864, -144, 0, 0, 0, 0, 4624, -144, 0, -16.4816, 0, 16.4816, 4640, -128)
+}
+point_count = 3
+
+[node name="Special3" type="Node"]
+script = ExtResource("1_a08ed")
+level_music = ExtResource("2_eob3f")
+autumn_music = ExtResource("3_oo0km")
+camera_left_end_position = 5056
+
+[node name="LevelBG" parent="." instance=ExtResource("3_pqsv2")]
+sky_colour = Color(0.847059, 0.972549, 0.847059, 1)
+
+[node name="Player" parent="." instance=ExtResource("6_7ibis")]
+material = SubResource("ShaderMaterial_8wr0c")
+position = Vector2(-40, 0)
+
+[node name="TileMap" parent="." instance=ExtResource("8_on1ep")]
+layer_0/tile_data = PackedInt32Array(65532, 10, 2, 65533, 65546, 2, 10, 65546, 2, 11, 131082, 2, 131069, 196618, 0, 131070, 262154, 0, 196605, 196618, 0, 196606, 262154, 0, 65545, 262154, 0, 65546, 327690, 0, 131081, 262154, 0, 131082, 327690, 0, 131071, 262154, 0, 196607, 262154, 0, 65536, 262154, 0, 131072, 262154, 0, 65537, 262154, 0, 131073, 262154, 0, 65538, 262154, 0, 131074, 262154, 0, 65539, 262154, 0, 131075, 262154, 0, 65540, 262154, 0, 131076, 262154, 0, 65541, 262154, 0, 131077, 262154, 0, 65542, 262154, 0, 131078, 262154, 0, 65543, 262154, 0, 131079, 262154, 0, 65544, 262154, 0, 131080, 262154, 0, 65534, 65546, 2, 65535, 65546, 2, 0, 65546, 2, 1, 65546, 2, 2, 65546, 2, 3, 65546, 2, 4, 65546, 2, 5, 65546, 2, 6, 65546, 2, 7, 65546, 2, 8, 65546, 2, 9, 65546, 2, -1048480, 65544, 0, -1048479, 65544, 0, -1245088, 5, 4, -1179552, 5, 5, -1245087, 65541, 4, -1179551, 65541, 5, -1114016, 5, 5, -1114015, 65541, 5, 134, 10, 2, 135, 65546, 2, 143, 65546, 2, 144, 131082, 2, -196463, 10, 2, -196462, 65546, 2, -196459, 65546, 2, -196458, 131082, 2, 156, 10, 2, 157, 65546, 2, 161, 65546, 2, 162, 131082, 2, -327508, 10, 2, -327507, 65546, 2, -327504, 65546, 2, -327503, 131082, 2, -327506, 65546, 2, -327505, 65546, 2, 158, 65546, 2, 159, 65546, 2, 160, 65546, 2, -196461, 65546, 2, -196460, 65546, 2, 136, 65546, 2, 137, 65546, 2, 138, 65546, 2, 139, 65546, 2, 140, 65546, 2, 141, 65546, 2, 142, 65546, 2, 65671, 196618, 0, 65672, 262154, 0, 131207, 196618, 0, 131208, 262154, 0, 65678, 262154, 0, 65679, 327690, 0, 131214, 262154, 0, 131215, 327690, 0, -130926, 196618, 0, -130925, 262154, 0, -65390, 196618, 0, -65389, 262154, 0, 146, 196618, 0, 147, 262154, 0, 65682, 196618, 0, 65683, 262154, 0, 131218, 196618, 0, 131219, 262154, 0, -130924, 262154, 0, -130923, 327690, 0, -65388, 262154, 0, -65387, 327690, 0, 148, 262154, 0, 149, 327690, 0, 65684, 262154, 0, 65685, 327690, 0, 131220, 262154, 0, 131221, 327690, 0, 65693, 196618, 0, 65694, 262154, 0, 131229, 196618, 0, 131230, 262154, 0, 65696, 262154, 0, 65697, 327690, 0, 131232, 262154, 0, 131233, 327690, 0, -261971, 196618, 0, -261970, 262154, 0, -196435, 196618, 0, -196434, 262154, 0, -130899, 196618, 0, -130898, 262154, 0, -65363, 196618, 0, -65362, 262154, 0, 173, 196618, 0, 174, 262154, 0, 65709, 196618, 0, 65710, 262154, 0, 131245, 196618, 0, 131246, 262154, 0, -261969, 262154, 0, -261968, 327690, 0, -196433, 262154, 0, -196432, 327690, 0, -130897, 262154, 0, -130896, 327690, 0, -65361, 262154, 0, -65360, 327690, 0, 175, 262154, 0, 176, 327690, 0, 65711, 262154, 0, 65712, 327690, 0, 131247, 262154, 0, 131248, 327690, 0, -65303, 196618, 0, -65302, 262154, 0, 233, 196618, 0, 234, 262154, 0, 65769, 196618, 0, 65770, 262154, 0, 131305, 196618, 0, 131306, 262154, 0, -65301, 262154, 0, -65300, 327690, 0, 235, 262154, 0, 236, 327690, 0, 65771, 262154, 0, 65772, 327690, 0, 131307, 262154, 0, 131308, 327690, 0, 65828, 196618, 0, 65829, 262154, 0, 131364, 196618, 0, 131365, 262154, 0, 65835, 262154, 0, 65836, 327690, 0, 131371, 262154, 0, 131372, 327690, 0, 65840, 262154, 0, 131376, 262154, 0, 65839, 196618, 0, 131375, 196618, 0, 65849, 262154, 0, 65850, 327690, 0, 131385, 262154, 0, 131386, 327690, 0, 65841, 262154, 0, 131377, 262154, 0, 65842, 262154, 0, 131378, 262154, 0, 65843, 262154, 0, 131379, 262154, 0, 65844, 262154, 0, 131380, 262154, 0, 65845, 262154, 0, 131381, 262154, 0, 65846, 262154, 0, 131382, 262154, 0, 65847, 262154, 0, 131383, 262154, 0, 65848, 262154, 0, 131384, 262154, 0, 65830, 262154, 0, 131366, 262154, 0, 65831, 262154, 0, 131367, 262154, 0, 65832, 262154, 0, 131368, 262154, 0, 65833, 262154, 0, 131369, 262154, 0, 65834, 262154, 0, 131370, 262154, 0, 291, 10, 2, 292, 65546, 2, 300, 65546, 2, 301, 131082, 2, 302, 10, 2, 303, 65546, 2, 314, 65546, 2, 315, 131082, 2, 304, 65546, 2, 305, 65546, 2, 306, 65546, 2, 307, 65546, 2, 308, 65546, 2, 309, 65546, 2, 310, 65546, 2, 311, 65546, 2, 312, 65546, 2, 313, 65546, 2, 293, 65546, 2, 294, 65546, 2, 295, 65546, 2, 296, 65546, 2, 297, 65546, 2, 298, 65546, 2, 299, 65546, 2, -130840, 10, 2, -130839, 65546, 2, -130836, 65546, 2, -130835, 131082, 2, 65673, 262154, 0, 131209, 262154, 0, 65674, 262154, 0, 131210, 262154, 0, 65675, 262154, 0, 131211, 262154, 0, 65676, 262154, 0, 131212, 262154, 0, 65677, 262154, 0, 131213, 262154, 0, 65695, 262154, 0, 131231, 262154, 0, -130838, 65546, 2, -130837, 65546, 2, -130918, 5, 0, -65382, 5, 1, -130917, 65541, 0, -65381, 65541, 1, 154, 5, 1, 155, 65541, 1, 65690, 5, 1, 65691, 65541, 1, 131226, 5, 1, 131227, 65541, 1, -393166, 15, 196608, -393165, 15, 196608, -655314, 15, 196608, -720849, 15, 196608, -786384, 15, 196608, -851919, 15, 196608, -131042, 15, 196608, -131041, 15, 196608, -131039, 15, 196608, -131038, 15, 196608, -720808, 15, 196608, -720807, 15, 196608, -720800, 15, 196608, -720799, 15, 196608, -720793, 15, 196608, -720792, 15, 196608, -327588, 15, 196608, -327587, 15, 196608, -327586, 15, 196608, -327589, 15, 196608, -589706, 15, 196608, -589705, 15, 196608, -589704, 15, 196608, -589703, 15, 196608, -589702, 15, 196608, -589707, 15, 196608)
+
+[node name="RailCluster" type="Node" parent="."]
+
+[node name="Rail" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_mddhi")
+starting_point_type = 2
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_kjgeh")
+
+[node name="Rail2" parent="RailCluster/Rail/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_fvn17")
+
+[node name="Rail2" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_guwlf")
+
+[node name="OnOffRailJunction2" type="Node" parent="RailCluster/Rail2" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail2/OnOffRailJunction2" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_vmyp8")
+
+[node name="Rail2" parent="RailCluster/Rail2/OnOffRailJunction2" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_y73uh")
+
+[node name="Rail3" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_kmy8t")
+
+[node name="OnOffRailJunction3" type="Node" parent="RailCluster/Rail3" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail3/OnOffRailJunction3" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_pvojb")
+
+[node name="Rail2" parent="RailCluster/Rail3/OnOffRailJunction3" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_m0ay0")
+
+[node name="Rail4" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_s7jol")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail4" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail4/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_nx6xf")
+
+[node name="Rail2" parent="RailCluster/Rail4/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_hd05c")
+
+[node name="Rail5" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_gyte4")
+
+[node name="Rail6" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_b3ffs")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail6" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail6/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_fwplq")
+
+[node name="Rail2" parent="RailCluster/Rail6/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_2mf76")
+
+[node name="Rail7" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_0ump5")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail7" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail7/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_8n4rh")
+
+[node name="Rail2" parent="RailCluster/Rail7/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_trsp8")
+
+[node name="OnOffRailJunction2" type="Node" parent="RailCluster/Rail7" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail7/OnOffRailJunction2" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_meo5x")
+
+[node name="Rail2" parent="RailCluster/Rail7/OnOffRailJunction2" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_xvm0r")
+
+[node name="Rail9" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_ydno8")
+
+[node name="Rail10" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_fbk77")
+
+[node name="Rail11" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_84wix")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail11" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail11/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_tqg45")
+
+[node name="Rail2" parent="RailCluster/Rail11/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_mrmio")
+
+[node name="Rail12" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_quw0p")
+
+[node name="Rail13" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_m1jcv")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail13" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail13/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_uoj0e")
+
+[node name="Rail2" parent="RailCluster/Rail13/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_fmur3")
+
+[node name="Rail14" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_cb1d4")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail14" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail14/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_0edkv")
+
+[node name="Rail2" parent="RailCluster/Rail14/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_28id7")
+
+[node name="Rail15" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_e0n35")
+
+[node name="Rail16" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_suwko")
+
+[node name="Rail17" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_emhob")
+
+[node name="Rail18" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_cjh12")
+
+[node name="OnOffRailJunction" type="Node" parent="RailCluster/Rail18" node_paths=PackedStringArray("on_rail", "off_rail")]
+script = ExtResource("13_e4rv4")
+on_rail = NodePath("Rail")
+off_rail = NodePath("Rail2")
+
+[node name="Rail" parent="RailCluster/Rail18/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_jggdc")
+
+[node name="Rail2" parent="RailCluster/Rail18/OnOffRailJunction" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_ao68n")
+
+[node name="Rail19" parent="RailCluster" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_r541o")
+
+[node name="FuzzyRails" type="Node" parent="."]
+
+[node name="Rail" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_pimi2")
+loop = true
+
+[node name="Rail2" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_hmfea")
+loop = true
+
+[node name="Rail3" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_jgo6r")
+loop = true
+
+[node name="Rail4" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_s0q0j")
+loop = true
+
+[node name="Rail5" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_0f607")
+loop = true
+
+[node name="Rail6" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_fjgjx")
+loop = true
+
+[node name="Rail7" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_t8c3f")
+loop = true
+
+[node name="Rail8" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_2ln72")
+loop = true
+
+[node name="Rail9" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_hvv1k")
+loop = true
+
+[node name="Rail10" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_i6qmx")
+loop = true
+
+[node name="Rail11" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_4vj18")
+loop = true
+
+[node name="Rail12" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_cer1b")
+loop = true
+
+[node name="Rail13" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_5tjwm")
+loop = true
+
+[node name="Rail14" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_87005")
+loop = true
+
+[node name="Rail15" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_13gub")
+loop = true
+
+[node name="Rail16" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_v3p2q")
+loop = true
+
+[node name="Rail17" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_hv2vr")
+loop = true
+
+[node name="Rail18" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_n4mm6")
+loop = true
+
+[node name="Rail19" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_vh1lj")
+loop = true
+
+[node name="Rail20" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_8yotn")
+loop = true
+
+[node name="Rail21" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_n2ohk")
+loop = true
+
+[node name="Rail22" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail23" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail24" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail25" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(64, 48)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail26" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(128, 0)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail27" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(272, 48)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail28" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(272, 0)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail29" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(368, 0)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail30" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(448, 16)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Rail31" parent="FuzzyRails" instance=ExtResource("12_xjpfo")]
+position = Vector2(496, 0)
+curve = SubResource("Curve2D_whd7f")
+loop = true
+
+[node name="Fuzzys" type="Node" parent="."]
+
+[node name="RailFuzzy" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(416, -48)
+starting_direction = -1
+
+[node name="RailFuzzy2" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(480, -144)
+starting_direction = -1
+
+[node name="RailFuzzy3" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(576, -128)
+starting_direction = -1
+
+[node name="RailFuzzy4" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(512, -272)
+starting_direction = -1
+
+[node name="RailFuzzy5" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(896, -208)
+starting_direction = -1
+
+[node name="RailFuzzy6" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(896, -128)
+starting_direction = -1
+
+[node name="RailFuzzy7" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(896, -80)
+starting_direction = -1
+
+[node name="RailFuzzy8" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1504, -160)
+starting_direction = -1
+
+[node name="RailFuzzy9" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1472, -208)
+starting_direction = -1
+
+[node name="RailFuzzy10" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1504, -48)
+starting_direction = -1
+
+[node name="RailFuzzy11" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1888, -192)
+starting_direction = -1
+
+[node name="RailFuzzy12" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1984, -224)
+starting_direction = -1
+
+[node name="RailFuzzy13" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1952, -64)
+starting_direction = -1
+
+[node name="RailFuzzy14" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(1920, -48)
+starting_direction = -1
+
+[node name="RailFuzzy15" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(2944, -96)
+starting_direction = -1
+
+[node name="RailFuzzy16" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3104, -96)
+starting_direction = -1
+
+[node name="RailFuzzy17" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3200, -112)
+starting_direction = -1
+
+[node name="RailFuzzy18" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3328, -48)
+starting_direction = -1
+
+[node name="RailFuzzy19" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3392, -96)
+starting_direction = -1
+
+[node name="RailFuzzy20" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3488, -48)
+starting_direction = -1
+
+[node name="RailFuzzy21" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3616, -96)
+starting_direction = -1
+
+[node name="RailFuzzy22" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(3840, -64)
+starting_direction = -1
+
+[node name="RailFuzzy24" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4000, -96)
+starting_direction = -1
+
+[node name="RailFuzzy25" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4096, -112)
+starting_direction = -1
+
+[node name="RailFuzzy26" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4160, -64)
+starting_direction = -1
+
+[node name="RailFuzzy27" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4224, -112)
+starting_direction = -1
+
+[node name="RailFuzzy28" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4384, -128)
+starting_direction = -1
+
+[node name="RailFuzzy29" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4384, -64)
+starting_direction = -1
+
+[node name="RailFuzzy30" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4480, -112)
+starting_direction = -1
+
+[node name="RailFuzzy31" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4544, -112)
+starting_direction = -1
+
+[node name="RailFuzzy32" parent="Fuzzys" instance=ExtResource("19_sw74k")]
+position = Vector2(4608, -112)
+starting_direction = -1
+
+[node name="RopeRails" type="Node" parent="."]
+
+[node name="Rail" parent="RopeRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_htgy4")
+starting_point_type = 2
+ending_point_type = 2
+
+[node name="Rail2" parent="RopeRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_r16qc")
+starting_point_type = 2
+ending_point_type = 2
+
+[node name="Rail3" parent="RopeRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_olxxl")
+starting_point_type = 2
+
+[node name="Rail4" parent="RopeRails" instance=ExtResource("12_xjpfo")]
+curve = SubResource("Curve2D_ddl1f")
+starting_point_type = 2
+
+[node name="Snes-SuperMarioWorld-WayCool-SwitchOff" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2496, -168)
+
+[node name="OnOffSwitch" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(280, -104)
+
+[node name="OnOffSwitch2" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(632, -40)
+
+[node name="OnOffSwitch3" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(632, -136)
+
+[node name="OnOffSwitch4" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1016, -216)
+
+[node name="OnOffSwitch5" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1016, -104)
+
+[node name="OnOffSwitch6" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1144, -248)
+
+[node name="OnOffSwitch7" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1144, -184)
+
+[node name="OnOffSwitch8" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1144, -120)
+
+[node name="OnOffSwitch9" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1144, -56)
+
+[node name="OnOffSwitch10" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1592, -56)
+
+[node name="OnOffSwitch11" parent="." instance=ExtResource("16_yd428")]
+position = Vector2(1736, -200)
+
+[node name="WoodenPlatform" parent="." instance=ExtResource("17_ff0n5")]
+position = Vector2(224, -32)
+player_activated = true
+
+[node name="DragonCoin" parent="." instance=ExtResource("17_0l0gg")]
+position = Vector2(520, -32)
+
+[node name="DragonCoin2" parent="." instance=ExtResource("17_0l0gg")]
+position = Vector2(1608, -192)
+
+[node name="DragonCoin3" parent="." instance=ExtResource("17_0l0gg")]
+position = Vector2(2168, -192)
+
+[node name="ChainSaw" parent="." instance=ExtResource("18_6k4mp")]
+position = Vector2(1728, -128)
+
+[node name="?Block" parent="." instance=ExtResource("15_afrma")]
+position = Vector2(952, -104)
+item = ExtResource("16_seehu")
+
+[node name="?Block2" parent="." instance=ExtResource("15_afrma")]
+position = Vector2(2584, -56)
+item = ExtResource("17_w1skt")
+
+[node name="DragonCoin4" parent="." instance=ExtResource("17_0l0gg")]
+position = Vector2(3400, -48)
+
+[node name="GoalPost" parent="." instance=ExtResource("17_erh7n")]
+position = Vector2(4776, 0)
+
+[node name="WoodenPlatform2" parent="." instance=ExtResource("17_ff0n5")]
+position = Vector2(2656, -24)
+player_activated = true
+
+[node name="WoodenPlatform3" parent="." instance=ExtResource("17_ff0n5")]
+position = Vector2(2720, -56)
+player_activated = true
+
+[node name="WoodenPlatform4" parent="." instance=ExtResource("17_ff0n5")]
+position = Vector2(3216, -80)
+
+[node name="WoodenPlatform5" parent="." instance=ExtResource("17_ff0n5")]
+position = Vector2(3632, -80)
+
+[node name="MotorRopeLong" parent="." instance=ExtResource("18_oqftt")]
+position = Vector2(2880, -144)
+
+[node name="MotorRopeLong2" parent="." instance=ExtResource("18_oqftt")]
+position = Vector2(3008, -112)
+
+[node name="MotorRopeLong3" parent="." instance=ExtResource("18_oqftt")]
+position = Vector2(3264, -112)
+
+[node name="MotorRopeLong4" parent="." instance=ExtResource("18_oqftt")]
+position = Vector2(3872, -144)
+
+[node name="PipeArea" parent="." instance=ExtResource("19_d5eqx")]
+position = Vector2(1552, -304)
+level_scene = "res://Instances/Levels/SpecialWorld/special_3a.tscn"
+
+[node name="PipeArea2" parent="." instance=ExtResource("19_d5eqx")]
+position = Vector2(2480, -32)
+pipe_id = 1
+exit_only = true
+
+[node name="CheckpointGate" parent="." instance=ExtResource("20_2tmg2")]
+position = Vector2(2384, -52)
+checkpoint_position = Vector2(-184, 52)
+
+[node name="ChainSaw2" parent="." instance=ExtResource("18_6k4mp")]
+position = Vector2(640, 16)
+
+[node name="ConditionalReplaceNode" type="Node" parent="." node_paths=PackedStringArray("nodes_to_delete")]
+script = ExtResource("20_41lji")
+target_players = 2
+nodes_to_delete = [NodePath("../WoodenPlatform")]
+
+[node name="LargeRailPlatform" parent="ConditionalReplaceNode" instance=ExtResource("22_1100h")]
+position = Vector2(224, -32)
+player_activated = true
+
+[node name="PeachCoin" parent="." instance=ExtResource("23_gdhea")]
+position = Vector2(240, -296)
+
+[node name="LevelBG2" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("24_pa7kn")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("25_56mgq")
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)

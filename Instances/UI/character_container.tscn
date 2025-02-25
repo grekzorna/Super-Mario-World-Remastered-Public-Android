@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://defmd3uhglewl"]
+
+[ext_resource type="Script" path="res://Scripts/UI/character_container.gd" id="1_kxlpr"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="2_f1lw1"]
+[ext_resource type="Resource" uid="uid://c2ltopll6tf4u" path="res://Resources/Characters/Luigi.tres" id="2_plhvv"]
+[ext_resource type="Texture2D" uid="uid://b0px7xn2h3jc2" path="res://Assets/Sprites/Characters/Mario/Big.png" id="3_l0lfh"]
+[ext_resource type="Texture2D" uid="uid://8ca74og2jesv" path="res://Assets/Sprites/Characters/Toadette/HUDTitle.png" id="5_2u4g1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h020x"]
+texture = ExtResource("2_f1lw1")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tscbh"]
+atlas = ExtResource("3_l0lfh")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwen5"]
+size = Vector2(34, 34)
+
+[node name="CharacterContainer" type="Control"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -446.0
+offset_bottom = -236.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kxlpr")
+character = ExtResource("2_plhvv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 34.0
+offset_bottom = 34.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_h020x")
+
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(17, 17)
+texture = SubResource("AtlasTexture_tscbh")
+offset = Vector2(0, -1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(17, 17)
+shape = SubResource("RectangleShape2D_bwen5")
+
+[node name="Title" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(17, -1)
+texture = ExtResource("5_2u4g1")
+
+[node name="CharacterScript" type="Node" parent="."]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://cj427oum287dw"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/red_coin.gd" id="1_wm2av"]
+[ext_resource type="Texture2D" uid="uid://cgxsoigkl43sf" path="res://Assets/Sprites/Items/RedCoinSheet.png" id="2_fx8i6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt4c5"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa38x"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak7kx"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1y57"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8fgu"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1k2t"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inffj"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exf1o"]
+atlas = ExtResource("2_fx8i6")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqsu6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt4c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa38x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ak7kx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1y57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8fgu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1k2t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inffj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exf1o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qyqsk"]
+radius = 8.0
+
+[node name="RedCoin" type="Node2D"]
+script = ExtResource("1_wm2av")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sqsu6")
+autoplay = "default"
+frame_progress = 0.300589
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_qyqsk")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbjy0t1s8p87m"]
+
+[sub_resource type="GDScript" id="GDScript_kvqwt"]
+script/source = "extends Area2D
+
+@export var gravity_vector := Vector2.DOWN
+@export var circle_area := false
+
+## This is just something that i made for some fun, feel free to expand on this stuff through a pull request if you'd like!
+
+func _physics_process(delta: float) -> void:
+	for i in get_overlapping_areas():
+		if i.get_parent() is Player:
+			if circle_area:
+				gravity_vector = -(i.global_position - global_position).normalized()
+			i.get_parent().gravity_vector = gravity_vector
+
+func _on_area_exited(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		area.get_parent().gravity_vector = Vector2.DOWN
+"
+
+[node name="GravityArea" type="Area2D"]
+script = SubResource("GDScript_kvqwt")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

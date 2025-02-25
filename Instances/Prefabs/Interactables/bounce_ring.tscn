@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://qvnrkvh704nw"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/bounce_ring.gd" id="1_2u5th"]
+[ext_resource type="Texture2D" uid="uid://dmfrxby5i7lsk" path="res://Assets/Sprites/Objects/BounceRing.png" id="2_bf0s6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61j4v"]
+atlas = ExtResource("2_bf0s6")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_126qi"]
+atlas = ExtResource("2_bf0s6")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3hy4i"]
+animations = [{
+"frames": [{
+"duration": 40.0,
+"texture": SubResource("AtlasTexture_61j4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_126qi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sgtc"]
+radius = 22.0
+
+[sub_resource type="Animation" id="Animation_vucpj"]
+resource_name = "Bounce"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0qyl8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nwgr0"]
+_data = {
+"Bounce": SubResource("Animation_vucpj"),
+"RESET": SubResource("Animation_0qyl8")
+}
+
+[node name="BounceRing" type="Node2D"]
+script = ExtResource("1_2u5th")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3hy4i")
+autoplay = "default"
+frame_progress = 0.262079
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_4sgtc")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nwgr0")
+}
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

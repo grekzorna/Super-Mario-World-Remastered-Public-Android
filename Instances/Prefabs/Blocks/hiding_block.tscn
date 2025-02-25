@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://hbikdaqfccw5"]
+
+[ext_resource type="Texture2D" uid="uid://bp2noccv2ehqo" path="res://Assets/Sprites/Objects/SpinBlock.png" id="1_mb2cf"]
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/hiding_block.gd" id="1_xsyg6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5ohr"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hbh8"]
+radius = 128.0
+
+[node name="HidingBlock" type="StaticBody2D"]
+script = ExtResource("1_xsyg6")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_mb2cf")
+hframes = 4
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_t5ohr")
+
+[node name="PlayerDetectArea" type="Area2D" parent="."]
+visible = false
+
+[node name="Shape" type="CollisionShape2D" parent="PlayerDetectArea"]
+position = Vector2(0, 56)
+shape = SubResource("CircleShape2D_0hbh8")

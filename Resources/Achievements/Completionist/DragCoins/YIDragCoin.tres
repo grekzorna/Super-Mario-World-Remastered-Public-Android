@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://buocthwtkeu0x"]
+
+[ext_resource type="Texture2D" uid="uid://bkue6vtsiji7m" path="res://Assets/Sprites/AchievementIcons/46590.png" id="1_dj7vp"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_y3klv"]
+
+[resource]
+script = ExtResource("1_y3klv")
+title = "Birth of Economy"
+description = "Collect all Dragon Coins in all eligible levels in Yoshi's Island"
+icon = ExtResource("1_dj7vp")

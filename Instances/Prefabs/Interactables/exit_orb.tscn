@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dlg6j4vonv8hv"]
+
+[ext_resource type="Texture2D" uid="uid://byouuhbtwk08s" path="res://Assets/Sprites/Objects/Orb.png" id="1_1gg6g"]
+[ext_resource type="Script" path="res://Scripts/Interactables/exit_orb.gd" id="1_i7t56"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="2_v56om"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4xjpc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_427nk"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v1wig"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 12.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 8.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[node name="ExitOrb" type="Node2D"]
+script = ExtResource("1_i7t56")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1gg6g")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_4xjpc")
+
+[node name="Glimmer" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_427nk")
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_v1wig")
+texture = ExtResource("2_v56om")
+randomness = 1.0
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

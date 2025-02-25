@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://boyvsgu8nc5r5"]
+
+[ext_resource type="Script" uid="uid://bwl3saqlx0qxs" path="res://Scripts/Classes/Enemies/thwimp.gd" id="1_ed4u8"]
+[ext_resource type="Texture2D" uid="uid://cddrtrf7j0vbx" path="res://Assets/Sprites/Enemys/Thwimp.png" id="1_t1hrt"]
+
+[sub_resource type="Animation" id="Animation_052vx"]
+resource_name = "Default"
+length = 3.7
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_t7nva"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcydm"]
+_data = {
+&"Default": SubResource("Animation_052vx"),
+&"RESET": SubResource("Animation_t7nva")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0qqg"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ii5tn"]
+size = Vector2(4, 4)
+
+[node name="Thwimp" type="CharacterBody2D" node_paths=PackedStringArray("main_animation_player")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_ed4u8")
+main_animation_player = NodePath("AnimationPlayer")
+spiky_top = true
+can_cape_damage = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jcydm")
+}
+autoplay = "Default"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_t1hrt")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_l0qqg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ii5tn")
+
+[connection signal="timeout" from="Timer" to="." method="jump"]
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

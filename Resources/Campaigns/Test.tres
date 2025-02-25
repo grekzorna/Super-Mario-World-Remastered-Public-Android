@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CampaignResource" load_steps=6 format=3 uid="uid://bya60s3uv5ysg"]
+
+[ext_resource type="Texture2D" uid="uid://shlkej8pdfxd" path="res://Assets/Sprites/UI/ThankYou.png" id="1_bgbh6"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_jlx17"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/CampaignResource.gd" id="1_ycrvo"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="3_3bpfb"]
+[ext_resource type="Resource" uid="uid://b1l1suycpmn4u" path="res://Resources/MapAreas/world_1.tres" id="4_u2b3x"]
+
+[resource]
+script = ExtResource("1_ycrvo")
+title = "Super Mario Bros Remastered"
+description = "Hi this is a new campaign :)!"
+icon = ExtResource("1_bgbh6")
+starting_scene = ""
+starting_map = "res://Instances/Levels/Maps/smb/world_1.tscn"
+achievements = Array[ExtResource("1_jlx17")]([])
+map_areas = Array[ExtResource("3_3bpfb")]([ExtResource("4_u2b3x")])

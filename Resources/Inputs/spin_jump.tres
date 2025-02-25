@@ -1,0 +1,6 @@
+[gd_resource type="InputEventJoypadMotion" format=3 uid="uid://djxd02qy5ps3c"]
+
+[resource]
+resource_local_to_scene = true
+axis = 5
+axis_value = 1.0

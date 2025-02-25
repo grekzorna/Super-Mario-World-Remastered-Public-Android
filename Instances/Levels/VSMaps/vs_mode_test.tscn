@@ -1,0 +1,158 @@
+[gd_scene load_steps=16 format=3 uid="uid://bxms6deu4rmru"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_tlplv"]
+[ext_resource type="AudioStream" uid="uid://b7lny1kxksl5k" path="res://Assets/Audio/BGM/VSMode.mp3" id="2_1iwp0"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_mj3o8"]
+[ext_resource type="Texture2D" uid="uid://ct20lw1pxdtkq" path="res://Assets/Sprites/Overworld/BG3.png" id="3_8rdxt"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/Music.gd" id="3_k3sou"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="4_5ptfs"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="5_l147t"]
+[ext_resource type="Texture2D" uid="uid://cpxggtheudfhl" path="res://Assets/LevelGuides/ml-grass.png" id="11_adkgj"]
+[ext_resource type="PackedScene" uid="uid://uy8t5hpg3w1o" path="res://Instances/Prefabs/vs_mode_manager.tscn" id="11_vml5o"]
+[ext_resource type="PackedScene" uid="uid://c308cugamvq8a" path="res://Instances/Prefabs/Items/fire_flower.tscn" id="12_2f62p"]
+[ext_resource type="PackedScene" uid="uid://dsm1iixyywln" path="res://Instances/Prefabs/Blocks/brick_block.tscn" id="12_ewcen"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="13_bepat"]
+
+[sub_resource type="Resource" id="Resource_a672a"]
+script = ExtResource("3_k3sou")
+normal_stream = ExtResource("2_1iwp0")
+yoshi_stream = ExtResource("2_1iwp0")
+hurry_stream = ExtResource("2_1iwp0")
+hurry_yoshi = ExtResource("2_1iwp0")
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f0u6n"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="VSModeTest" type="Node"]
+script = ExtResource("1_tlplv")
+level_music = SubResource("Resource_a672a")
+
+[node name="StaticBG" parent="." instance=ExtResource("2_mj3o8")]
+main_texture = ExtResource("3_8rdxt")
+
+[node name="TileMap" parent="." instance=ExtResource("4_5ptfs")]
+layer_0/tile_data = PackedInt32Array(262171, 1, 1, 196635, 65537, 0, 131099, 262145, 0, 262170, 524289, 0, 196634, 131073, 4, 131098, 327681, 0, 262169, 524289, 0, 196633, 131073, 4, 131097, 327681, 0, 262168, 524289, 0, 196632, 131073, 4, 131096, 327681, 0, 262167, 524289, 0, 196631, 131073, 4, 131095, 327681, 0, 262166, 524289, 0, 196630, 131073, 4, 131094, 327681, 0, 262165, 524289, 0, 196629, 131073, 4, 131093, 327681, 0, 262164, 524289, 0, 196628, 131073, 4, 131092, 327681, 0, 262163, 524289, 0, 196627, 131073, 4, 131091, 327681, 0, 262162, 524289, 0, 196626, 131073, 4, 131090, 327681, 0, 262161, 524289, 0, 196625, 131073, 4, 131089, 327681, 0, 262160, 524289, 0, 196624, 131073, 4, 131088, 327681, 0, 262159, 524289, 0, 196623, 131073, 4, 131087, 327681, 0, 262158, 524289, 0, 196622, 131073, 4, 131086, 327681, 0, 262157, 524289, 0, 196621, 131073, 4, 131085, 327681, 0, 262156, 524289, 0, 196620, 131073, 4, 131084, 327681, 0, 262155, 524289, 0, 196619, 131073, 4, 131083, 327681, 0, 262154, 524289, 0, 196618, 131073, 4, 131082, 327681, 0, 262153, 524289, 0, 196617, 131073, 4, 131081, 327681, 0, 262152, 524289, 0, 196616, 131073, 4, 131080, 327681, 0, 262151, 524289, 0, 196615, 131073, 4, 131079, 327681, 0, 262150, 524289, 0, 196614, 131073, 4, 131078, 327681, 0, 262149, 524289, 0, 196613, 131073, 4, 131077, 327681, 0, 262148, 524289, 0, 196612, 131073, 4, 131076, 327681, 0, 262147, 524289, 0, 196611, 131073, 4, 131075, 327681, 0, 262146, 524289, 0, 196610, 131073, 4, 131074, 327681, 0, 262145, 524289, 0, 196609, 131073, 4, 131073, 327681, 0, 262144, 524289, 0, 196608, 131073, 4, 131072, 327681, 0, 327679, 524289, 0, 262143, 131073, 4, 196607, 327681, 0, 327678, 524289, 0, 262142, 131073, 4, 196606, 327681, 0, 327677, 524289, 0, 262141, 131073, 4, 196605, 327681, 0, 327676, 458753, 0, 262140, 1, 0, 196604, 196609, 0, 262193, 1, 1, 196657, 65537, 0, 131121, 262145, 0, 262192, 524289, 0, 196656, 131073, 4, 131120, 327681, 0, 262191, 524289, 0, 196655, 131073, 4, 131119, 327681, 0, 262190, 524289, 0, 196654, 131073, 4, 131118, 327681, 0, 262189, 524289, 0, 196653, 131073, 4, 131117, 327681, 0, 262188, 524289, 0, 196652, 131073, 4, 131116, 327681, 0, 262187, 524289, 0, 196651, 131073, 4, 131115, 327681, 0, 262186, 524289, 0, 196650, 131073, 4, 131114, 327681, 0, 262185, 524289, 0, 196649, 131073, 4, 131113, 327681, 0, 262184, 524289, 0, 196648, 131073, 4, 131112, 327681, 0, 262183, 524289, 0, 196647, 131073, 4, 131111, 327681, 0, 262182, 524289, 0, 196646, 131073, 4, 131110, 327681, 0, 262181, 524289, 0, 196645, 131073, 4, 131109, 327681, 0, 262180, 524289, 0, 196644, 131073, 4, 131108, 327681, 0, 262179, 524289, 0, 196643, 131073, 4, 131107, 327681, 0, 262178, 524289, 0, 196642, 131073, 4, 131106, 327681, 0, 262177, 524289, 0, 196641, 131073, 4, 131105, 327681, 0, 262176, 524289, 0, 196640, 131073, 4, 131104, 327681, 0, 262175, 524289, 0, 196639, 131073, 4, 131103, 327681, 0, 262174, 458753, 0, 196638, 1, 0, 131102, 196609, 0, 262211, 1, 1, 196675, 65537, 0, 131139, 262145, 0, 262210, 524289, 0, 196674, 131073, 4, 131138, 327681, 0, 262209, 524289, 0, 196673, 131073, 4, 131137, 327681, 0, 262208, 524289, 0, 196672, 131073, 4, 131136, 327681, 0, 262207, 524289, 0, 196671, 131073, 4, 131135, 327681, 0, 262206, 524289, 0, 196670, 131073, 4, 131134, 327681, 0, 262205, 524289, 0, 196669, 131073, 4, 131133, 327681, 0, 262204, 524289, 0, 196668, 131073, 4, 131132, 327681, 0, 262203, 524289, 0, 196667, 131073, 4, 131131, 327681, 0, 262202, 524289, 0, 196666, 131073, 4, 131130, 327681, 0, 262201, 524289, 0, 196665, 131073, 4, 131129, 327681, 0, 262200, 524289, 0, 196664, 131073, 4, 131128, 327681, 0, 262199, 524289, 0, 196663, 131073, 4, 131127, 327681, 0, 262198, 524289, 0, 196662, 131073, 4, 131126, 327681, 0, 262197, 524289, 0, 196661, 131073, 4, 131125, 327681, 0, 262196, 458753, 0, 196660, 1, 0, 131124, 196609, 0, -65521, 4, 0, 15, 4, 1, -65520, 65540, 0, 16, 65540, 1, -131051, 4, 0, -65515, 4, 1, -131050, 65540, 0, -65514, 65540, 1, 65551, 4, 1, 65552, 65540, 1, 21, 4, 1, 22, 65540, 1, 65557, 4, 1, 65558, 65540, 1, 65581, 7, 0, 65582, 7, 0, 65583, 7, 0, 65584, 7, 0, 65585, 7, 0, 46, 7, 0, 47, 7, 0, 48, 7, 0, 49, 7, 0, -65489, 7, 0, -65488, 7, 0, -65487, 7, 0, -131024, 7, 0, -131023, 7, 0, -131020, 7, 0, -65484, 7, 0, 52, 7, 0, 65588, 7, 0, -131019, 7, 0, -65483, 7, 0, 53, 7, 0, 65589, 7, 0, -65482, 7, 0, 54, 7, 0, 65590, 7, 0, 55, 7, 0, 65591, 7, 0, 65592, 7, 0)
+
+[node name="Player" parent="." instance=ExtResource("5_l147t")]
+material = SubResource("ShaderMaterial_f0u6n")
+position = Vector2(104, 24)
+
+[node name="VSModeManager" parent="." instance=ExtResource("11_vml5o")]
+
+[node name="Ml-grass" type="Sprite2D" parent="."]
+modulate = Color(0.28485, 0.28485, 0.28485, 1)
+z_index = -8
+position = Vector2(-64, -240)
+texture = ExtResource("11_adkgj")
+centered = false
+
+[node name="GroundBrickBlock" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(120, -24)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock2" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(152, -24)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock3" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(184, -24)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock4" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(536, -24)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock5" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(568, -24)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock6" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(584, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock7" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(600, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock8" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(616, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock9" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(632, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock10" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(648, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock11" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(664, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock12" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(680, -88)
+visuals = NodePath("Sprite")
+
+[node name="GroundBrickBlock13" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("12_ewcen")]
+position = Vector2(696, -88)
+visuals = NodePath("Sprite")
+
+[node name="?Block" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("13_bepat")]
+position = Vector2(552, -24)
+visuals = NodePath("Sprite")
+item = ExtResource("12_2f62p")
+
+[node name="?Block2" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("13_bepat")]
+position = Vector2(136, -24)
+visuals = NodePath("Sprite")
+item = ExtResource("12_2f62p")
+
+[node name="?Block3" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("13_bepat")]
+position = Vector2(56, -24)
+visuals = NodePath("Sprite")
+
+[node name="?Block4" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("13_bepat")]
+position = Vector2(168, -24)
+visuals = NodePath("Sprite")
+
+[node name="?Block5" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("13_bepat")]
+position = Vector2(152, -88)
+visuals = NodePath("Sprite")

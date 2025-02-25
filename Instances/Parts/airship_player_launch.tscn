@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnpmmo1mnf23m"]
+
+[sub_resource type="GDScript" id="GDScript_lgfds"]
+script/source = "extends Area2D
+
+@export var launch_velocity := -800
+@export var air_time := 1.0
+
+func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		player_launch(area.get_parent())
+		await get_tree().create_timer(air_time + 1, false).timeout
+		queue_free()
+
+func player_launch(player: Player) -> void:
+	player.gravity = player.fall_gravity
+	player.z_index = 999
+	player.velocity.y = launch_velocity
+	player.state_machine.transition_to(\"Freeze\", {\"Gravity\" = true})
+	player.set_collision_mask_value(1, false)
+	await get_tree().create_timer(air_time, false).timeout
+	player.state_machine.transition_to(\"Normal\")
+	player.set_collision_mask_value(1, true)
+	await get_tree().create_timer(1, false)
+	player.z_index = 0
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1nmt"]
+size = Vector2(608, 20)
+
+[node name="AirshipPlayerLaunch" type="Area2D"]
+script = SubResource("GDScript_lgfds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h1nmt")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkhj4st0mkyow"]
+
+[ext_resource type="Texture2D" uid="uid://den1y2ti8p7tu" path="res://Assets/Sprites/Objects/DeathBlock.png" id="1_o4ndx"]
+
+[sub_resource type="GDScript" id="GDScript_sl86a"]
+script/source = "extends StaticBody2D
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.owner is Player:
+		area.owner.die()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hv845"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltdif"]
+size = Vector2(16, 16)
+
+[node name="DeathBlock" type="StaticBody2D"]
+collision_layer = 30
+collision_mask = 0
+script = SubResource("GDScript_sl86a")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hv845")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ltdif")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o4ndx")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

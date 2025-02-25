@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ivdhiom08bys"]
+
+[ext_resource type="Script" uid="uid://p2bj1i180ak1" path="res://Scripts/Classes/Blocks/BonusBlock.gd" id="1_e2hc5"]
+[ext_resource type="Texture2D" uid="uid://uvjw20ymr5vl" path="res://Assets/Sprites/Objects/BonusBlock.png" id="2_6t0wu"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="3_2hr1o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahb8g"]
+size = Vector2(16, 16)
+
+[node name="BonusBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+sync_to_physics = false
+script = ExtResource("1_e2hc5")
+visuals = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_6t0wu")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_ahb8g")
+
+[node name="ItemDispenser" parent="." instance=ExtResource("3_2hr1o")]

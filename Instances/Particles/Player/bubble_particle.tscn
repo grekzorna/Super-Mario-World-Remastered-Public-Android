@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwqovaqdcqvaa"]
+
+[ext_resource type="Script" uid="uid://b4oy2wht0ebvo" path="res://Instances/Particles/Misc/bubble_particle.gd" id="1_yjqmt"]
+[ext_resource type="Texture2D" uid="uid://cb14wc4x81jh2" path="res://Assets/Sprites/Particles/Bubble.png" id="2_qrxi8"]
+
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5ii2"]
+radius = 2.0
+
+[sub_resource type="Animation" id="Animation_qrxi8"]
+resource_name = "Pop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_yjqmt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5ii2"]
+_data = {
+&"Pop": SubResource("Animation_qrxi8"),
+&"RESET": SubResource("Animation_yjqmt")
+}
+
+[node name="BubbleParticle" type="Node2D"]
+z_index = -2
+script = ExtResource("1_yjqmt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qrxi8")
+hframes = 2
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_r5ii2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r5ii2")
+}
+autoplay = "RESET"
+
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]
+[connection signal="timeout" from="Timer" to="Animation" method="play" binds= ["Pop"]]

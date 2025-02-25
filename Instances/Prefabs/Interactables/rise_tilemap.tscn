@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dovpfmo68v4yt"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/rise_tilemap.gd" id="1_fxqjd"]
+
+[node name="RiseTilemap" type="Node"]
+script = ExtResource("1_fxqjd")

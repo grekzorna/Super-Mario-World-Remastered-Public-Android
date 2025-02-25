@@ -1,0 +1,173 @@
+[gd_scene load_steps=17 format=3 uid="uid://ddcr5k7yyir7t"]
+
+[ext_resource type="Script" uid="uid://4yp4a4lg4twx" path="res://Scripts/Classes/Levels/bowser_boss_arena.gd" id="1_euqsl"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="2_rseq6"]
+[ext_resource type="AudioStream" uid="uid://dl6bjvctocr4s" path="res://Assets/Audio/BGM/SMW/BowserPhase1.mp3" id="3_05upv"]
+[ext_resource type="AudioStream" uid="uid://bd3vv8ip3wmbx" path="res://Assets/Audio/BGM/SMW/BowserPhase2.mp3" id="4_avf17"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="5_4202p"]
+[ext_resource type="AudioStream" uid="uid://da4hgbsxa4qmq" path="res://Assets/Audio/BGM/SMW/BowserPhase3.mp3" id="5_tgbgn"]
+[ext_resource type="Texture2D" uid="uid://byo72nx3crn1m" path="res://Assets/Sprites/Tilesets/Terrains/BowserArenaBrick.png" id="6_fnacp"]
+[ext_resource type="AudioStream" uid="uid://b4oolo54ioe3e" path="res://Assets/Audio/BGM/SMW/BowserBossIntro.mp3" id="6_r6k0k"]
+[ext_resource type="PackedScene" uid="uid://2a3ssim3rrvi" path="res://Instances/Prefabs/Enemies/Bosses/bowser_boss.tscn" id="6_sohao"]
+[ext_resource type="PackedScene" uid="uid://d2vxrjxcmfur4" path="res://Instances/Prefabs/FriendlyEntities/ending_peach_cutscene.tscn" id="11_qi14h"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="11_ulkfv"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i54w0"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j7tlj"]
+texture = ExtResource("6_fnacp")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/z_index = 2
+
+[sub_resource type="TileSet" id="TileSet_mbu2a"]
+physics_layer_0/collision_layer = 31
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_j7tlj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7f08"]
+size = Vector2(34, 296)
+
+[node name="BowserBossArena" type="Node"]
+script = ExtResource("1_euqsl")
+time = 999
+override_time = true
+hide_hud = true
+lock_camera = true
+camera_left_end_position = 416
+
+[node name="Player" parent="." instance=ExtResource("2_rseq6")]
+process_mode = 1
+material = SubResource("ShaderMaterial_i54w0")
+position = Vector2(120, 0)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -4096
+z_as_relative = false
+offset_left = -104.0
+offset_top = -272.0
+offset_right = 560.0
+offset_bottom = 136.0
+color = Color(0, 0, 0, 1)
+
+[node name="FightMusic1" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_05upv")
+bus = &"Music"
+
+[node name="FightMusic2" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_avf17")
+bus = &"Music"
+
+[node name="FightMusic3" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("5_tgbgn")
+bus = &"Music"
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_r6k0k")
+bus = &"Music"
+
+[node name="LevelBG" parent="." instance=ExtResource("5_4202p")]
+process_mode = 1
+position = Vector2(176, 368)
+main_texture = null
+sky_colour = Color(0, 0, 0, 1)
+enable_thunder = true
+
+[node name="TileMap" type="TileMap" parent="."]
+process_mode = 1
+z_index = 2
+tile_set = SubResource("TileSet_mbu2a")
+format = 2
+layer_0/tile_data = PackedInt32Array(3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 65554, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65539, 0, 0, -65533, 65536, 0, -65530, 65536, 0, -65527, 65536, 0, -65524, 65536, 0, -65521, 65536, 0, -65518, 65536, 0, 131075, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131090, 0, 0, 1, 0, 0, 2, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 65557, 0, 0, 131093, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, -65536, 65536, 0, -65515, 65536, 0)
+
+[node name="BowserBoss" parent="." instance=ExtResource("6_sohao")]
+process_mode = 1
+z_index = 10
+
+[node name="InvisWall" type="StaticBody2D" parent="."]
+collision_layer = 4194304
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisWall"]
+position = Vector2(-16, -96)
+shape = SubResource("RectangleShape2D_x7f08")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InvisWall"]
+position = Vector2(368, -96)
+shape = SubResource("RectangleShape2D_x7f08")
+
+[node name="EndingPeachCutscene" parent="." instance=ExtResource("11_qi14h")]
+visible = false
+
+[node name="FlamePositions" type="Node" parent="."]
+
+[node name="2" type="Node2D" parent="FlamePositions"]
+position = Vector2(56, -216)
+
+[node name="3" type="Node2D" parent="FlamePositions"]
+position = Vector2(104, -216)
+
+[node name="4" type="Node2D" parent="FlamePositions"]
+position = Vector2(152, -216)
+
+[node name="5" type="Node2D" parent="FlamePositions"]
+position = Vector2(200, -216)
+
+[node name="6" type="Node2D" parent="FlamePositions"]
+position = Vector2(248, -216)
+
+[node name="7" type="Node2D" parent="FlamePositions"]
+position = Vector2(296, -216)
+
+[node name="LevelBG2" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("11_ulkfv")]
+position = Vector2(208, 168)
+og_bg = NodePath("../LevelBG")
+main_texture = null
+sky_colour = Color(0, 0, 0, 1)
+enable_rain = true
+enable_thunder = true
+
+[connection signal="fire_start" from="BowserBoss" to="." method="summon_flames"]

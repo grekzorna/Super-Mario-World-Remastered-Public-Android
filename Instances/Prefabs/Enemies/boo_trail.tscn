@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmbbhrdt7xk2p"]
+
+[ext_resource type="Texture2D" uid="uid://b2bjv1cuof6cx" path="res://Assets/Sprites/Enemys/Boos.png" id="1_ybqsr"]
+
+[sub_resource type="GDScript" id="GDScript_qt7xi"]
+script/source = "extends Node2D
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Player:
+		area.get_parent().damage()
+"
+
+[sub_resource type="Animation" id="Animation_o6p0q"]
+resource_name = "new_animation"
+length = 0.75
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.772549, 1, 1, 0.705882), Color(0.772549, 1, 1, 0.705882), Color(0.772549, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_14s2w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.772549, 1, 1, 0.705882)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3eb31"]
+_data = {
+"RESET": SubResource("Animation_14s2w"),
+"new_animation": SubResource("Animation_o6p0q")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvs8p"]
+radius = 5.0
+
+[node name="BooTrail" type="Node2D"]
+modulate = Color(0.772549, 1, 1, 0.705882)
+z_index = -1
+script = SubResource("GDScript_qt7xi")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ybqsr")
+hframes = 2
+vframes = 3
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3eb31")
+}
+autoplay = "new_animation"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_nvs8p")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

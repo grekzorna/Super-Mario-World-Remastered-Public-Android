@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://bsyaw5sf7tsu5"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/mega_mole.gd" id="1_pjsne"]
+[ext_resource type="Texture2D" uid="uid://d4feyc1jxin73" path="res://Assets/Sprites/Enemys/MegaMole.png" id="2_7irm3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpghp"]
+atlas = ExtResource("2_7irm3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d86m2"]
+atlas = ExtResource("2_7irm3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7vnhc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpghp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d86m2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s435"]
+size = Vector2(28, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jc1lv"]
+size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yx7pt"]
+size = Vector2(26, 8)
+
+[node name="MegaMole" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_pjsne")
+yoshi_behavior = "Swallow"
+ice_size = Vector2(2, 2)
+can_jump_on = false
+player_bounce_off = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_7vnhc")
+autoplay = "default"
+frame_progress = 0.841583
+flip_h = true
+
+[node name="Collision2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_0s435")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_jc1lv")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2.4, 2.4)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(0, -26)
+collision_mask = 0
+sync_to_physics = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_yx7pt")
+one_way_collision = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

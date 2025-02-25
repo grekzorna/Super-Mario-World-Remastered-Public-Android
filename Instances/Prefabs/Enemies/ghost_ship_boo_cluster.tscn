@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://jkqql6pjckiy"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/ghost_ship_boo_cluster.gd" id="1_s3oip"]
+
+[node name="GhostShipBoos" type="Node2D"]
+script = ExtResource("1_s3oip")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+autostart = true
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Boos" type="Node2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="attack"]
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]

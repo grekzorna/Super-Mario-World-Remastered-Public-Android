@@ -1,0 +1,217 @@
+[gd_scene load_steps=9 format=3 uid="uid://bolmsx85t2ra2"]
+
+[ext_resource type="PackedScene" uid="uid://dbw4ae1mpdkb6" path="res://Instances/Prefabs/Blocks/bonus_wheel_block.tscn" id="1_kgcn5"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/bonus_roulette_blocks.gd" id="1_sg3qu"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_l6llj"]
+[ext_resource type="Texture2D" uid="uid://bw1a5u0puq82u" path="res://Assets/Sprites/UI/StockPanel.png" id="4_rljjq"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="5_tis3m"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="6_drctt"]
+[ext_resource type="Resource" uid="uid://jhonajeybg8c" path="res://Resources/Achievements/General/PerfectBonus.tres" id="7_dkqfo"]
+
+[sub_resource type="Curve2D" id="Curve2D_s831r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -40, -40, 0, 0, 0, 0, 40, -40, 0, 0, 0, 0, 40, 40, 0, 0, 0, 0, -40, 40, 0, 0, 0, 0, -40, -40)
+}
+point_count = 5
+
+[node name="BonusRouletteBlocks" type="Node2D"]
+script = ExtResource("1_sg3qu")
+
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_s831r")
+
+[node name="Block1" type="PathFollow2D" parent="Path"]
+position = Vector2(-40, -40)
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block1" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block1"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "0"
+
+[node name="Block2" type="PathFollow2D" parent="Path"]
+position = Vector2(0, -40)
+progress = 40.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block2" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block2"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "1"
+
+[node name="Block3" type="PathFollow2D" parent="Path"]
+position = Vector2(40, -40)
+progress = 80.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block3" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block3"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "2"
+
+[node name="Block4" type="PathFollow2D" parent="Path"]
+position = Vector2(40, 0)
+progress = 120.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block4" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block4"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "3"
+
+[node name="Block5" type="PathFollow2D" parent="Path"]
+position = Vector2(40, 40)
+progress = 160.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block5" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block5"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "4"
+
+[node name="Block6" type="PathFollow2D" parent="Path"]
+position = Vector2(0, 40)
+progress = 200.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block6" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block6"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "5"
+
+[node name="Block7" type="PathFollow2D" parent="Path"]
+position = Vector2(-40, 40)
+progress = 240.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block7" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block7"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "6"
+
+[node name="Block8" type="PathFollow2D" parent="Path"]
+position = Vector2(-40, 0)
+progress = 280.0
+rotates = false
+
+[node name="BonusWheelBlock2" parent="Path/Block8" instance=ExtResource("1_kgcn5")]
+
+[node name="Label" type="Label" parent="Path/Block8"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "7"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.625
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_rljjq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("5_tis3m")
+
+[node name="BingoLines" type="Node2D" parent="."]
+
+[node name="Top" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-40, -40, 40, -40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Middle1" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-40, 0, 40, 0)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Middle2" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(0, -40, 0, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Left" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-40, -40, -40, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Right" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(40, -40, 40, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Bottom" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-40, 40, 40, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Diag1" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(-40, -40, 40, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="Diag2" type="Line2D" parent="BingoLines"]
+visible = false
+z_index = -1
+points = PackedVector2Array(40, -40, -40, 40)
+width = 4.0
+default_color = Color(1, 1, 0, 1)
+
+[node name="CenterBlock" parent="." instance=ExtResource("1_kgcn5")]
+center = true
+
+[node name="Label" type="Label" parent="CenterBlock"]
+visible = false
+offset_left = -8.0
+offset_top = -8.0
+theme_override_fonts/font = ExtResource("3_l6llj")
+text = "8"
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("6_drctt")
+achievement = ExtResource("7_dkqfo")
+
+[connection signal="full_bingo" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="timeout" from="Timer" to="." method="check_loop"]

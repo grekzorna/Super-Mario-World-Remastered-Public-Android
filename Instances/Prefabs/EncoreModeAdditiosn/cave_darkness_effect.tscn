@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvjwhir38ofgb"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/EncoreAdditions/CaveDarknessEffect.gd" id="1_8f3vk"]
+
+[node name="CaveDarknessEffect" type="Node"]
+script = ExtResource("1_8f3vk")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)

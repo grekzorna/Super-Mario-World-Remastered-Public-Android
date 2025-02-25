@@ -1,0 +1,207 @@
+[gd_scene load_steps=9 format=3 uid="uid://byna18hwcb2a4"]
+
+[ext_resource type="Texture2D" uid="uid://yehhh04bdqou" path="res://Assets/Sprites/Objects/Keyhole.png" id="1_2mu3k"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/key_hole.gd" id="1_yoxuy"]
+[ext_resource type="Texture2D" uid="uid://v7i11ny5l7gg" path="res://Assets/Sprites/Objects/KeyholeEffect.png" id="2_3xywj"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/KeyHoleEffect.gd" id="5_7mps3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg80d"]
+size = Vector2(1, 5)
+
+[sub_resource type="Animation" id="Animation_t4g53"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hole:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RemoteTransform2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effect:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Effect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ebro2"]
+resource_name = "Grow"
+length = 2.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hole:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"add_player"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RemoteTransform2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.001, 1.001)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Effect:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.7, 2.5),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Effect/Clip")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"screenshot"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Effect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_awrws"]
+_data = {
+&"RESET": SubResource("Animation_t4g53"),
+&"Grow": SubResource("Animation_ebro2")
+}
+
+[node name="KeyHole" type="Node2D"]
+process_mode = 3
+physics_interpolation_mode = 2
+script = ExtResource("1_yoxuy")
+
+[node name="Hole" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(4, -7)
+texture = ExtResource("1_2mu3k")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(4, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_xg80d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_awrws")
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+use_global_coordinates = false
+
+[node name="Effect" type="Sprite2D" parent="."]
+visible = false
+clip_children = 2
+z_index = -10
+z_as_relative = false
+position = Vector2(4, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_3xywj")
+offset = Vector2(0, -71)
+
+[node name="Clip" type="TextureRect" parent="Effect" node_paths=PackedStringArray("camera", "viewport")]
+offset_left = -240.0
+offset_top = -204.0
+offset_right = 240.0
+offset_bottom = 66.0
+stretch_mode = 3
+script = ExtResource("5_7mps3")
+camera = NodePath("../../Camera2D")
+viewport = NodePath("../SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="Effect"]
+disable_3d = true
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+canvas_cull_mask = 4293918721
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(4, -69)
+enabled = false
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

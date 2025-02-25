@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4thdearhaa2n"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/level_ghost.gd" id="1_g35bf"]
+[ext_resource type="SpriteFrames" uid="uid://cn1x868vhe3om" path="res://Resources/PlayerSpriteFrames/Luigi/Small.tres" id="2_cql0v"]
+[ext_resource type="PackedScene" uid="uid://buynfqe32158d" path="res://Instances/Parts/drop_shadow.tscn" id="3_nudtr"]
+
+[node name="LevelGhost" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_g35bf")
+
+[node name="MarioGhost" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.576471)
+sprite_frames = ExtResource("2_cql0v")
+animation = &"Run"
+offset = Vector2(0, -16)
+
+[node name="DropShadow" parent="MarioGhost" instance=ExtResource("3_nudtr")]
+
+[node name="GhostLine" type="Line2D" parent="."]
+width = 1.0
+default_color = Color(1, 1, 1, 0)

@@ -1,0 +1,129 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1e07t8c2oqf7"]
+
+[ext_resource type="Script" uid="uid://u8sdgkrqmfrw" path="res://Scripts/Classes/Enemies/wiggler.gd" id="1_tkj10"]
+[ext_resource type="Texture2D" uid="uid://nunvv78a4msc" path="res://Assets/Sprites/Enemys/Wiggler.png" id="2_qx1em"]
+[ext_resource type="Texture2D" uid="uid://crc88oi1j3kp6" path="res://Assets/Sprites/Enemys/WigglerFlower.png" id="3_4iu0g"]
+[ext_resource type="Script" uid="uid://dijvin054wujb" path="res://Scripts/Classes/ledge_detection.gd" id="4_1p8hm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqbxw"]
+size = Vector2(8, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn5tt"]
+size = Vector2(14, 11.875)
+
+[node name="Wiggler" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_tkj10")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+can_cape_damage = false
+can_spin_kill = false
+can_fire_damage = false
+
+[node name="Head" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -8)
+texture = ExtResource("2_qx1em")
+hframes = 4
+vframes = 2
+
+[node name="Hitbox" type="Area2D" parent="Head"]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Head/Hitbox"]
+shape = SubResource("RectangleShape2D_wqbxw")
+
+[node name="Flower" type="Sprite2D" parent="Head"]
+show_behind_parent = true
+position = Vector2(2, -11)
+texture = ExtResource("3_4iu0g")
+
+[node name="Body1" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(6, 0)
+texture = ExtResource("2_qx1em")
+offset = Vector2(0, -8)
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="Hitbox" type="Area2D" parent="Body1"]
+position = Vector2(0, -5)
+
+[node name="Shape" type="CollisionShape2D" parent="Body1/Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_wqbxw")
+
+[node name="Body2" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(13, 0)
+texture = ExtResource("2_qx1em")
+offset = Vector2(0, -8)
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="Hitbox" type="Area2D" parent="Body2"]
+position = Vector2(0, -5)
+
+[node name="Shape" type="CollisionShape2D" parent="Body2/Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_wqbxw")
+
+[node name="Body3" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(21, 0)
+texture = ExtResource("2_qx1em")
+offset = Vector2(0, -8)
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="Hitbox" type="Area2D" parent="Body3"]
+position = Vector2(0, -5)
+
+[node name="Shape" type="CollisionShape2D" parent="Body3/Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_wqbxw")
+
+[node name="Body4" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(28, 0)
+texture = ExtResource("2_qx1em")
+offset = Vector2(0, -8)
+hframes = 4
+vframes = 2
+frame = 1
+
+[node name="Hitbox" type="Area2D" parent="Body4"]
+position = Vector2(0, -5)
+
+[node name="Shape" type="CollisionShape2D" parent="Body4/Hitbox"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_wqbxw")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_xn5tt")
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="FloorCheck" type="RayCast2D" parent="."]
+position = Vector2(-5, -8)
+target_position = Vector2(0, 16)
+script = ExtResource("4_1p8hm")
+ray_length = 16
+
+[connection signal="area_entered" from="Head/Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Body1/Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Body2/Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Body3/Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Body4/Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="AnimationTimer" to="." method="_on_animation_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=12 format=3 uid="uid://dj3hx2sxuddb3"]
+
+[ext_resource type="AudioStream" uid="uid://bjviqg3bhmmrd" path="res://Assets/Audio/BGM/SMW/YoshiIslandAutumn.mp3" id="1_1limy"]
+[ext_resource type="Resource" uid="uid://buocthwtkeu0x" path="res://Resources/Achievements/Completionist/DragCoins/YIDragCoin.tres" id="1_760jb"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="1_kexar"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_n4l7g"]
+[ext_resource type="Resource" uid="uid://d0e5e7384ax1s" path="res://Resources/LevelData/YoshiIsland/YI1.tres" id="1_s6spp"]
+[ext_resource type="Resource" uid="uid://bhqmjeem0u267" path="res://Resources/LevelData/YoshiIsland/YellowSwitchPalace.tres" id="2_43k7m"]
+[ext_resource type="Resource" uid="uid://dscs6r1i8i0cd" path="res://Resources/LevelData/YoshiIsland/YI2.tres" id="3_f52vq"]
+[ext_resource type="Resource" uid="uid://bknkb3l1at5iv" path="res://Resources/LevelData/YoshiIsland/YI3.tres" id="4_5oeg2"]
+[ext_resource type="Resource" uid="uid://cgjc5thj23ygr" path="res://Resources/LevelData/YoshiIsland/YI4.tres" id="5_cjfv3"]
+[ext_resource type="Resource" uid="uid://c4jjmgc3xmnan" path="res://Resources/LevelData/YoshiIsland/Castle1.tres" id="6_fvlqt"]
+[ext_resource type="AudioStream" uid="uid://bkpogmt42n8lm" path="res://Assets/Audio/BGM/SMW/YoshiIsland.mp3" id="10_4b2wk"]
+
+[resource]
+script = ExtResource("1_kexar")
+area_name = "Yoshis Island"
+music = ExtResource("10_4b2wk")
+autumn_music = ExtResource("1_1limy")
+levels = Array[ExtResource("1_n4l7g")]([ExtResource("1_s6spp"), ExtResource("2_43k7m"), ExtResource("3_f52vq"), ExtResource("4_5oeg2"), ExtResource("5_cjfv3"), ExtResource("6_fvlqt")])
+dragon_coin_achievement = ExtResource("1_760jb")

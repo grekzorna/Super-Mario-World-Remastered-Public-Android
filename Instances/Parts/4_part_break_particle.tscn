@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt4cwimdm1qwk"]
+
+[ext_resource type="Script" uid="uid://cv38nv0xb0axx" path="res://Scripts/Parts/4PartBreakParticle.gd" id="1_dx7pr"]
+[ext_resource type="Texture2D" uid="uid://ccpeo7tn2vqbk" path="res://Assets/Sprites/Particles/BlockBreak.png" id="2_a7mph"]
+
+[sub_resource type="Gradient" id="Gradient_iqssd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8isq1"]
+gradient = SubResource("Gradient_iqssd")
+width = 8
+height = 8
+
+[node name="4PartBreakParticle" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_dx7pr")
+textures = [ExtResource("2_a7mph"), ExtResource("2_a7mph"), ExtResource("2_a7mph"), ExtResource("2_a7mph")]
+
+[node name="1" type="CharacterBody2D" parent="."]
+position = Vector2(-4, -4)
+
+[node name="Sprite" type="Sprite2D" parent="1"]
+texture = SubResource("GradientTexture2D_8isq1")
+
+[node name="2" type="CharacterBody2D" parent="."]
+position = Vector2(-4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="2"]
+texture = SubResource("GradientTexture2D_8isq1")
+
+[node name="3" type="CharacterBody2D" parent="."]
+position = Vector2(4, -4)
+
+[node name="Sprite" type="Sprite2D" parent="3"]
+texture = SubResource("GradientTexture2D_8isq1")
+flip_h = true
+
+[node name="4" type="CharacterBody2D" parent="."]
+position = Vector2(4, 4)
+
+[node name="Sprite" type="Sprite2D" parent="4"]
+texture = SubResource("GradientTexture2D_8isq1")
+flip_h = true

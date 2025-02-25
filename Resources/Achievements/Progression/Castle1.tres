@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cj37emlm4nqyj"]
+
+[ext_resource type="Texture2D" uid="uid://dyjtxlffk5dvd" path="res://Assets/Sprites/AchievementIcons/46598.png" id="1_33xk0"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_dde5d"]
+
+[resource]
+script = ExtResource("1_dde5d")
+title = "I is for Icky Iggy"
+description = "Defeat Iggy Koopa of Castle #1"
+icon = ExtResource("1_33xk0")

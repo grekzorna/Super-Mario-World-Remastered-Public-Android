@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8duacyr1yvbw"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_2cqrc"]
+[ext_resource type="PackedScene" uid="uid://ddg0gmjyyrqa0" path="res://Instances/Parts/epilogue_cutscene.tscn" id="2_sa586"]
+[ext_resource type="PackedScene" uid="uid://d37cfenfdhrii" path="res://Instances/Parts/cast_roll.tscn" id="3_8e1qp"]
+
+[node name="Epilogue" type="Node"]
+script = ExtResource("1_2cqrc")
+override_time = true
+hide_hud = true
+camera_left_end_position = 416
+camera_top_end_position = -216
+
+[node name="Cutscene" parent="." instance=ExtResource("2_sa586")]
+
+[node name="CastRoll" parent="." instance=ExtResource("3_8e1qp")]
+debug_test = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(176, -88)

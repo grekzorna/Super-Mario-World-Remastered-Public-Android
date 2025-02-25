@@ -1,0 +1,196 @@
+[gd_scene load_steps=29 format=3 uid="uid://csaljr4t3o4x1"]
+
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_2pyxs"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/vertex_properties.gd" id="2_tiaml"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/point.gd" id="3_kqi7y"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/point_array.gd" id="4_vgnle"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/edge_material.gd" id="5_s3q0q"]
+[ext_resource type="Texture2D" uid="uid://dpy6l3ofhk2b7" path="res://Assets/Sprites/Overworld/SS2DTop.png" id="6_y08gk"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/normal_range.gd" id="7_o32m3"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="8_id3kb"]
+[ext_resource type="Texture2D" uid="uid://cury0kyxkjchd" path="res://Assets/Sprites/Overworld/SS2DFill.png" id="9_h5e2k"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/shape_material.gd" id="10_c4arf"]
+
+[sub_resource type="Resource" id="Resource_mh753"]
+script = ExtResource("2_tiaml")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_5unh6"]
+script = ExtResource("3_kqi7y")
+position = Vector2(256, 0)
+point_in = Vector2(0, -128)
+point_out = Vector2(0, 128)
+properties = SubResource("Resource_mh753")
+
+[sub_resource type="Resource" id="Resource_ueb3p"]
+script = ExtResource("2_tiaml")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_dhnee"]
+script = ExtResource("3_kqi7y")
+position = Vector2(0, -256)
+point_in = Vector2(-128, 0)
+point_out = Vector2(128, 0)
+properties = SubResource("Resource_ueb3p")
+
+[sub_resource type="Resource" id="Resource_gagk4"]
+script = ExtResource("2_tiaml")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_uxj0d"]
+script = ExtResource("3_kqi7y")
+position = Vector2(-256, 0)
+point_in = Vector2(0, 128)
+point_out = Vector2(0, -128)
+properties = SubResource("Resource_gagk4")
+
+[sub_resource type="Resource" id="Resource_qtyxq"]
+script = ExtResource("2_tiaml")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_e5e7q"]
+script = ExtResource("3_kqi7y")
+position = Vector2(0, 256)
+point_in = Vector2(128, 0)
+point_out = Vector2(-128, 0)
+properties = SubResource("Resource_qtyxq")
+
+[sub_resource type="Resource" id="Resource_hhoae"]
+script = ExtResource("2_tiaml")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_kcop8"]
+script = ExtResource("3_kqi7y")
+position = Vector2(256, 0)
+point_in = Vector2(0, -128)
+point_out = Vector2(0, 128)
+properties = SubResource("Resource_hhoae")
+
+[sub_resource type="Resource" id="Resource_4vwlp"]
+script = ExtResource("4_vgnle")
+_points = {
+0: SubResource("Resource_5unh6"),
+1: SubResource("Resource_dhnee"),
+2: SubResource("Resource_uxj0d"),
+3: SubResource("Resource_e5e7q"),
+4: SubResource("Resource_kcop8")
+}
+_point_order = Array[int]([4, 3, 2, 1, 0])
+_constraints = {
+Array[int]([0, 4]): 15
+}
+_next_key = 5
+_material_overrides = {}
+
+[sub_resource type="Resource" id="Resource_u05t3"]
+script = ExtResource("5_s3q0q")
+textures = Array[Texture2D]([ExtResource("6_y08gk")])
+textures_corner_outer = Array[Texture2D]([])
+textures_corner_inner = Array[Texture2D]([])
+textures_taper_left = Array[Texture2D]([])
+textures_taper_right = Array[Texture2D]([])
+randomize_texture = false
+use_corner_texture = true
+use_taper_texture = true
+fit_mode = 0
+
+[sub_resource type="Resource" id="Resource_7ngv0"]
+script = ExtResource("7_o32m3")
+begin = 0.0
+distance = 360.0
+edgeRendering = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_nhlaw"]
+script = ExtResource("8_id3kb")
+edge_material = SubResource("Resource_u05t3")
+normal_range = SubResource("Resource_7ngv0")
+weld = true
+render = true
+z_index = 0
+z_as_relative = true
+offset = 0.0
+
+[sub_resource type="Resource" id="Resource_j2ur5"]
+script = ExtResource("10_c4arf")
+_edge_meta_materials = Array[ExtResource("8_id3kb")]([SubResource("Resource_nhlaw")])
+fill_textures = Array[Texture2D]([ExtResource("9_h5e2k")])
+fill_texture_z_index = -10
+fill_texture_show_behind_parent = false
+fill_texture_scale = 1.0
+fill_texture_absolute_position = false
+fill_texture_absolute_rotation = false
+fill_texture_offset = Vector2(0, 0)
+fill_texture_angle_offset = 0.0
+fill_mesh_offset = 0.0
+render_offset = 0.0
+
+[sub_resource type="Animation" id="Animation_prean"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yide3"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ulsoq"]
+_data = {
+"RESET": SubResource("Animation_prean"),
+"Spin": SubResource("Animation_yide3")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="SS2D_Shape" type="Node2D" parent="AnimatableBody2D"]
+z_index = -1
+texture_repeat = 2
+script = ExtResource("1_2pyxs")
+_points = SubResource("Resource_4vwlp")
+shape_material = SubResource("Resource_j2ur5")
+collision_polygon_node_path = NodePath("../CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatableBody2D"]
+visible = false
+modulate = Color(1, 1, 1, 0.3)
+polygon = PackedVector2Array(256.001, 0, 254.532, 23.9689, 250.251, 47.7502, 243.344, 71.1565, 234.001, 94.0002, 222.407, 116.094, 208.75, 137.25, 193.219, 157.282, 176, 176, 157.282, 193.219, 137.25, 208.75, 116.094, 222.407, 94.0002, 234.001, 71.1565, 243.344, 47.7502, 250.251, 23.9689, 254.532, 0, 256.001, -23.9689, 254.532, -47.7502, 250.251, -71.1565, 243.344, -94.0002, 234.001, -116.094, 222.407, -137.25, 208.75, -157.282, 193.219, -176, 176, -193.219, 157.282, -208.75, 137.25, -222.407, 116.094, -234.001, 94.0002, -243.344, 71.1565, -250.251, 47.7502, -254.532, 23.9689, -256.001, 0, -254.532, -23.9689, -250.251, -47.7502, -243.344, -71.1565, -234.001, -94.0002, -222.407, -116.094, -208.75, -137.25, -193.219, -157.282, -176, -176, -157.282, -193.219, -137.25, -208.75, -116.094, -222.407, -94.0002, -234.001, -71.1565, -243.344, -47.7502, -250.251, -23.9689, -254.532, 0, -256.001, 23.9689, -254.532, 47.7502, -250.251, 71.1565, -243.344, 94.0002, -234.001, 116.094, -222.407, 137.25, -208.75, 157.282, -193.219, 176, -176, 193.219, -157.282, 208.75, -137.25, 222.407, -116.094, 234.001, -94.0002, 243.344, -71.1565, 250.251, -47.7502, 254.532, -23.9689)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ulsoq")
+}
+autoplay = "Spin"
+speed_scale = 0.05

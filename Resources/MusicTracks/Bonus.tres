@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://jyjpswb5b2wv"]
+
+[ext_resource type="AudioStream" uid="uid://b0hnbucwjooxt" path="res://Assets/Audio/BGM/SMW/BonusGame.mp3" id="1_l7u34"]
+
+[resource]
+clip_count = 1
+clip_0/name = &""
+clip_0/stream = ExtResource("1_l7u34")
+clip_0/auto_advance = 0

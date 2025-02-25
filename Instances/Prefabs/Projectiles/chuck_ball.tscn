@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://dexqtjtsrusg2"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/chuck_ball.gd" id="1_osck0"]
+[ext_resource type="Texture2D" uid="uid://bt82j4jsdw3dc" path="res://Assets/Sprites/Objects/ChuckBaseBall.png" id="2_l8y4d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l726a"]
+radius = 1.0
+
+[sub_resource type="Animation" id="Animation_qn4f4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 3
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_o4dnd"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hd0wb"]
+_data = {
+&"RESET": SubResource("Animation_qn4f4"),
+&"Spin": SubResource("Animation_o4dnd")
+}
+
+[node name="ChuckBall" type="CharacterBody2D" node_paths=PackedStringArray("main_animation_player")]
+script = ExtResource("1_osck0")
+main_animation_player = NodePath("Animation")
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_l8y4d")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_l726a")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hd0wb")
+}
+autoplay = "Spin"
+speed_scale = 2.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

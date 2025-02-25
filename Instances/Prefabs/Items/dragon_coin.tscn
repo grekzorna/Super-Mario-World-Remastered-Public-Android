@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://nldepcgj07xt"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/DragonCoin.gd" id="1_siv8w"]
+[ext_resource type="Texture2D" uid="uid://cb6g6segh65gw" path="res://Assets/Sprites/Items/DragonCoinCollected.png" id="2_2e2xn"]
+[ext_resource type="Texture2D" uid="uid://b00elvgcvghfc" path="res://Assets/Sprites/Items/DragonCoins.png" id="2_agun2"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_l1dul"]
+[ext_resource type="Resource" uid="uid://cjasg0rsxbilt" path="res://Resources/Achievements/General/DragCoin.tres" id="4_qdkui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjfy5"]
+atlas = ExtResource("2_2e2xn")
+region = Rect2(0, 0, 24, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5hde"]
+atlas = ExtResource("2_agun2")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr0fp"]
+atlas = ExtResource("2_agun2")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmfkv"]
+atlas = ExtResource("2_agun2")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hc1t"]
+atlas = ExtResource("2_agun2")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hpi1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjfy5")
+}],
+"loop": true,
+"name": &"collected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5hde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr0fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmfkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hc1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmfkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr0fp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o82mk"]
+size = Vector2(20, 26)
+
+[node name="DragonCoin" type="Node2D"]
+script = ExtResource("1_siv8w")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hpi1l")
+autoplay = "default"
+speed_scale = -1.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_o82mk")
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("3_l1dul")
+achievement = ExtResource("4_qdkui")
+
+[connection signal="all_collected" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dli7pkw828ict"]
+
+[ext_resource type="Script" path="res://Scripts/UI/achievement_container.gd" id="1_p12ce"]
+[ext_resource type="Resource" uid="uid://b6aroiq3p6ffx" path="res://Resources/Achievements/General/YoshiMount.tres" id="2_pof1c"]
+[ext_resource type="Texture2D" uid="uid://b40o0jg0ux5e8" path="res://Assets/Sprites/AchievementIcons/Locked.png" id="2_uawn0"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_jk243"]
+[ext_resource type="FontFile" uid="uid://lfpsqjjnmb8i" path="res://Assets/Sprites/UI/Font.png" id="5_1va88"]
+
+[node name="AchievementContainer" type="Control"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 3
+anchor_right = 0.666667
+anchor_bottom = 0.118519
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_p12ce")
+unlocked = true
+achievement = ExtResource("2_pof1c")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.25
+anchor_right = 1.0
+anchor_bottom = 1.25
+offset_top = 8.00003
+offset_bottom = 8.00003
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.00003
+offset_right = -0.000152588
+offset_bottom = 7.9999
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_uawn0")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="HBoxContainer/VBoxContainer"]
+modulate = Color(0.473976, 0.473976, 0.473976, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_jk243")
+text = "???"
+uppercase = true
+
+[node name="Description" type="Label" parent="HBoxContainer/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_1va88")
+text = "Hi this is a description of the achievement 8909809807456"
+autowrap_mode = 2
+uppercase = true

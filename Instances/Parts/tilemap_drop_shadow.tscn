@@ -1,0 +1,71 @@
+[gd_scene load_steps=2 format=3 uid="uid://2y6gcrp6cl7m"]
+
+[sub_resource type="GDScript" id="GDScript_hm5uy"]
+script/source = "extends Node
+
+@export var viewport: SubViewport = null
+@export var camera: Camera2D = null
+
+@onready var og_tiles = get_parent()
+
+
+
+var new_tiles
+
+static var clone := false
+
+func _ready() -> void:
+	if clone:
+		queue_free()
+		return
+	if og_tiles:
+		clone = true
+		new_tiles = og_tiles.duplicate()
+		viewport.add_child(new_tiles)
+
+func _exit_tree() -> void:
+	clone = false
+
+func _process(delta: float) -> void:
+	camera.make_current()
+	camera.global_position = get_tree().root.get_viewport().get_camera_2d().get_screen_center_position()
+	$Position.global_position = camera.global_position
+	viewport.set_world_2d(GameManager.get_viewport().get_world_2d())
+	
+	
+"
+
+[node name="TilemapShadow" type="Node" node_paths=PackedStringArray("viewport", "camera")]
+script = SubResource("GDScript_hm5uy")
+viewport = NodePath("Position/SubViewportContainer/Viewport")
+camera = NodePath("Position/SubViewportContainer/Viewport/Camera2D")
+
+[node name="Position" type="Node2D" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Position"]
+modulate = Color(0, 0, 0, 1)
+z_index = -5
+z_as_relative = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -136.0
+offset_right = 240.0
+offset_bottom = 134.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Viewport" type="SubViewport" parent="Position/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+canvas_item_default_texture_repeat = 1
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="Position/SubViewportContainer/Viewport"]
+light_mask = 16
+visibility_layer = 16

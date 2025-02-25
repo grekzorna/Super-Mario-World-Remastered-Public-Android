@@ -1,0 +1,189 @@
+[gd_scene load_steps=20 format=3 uid="uid://n683bw1fnuhd"]
+
+[ext_resource type="Texture2D" uid="uid://cjfqjqmet8lif" path="res://Assets/Sprites/Objects/Flagpolebase.png" id="1_3i66w"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/end_flag_pole.gd" id="1_pnles"]
+[ext_resource type="Texture2D" uid="uid://dm3eq42d5q8u6" path="res://Assets/Sprites/Objects/FlagPolePole.png" id="2_av6gj"]
+[ext_resource type="Texture2D" uid="uid://bhk2p6vdefaei" path="res://Assets/Sprites/Objects/FlagpoleTop.png" id="3_gjlm3"]
+[ext_resource type="Texture2D" uid="uid://bg6icenh1plos" path="res://Assets/Sprites/Objects/GoalPostFlag.png" id="4_4y678"]
+[ext_resource type="AudioStream" uid="uid://canuyq7n6io6l" path="res://Assets/Audio/SFX/FlagpoleSlide.mp3" id="6_dkova"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2yql"]
+size = Vector2(16, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_q41ng"]
+a = Vector2(0, -16)
+b = Vector2(0, -176)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qo014"]
+radius = 9.05539
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32vwq"]
+atlas = ExtResource("4_4y678")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdfjg"]
+atlas = ExtResource("4_4y678")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqbxj"]
+atlas = ExtResource("4_4y678")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yd0vd"]
+atlas = ExtResource("4_4y678")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjmt1"]
+atlas = ExtResource("4_4y678")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6stt"]
+atlas = ExtResource("4_4y678")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y1uk8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32vwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdfjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqbxj")
+}],
+"loop": true,
+"name": &"Secret",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yd0vd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjmt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6stt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_nyoev"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, -168)]
+}
+
+[sub_resource type="Animation" id="Animation_j0qo3"]
+resource_name = "SlideDown"
+length = 1.7
+step = 0.05
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flag/Slide")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_dkova")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flag:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(12, -168), Vector2(12, -27)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cb4sl"]
+_data = {
+&"RESET": SubResource("Animation_nyoev"),
+&"SlideDown": SubResource("Animation_j0qo3")
+}
+
+[node name="EndFlagPole" type="Node2D"]
+script = ExtResource("1_pnles")
+
+[node name="Base" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 0
+
+[node name="Sprite" type="Sprite2D" parent="Base"]
+position = Vector2(0, -8)
+texture = ExtResource("1_3i66w")
+hframes = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Base"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_m2yql")
+
+[node name="Pole" type="NinePatchRect" parent="."]
+offset_left = -4.0
+offset_top = -177.0
+offset_right = 4.0
+offset_bottom = -16.0
+texture = ExtResource("2_av6gj")
+patch_margin_left = 4
+patch_margin_top = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Hitbox" type="Area2D" parent="Pole"]
+position = Vector2(4, 177)
+
+[node name="Shape" type="CollisionShape2D" parent="Pole/Hitbox"]
+shape = SubResource("SegmentShape2D_q41ng")
+
+[node name="Top" type="Sprite2D" parent="."]
+position = Vector2(0, -176)
+texture = ExtResource("3_gjlm3")
+offset = Vector2(0, -4)
+vframes = 2
+
+[node name="Hitbox" type="Area2D" parent="Top"]
+position = Vector2(0, -4)
+
+[node name="Shape" type="CollisionShape2D" parent="Top/Hitbox"]
+shape = SubResource("CircleShape2D_qo014")
+
+[node name="Flag" type="AnimatedSprite2D" parent="."]
+position = Vector2(12, -168)
+sprite_frames = SubResource("SpriteFrames_y1uk8")
+animation = &"Secret"
+autoplay = "default"
+
+[node name="Slide" type="AudioStreamPlayer2D" parent="Flag"]
+position = Vector2(-12, 168)
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cb4sl")
+}
+
+[connection signal="area_entered" from="Pole/Hitbox" to="." method="pole_hitbox_hit"]
+[connection signal="area_entered" from="Top/Hitbox" to="." method="top_hitbox_hit"]

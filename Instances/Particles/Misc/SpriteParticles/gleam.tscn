@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxn18ah8r5vj7"]
+
+[ext_resource type="Texture2D" uid="uid://dexi2e1koghm5" path="res://Assets/Sprites/Particles/MapUnlock.png" id="1_uckt6"]
+[ext_resource type="Script" path="res://Scripts/Classes/SpriteParticleClass.gd" id="2_0hopg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5olw"]
+atlas = ExtResource("1_uckt6")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3bt4"]
+atlas = ExtResource("1_uckt6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xbs6"]
+atlas = ExtResource("1_uckt6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjdrq"]
+atlas = ExtResource("1_uckt6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krppj"]
+atlas = ExtResource("1_uckt6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l0yae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5olw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3bt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xbs6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjdrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krppj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjdrq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xbs6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3bt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5olw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="Gleam" type="AnimatedSprite2D"]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_l0yae")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
+script = ExtResource("2_0hopg")

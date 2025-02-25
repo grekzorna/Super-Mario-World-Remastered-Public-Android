@@ -1,0 +1,29 @@
+[gd_resource type="AudioStreamInteractive" load_steps=5 format=3 uid="uid://bo4e7og5g2ex4"]
+
+[ext_resource type="AudioStream" uid="uid://bqadn3fexa53b" path="res://Assets/Audio/BGM/SMW/Forest.mp3" id="1_62lru"]
+[ext_resource type="AudioStream" uid="uid://byyd5d2ui6urd" path="res://Assets/Audio/BGM/SMW/ForestYoshi.mp3" id="2_uq4fy"]
+[ext_resource type="AudioStream" uid="uid://bqadn3fexa53b" path="res://Assets/Audio/BGM/SMW/Forest.mp3" id="3_6468p"]
+[ext_resource type="AudioStream" uid="uid://byyd5d2ui6urd" path="res://Assets/Audio/BGM/SMW/ForestYoshi.mp3" id="4_c0cxb"]
+
+[resource]
+clip_count = 4
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_62lru")
+clip_0/auto_advance = 0
+clip_1/name = &"Yoshi"
+clip_1/stream = ExtResource("2_uq4fy")
+clip_1/auto_advance = 0
+clip_2/name = &"Hurry"
+clip_2/stream = ExtResource("3_6468p")
+clip_2/auto_advance = 0
+clip_3/name = &"HurryYoshi"
+clip_3/stream = ExtResource("4_c0cxb")
+clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+}
+}

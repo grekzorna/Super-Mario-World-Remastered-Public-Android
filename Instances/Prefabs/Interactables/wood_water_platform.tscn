@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxg13gbn11g3o"]
+
+[ext_resource type="Script" uid="uid://p1lh1ocpnok" path="res://Scripts/Interactables/water_platform.gd" id="1_e66x1"]
+[ext_resource type="Texture2D" uid="uid://31ip4o0xy683" path="res://Assets/Sprites/Objects/PlatformSheet.png" id="2_xciqb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3foil"]
+size = Vector2(48, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kmqd"]
+size = Vector2(48, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pv2o"]
+atlas = ExtResource("2_xciqb")
+region = Rect2(0, 16, 32, 16)
+
+[node name="WaterPlatform" type="StaticBody2D"]
+collision_layer = 25
+script = ExtResource("1_e66x1")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_3foil")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -18)
+shape = SubResource("RectangleShape2D_3kmqd")
+
+[node name="Sprite" type="NinePatchRect" parent="."]
+offset_left = -24.0
+offset_top = -16.0
+offset_right = 24.0
+texture = SubResource("AtlasTexture_3pv2o")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1

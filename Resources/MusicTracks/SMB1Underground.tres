@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://bf8giy6s4b88b"]
+
+[ext_resource type="AudioStream" uid="uid://d24bnq3rvuw3i" path="res://Assets/Audio/BGM/SMB1/SMB1Underground.mp3" id="1_mxlew"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Smb 1 Underground"
+clip_0/stream = ExtResource("1_mxlew")
+clip_0/auto_advance = 0
+metadata/Name = "SMB1 Underground Remix"
+metadata/Artist = "mario90"

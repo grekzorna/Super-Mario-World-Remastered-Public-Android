@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqtts48ey7tji"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/ParaGaloombaGenerator.gd" id="1_dakmy"]
+
+[node name="EntityGenerator" type="CollisionShape2D"]
+debug_color = Color(1, 0.6, 0, 0.419608)
+script = ExtResource("1_dakmy")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+visible = false
+debug_color = Color(1, 0.6, 0.701961, 0.419608)

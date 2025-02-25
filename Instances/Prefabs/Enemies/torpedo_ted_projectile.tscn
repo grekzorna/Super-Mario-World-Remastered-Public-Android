@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnfuyt0nx4ed4"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/torpedo_ted_projectile.gd" id="1_aq7g5"]
+[ext_resource type="Texture2D" uid="uid://cqb0m3atj0y2n" path="res://Assets/Sprites/Enemys/TorpedoTed.png" id="2_8rakd"]
+[ext_resource type="PackedScene" uid="uid://gr6gqqb0pdkl" path="res://Instances/Particles/Player/puff_trail.tscn" id="3_5qab4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gajk"]
+atlas = ExtResource("2_8rakd")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kamd"]
+atlas = ExtResource("2_8rakd")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijrp8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gajk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kamd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1lvp"]
+size = Vector2(26, 9)
+
+[node name="TorpedoTedProjectile" type="CharacterBody2D"]
+z_index = -1
+script = ExtResource("1_aq7g5")
+gib_type = 1
+can_swim = true
+spiky_top = true
+can_slide_damage = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = -3
+sprite_frames = SubResource("SpriteFrames_ijrp8")
+autoplay = "default"
+frame_progress = 0.532564
+
+[node name="PuffTrail" parent="Sprite" instance=ExtResource("3_5qab4")]
+show_behind_parent = true
+position = Vector2(16, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_p1lvp")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -1.43051e-06)
+scale = Vector2(3.2, 1.7)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

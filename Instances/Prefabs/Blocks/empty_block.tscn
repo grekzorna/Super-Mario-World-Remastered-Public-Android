@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl7327rqgskw7"]
+
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="1_7lj4v"]
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/empty_block.gd" id="1_devy6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj3gr"]
+size = Vector2(16, 16)
+
+[node name="EmptyBlock" type="AnimatableBody2D"]
+physics_interpolation_mode = 2
+light_mask = 3
+visibility_layer = 3
+collision_layer = 31
+collision_mask = 0
+sync_to_physics = false
+script = ExtResource("1_devy6")
+p_switch = true
+enable_side_hits = false
+enable_ground_pounds = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7lj4v")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_pj3gr")

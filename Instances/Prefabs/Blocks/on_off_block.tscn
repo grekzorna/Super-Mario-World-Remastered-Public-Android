@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxj7mbl7hn636"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/on_off_block.gd" id="1_a2uqs"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="2_neg3d"]
+[ext_resource type="Texture2D" uid="uid://b152ql1clofba" path="res://Assets/Sprites/Objects/OnOffBlock.png" id="2_nvwqc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0xak"]
+atlas = ExtResource("2_nvwqc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyoeh"]
+atlas = ExtResource("2_nvwqc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36usa"]
+size = Vector2(16, 16)
+
+[node name="OnOffBlock" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_a2uqs")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_b0xak")
+hframes = 2
+vframes = 2
+script = ExtResource("2_neg3d")
+textures = Array[Texture2D]([SubResource("AtlasTexture_iyoeh"), SubResource("AtlasTexture_b0xak")])
+settings_value = "onoffswitch"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_36usa")

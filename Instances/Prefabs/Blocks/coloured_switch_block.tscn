@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc8q1aphapb0g"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/coloured_switch_block.gd" id="1_i4ggs"]
+[ext_resource type="Texture2D" uid="uid://dqwbu1w2h5dw0" path="res://Assets/Sprites/Objects/ColouredSwitchBlocks.png" id="2_qhqxn"]
+[ext_resource type="PackedScene" uid="uid://dsi7hx88qsxq1" path="res://Instances/Prefabs/Items/mushroom_item.tscn" id="2_ybjbt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kkkm"]
+size = Vector2(16, 16)
+
+[node name="ColouredSwitchBlock" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+collision_layer = 5
+script = ExtResource("1_i4ggs")
+visuals = NodePath("Sprite")
+item = ExtResource("2_ybjbt")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_qhqxn")
+hframes = 2
+vframes = 2
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4kkkm")

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=13 format=3 uid="uid://c2ltopll6tf4u"]
+
+[ext_resource type="Texture2D" uid="uid://bmxg6clj8in1e" path="res://Assets/Sprites/Characters/Luigi/HUDIcon.png" id="1_iksjr"]
+[ext_resource type="Texture2D" uid="uid://dk7pgcwagvcmw" path="res://Assets/Sprites/Characters/Luigi/HUDTitle.png" id="2_16brv"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="3_7by33"]
+[ext_resource type="Script" path="res://Scripts/Classes/Characters/Luigi.gd" id="4_225f6"]
+[ext_resource type="Texture2D" uid="uid://da2gu7hk8otbk" path="res://Assets/Sprites/Characters/Luigi/FireworkMask.png" id="4_fa42o"]
+[ext_resource type="Texture2D" uid="uid://cbi02abuynpbd" path="res://Assets/Sprites/Characters/Luigi/Ending.png" id="4_fwrwx"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/CharacterResource.gd" id="6_kkxey"]
+[ext_resource type="SpriteFrames" uid="uid://coqespul514fd" path="res://Resources/PlayerSpriteFrames/Luigi/Map.tres" id="7_ulnch"]
+[ext_resource type="Texture2D" uid="uid://qjbkxryumxif" path="res://Assets/Sprites/Characters/Luigi/SelectionSprites/SMMIdle.tres" id="9_pyf0t"]
+[ext_resource type="Texture2D" uid="uid://e0h45dip2dbp" path="res://Assets/Sprites/Characters/Luigi/SelectionSprites/SMMActive.tres" id="10_u8xys"]
+[ext_resource type="AudioStream" uid="uid://c5t4v2hmyvxw1" path="res://Assets/Audio/SFX/coin.wav" id="11_a2w1t"]
+[ext_resource type="Resource" uid="uid://ceqaqufmindu" path="res://Resources/SoundLibraries/Default.tres" id="12_ivdio"]
+
+[resource]
+script = ExtResource("6_kkxey")
+character_name = "Luigi"
+base_character_scene = ExtResource("3_7by33")
+character_script = ExtResource("4_225f6")
+char_colour = Color(0, 0.972549, 0, 1)
+custom_properties = {
+"PhysicsStyle": "Luigi"
+}
+sound_library = ExtResource("12_ivdio")
+character_id = 1
+power_sprite_extra_offsets = {
+"Cape": Vector2(0, 0),
+"PropellerBlade": Vector2(0, -2)
+}
+power_sprite_extra_replaces = {}
+power_state_script_replace = {}
+HUDTitle = ExtResource("2_16brv")
+HUDLetter = ExtResource("1_iksjr")
+ending_portrait = ExtResource("4_fwrwx")
+ending_firework_mask = ExtResource("4_fa42o")
+map_sprites = ExtResource("7_ulnch")
+selection_idle = ExtResource("9_pyf0t")
+selection_selected = ExtResource("10_u8xys")
+selection_sfx = ExtResource("11_a2w1t")

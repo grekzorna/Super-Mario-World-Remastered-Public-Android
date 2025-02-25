@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=5 format=3 uid="uid://wv5dywte0xc7"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_a0ymy"]
+[ext_resource type="Texture2D" uid="uid://bae1y7iac6k26" path="res://Assets/Sprites/UI/TextImages/Airship1.png" id="2_jvtkh"]
+[ext_resource type="Texture2D" uid="uid://cae7sydba5k0o" path="res://Assets/Sprites/UI/TextImages/Airship2.png" id="3_863qf"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_hetf4"]
+frames = 2
+frame_0/texture = ExtResource("2_jvtkh")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("3_863qf")
+frame_1/duration = 0.25
+
+[resource]
+script = ExtResource("1_a0ymy")
+level_title = "Bridge Airship"
+level_scene_path = "Airships/airship_3"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = false
+title_image = SubResource("AnimatedTexture_hetf4")
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = true
+map_point_warp = ""
+map_scene_warp = ""

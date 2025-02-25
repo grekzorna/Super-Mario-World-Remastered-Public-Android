@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bonywbspphm3t"]
+
+[ext_resource type="Script" uid="uid://cd6gr40f5vdhy" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_2ltqu"]
+
+[resource]
+script = ExtResource("1_2ltqu")
+level_title = "Chocolate Secret"
+level_scene_path = "res://Instances/Levels/ChocoIsland/cs.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = true
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = true
+map_point_warp = "ChocoSecret"
+map_scene_warp = "res://Instances/Levels/Maps/BowserValley.tscn"

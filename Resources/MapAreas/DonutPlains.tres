@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=17 format=3 uid="uid://dy6r26qvhpxu"]
+
+[ext_resource type="Resource" uid="uid://jqk34owisgt5" path="res://Resources/Achievements/Completionist/DragCoins/DPDragCoin.tres" id="1_bnjbn"]
+[ext_resource type="AudioStream" uid="uid://cxu116nlh1axh" path="res://Assets/Audio/BGM/SMW/AutumnMainIsland.mp3" id="1_f5bf1"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="1_rjw6g"]
+[ext_resource type="Resource" uid="uid://dd8ptitrvm1y5" path="res://Resources/LevelData/DonutPlains/DP1.tres" id="1_y60xh"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="2_5ssih"]
+[ext_resource type="Resource" uid="uid://d1nuh7ljhp57f" path="res://Resources/LevelData/DonutPlains/DP2.tres" id="2_on266"]
+[ext_resource type="Resource" uid="uid://753cvn2b7d1a" path="res://Resources/LevelData/DonutPlains/GreenSwitchPalace.tres" id="3_rfuev"]
+[ext_resource type="Resource" uid="uid://defxlsrvxw6sm" path="res://Resources/LevelData/DonutPlains/DGH.tres" id="4_f0l46"]
+[ext_resource type="Resource" uid="uid://c12jh2e2j1qc0" path="res://Resources/LevelData/DonutPlains/DP3.tres" id="4_mndds"]
+[ext_resource type="Resource" uid="uid://biasx5nlt1dc7" path="res://Resources/LevelData/DonutPlains/DP4.tres" id="5_of7l3"]
+[ext_resource type="Resource" uid="uid://b38frf7heim7l" path="res://Resources/LevelData/DonutPlains/DS1.tres" id="6_rv7cx"]
+[ext_resource type="Resource" uid="uid://cfttm6jihuytu" path="res://Resources/LevelData/DonutPlains/DS2.tres" id="7_nv5y6"]
+[ext_resource type="Resource" uid="uid://y03hju7bvqdm" path="res://Resources/LevelData/DonutPlains/DSH.tres" id="8_48hxp"]
+[ext_resource type="Resource" uid="uid://b5wg5boeyafax" path="res://Resources/LevelData/DonutPlains/Castle2.tres" id="9_wjqtw"]
+[ext_resource type="AudioStream" uid="uid://cu7uxj1ov3jl5" path="res://Assets/Audio/BGM/SMW/MainIsland.mp3" id="14_fv0as"]
+[ext_resource type="Resource" uid="uid://eru8n36bw4gb" path="res://Resources/LevelData/DonutPlains/TopSecretArea.tres" id="14_vfnqd"]
+
+[resource]
+script = ExtResource("1_rjw6g")
+area_name = "Donut Plains"
+music = ExtResource("14_fv0as")
+autumn_music = ExtResource("1_f5bf1")
+levels = Array[ExtResource("2_5ssih")]([ExtResource("1_y60xh"), ExtResource("2_on266"), ExtResource("3_rfuev"), ExtResource("4_f0l46"), ExtResource("4_mndds"), ExtResource("5_of7l3"), ExtResource("6_rv7cx"), ExtResource("7_nv5y6"), ExtResource("8_48hxp"), ExtResource("9_wjqtw"), ExtResource("14_vfnqd")])
+dragon_coin_achievement = ExtResource("1_bnjbn")

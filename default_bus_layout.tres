@@ -1,0 +1,48 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://b5afhf1pgx2fv"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_s2rq8"]
+resource_name = "Reverb"
+room_size = 0.53
+damping = 0.67
+wet = 0.14
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_svobe"]
+resource_name = "Distortion"
+mode = 2
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_e3vqo"]
+resource_name = "PitchShift"
+pitch_scale = 0.98
+
+[resource]
+bus/0/volume_db = -11.4624
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 1.06049
+bus/1/send = &"Master"
+bus/2/name = &"SFX"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 6.02
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectReverb_s2rq8")
+bus/2/effect/0/enabled = false
+bus/3/name = &"UI"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.464998
+bus/3/send = &"Master"
+bus/4/name = &"CloneVoices"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 6.02
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectDistortion_svobe")
+bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource("AudioEffectPitchShift_e3vqo")
+bus/4/effect/1/enabled = true

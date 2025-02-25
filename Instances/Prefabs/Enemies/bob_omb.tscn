@@ -1,0 +1,90 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdo7p72txejqf"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/BobOmb.gd" id="1_qgfae"]
+[ext_resource type="Texture2D" uid="uid://bprbyvo7k13gh" path="res://Assets/Sprites/Enemys/BobOmb.png" id="2_dmjrl"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_e712f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggkdn"]
+size = Vector2(9, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjn2k"]
+atlas = ExtResource("2_dmjrl")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34ugq"]
+atlas = ExtResource("2_dmjrl")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riqus"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjn2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34ugq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8chm"]
+atlas = ExtResource("2_dmjrl")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw8rm"]
+atlas = ExtResource("2_dmjrl")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3044"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8chm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw8rm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysetq"]
+size = Vector2(12, 11)
+
+[node name="BobOmb" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_qgfae")
+held_scene = "res://Instances/Prefabs/Enemies/bob_omb_held.tscn"
+enemy_height = 8
+yoshi_behavior = "Swallow"
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_ggkdn")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_riqus")
+autoplay = "default"
+frame = 1
+frame_progress = 0.809167
+script = ExtResource("3_e712f")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_riqus"), SubResource("SpriteFrames_x3044")])
+settings_value = "bobomb"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_ysetq")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdxmrocmkp6tl"]
+
+[ext_resource type="Texture2D" uid="uid://c3ky4nbmmgjic" path="res://Assets/Sprites/UI/EmptyEggFrame.png" id="1_4oss1"]
+[ext_resource type="Script" path="res://Scripts/UI/save_egg_display.gd" id="2_r12ph"]
+
+[node name="SaveEggDisplay" type="TextureRect"]
+custom_minimum_size = Vector2(24, 24)
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_4oss1")
+stretch_mode = 4
+script = ExtResource("2_r12ph")

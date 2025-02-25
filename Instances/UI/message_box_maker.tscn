@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxypv1h8tedh3"]
+
+[ext_resource type="FontFile" uid="uid://csewkyorvkv8u" path="res://Assets/Sprites/UI/Messages/MessageFont.png" id="1_uw4n0"]
+[ext_resource type="Texture2D" uid="uid://cvuhdlkog3eqw" path="res://Assets/Sprites/UI/Messages/DP1A.png" id="2_k1hxg"]
+
+[sub_resource type="FontVariation" id="FontVariation_bojm2"]
+base_font = ExtResource("1_uw4n0")
+
+[node name="MessageBoxMaker" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -319.0
+offset_bottom = -191.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = SubResource("FontVariation_bojm2")
+text = "Our         heroes
+have  defeated the
+demented      Iggy
+Koopa of Castle #1
+and        rescued
+Yoshi's friend who
+is  trapped  in an
+egg. Together, the
+"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Dp1a" type="Sprite2D" parent="."]
+position = Vector2(81.4969, -44.5)
+texture = ExtResource("2_k1hxg")

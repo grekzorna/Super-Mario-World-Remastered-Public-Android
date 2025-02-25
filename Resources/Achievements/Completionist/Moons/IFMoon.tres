@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bwcd5nhine8u6"]
+
+[ext_resource type="Texture2D" uid="uid://d1lg0godpuvd2" path="res://Assets/Sprites/AchievementIcons/46557.png" id="1_my147"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_ojwsn"]
+
+[resource]
+script = ExtResource("1_ojwsn")
+title = "A False Moon"
+description = "Collect the 3-Up Moon in the Forest of Illusion"
+icon = ExtResource("1_my147")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://c8ctbdsxdwi2u"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_o3uej"]
+
+[resource]
+script = ExtResource("1_o3uej")
+level_title = "Yoshi's House"
+level_scene_path = "res://Instances/Levels/YoshiIsland/yoshi_house.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = false
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = false
+map_point_warp = "YoshiHouse"
+map_scene_warp = "res://Instances/Levels/Maps/YoshiIsland.tscn"

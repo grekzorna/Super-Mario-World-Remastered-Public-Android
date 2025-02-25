@@ -1,0 +1,197 @@
+[gd_scene load_steps=23 format=3 uid="uid://b73j88a80yqdb"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/MotorRope.gd" id="1_5fj4b"]
+[ext_resource type="PackedScene" uid="uid://cnv6i6byojhnq" path="res://Instances/Parts/climbable_area.tscn" id="2_rt1wj"]
+[ext_resource type="Texture2D" uid="uid://df6p4t0570f1v" path="res://Assets/Sprites/Objects/Motor.png" id="3_hgnb1"]
+[ext_resource type="Texture2D" uid="uid://c366rqrm25gab" path="res://Assets/Sprites/Objects/Rope.png" id="4_jgqpt"]
+[ext_resource type="Texture2D" uid="uid://ce4soijovgah3" path="res://Assets/Sprites/Objects/RopeEnd.png" id="5_oteux"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="6_bqgtm"]
+[ext_resource type="PackedScene" uid="uid://cv6xjedrokkrh" path="res://Instances/Particles/Misc/steam_particles.tscn" id="7_14dq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixive"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kiyqn"]
+size = Vector2(8, 120)
+
+[sub_resource type="Animation" id="Animation_nxxw6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:destination_travel_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ftisc"]
+resource_name = "Travel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:destination_travel_ratio")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sy06j"]
+_data = {
+&"Travel": SubResource("Animation_ftisc"),
+&"RESET": SubResource("Animation_nxxw6")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13sm0"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aebd2"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ev2ot"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mnkyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13sm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aebd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev2ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aebd2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_suxfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13sm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aebd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ev2ot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aebd2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0quj"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p88yr"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bisfj"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5qvq"]
+atlas = ExtResource("3_hgnb1")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdf60"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0quj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p88yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bisfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p88yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5qvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p88yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bisfj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p88yr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="MotorRopeLong" type="CharacterBody2D"]
+script = ExtResource("1_5fj4b")
+move_speed = 64
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ixive")
+
+[node name="ClimbableArea" parent="." instance=ExtResource("2_rt1wj")]
+lock_x_axis = true
+moving = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbableArea"]
+position = Vector2(0, 68)
+shape = SubResource("RectangleShape2D_kiyqn")
+
+[node name="TravelAnimation" type="AnimationPlayer" parent="."]
+callback_mode_process = 2
+callback_mode_method = 1
+libraries = {
+&"": SubResource("AnimationLibrary_sy06j")
+}
+
+[node name="RopeLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 8, 0, 128)
+width = 16.0
+texture = ExtResource("4_jgqpt")
+texture_mode = 1
+
+[node name="RopeEnd" type="Sprite2D" parent="."]
+position = Vector2(0, 132)
+texture = ExtResource("5_oteux")
+
+[node name="Motor" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mnkyw")
+autoplay = "default"
+script = ExtResource("6_bqgtm")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_suxfr"), SubResource("SpriteFrames_vdf60")])
+settings_value = "motor"
+
+[node name="SteamParticles" parent="." instance=ExtResource("7_14dq5")]
+position = Vector2(3, -2)
+emitting = false
+
+[connection signal="player_climbed" from="ClimbableArea" to="." method="activate"]

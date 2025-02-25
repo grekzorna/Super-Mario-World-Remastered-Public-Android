@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxd4s1edmkmmq"]
+
+[ext_resource type="PackedScene" uid="uid://s4a6vmjiv55t" path="res://Instances/Prefabs/Projectiles/hammer_bro_hammer.tscn" id="1_bte6u"]
+
+[node name="YoshiHammer" instance=ExtResource("1_bte6u")]
+can_damage_enemies = true
+yoshi_behavior = "None"
+spit_item = null

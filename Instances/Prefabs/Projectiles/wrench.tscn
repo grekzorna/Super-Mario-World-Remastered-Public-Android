@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bihr1c1mualg0"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/wrench.gd" id="1_6n8jk"]
+[ext_resource type="Texture2D" uid="uid://dk1nb62jwjf4m" path="res://Assets/Sprites/Objects/Wrench.png" id="1_fp0j1"]
+[ext_resource type="AudioStream" uid="uid://ifddwnuojq7r" path="res://Assets/Audio/SFX/boomerang.wav" id="3_jjk3x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mqlq"]
+atlas = ExtResource("1_fp0j1")
+region = Rect2(0, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt4ut"]
+atlas = ExtResource("1_fp0j1")
+region = Rect2(15, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfxsp"]
+atlas = ExtResource("1_fp0j1")
+region = Rect2(30, 0, 15, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaaax"]
+atlas = ExtResource("1_fp0j1")
+region = Rect2(45, 0, 15, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rul45"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mqlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt4ut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfxsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaaax")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhkid"]
+radius = 2.0
+
+[node name="Wrench" type="Node2D"]
+script = ExtResource("1_6n8jk")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rul45")
+autoplay = "default"
+frame_progress = 0.305443
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_uhkid")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jjk3x")
+autoplay = true
+bus = &"SFX"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

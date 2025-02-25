@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfkhh8y11cjlt"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/CameraLockArea.gd" id="1_djwqt"]
+[ext_resource type="Texture2D" uid="uid://dpu7yp3s7asvx" path="res://Assets/Sprites/Editor/CameraLockIcon.png" id="2_lhvpf"]
+
+[node name="CameraLockArea" type="CollisionShape2D"]
+script = ExtResource("1_djwqt")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lhvpf")

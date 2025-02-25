@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsb4v1pu1ogim"]
+
+[ext_resource type="Texture2D" uid="uid://kcxikp7dqo2d" path="res://Assets/Sprites/Editor/PipeDispenser.png" id="1_1of71"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/pipe_dispenser.gd" id="1_8m8xe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak667"]
+
+[node name="PipeDispenser" type="Node2D"]
+script = ExtResource("1_8m8xe")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_1of71")
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="Shape" type="CollisionShape2D" parent="Area"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ak667")
+debug_color = Color(1, 0.6, 0, 0.419608)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

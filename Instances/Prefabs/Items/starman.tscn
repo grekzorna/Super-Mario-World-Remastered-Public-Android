@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://cuhfdjkflof8a"]
+
+[ext_resource type="Script" uid="uid://ctprh7mpaiyum" path="res://Scripts/Classes/Items/Starman.gd" id="1_7872i"]
+[ext_resource type="Texture2D" uid="uid://cue225imgd2wp" path="res://Assets/Sprites/Items/StarMan.png" id="2_snkqt"]
+[ext_resource type="Script" uid="uid://drj8okmqlf5y6" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="3_ooor0"]
+[ext_resource type="Script" uid="uid://cib3wkgoiw57u" path="res://Scripts/Classes/water_bouyancy.gd" id="4_yv8b7"]
+
+[sub_resource type="Resource" id="Resource_5yu4y"]
+script = ExtResource("3_ooor0")
+state_name = "StarMan"
+sprite_frame_name = ""
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = false
+power_tier = 0
+item_sprite = ExtResource("2_snkqt")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxx5t"]
+atlas = ExtResource("2_snkqt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndue2"]
+atlas = ExtResource("2_snkqt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbouw"]
+atlas = ExtResource("2_snkqt")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wy8ig"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_cxx5t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndue2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbouw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndue2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkqu3"]
+size = Vector2(8, 5.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pa2e6"]
+
+[node name="Starman" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_7872i")
+power = SubResource("Resource_5yu4y")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wy8ig")
+autoplay = "default"
+frame_progress = 0.544815
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 5.25)
+shape = SubResource("RectangleShape2D_pkqu3")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pa2e6")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_yv8b7")
+hitbox = NodePath("../Hitbox")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

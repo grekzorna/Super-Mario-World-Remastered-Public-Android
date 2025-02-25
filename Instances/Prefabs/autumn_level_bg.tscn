@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://cge612j26d8ws"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/autumn_level_bg.gd" id="1_4c5ui"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="1_dax75"]
+
+[sub_resource type="Shader" id="Shader_slw6q"]
+code = "shader_type canvas_item;
+
+uniform bool enabled = true;
+uniform float wave_speed = 3.0; //wave loop speed
+uniform float wave_freq = 10.0; //wave vertical freq
+uniform float wave_width = 1; //wave width 
+
+void fragment(){
+	if (enabled){
+		vec2 scale_UV = UV;
+		vec2 wave_uv_offset;
+		wave_uv_offset.x = cos((TIME*wave_speed)+UV.x+UV.y*wave_freq*2.0)*wave_width*0.01;
+		//COLOR = vec4(wave_uv_offset,0.0,1.0);
+		COLOR = texture(TEXTURE,scale_UV+wave_uv_offset);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qn22y"]
+shader = SubResource("Shader_slw6q")
+shader_parameter/enabled = false
+shader_parameter/wave_speed = 3.0
+shader_parameter/wave_freq = 10.0
+shader_parameter/wave_width = 1.0
+
+[node name="LevelBG" instance=ExtResource("1_dax75")]
+z_index = -2
+script = ExtResource("1_4c5ui")
+
+[node name="SkyLayer" parent="." index="0"]
+scroll_offset = Vector2(-2048, -1536)
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="RainLayer" parent="." index="1"]
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="MainBGLayer" parent="." index="2"]
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="MainTexture" parent="MainBGLayer" index="0"]
+material = SubResource("ShaderMaterial_qn22y")
+
+[node name="MainFGLayer" parent="." index="3"]
+modulate = Color(1, 1, 1, 0.3)
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="FGLayer" parent="." index="4"]
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="SnowLayer" parent="." index="8"]
+screen_offset = Vector2(-1673.78, -292.11)
+
+[node name="LeafLayer" parent="." index="9"]
+screen_offset = Vector2(-1673.78, -292.11)

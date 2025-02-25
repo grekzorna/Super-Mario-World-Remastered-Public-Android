@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://ideft2qkgpv6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/water_mines.gd" id="1_ngfd2"]
+[ext_resource type="Texture2D" uid="uid://cti2oedj824x6" path="res://Assets/Sprites/Enemys/WaterMine.png" id="2_gud27"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tud7p"]
+atlas = ExtResource("2_gud27")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qc7qn"]
+atlas = ExtResource("2_gud27")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnlmg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tud7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qc7qn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mnk5y"]
+radius = 11.0
+
+[node name="WaterMines" type="CharacterBody2D"]
+script = ExtResource("1_ngfd2")
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_slide_damage = false
+can_cape_damage = false
+can_held_item_damage = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_cnlmg")
+autoplay = "default"
+frame_progress = 0.771967
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_mnk5y")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-2.38419e-07, -16)
+scale = Vector2(1.6, 1.6)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

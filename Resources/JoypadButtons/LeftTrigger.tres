@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="JoypadButton" load_steps=6 format=3 uid="uid://co213sbh4khs2"]
+
+[ext_resource type="Texture2D" uid="uid://cjtg5v035vnmt" path="res://Assets/Sprites/UI/InputButtons/PS/LeftTrigger.png" id="1_gnode"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/GamepadButton.gd" id="1_wn0b8"]
+[ext_resource type="Texture2D" uid="uid://cetv1npl8jrkn" path="res://Assets/Sprites/UI/InputButtons/Nintendo/LeftTrigger.png" id="3_r7sx7"]
+[ext_resource type="Texture2D" uid="uid://c4r4dhs7fth18" path="res://Assets/Sprites/UI/InputButtons/Xbox/LeftTrigger.png" id="4_3iv7g"]
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_g35yv"]
+axis = 4
+axis_value = 1.0
+
+[resource]
+script = ExtResource("1_wn0b8")
+input_event = SubResource("InputEventJoypadMotion_g35yv")
+ps_texture = ExtResource("1_gnode")
+xbox_texture = ExtResource("4_3iv7g")
+switch_texture = ExtResource("3_r7sx7")

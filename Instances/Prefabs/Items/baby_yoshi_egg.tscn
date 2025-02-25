@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbinnyub65ub8"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/baby_yoshi_egg.gd" id="1_pyh4v"]
+[ext_resource type="Texture2D" uid="uid://bybhpb7bw8urf" path="res://Assets/Sprites/Characters/Yoshi/Eggs/BabyGreen.png" id="2_3cu3h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_78t0d"]
+size = Vector2(4, 4)
+
+[node name="BabyYoshiEgg" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_pyh4v")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_3cu3h")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_78t0d")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)

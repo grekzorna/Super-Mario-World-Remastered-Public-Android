@@ -1,0 +1,216 @@
+[gd_scene load_steps=16 format=3 uid="uid://7ww2p3d2iqmu"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/ParaGaloomba.gd" id="1_vxqoo"]
+[ext_resource type="Texture2D" uid="uid://em5tj6tt4vtx" path="res://Assets/Sprites/Enemys/ParaGaloomba.png" id="2_f5gyh"]
+[ext_resource type="PackedScene" uid="uid://cm32wq57jbsyf" path="res://Instances/Prefabs/Enemies/galoomba.tscn" id="2_lppv3"]
+[ext_resource type="Texture2D" uid="uid://w2bbnlyjvu4f" path="res://Assets/Sprites/Enemys/AutumnParaGaloomba.png" id="3_ks0gg"]
+[ext_resource type="Texture2D" uid="uid://bwwebuttgtpcu" path="res://Assets/Sprites/Objects/Parachute.png" id="3_q04a8"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="4_d6iwa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbc4e"]
+atlas = ExtResource("3_q04a8")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehd48"]
+atlas = ExtResource("3_q04a8")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc0d0"]
+atlas = ExtResource("2_f5gyh")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_167m7"]
+atlas = ExtResource("2_f5gyh")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="Animation" id="Animation_6f06f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Galoomba:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Galoomba:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(8, 16)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Galoomba:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u2rk3"]
+resource_name = "Rock"
+length = 3.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Galoomba:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.4, 1.8, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Galoomba:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(8, 14), Vector2(7, 15), Vector2(6, 16), Vector2(4, 16), Vector2(2, 16), Vector2(-2, 16), Vector2(-4, 16), Vector2(-5, 16), Vector2(-7, 15), Vector2(-8, 14), Vector2(-7, 15), Vector2(-5, 16), Vector2(-4, 16), Vector2(-2, 16), Vector2(2, 16), Vector2(4, 16), Vector2(7, 15), Vector2(8, 14)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Galoomba:scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.6, 2.4, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0, 1]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbrwi"]
+_data = {
+"RESET": SubResource("Animation_6f06f"),
+"Rock": SubResource("Animation_u2rk3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uny4d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a150s"]
+radius = 6.0
+
+[node name="ParaGaloomba" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_vxqoo")
+scene = ExtResource("2_lppv3")
+autumn_sprite = ExtResource("3_ks0gg")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+
+[node name="Parachute" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = SubResource("AtlasTexture_kbc4e")
+hframes = 2
+script = ExtResource("4_d6iwa")
+textures = Array[Texture2D]([SubResource("AtlasTexture_ehd48"), SubResource("AtlasTexture_kbc4e")])
+settings_value = "parachute"
+
+[node name="Galoomba" type="Sprite2D" parent="Parachute"]
+position = Vector2(8, 16)
+texture = SubResource("AtlasTexture_pc0d0")
+hframes = 2
+frame = 1
+script = ExtResource("4_d6iwa")
+textures = Array[Texture2D]([SubResource("AtlasTexture_pc0d0"), SubResource("AtlasTexture_167m7")])
+settings_value = "galoomba"
+
+[node name="Animation" type="AnimationPlayer" parent="Parachute"]
+libraries = {
+"": SubResource("AnimationLibrary_lbrwi")
+}
+autoplay = "Rock"
+speed_scale = 3.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -1.52588e-05)
+scale = Vector2(2.4, 55.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_uny4d")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0.166551, 3.4158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.166551, -11.4158)
+shape = SubResource("CircleShape2D_a150s")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

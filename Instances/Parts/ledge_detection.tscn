@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://mhx5o6wfgkmk"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/ledge_detection.gd" id="1_88v7a"]
+
+[node name="LedgeDetection" type="RayCast2D"]
+position = Vector2(8, 0)
+target_position = Vector2(0, 16)
+collision_mask = 5
+hit_from_inside = true
+script = ExtResource("1_88v7a")
+floor_normal = Vector2(0.5, 0.5)

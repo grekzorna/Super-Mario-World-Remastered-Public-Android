@@ -1,0 +1,582 @@
+[gd_scene load_steps=23 format=4 uid="uid://donk1t1qanm0r"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Levels/castle_entrance_cutscene.gd" id="1_lu66g"]
+[ext_resource type="AudioStream" uid="uid://tmquifk0xxio" path="res://Resources/MusicTracks/Fortress.tres" id="2_3bnou"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="4_8med3"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="5_6kv3u"]
+[ext_resource type="TileSet" uid="uid://b40euarkcv2yh" path="res://Resources/TileSets/Default.tres" id="6_g0xkp"]
+[ext_resource type="Texture2D" uid="uid://ddcracxkjpxqd" path="res://Assets/Sprites/Objects/CastleBossArch.png" id="6_r7gjo"]
+[ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="7_8wkqt"]
+[ext_resource type="Texture2D" uid="uid://pubo44g263bp" path="res://Assets/Sprites/Objects/CastleEntranceDoor.png" id="8_aga60"]
+[ext_resource type="AudioStream" uid="uid://cle5n6xjd1fvj" path="res://Assets/Audio/SFX/door.wav" id="8_gytys"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="10_cen2a"]
+[ext_resource type="PackedScene" uid="uid://c0uopn7i6degn" path="res://Instances/Prefabs/Interactables/yoshi.tscn" id="10_rmqes"]
+[ext_resource type="Resource" uid="uid://bbbdicik3lu1r" path="res://Resources/Characters/Toad.tres" id="11_fgf5l"]
+[ext_resource type="Resource" uid="uid://c2ltopll6tf4u" path="res://Resources/Characters/Luigi.tres" id="11_powso"]
+
+[sub_resource type="Animation" id="Animation_5o01g"]
+resource_name = "Normal"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 4.5, 8, 8.23333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(320, 0), Vector2(320, 0), Vector2(320, -48), Vector2(320, -48), Vector2(320, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(8.23333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end"
+}]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_gytys")
+}],
+"times": PackedFloat32Array(4)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="Animation" id="Animation_tqgm1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_duhki"]
+resource_name = "Wait"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7, 7.5, 11, 11.2333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(320, 0), Vector2(320, 0), Vector2(320, -48), Vector2(320, -48), Vector2(320, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_gytys")
+}],
+"times": PackedFloat32Array(7)
+}
+tracks/1/use_blend = true
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(11.2333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfo8y"]
+_data = {
+"Normal": SubResource("Animation_5o01g"),
+"RESET": SubResource("Animation_tqgm1"),
+"Wait": SubResource("Animation_duhki")
+}
+
+[sub_resource type="Animation" id="Animation_0fcem"]
+resource_name = "NoYoshi"
+length = 20.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 3, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Walk", "Idle", "LookUp", "Idle", "Walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:riding_yoshi")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2, 5, 8),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(104, 32), Vector2(288, 32), Vector2(288, 32), Vector2(520, 32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c6sq6"]
+resource_name = "NoYoshiWait"
+length = 20.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1, 6, 6.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Walk", "Idle", "LookUp", "Idle", "Walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:riding_yoshi")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.1, 8, 11),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(104, 32), Vector2(288, 32), Vector2(288, 32), Vector2(520, 32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jid4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:riding_yoshi")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(104, 32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:yoshi_animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Move"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Yoshi:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_pb8q2"]
+resource_name = "Yoshi"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation_speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 3, 3.46667, 4.06667, 5, 6, 6.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Walk", "Idle", "Spin", "Idle", "Walk", "Idle", "LookUp", "Idle", "Walk"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:riding_yoshi")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.53333, 2, 3, 3.23333, 3.46667, 3.56667, 4.06667, 5, 8, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1e+06, 1, 1, 1e-05, 1e-05, 1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(104, 32), Vector2(176, 32), Vector2(224, 32), Vector2(256, 32), Vector2(256, 16), Vector2(240, 8), Vector2(232, 32), Vector2(232, 32), Vector2(230.305, 32), Vector2(288, 32), Vector2(288, 32), Vector2(520, 32)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:yoshi_animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["Move", "Idle"]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Yoshi:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j7l34"]
+_data = {
+"NoYoshi": SubResource("Animation_0fcem"),
+"NoYoshiWait": SubResource("Animation_c6sq6"),
+"RESET": SubResource("Animation_jid4t"),
+"Yoshi": SubResource("Animation_pb8q2")
+}
+
+[node name="CastleEntrance" type="Node"]
+script = ExtResource("1_lu66g")
+level_music = ExtResource("2_3bnou")
+
+[node name="TileMap" parent="." instance=ExtResource("4_8med3")]
+position = Vector2(112, 48)
+layer_0/tile_data = PackedInt32Array(-65536, 262157, 2, -65535, 262157, 2, -65534, 262157, 2, -65533, 262157, 2, -65532, 262157, 2, -65531, 262157, 2, -65530, 262157, 2, -65529, 262157, 2, -65528, 262157, 2, -65527, 262157, 2, -65526, 262157, 2, -65525, 262157, 2, -65524, 262157, 2, -65523, 262157, 2, -65522, 262157, 2, -65521, 262157, 2, -14, 262157, 2, -13, 262157, 2, -12, 262157, 2, -11, 262157, 2, -10, 262157, 2, -9, 262157, 2, -8, 262157, 2, -7, 262157, 2, -6, 262157, 2, -5, 262157, 2, -4, 262157, 2, -3, 262157, 2, -2, 262157, 2, -1, 262157, 2, -65550, 1966089, 4, -131085, 2031625, 3, -65549, 2031625, 4, -262156, 2097161, 1, -196620, 2097161, 2, -131084, 2097161, 3, -65548, 2097161, 4, -327691, 2162697, 0, -262155, 2162697, 1, -196619, 2162697, 2, -131083, 2162697, 3, -65547, 2162697, 4, -327690, 2228233, 0, -262154, 2228233, 1, -196618, 2228233, 2, -131082, 2228233, 3, -65546, 2228233, 4, -327689, 2293769, 0, -262153, 2293769, 1, -196617, 2293769, 2, -131081, 2293769, 3, -65545, 2293769, 4, -262152, 2359305, 1, -196616, 2359305, 2, -131080, 2359305, 3, -65544, 2359305, 4, -262151, 2424841, 1, -196615, 2424841, 2, -131079, 2424841, 3, -65543, 2424841, 4, -262150, 2490377, 1, -196614, 2490377, 2, -131078, 2490377, 3, -65542, 2490377, 4, -196613, 2555913, 2, -131077, 2555913, 3, -65541, 2555913, 4, -131076, 2621449, 3, -65540, 2621449, 4)
+enable_autumn = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, -88)
+
+[node name="LevelBG" parent="." instance=ExtResource("5_6kv3u")]
+
+[node name="Arch" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(304, -8)
+texture = ExtResource("6_r7gjo")
+hframes = 2
+
+[node name="ColorRect" type="ColorRect" parent="Arch"]
+show_behind_parent = true
+z_index = -5
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Arch2" type="Sprite2D" parent="Arch"]
+z_index = 8
+position = Vector2(32, 0)
+texture = ExtResource("6_r7gjo")
+hframes = 2
+frame = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -1
+tile_map_data = PackedByteArray("AAAMAP3/CQAOAAAAAAAMAP7/CQAOAAEAAAAMAP//CQAOAAIAAAAMAAAACQAOAAMAAAAMAAEACQAOAAQAAAANAP7/CQAPAAEAAAANAP//CQAPAAIAAAANAAAACQAPAAMAAAANAAEACQAPAAQAAAAOAPH/DQAAAAAAAAAOAPL/DQAAAAEAAAAOAPP/DQAAAAIAAAAOAPT/DQAAAAAAAAAOAPX/DQAAAAIAAAAOAPb/DQAAAAAAAAAOAPf/DQAAAAEAAAAOAPj/DQAAAAIAAAAOAP//CQAQAAIAAAAOAAAACQAQAAMAAAAOAAEACQAQAAQAAAAPAPH/DQABAAAAAAAPAPL/DQABAAEAAAAPAPP/DQABAAIAAAAPAPT/DQABAAAAAAAPAPX/DQABAAIAAAAPAPb/DQABAAAAAAAPAPf/DQABAAEAAAAPAPj/DQABAAIAAAAQAPH/DQACAAAAAAAQAPL/DQACAAEAAAAQAPP/DQACAAIAAAAQAPT/DQACAAAAAAAQAPX/DQACAAIAAAAQAPb/DQABAAAAAAAQAPf/DQABAAEAAAAQAPj/DQACAAIAAAARAPH/DQAAAAAAAAARAPL/DQAAAAEAAAARAPP/DQAAAAIAAAARAPT/DQAAAAAAAAARAPX/DQAAAAIAAAARAPb/DQABAAAAAAARAPf/DQABAAIAAAASAPH/DQABAAAAAAASAPL/DQABAAEAAAASAPP/DQACAAIAAAASAPT/DQABAAAAAAASAPX/DQABAAIAAAASAPb/DQACAAAAAAASAPf/DQACAAIAAAATAPH/DQABAAAAAAATAPL/DQABAAIAAAATAPP/DQAAAAAAAAATAPT/DQABAAEAAAATAPX/DQACAAIAAAATAPb/DQAAAAAAAAATAPf/DQAAAAIAAAAUAPH/DQABAAAAAAAUAPL/DQABAAIAAAAUAPP/DQACAAAAAAAUAPT/DQACAAIAAAAUAPX/DQAAAAAAAAAUAPb/DQABAAEAAAAUAPf/DQABAAIAAAAVAPH/DQABAAAAAAAVAPL/DQABAAIAAAAVAPP/DQAAAAAAAAAVAPT/DQAAAAIAAAAVAPX/DQABAAAAAAAVAPb/DQABAAEAAAAVAPf/DQABAAIAAAAWAPH/DQABAAAAAAAWAPL/DQABAAIAAAAWAPP/DQABAAAAAAAWAPT/DQABAAIAAAAWAPX/DQACAAAAAAAWAPb/DQACAAEAAAAWAPf/DQACAAIAAAAOAPn/DQAAAAAAAAAOAPr/DQAAAAIAAAAPAPn/DQACAAAAAAAPAPr/DQACAAIAAAAPAPv/DQAAAAAAAAAPAPz/DQAAAAEAAAAPAP3/DQAAAAEAAAAPAP7/DQAAAAIAAAAPAP//DQAAAAAAAAAPAAAADQAAAAEAAAAPAAEADQAAAAIAAAAQAPn/DQAAAAAAAAAQAPr/DQAAAAIAAAAQAPv/DQABAAAAAAAQAPz/DQABAAEAAAAQAP3/DQABAAEAAAAQAP7/DQABAAIAAAAQAP//DQABAAAAAAAQAAAADQABAAEAAAAQAAEADQABAAIAAAARAPj/DQAAAAAAAAARAPn/DQABAAEAAAARAPr/DQACAAIAAAARAPv/DQACAAAAAAARAPz/DQACAAEAAAARAP3/DQACAAEAAAARAP7/DQACAAIAAAARAP//DQACAAAAAAARAAAADQACAAEAAAARAAEADQACAAIAAAASAPj/DQABAAAAAAASAPn/DQABAAIAAAASAPr/DQAAAAAAAAASAPv/DQAAAAEAAAASAPz/DQAAAAIAAAATAPj/DQABAAAAAAATAPn/DQABAAIAAAATAPr/DQABAAAAAAATAPv/DQABAAEAAAATAPz/DQABAAIAAAAUAPj/DQACAAAAAAAUAPn/DQACAAIAAAAUAPr/DQABAAAAAAAUAPv/DQABAAEAAAAUAPz/DQABAAIAAAAVAPj/DQAAAAAAAAAVAPn/DQAAAAIAAAAVAPr/DQABAAAAAAAVAPv/DQABAAEAAAAVAPz/DQABAAIAAAAWAPj/DQABAAAAAAAWAPn/DQABAAIAAAAWAPr/DQABAAAAAAAWAPv/DQABAAEAAAAWAPz/DQABAAIAAAAXAPr/DQABAAAAAAAXAPv/DQABAAEAAAAXAPz/DQABAAIAAAAYAPr/DQABAAAAAAAYAPv/DQABAAEAAAAYAPz/DQABAAIAAAAHAAEACQAJAAQAAAAIAAAACQAKAAMAAAAIAAEACQAKAAQAAAAJAP7/CQALAAEAAAAJAP//CQALAAIAAAAJAAAACQALAAMAAAAJAAEACQALAAQAAAAKAP3/CQAMAAAAAAAKAP7/CQAMAAEAAAAKAP//CQAMAAIAAAAKAAAACQAMAAMAAAAKAAEACQAMAAQAAAALAP3/CQANAAAAAAALAP7/CQANAAEAAAALAP//CQANAAIAAAALAAAACQANAAMAAAALAAEACQANAAQAAAA=")
+tile_set = ExtResource("6_g0xkp")
+collision_enabled = false
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+z_index = 10
+tile_map_data = PackedByteArray("AAAWAP3/DQAAAAAAAAAWAP7/DQAAAAIAAAAWAP//DQAAAAAAAAAWAAAADQAAAAEAAAAWAAEADQAAAAIAAAAXAP3/DQABAAAAAAAXAP7/DQABAAIAAAAXAP//DQABAAAAAAAXAAAADQABAAEAAAAXAAEADQABAAIAAAA=")
+tile_set = ExtResource("6_g0xkp")
+collision_enabled = false
+
+[node name="Door" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(320, 0)
+texture = ExtResource("8_aga60")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+libraries = {
+"": SubResource("AnimationLibrary_mfo8y")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Door"]
+
+[node name="P1" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Sprite" parent="P1" instance=ExtResource("7_8wkqt")]
+position = Vector2(104, 32)
+power_state = ExtResource("10_cen2a")
+animating = true
+
+[node name="Animation" type="AnimationPlayer" parent="P1/Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_j7l34")
+}
+
+[node name="Yoshi" parent="P1" instance=ExtResource("10_rmqes")]
+visible = false
+top_level = true
+position = Vector2(256, 32)
+
+[node name="P2" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(-32, 0)
+
+[node name="Sprite" parent="P2" instance=ExtResource("7_8wkqt")]
+position = Vector2(104, 32)
+power_state = ExtResource("10_cen2a")
+character = ExtResource("11_powso")
+animating = true
+
+[node name="Animation" type="AnimationPlayer" parent="P2/Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_j7l34")
+}
+
+[node name="Yoshi" parent="P2" instance=ExtResource("10_rmqes")]
+visible = false
+top_level = true
+position = Vector2(224, 32)
+
+[node name="P3" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(-64, 0)
+
+[node name="Sprite" parent="P3" instance=ExtResource("7_8wkqt")]
+position = Vector2(104, 32)
+power_state = ExtResource("10_cen2a")
+character = ExtResource("11_fgf5l")
+animating = true
+
+[node name="Animation" type="AnimationPlayer" parent="P3/Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_j7l34")
+}
+
+[node name="Yoshi" parent="P3" instance=ExtResource("10_rmqes")]
+visible = false
+top_level = true
+position = Vector2(192, 32)
+
+[node name="P4" type="Node2D" parent="."]
+z_index = 3
+position = Vector2(-96, 0)
+
+[node name="Sprite" parent="P4" instance=ExtResource("7_8wkqt")]
+position = Vector2(104, 32)
+power_state = ExtResource("10_cen2a")
+animating = true
+
+[node name="Animation" type="AnimationPlayer" parent="P4/Sprite"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_j7l34")
+}
+
+[node name="Yoshi" parent="P4" instance=ExtResource("10_rmqes")]
+visible = false
+top_level = true
+position = Vector2(160, 32)

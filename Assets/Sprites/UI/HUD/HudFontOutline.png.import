@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://battfdcbkb2by"
+path="res://.godot/imported/HudFontOutline.png-e003173d26eb2e194142bfaebca27bfa.fontdata"
+
+[deps]
+
+source_file="res://Assets/Sprites/UI/HUD/HudFontOutline.png"
+dest_files=["res://.godot/imported/HudFontOutline.png-e003173d26eb2e194142bfaebca27bfa.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("65-90", "46", "44", "45", "33", "61", "58", "39", "34", "40-41", "42", "1", "2", "48-57", "32")
+kerning_pairs=PackedStringArray()
+columns=13
+rows=4
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=0

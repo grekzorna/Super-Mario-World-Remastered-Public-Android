@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dthnop5t133xo"]
+
+[ext_resource type="Texture2D" uid="uid://ie6ah8nl8v0m" path="res://Assets/Sprites/AchievementIcons/46596.png" id="1_br32b"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_776fe"]
+
+[resource]
+script = ExtResource("2_776fe")
+title = "Shoo! Shoo! Big Boo"
+description = "Find and defeat the hidden Big Boo in Donut Secret House"
+icon = ExtResource("1_br32b")

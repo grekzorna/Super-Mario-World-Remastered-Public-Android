@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://coo4uayocbkok"]
+
+[ext_resource type="Texture2D" uid="uid://cxhh1dd2d31en" path="res://Assets/Sprites/UI/Inventory.png" id="1_in5y5"]
+[ext_resource type="Texture2D" uid="uid://be4wllnqgb02f" path="res://Assets/Sprites/UI/DPadUp.png" id="2_2r8vy"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Preview" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 240.0
+offset_top = 136.0
+offset_right = 280.0
+offset_bottom = 176.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Icon" type="TextureRect" parent="Preview"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 392.0
+offset_top = 184.0
+offset_right = 424.0
+offset_bottom = 216.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_in5y5")
+
+[node name="ActionButton" type="TextureRect" parent="Preview/Icon"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("2_2r8vy")

@@ -1,0 +1,150 @@
+[gd_scene load_steps=18 format=3 uid="uid://dkpwciifoe0ay"]
+
+[ext_resource type="Script" uid="uid://bxbnqq6nrf0mv" path="res://Scripts/HeldObjects/GrabBlock.gd" id="1_vrmme"]
+[ext_resource type="Texture2D" uid="uid://ckaak177fmyh0" path="res://Assets/Sprites/Objects/GrabBlock.png" id="2_ag237"]
+[ext_resource type="PackedScene" uid="uid://xqivdp4tj0se" path="res://Instances/Particles/Player/skid.tscn" id="4_eg3ms"]
+[ext_resource type="Script" uid="uid://cib3wkgoiw57u" path="res://Scripts/Classes/water_bouyancy.gd" id="4_ncpqg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojtgf"]
+atlas = ExtResource("2_ag237")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rh5cq"]
+atlas = ExtResource("2_ag237")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh3lh"]
+atlas = ExtResource("2_ag237")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lncrg"]
+atlas = ExtResource("2_ag237")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ganpr"]
+atlas = ExtResource("2_ag237")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtl22"]
+atlas = ExtResource("2_ag237")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_163no"]
+atlas = ExtResource("2_ag237")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qscrt"]
+atlas = ExtResource("2_ag237")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw5ll"]
+atlas = ExtResource("2_ag237")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogx7u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojtgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rh5cq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh3lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lncrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ganpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtl22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_163no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qscrt")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw5ll")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lp7wk"]
+custom_solver_bias = 1.0
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgl7v"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2hhl1"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(-10, -0.5, 0)
+spread = 22.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[node name="GrabBlock" type="CharacterBody2D"]
+disable_mode = 1
+collision_layer = 21
+collision_mask = 4
+safe_margin = 0.001
+script = ExtResource("1_vrmme")
+press_pickup = true
+yoshi_can_eat = false
+can_destroy = true
+kickable = false
+player_can_stand = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_ogx7u")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.197644
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 7
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_lp7wk")
+debug_color = Color(0.976471, 0.6, 0, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+shape = SubResource("RectangleShape2D_wgl7v")
+
+[node name="Skid" parent="." instance=ExtResource("4_eg3ms")]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_2hhl1")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_ncpqg")
+hitbox = NodePath("../Hitbox")
+max_water_speed = 100
+metadata/_custom_type_script = ExtResource("4_ncpqg")
+
+[connection signal="picked_up" from="." to="." method="activate"]
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

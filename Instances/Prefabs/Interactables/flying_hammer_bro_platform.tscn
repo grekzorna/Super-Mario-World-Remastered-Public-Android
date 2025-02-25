@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlnvwswhqdeu8"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/flying_hammer_bro_platform.gd" id="1_4xpfj"]
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="1_pw1mr"]
+[ext_resource type="Texture2D" uid="uid://d2i07lhi7kx7s" path="res://Assets/Sprites/Objects/FlyingHammerBroPlatform.png" id="2_dwef0"]
+[ext_resource type="Texture2D" uid="uid://b8bkvj4w4ew5v" path="res://Assets/Sprites/Objects/WingSprite.png" id="3_87082"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5xfn"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llcou"]
+atlas = ExtResource("3_87082")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgmdb"]
+atlas = ExtResource("3_87082")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6ab2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llcou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgmdb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FlyingHammerBroPlatform" type="Node2D"]
+script = ExtResource("1_4xpfj")
+
+[node name="Block1" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(-8, 0)
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("1_pw1mr")
+visuals = NodePath("Sprite1")
+
+[node name="Sprite1" type="Sprite2D" parent="Block1"]
+texture = ExtResource("2_dwef0")
+
+[node name="Collision" type="CollisionShape2D" parent="Block1"]
+shape = SubResource("RectangleShape2D_d5xfn")
+
+[node name="Block2" type="AnimatableBody2D" parent="." node_paths=PackedStringArray("visuals")]
+position = Vector2(8, 0)
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("1_pw1mr")
+visuals = NodePath("Sprite2")
+
+[node name="Sprite2" type="Sprite2D" parent="Block2"]
+texture = ExtResource("2_dwef0")
+
+[node name="Collision" type="CollisionShape2D" parent="Block2"]
+shape = SubResource("RectangleShape2D_d5xfn")
+
+[node name="Wing1" type="AnimatedSprite2D" parent="."]
+position = Vector2(21, -9)
+sprite_frames = SubResource("SpriteFrames_m6ab2")
+autoplay = "default"
+
+[node name="Wing2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-21, -9)
+sprite_frames = SubResource("SpriteFrames_m6ab2")
+autoplay = "default"
+flip_h = true

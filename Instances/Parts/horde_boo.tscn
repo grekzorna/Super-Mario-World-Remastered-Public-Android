@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://ftexrivvmqr"]
+
+[ext_resource type="Script" uid="uid://cua107mmkisl4" path="res://Scripts/Classes/Enemies/horde_boo.gd" id="1_0neby"]
+[ext_resource type="Texture2D" uid="uid://vodvfu57o7av" path="res://Assets/Sprites/Enemys/Boos.png" id="2_cnpnd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88c3e"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6plg8"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jl2l"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svq4b"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40xs7"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he37k"]
+atlas = ExtResource("2_cnpnd")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkid1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88c3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6plg8")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jl2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svq4b")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40xs7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he37k")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spsge"]
+radius = 5.09902
+
+[node name="HordeBoo" type="CharacterBody2D"]
+script = ExtResource("1_0neby")
+gib_type = 2
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pkid1")
+animation = &"3"
+
+[node name="Hitbox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_spsge")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

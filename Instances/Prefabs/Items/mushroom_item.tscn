@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsi7hx88qsxq1"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/MushroomItem.gd" id="1_yx73k"]
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="2_aadsu"]
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="3_e3qad"]
+[ext_resource type="Script" path="res://Scripts/Classes/water_bouyancy.gd" id="4_0vdig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mu12l"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tf025"]
+size = Vector2(8, 8)
+
+[node name="MushroomItem" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+floor_max_angle = 1.39626
+floor_snap_length = 0.0
+safe_margin = 0.001
+script = ExtResource("1_yx73k")
+power = ExtResource("2_aadsu")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_e3qad")
+offset = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_mu12l")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_tf025")
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_0vdig")
+hitbox = NodePath("../Area2D")
+
+[connection signal="area_entered" from="Area2D" to="." method="hitbox_hit"]

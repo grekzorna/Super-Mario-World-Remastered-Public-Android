@@ -1,0 +1,330 @@
+[gd_scene load_steps=13 format=3 uid="uid://buq5u2vf04i17"]
+
+[ext_resource type="Script" uid="uid://esafg2l54ysn" path="res://Scripts/UI/player_amount_select.gd" id="1_ct47p"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="2_lpwfa"]
+[ext_resource type="FontFile" uid="uid://battfdcbkb2by" path="res://Assets/Sprites/UI/HUD/HudFontOutline.png" id="3_ptak1"]
+[ext_resource type="Texture2D" uid="uid://bke5cgm7ltx8c" path="res://Assets/Sprites/Characters/Mario/MenuIcon.png" id="4_cmwgq"]
+[ext_resource type="Texture2D" uid="uid://826igtj2bc3f" path="res://Assets/Sprites/Characters/Luigi/MenuIcon.png" id="5_x2sla"]
+[ext_resource type="Texture2D" uid="uid://bemqoyy421hlh" path="res://Assets/Sprites/Characters/Toad/MenuIcon.png" id="6_8j56d"]
+[ext_resource type="Texture2D" uid="uid://ddh7r0u8r7kkg" path="res://Assets/Sprites/Characters/Toadette/MenuIcon.png" id="7_wqj0q"]
+[ext_resource type="Texture2D" uid="uid://dy8e2jatiiike" path="res://Assets/Sprites/UI/ArrowDown.png" id="8_tx0an"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="9_gnmer"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bks8w"]
+texture = ExtResource("2_lpwfa")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="Shader" id="Shader_fpgpu"]
+code = "shader_type canvas_item;
+
+uniform vec4 new_colour: source_color;
+
+void fragment() {
+	vec4 current_colour = texture(TEXTURE, UV);
+	vec4 new_colour_copy = new_colour;
+	new_colour_copy.a = current_colour.a;
+	if (COLOR == vec4(1, 1, 1, new_colour_copy.a)){
+		COLOR = new_colour_copy;
+	}
+
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udtu0"]
+shader = SubResource("Shader_fpgpu")
+shader_parameter/new_colour = Color(0, 0, 0, 1)
+
+[node name="PlayerAmountSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ct47p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -168.0
+offset_top = -31.0
+offset_right = 168.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="1Player" type="Panel" parent="HBoxContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(81, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bks8w")
+
+[node name="Label" type="Label" parent="HBoxContainer/1Player"]
+auto_translate_mode = 1
+modulate = Color(0, 0.541176, 1, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.5
+offset_right = 20.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ptak1")
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/1Player"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="1" type="TextureRect" parent="HBoxContainer/1Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("4_cmwgq")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="2Player" type="Panel" parent="HBoxContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(81, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bks8w")
+
+[node name="Label" type="Label" parent="HBoxContainer/2Player"]
+auto_translate_mode = 1
+modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ptak1")
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/2Player"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="1" type="TextureRect" parent="HBoxContainer/2Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("4_cmwgq")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="2" type="TextureRect" parent="HBoxContainer/2Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_x2sla")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="3Player" type="Panel" parent="HBoxContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(81, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bks8w")
+
+[node name="Label" type="Label" parent="HBoxContainer/3Player"]
+auto_translate_mode = 1
+modulate = Color(0, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ptak1")
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/3Player"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="1" type="TextureRect" parent="HBoxContainer/3Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("4_cmwgq")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="2" type="TextureRect" parent="HBoxContainer/3Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_x2sla")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="3" type="TextureRect" parent="HBoxContainer/3Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_8j56d")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="4Player" type="Panel" parent="HBoxContainer"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(81, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bks8w")
+
+[node name="Label" type="Label" parent="HBoxContainer/4Player"]
+auto_translate_mode = 1
+modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_ptak1")
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/4Player"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 19
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="1" type="TextureRect" parent="HBoxContainer/4Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("4_cmwgq")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="2" type="TextureRect" parent="HBoxContainer/4Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_x2sla")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="3" type="TextureRect" parent="HBoxContainer/4Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_8j56d")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="4" type="TextureRect" parent="HBoxContainer/4Player/HBoxContainer"]
+auto_translate_mode = 1
+material = SubResource("ShaderMaterial_udtu0")
+layout_mode = 2
+size_flags_vertical = 9
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("7_wqj0q")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Pointer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 176.0
+offset_right = 120.0
+offset_bottom = 176.0
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="Pointer"]
+layout_mode = 2
+texture = ExtResource("8_tx0an")
+stretch_mode = 3
+flip_v = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("9_gnmer")
+text = "How Many Players?"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true

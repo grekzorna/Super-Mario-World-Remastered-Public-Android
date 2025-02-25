@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c1251lrkralpd"]
+
+[ext_resource type="Texture2D" uid="uid://0vx2qmwun0y7" path="res://Assets/Sprites/AchievementIcons/46603.png" id="1_mbutt"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_vquhf"]
+
+[resource]
+script = ExtResource("2_vquhf")
+title = "Wendy Chips Are Down"
+description = "Defeat Wendy O. Koopa of Castle #6"
+icon = ExtResource("1_mbutt")

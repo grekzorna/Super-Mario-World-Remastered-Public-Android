@@ -1,0 +1,183 @@
+[gd_scene load_steps=21 format=3 uid="uid://dq7q85qh3siof"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_g74r5"]
+[ext_resource type="AudioStream" uid="uid://d2mfwfapwilqw" path="res://Resources/MusicTracks/GhostHouse.tres" id="2_yxyf8"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="3_yhf3f"]
+[ext_resource type="Texture2D" uid="uid://hsj1u4o8tcy2" path="res://Assets/Sprites/Backgrounds/GhostHouse/BG6.png" id="5_kbywb"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="6_rb548"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="8_egeqv"]
+[ext_resource type="Texture2D" uid="uid://buhxn2cw3o82o" path="res://Assets/LevelGuides/Level 1EA.png" id="11_4rndk"]
+[ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="12_scdox"]
+[ext_resource type="PackedScene" uid="uid://d3ay6d00er3ko" path="res://Instances/Prefabs/Interactables/door.tscn" id="13_q3hnf"]
+[ext_resource type="PackedScene" uid="uid://dm7exbyvtd2fw" path="res://Instances/Prefabs/Blocks/spin_block.tscn" id="14_lq66s"]
+[ext_resource type="PackedScene" uid="uid://cr080mol026x8" path="res://Instances/Prefabs/HeldObjects/p_switch.tscn" id="15_s3dn3"]
+[ext_resource type="PackedScene" uid="uid://uad2ip1uxnmd" path="res://Instances/Prefabs/Enemies/gas_bubble.tscn" id="16_t6nv4"]
+[ext_resource type="PackedScene" uid="uid://xxv2d45bn53a" path="res://Instances/Prefabs/Items/pswitch_coin_secret.tscn" id="17_kbh7r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpi4x"]
+atlas = ExtResource("5_kbywb")
+region = Rect2(0, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc8xt"]
+atlas = ExtResource("5_kbywb")
+region = Rect2(512, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1k5k"]
+atlas = ExtResource("5_kbywb")
+region = Rect2(1024, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nleti"]
+atlas = ExtResource("5_kbywb")
+region = Rect2(1536, 0, 512, 432)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_figia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpi4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xc8xt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1k5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nleti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4smpy"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="VGHA" type="Node"]
+script = ExtResource("1_g74r5")
+level_music = ExtResource("2_yxyf8")
+camera_left_end_position = 2000
+
+[node name="LevelBG" parent="." instance=ExtResource("3_yhf3f")]
+main_sprite_frames = SubResource("SpriteFrames_figia")
+sky_colour = Color(0.0941176, 0.188235, 0.282353, 1)
+
+[node name="Player" parent="." instance=ExtResource("6_rb548")]
+material = SubResource("ShaderMaterial_4smpy")
+
+[node name="TileMap" parent="." instance=ExtResource("8_egeqv")]
+layer_0/tile_data = PackedInt32Array(65533, 11, 0, 65534, 11, 0, 65535, 11, 0, 0, 11, 0, 1, 11, 0, 2, 11, 0, 3, 11, 0, 4, 11, 0, 5, 11, 0, 6, 11, 0, 7, 11, 0, 8, 11, 0, 9, 11, 0, 10, 11, 0, 11, 11, 0, 12, 11, 0, 13, 11, 0, 14, 11, 0, 15, 11, 0, 16, 11, 0, 17, 11, 0, 18, 11, 0, 19, 11, 0, 20, 11, 0, 21, 11, 0, 22, 11, 0, 23, 11, 0, 24, 11, 0, 25, 11, 0, 26, 11, 0, 27, 11, 0, 28, 11, 0, 29, 11, 0, 30, 11, 0, 31, 11, 0, 32, 11, 0, 33, 11, 0, 34, 11, 0, 35, 11, 0, 36, 11, 0, 37, 11, 0, 38, 11, 0, 39, 11, 0, 40, 11, 0, 41, 11, 0, 42, 131083, 0, 65532, 11, 0, -262100, 11, 0, -262099, 65547, 0, -262091, 65547, 0, -262090, 131083, 0, 54, 11, 0, 55, 65547, 0, 59, 65547, 0, 60, 131083, 0, 65, 11, 0, 66, 65547, 0, 67, 131083, 0, 72, 11, 0, 73, 65547, 0, 74, 131083, 0, 79, 11, 0, 80, 65547, 0, 81, 131083, 0, -130987, 11, 0, -130986, 65547, 0, -130978, 65547, 0, -130977, 131083, 0, 101, 11, 0, 102, 65547, 0, 122, 65547, 0, 123, 131083, 0, 103, 65547, 0, 104, 65547, 0, 105, 65547, 0, 106, 65547, 0, 107, 65547, 0, 108, 65547, 0, 109, 65547, 0, 110, 65547, 0, 111, 65547, 0, 112, 65547, 0, 113, 65547, 0, 114, 65547, 0, 115, 65547, 0, 116, 65547, 0, 117, 65547, 0, 118, 65547, 0, 119, 65547, 0, 120, 65547, 0, 121, 65547, 0, -130985, 65547, 0, -130984, 65547, 0, -130983, 65547, 0, -130982, 65547, 0, -130981, 65547, 0, -130980, 65547, 0, -130979, 65547, 0, 56, 65547, 0, 57, 65547, 0, 58, 65547, 0, -262098, 65547, 0, -262097, 65547, 0, -262096, 65547, 0, -262095, 65547, 0, -262094, 65547, 0, -262093, 65547, 0, -262092, 65547, 0, 131069, 327691, 0, 196605, 327691, 1, 65537, 327691, 0, 131073, 327691, 1, 65541, 327691, 0, 131077, 327691, 1, 65545, 327691, 0, 131081, 327691, 1, 65549, 327691, 0, 131085, 327691, 1, 65553, 327691, 0, 131089, 327691, 1, 65557, 327691, 0, 131093, 327691, 1, 65561, 327691, 0, 131097, 327691, 1, 65565, 327691, 0, 131101, 327691, 1, 65569, 327691, 0, 131105, 327691, 1, 65573, 327691, 0, 131109, 327691, 1, 65577, 327691, 0, 131113, 327691, 1, -196563, 327691, 0, -131027, 327691, 1, -196559, 327691, 0, -131023, 327691, 1, -196555, 327691, 0, -131019, 327691, 1, 65591, 327691, 0, 131127, 327691, 1, 65595, 327691, 0, 131131, 327691, 1, 65602, 327691, 0, 131138, 327691, 1, 65609, 327691, 0, 131145, 327691, 1, 65616, 327691, 0, 131152, 327691, 1, -65450, 327691, 0, 86, 327691, 1, -65446, 327691, 0, 90, 327691, 1, -65442, 327691, 0, 94, 327691, 1, 65638, 327691, 0, 131174, 327691, 1, 65642, 327691, 0, 131178, 327691, 1, 65646, 327691, 0, 131182, 327691, 1, 65650, 327691, 0, 131186, 327691, 1, 65654, 327691, 0, 131190, 327691, 1, 65658, 327691, 0, 131194, 327691, 1, 65622, 327691, 1, 131158, 327691, 1, 65626, 327691, 1, 131162, 327691, 1, 65630, 327691, 1, 131166, 327691, 1, -65483, 327691, 1, 53, 327691, 1, 65589, 327691, 1, 131125, 327691, 1, -65487, 327691, 1, 49, 327691, 1, 65585, 327691, 1, 131121, 327691, 1, -65491, 327691, 1, 45, 327691, 1, 65581, 327691, 1, 131117, 327691, 1, -1507333, 11, 1, -1507332, 65547, 1, -1441797, 11, 1, -1441796, 65547, 1, -1376261, 11, 1, -1376260, 65547, 1, -1310725, 11, 1, -1310724, 65547, 1, -1245189, 11, 1, -1245188, 65547, 1, -1179653, 11, 1, -1179652, 65547, 1, -1114117, 11, 1, -1114116, 65547, 1, -1048581, 11, 1, -1048580, 65547, 1, -983045, 11, 1, -983044, 65547, 1, -917509, 11, 1, -917508, 65547, 1, -851973, 11, 1, -851972, 65547, 1, -786437, 11, 1, -786436, 65547, 1, -720901, 11, 1, -720900, 65547, 1, -655365, 11, 1, -655364, 65547, 1, -589829, 11, 1, -589828, 65547, 1, -524293, 11, 1, -524292, 65547, 1, -458757, 11, 1, -458756, 65547, 1, -393221, 11, 1, -393220, 65547, 1, -327685, 11, 1, -327684, 65547, 1, -262149, 11, 1, -262148, 65547, 1, -196613, 11, 1, -196612, 65547, 1, -131077, 11, 1, -131076, 65547, 1, -65541, 11, 1, -65540, 65547, 1, -5, 11, 1, -4, 65547, 1, -1572741, 11, 1, -1572740, 65547, 1, -1507205, 11, 1, -1507204, 65547, 1, -1441669, 11, 1, -1441668, 65547, 1, -1376133, 11, 1, -1376132, 65547, 1, -1310597, 11, 1, -1310596, 65547, 1, -1245061, 11, 1, -1245060, 65547, 1, -1179525, 11, 1, -1179524, 65547, 1, -1113989, 11, 1, -1113988, 65547, 1, -1048453, 11, 1, -1048452, 65547, 1, -982917, 11, 1, -982916, 65547, 1, -917381, 11, 1, -917380, 65547, 1, -851845, 11, 1, -851844, 65547, 1, -786309, 11, 1, -786308, 65547, 1, -720773, 11, 1, -720772, 65547, 1, -655237, 11, 1, -655236, 65547, 1, -589701, 11, 1, -589700, 65547, 1, -524165, 11, 1, -524164, 65547, 1, -458629, 11, 1, -458628, 65547, 1, -393093, 11, 1, -393092, 65547, 1, -327557, 11, 1, -327556, 65547, 1, -262021, 11, 1, -262020, 65547, 1, -196485, 11, 1, -196484, 65547, 1, -130949, 11, 1, -130948, 65547, 1, -65413, 11, 1, -65412, 65547, 1, -262113, 15, 196608, -262112, 15, 196608, -262111, 15, 196608, -262107, 15, 196608, -262106, 15, 196608, -262105, 15, 196608, -262083, 15, 196608, -262082, 15, 196608, -262081, 15, 196608, -262076, 15, 196608, -262075, 15, 196608, -262074, 15, 196608, -130953, 15, 196608, -65417, 15, 196608, -196488, 15, 196608, -130951, 15, 196608, -65415, 15, 196608)
+
+[node name="LevelGuide" type="Sprite2D" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+z_index = -10
+position = Vector2(-64, -384)
+texture = ExtResource("11_4rndk")
+centered = false
+
+[node name="DragonCoin" parent="." instance=ExtResource("12_scdox")]
+position = Vector2(1816, -48)
+
+[node name="Door" parent="." instance=ExtResource("13_q3hnf")]
+position = Vector2(1688, 0)
+level_scene = "res://Instances/Levels/VanillaDome/vgh.tscn"
+
+[node name="Door2" parent="." instance=ExtResource("13_q3hnf")]
+position = Vector2(1928, 0)
+level_scene = "res://Instances/Levels/ghost_house_exit.tscn"
+p_switch = true
+
+[node name="SpinBlock" parent="." instance=ExtResource("14_lq66s")]
+position = Vector2(1432, -88)
+
+[node name="SpinBlock2" parent="." instance=ExtResource("14_lq66s")]
+position = Vector2(1464, -88)
+
+[node name="SpinBlock3" parent="." instance=ExtResource("14_lq66s")]
+position = Vector2(1448, -88)
+item = ExtResource("15_s3dn3")
+
+[node name="GasBubble" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(280, -80)
+
+[node name="GasBubble2" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(504, -96)
+
+[node name="GasBubble3" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(760, -96)
+
+[node name="GasBubble4" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(1080, -96)
+
+[node name="GasBubble5" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(1272, -144)
+
+[node name="GasBubble6" parent="." instance=ExtResource("16_t6nv4")]
+position = Vector2(1528, -96)
+
+[node name="PswitchCoinSecret" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1496, -72)
+
+[node name="PswitchCoinSecret2" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1512, -72)
+
+[node name="PswitchCoinSecret3" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1528, -72)
+
+[node name="PswitchCoinSecret4" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1544, -72)
+
+[node name="PswitchCoinSecret5" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1560, -72)
+
+[node name="PswitchCoinSecret6" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1560, -88)
+
+[node name="PswitchCoinSecret7" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1544, -104)
+
+[node name="PswitchCoinSecret8" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1576, -72)
+
+[node name="PswitchCoinSecret9" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1560, -56)
+
+[node name="PswitchCoinSecret10" parent="." instance=ExtResource("17_kbh7r")]
+position = Vector2(1544, -40)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cscc1tweile6b"]
+
+[ext_resource type="Script" path="res://Scripts/UI/hole_renderer.gd" id="1_mqbjo"]
+
+[node name="HoleRenderer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mqbjo")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 280.0
+offset_bottom = 104.0
+
+[node name="Control2" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 136.0
+offset_right = 392.0
+offset_bottom = 232.0

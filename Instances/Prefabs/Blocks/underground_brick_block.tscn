@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://chr5ur65vyoce"]
+
+[ext_resource type="PackedScene" uid="uid://dsm1iixyywln" path="res://Instances/Prefabs/Blocks/brick_block.tscn" id="1_k0vcu"]
+[ext_resource type="Texture2D" uid="uid://vbbadupn4hrq" path="res://Assets/Sprites/Objects/UndergroundBrickBlock.png" id="2_hdsu5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc72n"]
+atlas = ExtResource("2_hdsu5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ogsvf"]
+animations = [{
+"frames": [{
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_xc72n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="BrickBlock" instance=ExtResource("1_k0vcu")]
+
+[node name="Sprite" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_ogsvf")
+frame_progress = 0.146342

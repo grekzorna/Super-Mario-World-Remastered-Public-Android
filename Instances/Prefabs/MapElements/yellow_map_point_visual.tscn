@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5h6w3lj8af04"]
+
+[ext_resource type="Texture2D" uid="uid://bexfcyqrm0q7e" path="res://Assets/Sprites/Map/MapSprites/StandardMapPoints.png" id="1_igla3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l3u2"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpje5"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbpku"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvajh"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cxu3"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_674ho"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svpui"]
+atlas = ExtResource("1_igla3")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ky1je"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l3u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lpje5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbpku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvajh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cxu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_674ho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svpui")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="YellowMapPointVisual" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ky1je")
+autoplay = "default"
+frame_progress = 0.088422
+speed_scale = 2.0

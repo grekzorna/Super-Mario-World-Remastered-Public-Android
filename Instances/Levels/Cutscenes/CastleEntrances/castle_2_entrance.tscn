@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://clu6cjvcaqr3r"]
+
+[ext_resource type="PackedScene" uid="uid://donk1t1qanm0r" path="res://Instances/Levels/Cutscenes/CastleEntrances/castle_entrance.tscn" id="1_huwhf"]
+[ext_resource type="Texture2D" uid="uid://c8nork0385k8f" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/Mountains1.png" id="2_l2v4d"]
+
+[node name="CastleEntrance" instance=ExtResource("1_huwhf")]
+
+[node name="LevelBG" parent="." index="2"]
+main_texture = ExtResource("2_l2v4d")
+sky_colour = Color(0.596078, 0.878431, 0.878431, 1)

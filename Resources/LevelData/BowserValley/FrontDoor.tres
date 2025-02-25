@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://bvmyr6ic1e116"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_3olyy"]
+[ext_resource type="Texture2D" uid="uid://bs1xp0aw7jr4e" path="res://Assets/Sprites/UI/TextImages/Bowser.png" id="2_syu2j"]
+
+[resource]
+script = ExtResource("1_3olyy")
+level_title = "Front Door"
+level_scene_path = "res://Instances/Levels/BowserValley/FinalCastle/front_door.tscn"
+start_cutscene_path = "res://Instances/Levels/Cutscenes/CastleEntrances/bowser_castle_entrance.tscn"
+has_secret_exit = false
+yoshi_allowed = false
+has_dragon_coins = false
+title_image = ExtResource("2_syu2j")
+dragon_coin_amount = 5
+counts_as_exit = false
+has_peach_coin = false
+map_point_warp = "FrontDoor"
+map_scene_warp = "res://Instances/Levels/Maps/BowserValley.tscn"

@@ -1,0 +1,219 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi6g06uvigns2"]
+
+[ext_resource type="Script" uid="uid://6oekgnpvrxo6" path="res://Scripts/UI/player_select.gd" id="1_fskb2"]
+[ext_resource type="Texture2D" uid="uid://5pk0boo12kaf" path="res://Assets/Sprites/UI/PlayBG.png" id="1_lxqto"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_uh84k"]
+[ext_resource type="Texture2D" uid="uid://c0yyn0rmenetc" path="res://Assets/Sprites/UI/CornerArrow.png" id="6_txqgy"]
+
+[sub_resource type="Shader" id="Shader_i76tw"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4pxw"]
+shader = SubResource("Shader_i76tw")
+shader_parameter/motion = Vector2(-4, -4)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3k4v3"]
+radius = 3.0
+
+[node name="CharacterSelect" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fskb2")
+metadata/_edit_use_anchors_ = true
+
+[node name="BG" type="TextureRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_t4pxw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_lxqto")
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -83.0
+offset_right = 83.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "Select your Character"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+
+[node name="Confirmation" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -11.0
+offset_right = 88.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "press Start to confirm"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 140.0
+offset_bottom = 54.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer"]
+layout_mode = 2
+columns = 11
+
+[node name="P1Cursor" type="Node2D" parent="."]
+visible = false
+modulate = Color(0.423529, 0.733333, 1, 1)
+top_level = true
+z_index = 4096
+position = Vector2(208, 184)
+
+[node name="Sprite" type="Sprite2D" parent="P1Cursor"]
+texture = ExtResource("6_txqgy")
+
+[node name="Text" type="Label" parent="P1Cursor"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 7.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "1"
+
+[node name="Area" type="Area2D" parent="P1Cursor"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P1Cursor/Area"]
+position = Vector2(-2, -2)
+shape = SubResource("CircleShape2D_3k4v3")
+
+[node name="P2Cursor" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+top_level = true
+z_index = 4096
+position = Vector2(224, 184)
+
+[node name="Sprite" type="Sprite2D" parent="P2Cursor"]
+texture = ExtResource("6_txqgy")
+flip_h = true
+
+[node name="Text" type="Label" parent="P2Cursor"]
+offset_left = -7.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 6.0
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "2"
+
+[node name="Area" type="Area2D" parent="P2Cursor"]
+position = Vector2(4, 0)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P2Cursor/Area"]
+position = Vector2(-2, -2)
+shape = SubResource("CircleShape2D_3k4v3")
+
+[node name="P3Cursor" type="Node2D" parent="."]
+visible = false
+modulate = Color(0, 1, 0, 1)
+top_level = true
+z_index = 4096
+position = Vector2(240, 184)
+
+[node name="Sprite" type="Sprite2D" parent="P3Cursor"]
+texture = ExtResource("6_txqgy")
+flip_v = true
+
+[node name="Text" type="Label" parent="P3Cursor"]
+offset_left = -1.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 1.0
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "3"
+
+[node name="Area" type="Area2D" parent="P3Cursor"]
+position = Vector2(0, 4)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P3Cursor/Area"]
+position = Vector2(-2, -2)
+shape = SubResource("CircleShape2D_3k4v3")
+
+[node name="P4Cursor" type="Node2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+top_level = true
+z_index = 4096
+position = Vector2(256, 184)
+
+[node name="Sprite" type="Sprite2D" parent="P4Cursor"]
+texture = ExtResource("6_txqgy")
+flip_h = true
+flip_v = true
+
+[node name="Text" type="Label" parent="P4Cursor"]
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 1.0
+offset_bottom = 1.0
+theme_override_fonts/font = ExtResource("2_uh84k")
+text = "4"
+
+[node name="Area" type="Area2D" parent="P4Cursor"]
+position = Vector2(4, 4)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="P4Cursor/Area"]
+position = Vector2(-2, -2)
+shape = SubResource("CircleShape2D_3k4v3")
+
+[connection signal="area_entered" from="P1Cursor/Area" to="." method="_on_p_1_area_area_entered"]
+[connection signal="area_exited" from="P1Cursor/Area" to="." method="_on_p_1_area_area_exited"]
+[connection signal="area_entered" from="P2Cursor/Area" to="." method="_on_p_2_area_area_entered"]
+[connection signal="area_entered" from="P3Cursor/Area" to="." method="_on_p_3_area_area_entered"]
+[connection signal="area_entered" from="P4Cursor/Area" to="." method="_on_p_4_area_area_entered"]

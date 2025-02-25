@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cytkmisj6omg6"]
+
+[ext_resource type="Texture2D" uid="uid://cvklhgnd4neue" path="res://Assets/Sprites/AchievementIcons/46599.png" id="1_ngx2s"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_657o6"]
+
+[resource]
+script = ExtResource("2_657o6")
+title = "Morton Enough"
+description = "Defeat Morton Koopa Jr. of Castle #2"
+icon = ExtResource("1_ngx2s")

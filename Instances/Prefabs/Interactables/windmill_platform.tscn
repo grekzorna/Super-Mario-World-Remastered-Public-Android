@@ -1,0 +1,224 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk374hknivypi"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/WindmillPlatform.gd" id="1_f7h46"]
+[ext_resource type="Texture2D" uid="uid://c7ui24bfgxrpp" path="res://Assets/Sprites/Objects/Platforms/WindmillPlatform.png" id="2_wd8cg"]
+[ext_resource type="Texture2D" uid="uid://cdnw3ie3b2qdw" path="res://Assets/Sprites/Objects/Platforms/WindmillBearing.png" id="3_4pcbc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfvix"]
+size = Vector2(48, 16)
+
+[sub_resource type="Animation" id="Animation_kfxdy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spin:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y4hbt"]
+resource_name = "Spin"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spin:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_unrsp"]
+_data = {
+&"Spin": SubResource("Animation_y4hbt"),
+&"RESET": SubResource("Animation_kfxdy")
+}
+
+[node name="WindmillPlatform" type="Node2D"]
+script = ExtResource("1_f7h46")
+
+[node name="Platform1" type="AnimatableBody2D" parent="."]
+position = Vector2(0, -48)
+collision_layer = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RectangleShape2D_mfvix")
+one_way_collision = true
+
+[node name="Sprite" type="Sprite2D" parent="Platform1"]
+texture = ExtResource("2_wd8cg")
+
+[node name="Platform2" type="AnimatableBody2D" parent="."]
+position = Vector2(41.5691, 24.0002)
+collision_layer = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("RectangleShape2D_mfvix")
+one_way_collision = true
+
+[node name="Sprite" type="Sprite2D" parent="Platform2"]
+texture = ExtResource("2_wd8cg")
+
+[node name="Platform3" type="AnimatableBody2D" parent="."]
+position = Vector2(-41.5692, 24)
+collision_layer = 5
+
+[node name="Collision" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("RectangleShape2D_mfvix")
+one_way_collision = true
+
+[node name="Sprite" type="Sprite2D" parent="Platform3"]
+texture = ExtResource("2_wd8cg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_unrsp")
+}
+autoplay = "Spin"
+
+[node name="Spin" type="Node2D" parent="."]
+
+[node name="Platform1" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../Platform1")
+update_rotation = false
+update_scale = false
+
+[node name="Node2D" type="Node2D" parent="Spin"]
+rotation = 2.0944
+
+[node name="Platform2" type="RemoteTransform2D" parent="Spin/Node2D"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../../Platform2")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition1" type="RemoteTransform2D" parent="Spin/Node2D"]
+position = Vector2(0, -16)
+remote_path = NodePath("../../../Chains/PlatformB/1")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition2" type="RemoteTransform2D" parent="Spin/Node2D"]
+position = Vector2(0, -32)
+remote_path = NodePath("../../../Chains/PlatformB/2")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition3" type="RemoteTransform2D" parent="Spin/Node2D"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../../Chains/PlatformB/3")
+update_rotation = false
+update_scale = false
+
+[node name="Node2D2" type="Node2D" parent="Spin"]
+rotation = 4.18879
+
+[node name="Platform3" type="RemoteTransform2D" parent="Spin/Node2D2"]
+position = Vector2(0, -48)
+rotation = 2.09439
+remote_path = NodePath("../../../Platform3")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition1" type="RemoteTransform2D" parent="Spin/Node2D2"]
+position = Vector2(0, -16)
+remote_path = NodePath("../../../Chains/PlatformC/1")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition2" type="RemoteTransform2D" parent="Spin/Node2D2"]
+position = Vector2(0, -32)
+remote_path = NodePath("../../../Chains/PlatformC/2")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition3" type="RemoteTransform2D" parent="Spin/Node2D2"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../../Chains/PlatformC/3")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition1" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, -16)
+remote_path = NodePath("../../Chains/PlatformA/1")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition2" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, -32)
+remote_path = NodePath("../../Chains/PlatformA/2")
+update_rotation = false
+update_scale = false
+
+[node name="ChainPosition3" type="RemoteTransform2D" parent="Spin"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../Chains/PlatformA/3")
+update_rotation = false
+update_scale = false
+
+[node name="Chains" type="Node2D" parent="."]
+
+[node name="PlatformA" type="Node2D" parent="Chains"]
+
+[node name="1" type="Sprite2D" parent="Chains/PlatformA"]
+z_index = -1
+position = Vector2(0, -16)
+texture = ExtResource("3_4pcbc")
+
+[node name="2" type="Sprite2D" parent="Chains/PlatformA"]
+z_index = -1
+position = Vector2(0, -32)
+texture = ExtResource("3_4pcbc")
+
+[node name="3" type="Sprite2D" parent="Chains/PlatformA"]
+z_index = -1
+position = Vector2(0, -48)
+texture = ExtResource("3_4pcbc")
+
+[node name="PlatformB" type="Node2D" parent="Chains"]
+
+[node name="1" type="Sprite2D" parent="Chains/PlatformB"]
+z_index = -1
+position = Vector2(13.8564, 8.00007)
+texture = ExtResource("3_4pcbc")
+
+[node name="2" type="Sprite2D" parent="Chains/PlatformB"]
+z_index = -1
+position = Vector2(27.7127, 16.0001)
+texture = ExtResource("3_4pcbc")
+
+[node name="3" type="Sprite2D" parent="Chains/PlatformB"]
+z_index = -1
+position = Vector2(41.5691, 24.0002)
+texture = ExtResource("3_4pcbc")
+
+[node name="PlatformC" type="Node2D" parent="Chains"]
+
+[node name="1" type="Sprite2D" parent="Chains/PlatformC"]
+z_index = -1
+position = Vector2(-13.8564, 8)
+texture = ExtResource("3_4pcbc")
+
+[node name="2" type="Sprite2D" parent="Chains/PlatformC"]
+z_index = -1
+position = Vector2(-27.7128, 16)
+texture = ExtResource("3_4pcbc")
+
+[node name="3" type="Sprite2D" parent="Chains/PlatformC"]
+z_index = -1
+position = Vector2(-41.5692, 24)
+texture = ExtResource("3_4pcbc")
+
+[node name="ChainPositions" type="Node2D" parent="Chains"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcih1ax8lsbo3"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/SpriteParticleClass.gd" id="2_5bjki"]
+[ext_resource type="Texture2D" uid="uid://deix45ftvvx1q" path="res://Assets/Sprites/Particles/WaterSplash.png" id="2_ovldk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu0yx"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_845g0"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6867"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3aem3"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2rkf"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvwys"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss02m"]
+atlas = ExtResource("2_ovldk")
+region = Rect2(3, 2, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n1qm8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu0yx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_845g0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6867")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3aem3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2rkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvwys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss02m")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="WaterSplash" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_n1qm8")
+autoplay = "default"
+frame = 1
+offset = Vector2(0, -8)
+script = ExtResource("2_5bjki")

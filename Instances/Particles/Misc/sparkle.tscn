@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsxf3mp225s6u"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/CustomParticle.gd" id="1_ec7pp"]
+[ext_resource type="Texture2D" uid="uid://dxee8j7kqm6rw" path="res://Assets/Sprites/Particles/Sparkle.png" id="2_3638f"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2squu"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v1wig"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 12.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 8.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[node name="Sparkle" type="Node2D"]
+script = ExtResource("1_ec7pp")
+
+[node name="Glimmer" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_2squu")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_v1wig")
+texture = ExtResource("2_3638f")
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://cai8wb5qay3j8"]
+
+[ext_resource type="Texture2D" uid="uid://ct5r4sx4b123x" path="res://Assets/Sprites/Objects/CheckpointBar.png" id="1_pxkwa"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/checkpoint_gate.gd" id="1_xjnvc"]
+[ext_resource type="Texture2D" uid="uid://bii5hh0i12iu0" path="res://Assets/Sprites/Objects/CheckpointPole1.png" id="3_xnygg"]
+[ext_resource type="Texture2D" uid="uid://0u7skxqiwcqm" path="res://icon.png" id="5_yxnd0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73n0g"]
+size = Vector2(20, 10)
+
+[node name="CheckpointGate" type="Node2D"]
+script = ExtResource("1_xjnvc")
+height = 8
+
+[node name="Bar1" type="Node2D" parent="."]
+z_index = 5
+
+[node name="Bar" type="Sprite2D" parent="Bar1"]
+position = Vector2(-15, -38)
+texture = ExtResource("1_pxkwa")
+
+[node name="Area2D" type="Area2D" parent="Bar1/Bar"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bar1/Bar/Area2D"]
+shape = SubResource("RectangleShape2D_73n0g")
+
+[node name="Bar2" type="Node2D" parent="Bar1"]
+show_behind_parent = true
+z_index = -1
+z_as_relative = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Bar1"]
+texture = ExtResource("3_xnygg")
+hframes = 4
+vframes = 3
+frame = 8
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="."]
+gizmo_extents = 8.0
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerSpawnPosition"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_yxnd0")
+offset = Vector2(0, -32)
+
+[connection signal="area_entered" from="Bar1/Bar/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

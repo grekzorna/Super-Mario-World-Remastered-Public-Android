@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bo8jpbrgr2pem"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/spinning_saw.gd" id="1_11xak"]
+[ext_resource type="Texture2D" uid="uid://bd4msmkp1uu6s" path="res://Assets/Sprites/Objects/SpinningSaw.png" id="2_r1hma"]
+[ext_resource type="AudioStream" uid="uid://b50se8jyi838f" path="res://Assets/Audio/SFX/saw.wav" id="3_ppvb8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axdqy"]
+atlas = ExtResource("2_r1hma")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mry41"]
+atlas = ExtResource("2_r1hma")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kxit6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axdqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mry41")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbgo7"]
+
+[node name="SpinningSaw" type="CharacterBody2D"]
+script = ExtResource("1_11xak")
+spiky_top = true
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kxit6")
+autoplay = "default"
+frame_progress = 0.564102
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_dbgo7")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ppvb8")
+max_distance = 512.0
+bus = &"SFX"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

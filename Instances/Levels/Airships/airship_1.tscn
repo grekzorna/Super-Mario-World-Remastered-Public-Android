@@ -1,0 +1,263 @@
+[gd_scene load_steps=28 format=3 uid="uid://p7b6nbk566b1"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_r3idb"]
+[ext_resource type="AudioStream" uid="uid://b1i5k6pke7opx" path="res://Resources/MusicTracks/Airship.tres" id="2_6vodg"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="2_eat57"]
+[ext_resource type="Texture2D" uid="uid://3mvwjkif1ytb" path="res://Assets/Sprites/Tilesets/Airship/Tileset.png" id="3_8qams"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="4_cei7m"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="4_ota3u"]
+[ext_resource type="PackedScene" uid="uid://bk6gwhcfdn3nn" path="res://Instances/Prefabs/Enemies/airship_cannon.tscn" id="4_trc1m"]
+[ext_resource type="PackedScene" uid="uid://c308cugamvq8a" path="res://Instances/Prefabs/Items/fire_flower.tscn" id="5_b07b4"]
+[ext_resource type="Texture2D" uid="uid://c53og0bj21a6x" path="res://Assets/LevelGuides/airshiptest.png" id="5_ner5h"]
+[ext_resource type="PackedScene" uid="uid://dsi7hx88qsxq1" path="res://Instances/Prefabs/Items/mushroom_item.tscn" id="6_7j4dg"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="7_74d8l"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="14_awjl8"]
+[ext_resource type="PackedScene" uid="uid://bnpmmo1mnf23m" path="res://Instances/Parts/airship_player_launch.tscn" id="15_ey3k5"]
+[ext_resource type="PackedScene" uid="uid://d377acfcvpbhk" path="res://Instances/Prefabs/auto_scroll.tscn" id="15_mpiuk"]
+[ext_resource type="Texture2D" uid="uid://d0xffqsebrdfg" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds2.png" id="15_vyuxr"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="16_wopt6"]
+[ext_resource type="Texture2D" uid="uid://dplyy8o1loj3v" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/CylMountainsAutumn.png" id="17_mep02"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6qu5"]
+atlas = ExtResource("3_8qams")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3860"]
+atlas = ExtResource("3_8qams")
+region = Rect2(32, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpodq"]
+atlas = ExtResource("3_8qams")
+region = Rect2(64, 96, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fva76"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6qu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3860")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpodq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_b2gk0"]
+resource_name = "Bob"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_afvhx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc2ww"]
+_data = {
+"Bob": SubResource("Animation_b2gk0"),
+"RESET": SubResource("Animation_afvhx")
+}
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gmgr"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="Curve2D" id="Curve2D_ftj6q"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 184, -224, -53.5466, -1.25992, 53.5466, 1.25992, 256, -224, -56.6964, -39.6875, 56.6964, 39.6875, 488, -192, -165.05, -2.51984, 165.05, 2.51984, 840, -152, 0, 0, 0, 0, 1064, -136, -10.0794, 28.9782, 10.0794, -28.9782, 1216, -200, 0, 0, 0, 0, 1360, -232)
+}
+point_count = 7
+
+[node name="Airship1" type="Node"]
+script = ExtResource("1_r3idb")
+level_music = ExtResource("2_6vodg")
+camera_top_end_position = -384
+
+[node name="ShipBob" type="Node2D" parent="."]
+
+[node name="TileMap" parent="ShipBob" instance=ExtResource("2_eat57")]
+layer_0/tile_data = PackedInt32Array(-786431, 196628, 2, -786430, 262164, 2, -786429, 196628, 2, -786428, 262164, 2, -786427, 327700, 2, -786426, 196628, 2, -786425, 262164, 2, -786424, 393236, 2, -720888, 262164, 3, -720890, 196628, 5, -720889, 196628, 5, -720891, 393236, 4, -720894, 196628, 5, -720893, 196628, 5, -720892, 196628, 5, -720895, 131092, 5, -786432, 131092, 2, -655358, 131092, 5, -589821, 131092, 5, -524284, 131092, 3, -524283, 196628, 3, -458746, 131092, 3, -458745, 196628, 3, -393208, 131092, 3, -393207, 196628, 3, -327671, 131092, 5, -327670, 196628, 5, -327669, 196628, 5, -327668, 196628, 5, -327667, 196628, 5, -327666, 196628, 5, -327665, 262164, 3, -393201, 262164, 3, -393206, 196628, 5, -393205, 196628, 5, -393204, 196628, 5, -393203, 196628, 5, -393202, 196628, 5, -458744, 196628, 5, -458743, 196628, 5, -458742, 196628, 5, -458741, 196628, 5, -458740, 196628, 5, -458739, 196628, 5, -458738, 196628, 5, -458737, 196628, 5, -458736, 196628, 5, -458735, 196628, 5, -458734, 196628, 5, -458733, 196628, 5, -458732, 196628, 5, -458731, 196628, 5, -458730, 196628, 5, -458729, 196628, 5, -458728, 196628, 5, -655354, 196628, 5, -589818, 196628, 5, -524282, 196628, 5, -655353, 196628, 5, -589817, 196628, 5, -524281, 196628, 5, -655352, 196628, 5, -589816, 196628, 5, -524280, 196628, 5, -655351, 393236, 5, -589815, 196628, 5, -524279, 196628, 5, -655350, 393236, 5, -589814, 196628, 5, -524278, 196628, 5, -655349, 393236, 5, -589813, 196628, 5, -524277, 196628, 5, -655348, 393236, 5, -589812, 196628, 5, -524276, 196628, 5, -655347, 393236, 5, -589811, 196628, 5, -524275, 196628, 5, -655346, 393236, 5, -589810, 196628, 5, -524274, 196628, 5, -655345, 393236, 5, -589809, 196628, 5, -524273, 196628, 5, -655344, 393236, 5, -589808, 196628, 5, -524272, 196628, 5, -655343, 393236, 5, -589807, 196628, 5, -524271, 196628, 5, -655342, 196628, 5, -589806, 196628, 5, -524270, 196628, 5, -655341, 196628, 5, -589805, 196628, 5, -524269, 196628, 5, -655340, 196628, 5, -589804, 196628, 5, -524268, 196628, 5, -655339, 196628, 5, -589803, 196628, 5, -524267, 196628, 5, -655338, 196628, 5, -589802, 196628, 5, -524266, 196628, 5, -655337, 196628, 5, -589801, 196628, 5, -524265, 196628, 5, -655336, 196628, 5, -589800, 196628, 5, -524264, 196628, 5, -655335, 196628, 5, -589799, 196628, 5, -524263, 196628, 5, -655334, 196628, 5, -589798, 196628, 5, -524262, 196628, 5, -655333, 196628, 5, -589797, 196628, 5, -524261, 196628, 5, -655356, 196628, 5, -589820, 196628, 5, -655355, 196628, 5, -589819, 196628, 5, -655357, 196628, 5, -589796, 262164, 3, -524260, 262164, 3, -655332, 262164, 3, -720870, 65556, 3, -458727, 196628, 5, -458726, 196628, 5, -458725, 196628, 5, -458724, 196628, 5, -458723, 196628, 5, -458722, 196628, 5, -458721, 196628, 5, -458720, 196628, 5, -458719, 196628, 5, -458718, 196628, 5, -458717, 196628, 5, -458716, 196628, 5, -458715, 196628, 5, -393190, 196628, 5, -393189, 196628, 5, -393188, 196628, 5, -393187, 196628, 5, -393186, 196628, 5, -393185, 196628, 5, -393184, 196628, 5, -393183, 196628, 5, -393182, 196628, 5, -393181, 196628, 5, -393180, 196628, 5, -393179, 262164, 3, -327646, 262164, 3, -327653, 196628, 5, -327652, 196628, 5, -327651, 196628, 5, -327650, 196628, 5, -327649, 196628, 5, -327648, 196628, 5, -327647, 196628, 5, -393191, 131092, 5, -327654, 131092, 5, -262117, 131092, 3, -262116, 196628, 3, -262115, 196628, 5, -262114, 196628, 5, -262113, 196628, 5, -262112, 196628, 5, -262111, 196628, 5, -262110, 196628, 5, -458714, 196628, 5, -458713, 196628, 5, -458712, 196628, 5, -458711, 196628, 5, -458710, 196628, 5, -458709, 196628, 5, -458708, 196628, 5, -458707, 196628, 5, -458706, 196628, 5, -458705, 196628, 5, -458704, 196628, 5, -458703, 196628, 5, -458702, 196628, 5, -458701, 196628, 5, -458700, 196628, 5, -393170, 196628, 5, -393169, 196628, 5, -393168, 196628, 5, -393167, 196628, 5, -393166, 196628, 5, -393165, 196628, 5, -393164, 196628, 5, -393163, 196628, 5, -393162, 196628, 5, -393161, 196628, 5, -393160, 196628, 5, -327633, 196628, 5, -327632, 196628, 5, -327631, 196628, 5, -327630, 196628, 5, -327629, 196628, 5, -327628, 196628, 5, -327627, 196628, 5, -262096, 196628, 3, -262095, 196628, 5, -262094, 196628, 5, -262093, 196628, 5, -262092, 196628, 5, -262091, 196628, 5, -262097, 131092, 3, -327634, 131092, 5, -393171, 131092, 5, -262090, 262164, 3, -327626, 262164, 3, -393159, 262164, 3, -458687, 262164, 3, -393151, 262164, 3, -458699, 196628, 5, -458698, 196628, 5, -458697, 196628, 5, -458696, 196628, 5, -458695, 196628, 5, -458694, 196628, 5, -458693, 196628, 5, -458692, 196628, 5, -458691, 196628, 5, -458690, 196628, 5, -458689, 196628, 5, -458688, 196628, 5, -393154, 196628, 5, -393153, 196628, 5, -393152, 196628, 5, -327617, 196628, 5, -327616, 196628, 5, -327615, 196628, 5, -327614, 196628, 5, -327613, 196628, 5, -327618, 131092, 5, -393155, 131092, 5, -262081, 131092, 3, -262080, 196628, 3, -196543, 131092, 3, -196542, 196628, 3, -262079, 196628, 5, -262078, 196628, 5, -262077, 196628, 5, -327612, 196628, 5, -262076, 196628, 5, -327611, 196628, 5, -262075, 196628, 5, -327610, 196628, 5, -262074, 196628, 5, -327609, 196628, 5, -262073, 196628, 5, -327608, 196628, 5, -262072, 196628, 5, -327607, 196628, 5, -262071, 196628, 5, -327606, 196628, 5, -262070, 196628, 5, -327605, 196628, 5, -262069, 196628, 5, -327604, 196628, 5, -262068, 196628, 5, -327603, 196628, 5, -262067, 196628, 5, -327602, 196628, 5, -262066, 196628, 5, -327601, 196628, 5, -262065, 196628, 5, -327600, 196628, 5, -262064, 196628, 5, -327599, 196628, 5, -262063, 196628, 5, -327598, 196628, 5, -262062, 196628, 5, -327597, 196628, 5, -262061, 196628, 5, -327596, 196628, 5, -262060, 196628, 5, -327595, 196628, 5, -262059, 196628, 5, -196541, 196628, 5, -196540, 196628, 5, -196539, 196628, 5, -196538, 196628, 5, -196537, 196628, 5, -196536, 196628, 5, -196535, 196628, 5, -196534, 196628, 5, -196533, 196628, 5, -196532, 196628, 5, -196531, 196628, 5, -196530, 196628, 5, -196529, 196628, 5, -196528, 196628, 5, -196527, 196628, 5, -196526, 196628, 5, -196525, 196628, 5, -196524, 196628, 5, -196523, 196628, 5, -262058, 262164, 3, -196522, 262164, 3, -327593, 262164, 3, -393128, 262164, 3, -458663, 262164, 3, -655270, 393236, 2, -589734, 262164, 3, -524198, 262164, 3, -393140, 131092, 4, -458674, 131092, 4, -524209, 131092, 4, -655280, 131092, 2, -589744, 131092, 4, -393139, 196628, 5, -393138, 196628, 5, -393137, 196628, 5, -393136, 196628, 5, -393135, 196628, 5, -393134, 196628, 5, -393133, 196628, 5, -393132, 196628, 5, -393131, 196628, 5, -393130, 196628, 5, -393129, 196628, 5, -327594, 196628, 5, -458665, 196628, 5, -458664, 196628, 5, -458667, 196628, 5, -458669, 196628, 5, -458673, 196628, 5, -458671, 196628, 5, -524208, 196628, 5, -524207, 196628, 5, -524206, 196628, 5, -524205, 196628, 5, -524204, 196628, 5, -524203, 196628, 5, -524202, 196628, 5, -524201, 196628, 5, -524200, 196628, 5, -524199, 196628, 5, -655279, 196628, 2, -589743, 196628, 5, -655278, 262164, 2, -589742, 196628, 5, -655277, 327700, 2, -589741, 196628, 5, -655276, 196628, 2, -589740, 196628, 5, -655275, 262164, 2, -589739, 196628, 5, -655274, 327700, 2, -589738, 196628, 5, -655273, 196628, 2, -589737, 196628, 5, -655272, 262164, 2, -589736, 196628, 5, -655271, 327700, 2, -589735, 196628, 5, -458672, 393236, 4, -458670, 393236, 4, -458668, 393236, 4, -458666, 393236, 4, -458679, 393236, 6, -393143, 393236, 8, -655305, 393236, 6, -589769, 393236, 7, -524233, 393236, 8, -655320, 393236, 6, -589784, 393236, 7, -524248, 393236, 8, -655327, 20, 3, -589791, 20, 4, -524255, 20, 5, -655326, 65556, 3, -589790, 65556, 4, -524254, 65556, 5, -1048539, 196628, 2, -1048538, 327700, 2, -1048537, 196628, 2, -1048536, 262164, 2, -1048535, 327700, 2, -1048534, 196628, 2, -1048533, 262164, 2, -1048532, 327700, 2, -1048531, 196628, 2, -1048530, 262164, 2, -1048529, 327700, 2, -1048528, 196628, 2, -1048527, 262164, 2, -1048526, 327700, 2, -1048525, 196628, 2, -1048524, 262164, 2, -1048523, 327700, 2, -1048522, 196628, 2, -1048521, 262164, 2, -1048520, 327700, 2, -1048519, 196628, 2, -1048518, 262164, 2, -1048517, 327700, 2, -1048516, 196628, 2, -1048515, 262164, 2, -1048514, 327700, 2, -1048513, 196628, 2, -1048512, 262164, 2, -1048511, 327700, 2, -1048510, 196628, 2, -1048509, 262164, 2, -1048508, 327700, 2, -1048507, 327700, 2, -982982, 196628, 5, -917446, 196628, 5, -851910, 196628, 5, -982981, 196628, 5, -917445, 196628, 5, -851909, 196628, 5, -982980, 196628, 5, -917444, 196628, 5, -851908, 196628, 5, -982979, 196628, 5, -917443, 196628, 5, -851907, 196628, 5, -982978, 196628, 5, -917442, 196628, 5, -851906, 196628, 5, -982977, 196628, 5, -917441, 196628, 5, -851905, 196628, 5, -982976, 196628, 5, -917440, 196628, 5, -851904, 196628, 5, -982975, 196628, 5, -917439, 196628, 5, -851903, 196628, 5, -982974, 196628, 5, -917438, 196628, 5, -851902, 196628, 5, -982973, 196628, 5, -917437, 196628, 5, -851901, 196628, 5, -982972, 196628, 5, -917436, 196628, 5, -851900, 196628, 5, -982971, 196628, 5, -917435, 196628, 5, -851899, 196628, 5, -917447, 131092, 4, -851911, 131092, 4, -982983, 131092, 4, -1048506, 393236, 2, -982970, 262164, 3, -917434, 262164, 3, -851898, 262164, 3, -1048540, 131092, 2, -786348, 20, 0, -720812, 20, 1, -786347, 65556, 0, -720811, 65556, 1, -720871, 20, 3, -262109, 720916, 2, -262089, 720916, 2, -196521, 720916, 2, -327664, 720916, 2)
+layer_1/tile_data = PackedInt32Array(-720816, 458772, 6, -720807, 458772, 8, -720815, 458772, 7, -720814, 458772, 7, -720813, 458772, 7, -720810, 458772, 7, -720809, 458772, 7, -720808, 458772, 7, -720812, 458772, 7, -720811, 458772, 7)
+
+[node name="Propeller2" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(592, -56)
+sprite_frames = SubResource("SpriteFrames_fva76")
+autoplay = "default"
+frame_progress = 0.689239
+flip_h = true
+
+[node name="Propeller5" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(288, -72)
+sprite_frames = SubResource("SpriteFrames_fva76")
+autoplay = "default"
+frame_progress = 0.689239
+flip_h = true
+
+[node name="Propeller3" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(912, -56)
+sprite_frames = SubResource("SpriteFrames_fva76")
+autoplay = "default"
+frame_progress = 0.689239
+flip_h = true
+
+[node name="Propeller4" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(1424, -40)
+sprite_frames = SubResource("SpriteFrames_fva76")
+autoplay = "default"
+frame_progress = 0.0928298
+flip_h = true
+
+[node name="PipeArea" parent="ShipBob/TileMap" instance=ExtResource("7_74d8l")]
+position = Vector2(1360, -192)
+level_scene = "res://Instances/Levels/Airships/air_ship_factory.tscn"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShipBob"]
+libraries = {
+"": SubResource("AnimationLibrary_pc2ww")
+}
+autoplay = "Bob"
+
+[node name="?Block" parent="ShipBob" instance=ExtResource("4_cei7m")]
+position = Vector2(792, -168)
+item = ExtResource("5_b07b4")
+
+[node name="MushroomItem" parent="ShipBob" instance=ExtResource("6_7j4dg")]
+position = Vector2(96, -208)
+
+[node name="AirshipCannon" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(248, -168)
+rotation = -0.785398
+ball_time = 2.0
+
+[node name="AirshipCannon2" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(328, -168)
+rotation = -0.785398
+ball_time = 2.0
+
+[node name="AirshipCannon3" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(520, -120)
+rotation = -0.785398
+ball_time = 2.0
+
+[node name="AirshipCannon4" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(1080, -88)
+rotation = -0.785398
+ball_time = 2.0
+
+[node name="AirshipCannon5" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(664, -232)
+rotation = -2.35619
+holder_rotation = 180
+ball_time = 2.0
+
+[node name="AirshipCannon6" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(584, -232)
+rotation = -2.35619
+holder_rotation = 180
+ball_time = 2.0
+
+[node name="AirshipCannon7" parent="ShipBob" instance=ExtResource("4_trc1m")]
+position = Vector2(1208, -88)
+rotation = 0.785398
+ball_time = 2.0
+
+[node name="Player" parent="." instance=ExtResource("4_ota3u")]
+material = SubResource("ShaderMaterial_1gmgr")
+position = Vector2(64, -24)
+
+[node name="Airshiptest" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.529067, 0.529067, 0.529067, 1)
+z_index = -16
+position = Vector2(-64, -384)
+texture = ExtResource("5_ner5h")
+centered = false
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ftj6q")
+
+[node name="AirshipPlayerLaunch" parent="." instance=ExtResource("15_ey3k5")]
+position = Vector2(304, -8)
+
+[node name="AutoScroll" parent="." node_paths=PackedStringArray("path") instance=ExtResource("15_mpiuk")]
+path = NodePath("../Path2D")
+scroll_speed = 32.0
+
+[node name="LevelBG" parent="." instance=ExtResource("14_awjl8")]
+fg_texture = ExtResource("15_vyuxr")
+bg_scroll_speed = Vector2(32, 0)
+bg_vertical_offset = -359
+fg_scroll_speed = Vector2(48, 0)
+fg_vertical_offset = -301
+
+[node name="AutumnLevelBG" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("16_wopt6")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("17_mep02")
+fg_texture = ExtResource("15_vyuxr")
+sky_colour = Color(1, 0.866667, 0.552941, 1)
+bg_scroll_speed = Vector2(32, 0)
+fg_scroll_speed = Vector2(48, 0)
+fg_vertical_offset = -301

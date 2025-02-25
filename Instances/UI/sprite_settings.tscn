@@ -1,0 +1,813 @@
+[gd_scene load_steps=136 format=3 uid="uid://bucglb4sqi4jx"]
+
+[ext_resource type="Script" path="res://Scripts/UI/sprite_settings.gd" id="1_7malp"]
+[ext_resource type="PackedScene" uid="uid://u84jg7u3at58" path="res://Instances/UI/sprite_option_node.tscn" id="2_pl8ir"]
+[ext_resource type="Texture2D" uid="uid://bq5v8uk0vd6ct" path="res://Assets/Sprites/Characters/Luigi/Big.png" id="3_xomm4"]
+[ext_resource type="Texture2D" uid="uid://3otij6tjte6v" path="res://Assets/Sprites/Characters/Luigi/SMA2/Big.png" id="4_w1jf5"]
+[ext_resource type="Texture2D" uid="uid://bn3n1bhdvu0v5" path="res://Assets/Sprites/Characters/Luigi/SMAS/Big.png" id="5_jfjfi"]
+[ext_resource type="Texture2D" uid="uid://djyr2ffecc8w4" path="res://Assets/Sprites/Enemys/GoomboSheet.png" id="6_0nkgq"]
+[ext_resource type="Texture2D" uid="uid://bauo0kcxfta2c" path="res://Assets/Sprites/Objects/SettingsSprites/Tilesets/New.png" id="6_6v5dn"]
+[ext_resource type="Texture2D" uid="uid://bskbso75u18nt" path="res://Assets/Sprites/Characters/Bosses/Morton.png" id="7_77aim"]
+[ext_resource type="Texture2D" uid="uid://cc38oksw2dkdu" path="res://Assets/Sprites/Items/1up.png" id="7_ag71x"]
+[ext_resource type="Texture2D" uid="uid://rh45bjveta70" path="res://Assets/Sprites/Enemys/PidgetBill.png" id="8_lxhi7"]
+[ext_resource type="Texture2D" uid="uid://cog48xbb58dpp" path="res://Assets/Sprites/Characters/Bosses/Bowser/BowserClassic.png" id="9_v27ak"]
+[ext_resource type="Texture2D" uid="uid://ce8ne305ujll5" path="res://Assets/Sprites/Characters/Bosses/Bowser/BowserGBA.png" id="10_cd4eo"]
+[ext_resource type="Texture2D" uid="uid://c8237tobowslb" path="res://Assets/Sprites/Characters/Bosses/Bowser/BowserModern.png" id="11_mvnia"]
+[ext_resource type="Texture2D" uid="uid://cujv3drmvncs2" path="res://Assets/Sprites/Characters/Yoshi/YoshiSettingsSprite.png" id="12_six26"]
+[ext_resource type="Texture2D" uid="uid://dmv3vhp47jrsm" path="res://Assets/Sprites/Characters/Peach/SNES.png" id="15_dp4n4"]
+[ext_resource type="Texture2D" uid="uid://crv4topsehlnq" path="res://Assets/Sprites/Characters/Peach/GBA.png" id="16_54xa7"]
+[ext_resource type="Texture2D" uid="uid://di2i5id8vbt5g" path="res://Assets/Sprites/Characters/Peach/Modern.png" id="17_30s4v"]
+[ext_resource type="Texture2D" uid="uid://cbo8xk7f57yv0" path="res://Assets/Sprites/Enemys/Magikoopa.png" id="18_ivpps"]
+[ext_resource type="Texture2D" uid="uid://bsr7vt23giiyx" path="res://Assets/Sprites/Objects/Bubble.png" id="19_3evsh"]
+[ext_resource type="Texture2D" uid="uid://daxvpldn05c7v" path="res://Assets/Sprites/Enemys/Podoboo.png" id="19_cyvnf"]
+[ext_resource type="Texture2D" uid="uid://cj8n7bnn5yr7u" path="res://Assets/Sprites/Enemys/Muncher.png" id="19_tcvnp"]
+[ext_resource type="Texture2D" uid="uid://cdl4ajrtjx2rk" path="res://Assets/Sprites/Objects/SettingsSprites/LakituCloudOld.png" id="20_2xk7a"]
+[ext_resource type="Texture2D" uid="uid://dnkq23lwhn0dq" path="res://Assets/Sprites/Items/DefaultFireball.png" id="21_fda7i"]
+[ext_resource type="Texture2D" uid="uid://defkyp7fwqb6w" path="res://Assets/Sprites/Enemys/DryBones.png" id="21_hr8ft"]
+[ext_resource type="Texture2D" uid="uid://c61kan8ofhtrw" path="res://Assets/Sprites/Objects/LakituCloud.png" id="21_r6hia"]
+[ext_resource type="Texture2D" uid="uid://di25oxrpvmmvp" path="res://Assets/Sprites/Enemys/BowserFire.png" id="22_74aph"]
+[ext_resource type="Texture2D" uid="uid://cmeyna4pi8uug" path="res://Assets/Sprites/Enemys/BonyBeetle.png" id="22_datx2"]
+[ext_resource type="Texture2D" uid="uid://dchkpqx8drmt5" path="res://Assets/Sprites/Enemys/BuzzyBeetleShell.png" id="23_306pd"]
+[ext_resource type="Texture2D" uid="uid://glkpwvcfvh15" path="res://Assets/Sprites/Enemys/SpikeTop.png" id="24_gsj68"]
+[ext_resource type="Texture2D" uid="uid://bhhh7d1h2opuu" path="res://Assets/Sprites/Enemys/FishBone.png" id="25_4b118"]
+[ext_resource type="Texture2D" uid="uid://bprbyvo7k13gh" path="res://Assets/Sprites/Enemys/BobOmb.png" id="26_o1u8g"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="28_j7i06"]
+[ext_resource type="Texture2D" uid="uid://cev2l7hc0cglr" path="res://Assets/Sprites/Objects/SnakeBlock.png" id="29_jhm4s"]
+[ext_resource type="Texture2D" uid="uid://b75y6uuuos77j" path="res://Assets/Sprites/Objects/ColouredSwitchBlockEmpty.png" id="30_1k5bw"]
+[ext_resource type="Texture2D" uid="uid://bpdtygvihkqga" path="res://Assets/Sprites/Objects/SettingsSprites/YoshiBerries.png" id="30_blel2"]
+[ext_resource type="Texture2D" uid="uid://bmdgvms3k86gt" path="res://Assets/Sprites/Objects/StaticIceBlock.png" id="31_4fx0x"]
+[ext_resource type="Texture2D" uid="uid://crt8ffn5r0ppy" path="res://Assets/Sprites/Items/CoinSheet.png" id="32_46k2w"]
+[ext_resource type="Texture2D" uid="uid://df6p4t0570f1v" path="res://Assets/Sprites/Objects/Motor.png" id="33_utub7"]
+[ext_resource type="Texture2D" uid="uid://yusf4y443uvn" path="res://Assets/Sprites/Objects/PSwitch.png" id="34_ex7kk"]
+[ext_resource type="Texture2D" uid="uid://bwwebuttgtpcu" path="res://Assets/Sprites/Objects/Parachute.png" id="34_h1qi0"]
+[ext_resource type="Texture2D" uid="uid://ud3y2kgln0iq" path="res://Assets/Sprites/Objects/SettingsSprites/PSwitch/Maker1.png" id="35_gky3c"]
+[ext_resource type="Texture2D" uid="uid://bjfb8pxoant3q" path="res://Assets/Sprites/Objects/SettingsSprites/PSwitch/Maker2.png" id="36_mx2mr"]
+[ext_resource type="Texture2D" uid="uid://ci4dxva24xniw" path="res://Assets/Sprites/Objects/SettingsSprites/PSwitch/Maker3.png" id="37_17qfe"]
+[ext_resource type="Texture2D" uid="uid://d11sfpiheahq" path="res://Assets/Sprites/Objects/SettingsSprites/PSwitch/Maker4.png" id="38_i47op"]
+[ext_resource type="Texture2D" uid="uid://40y4esx0tnng" path="res://Assets/Sprites/Objects/SettingsSprites/Coin.png" id="38_nxg82"]
+[ext_resource type="Texture2D" uid="uid://dkwke5samsydl" path="res://Assets/Sprites/Objects/OnOffSwitch.png" id="39_bsrcm"]
+[ext_resource type="Texture2D" uid="uid://bebkwyuabtaf7" path="res://Assets/Sprites/Objects/SettingsSprites/Door/Classic.png" id="39_ynaxs"]
+[ext_resource type="Texture2D" uid="uid://bwrppn8r3qruq" path="res://Assets/Sprites/Objects/SettingsSprites/Door/Maker.png" id="40_npuex"]
+[ext_resource type="Texture2D" uid="uid://usqyyicak7my" path="res://Assets/Sprites/Objects/SettingsSprites/OnOffSwitch/Maker1.png" id="40_ydff8"]
+[ext_resource type="Texture2D" uid="uid://6sxek4wwl6kw" path="res://Assets/Sprites/Objects/SettingsSprites/OnOffSwitch/Maker2.png" id="41_1eeac"]
+[ext_resource type="Texture2D" uid="uid://clkfm54bn81ty" path="res://Assets/Sprites/Objects/SettingsSprites/Door/Maker2.png" id="41_tu1rt"]
+[ext_resource type="Texture2D" uid="uid://be6itxav5ti43" path="res://Assets/Sprites/Objects/SettingsSprites/Door/Maker3.png" id="42_mtrel"]
+[ext_resource type="Texture2D" uid="uid://bdyxy6o8lypmr" path="res://Assets/Sprites/Objects/ArrowSign.png" id="52_q5jur"]
+[ext_resource type="Texture2D" uid="uid://b0khnvskkl3uq" path="res://Assets/Sprites/Objects/BigArrowSign.png" id="53_hsx6a"]
+[ext_resource type="Texture2D" uid="uid://c3ygc2w6kl7yi" path="res://Assets/Sprites/Objects/GoalPost.png" id="54_x3mou"]
+[ext_resource type="Texture2D" uid="uid://c2ufctbdrfopo" path="res://Assets/Sprites/Enemys/ChainChomp.png" id="56_a467v"]
+[ext_resource type="Texture2D" uid="uid://diwehhu2ukaxr" path="res://Assets/Sprites/Enemys/Blooper.png" id="57_e5sbk"]
+[ext_resource type="Texture2D" uid="uid://crr36qem1a4qx" path="res://Assets/Sprites/Enemys/AngrySun.png" id="58_i4t4h"]
+[ext_resource type="Texture2D" uid="uid://s551e36d1lc4" path="res://Assets/Sprites/Enemys/Spike.png" id="59_j5cu2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ram21"]
+atlas = ExtResource("3_xomm4")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niu3g"]
+atlas = ExtResource("4_w1jf5")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_carms"]
+atlas = ExtResource("5_jfjfi")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynici"]
+atlas = ExtResource("6_6v5dn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br81l"]
+atlas = ExtResource("6_6v5dn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hi3ju"]
+atlas = ExtResource("7_ag71x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37hwu"]
+atlas = ExtResource("7_ag71x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcqte"]
+atlas = ExtResource("6_0nkgq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yodd"]
+atlas = ExtResource("6_0nkgq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mr48x"]
+atlas = ExtResource("7_77aim")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4mlx"]
+atlas = ExtResource("7_77aim")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5pry"]
+atlas = ExtResource("8_lxhi7")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7y3u"]
+atlas = ExtResource("8_lxhi7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlnk4"]
+atlas = ExtResource("9_v27ak")
+region = Rect2(0, 24, 56, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fl1s"]
+atlas = ExtResource("10_cd4eo")
+region = Rect2(0, 24, 56, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2p057"]
+atlas = ExtResource("11_mvnia")
+region = Rect2(0, 24, 56, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvppu"]
+atlas = ExtResource("12_six26")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ohe7"]
+atlas = ExtResource("12_six26")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mks7a"]
+atlas = ExtResource("12_six26")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb10v"]
+atlas = ExtResource("12_six26")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kklo8"]
+atlas = ExtResource("15_dp4n4")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxkjp"]
+atlas = ExtResource("16_54xa7")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvf1y"]
+atlas = ExtResource("17_30s4v")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyub6"]
+atlas = ExtResource("18_ivpps")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf5br"]
+atlas = ExtResource("18_ivpps")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfayb"]
+atlas = ExtResource("18_ivpps")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxfdw"]
+atlas = ExtResource("19_tcvnp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1rdf"]
+atlas = ExtResource("19_tcvnp")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf1nl"]
+atlas = ExtResource("19_cyvnf")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efnp0"]
+atlas = ExtResource("19_cyvnf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_706bx"]
+atlas = ExtResource("21_r6hia")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nq7n"]
+atlas = ExtResource("19_3evsh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrpbq"]
+atlas = ExtResource("19_3evsh")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io2pt"]
+atlas = ExtResource("21_hr8ft")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhguu"]
+atlas = ExtResource("21_hr8ft")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxg82"]
+atlas = ExtResource("21_hr8ft")
+region = Rect2(160, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo435"]
+atlas = ExtResource("22_datx2")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk374"]
+atlas = ExtResource("21_fda7i")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyc4f"]
+atlas = ExtResource("21_fda7i")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioaae"]
+atlas = ExtResource("22_74aph")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_keyeq"]
+atlas = ExtResource("22_74aph")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31crp"]
+atlas = ExtResource("23_306pd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnot6"]
+atlas = ExtResource("23_306pd")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsukd"]
+atlas = ExtResource("24_gsj68")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi7r0"]
+atlas = ExtResource("24_gsj68")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0wrw"]
+atlas = ExtResource("30_blel2")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e5i6"]
+atlas = ExtResource("30_blel2")
+region = Rect2(0, 48, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhe68"]
+atlas = ExtResource("25_4b118")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0llhq"]
+atlas = ExtResource("25_4b118")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kjob"]
+atlas = ExtResource("26_o1u8g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o2u0"]
+atlas = ExtResource("26_o1u8g")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_724vo"]
+atlas = ExtResource("30_1k5bw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kka6b"]
+atlas = ExtResource("30_1k5bw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4xn0"]
+atlas = ExtResource("31_4fx0x")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka8g6"]
+atlas = ExtResource("31_4fx0x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jepo7"]
+atlas = ExtResource("32_46k2w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgjy6"]
+atlas = ExtResource("33_utub7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hy2bd"]
+atlas = ExtResource("33_utub7")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68vqc"]
+atlas = ExtResource("34_h1qi0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqcsd"]
+atlas = ExtResource("34_h1qi0")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm6p1"]
+atlas = ExtResource("34_ex7kk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_2rrhr"]
+frames = 4
+speed_scale = 5.0
+frame_0/texture = ExtResource("35_gky3c")
+frame_1/texture = ExtResource("36_mx2mr")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("37_17qfe")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("38_i47op")
+frame_3/duration = 1.0
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_j0beb"]
+frames = 4
+speed_scale = 4.0
+frame_0/texture = ExtResource("40_npuex")
+frame_0/duration = 5.0
+frame_1/texture = ExtResource("41_tu1rt")
+frame_1/duration = 0.5
+frame_2/texture = ExtResource("42_mtrel")
+frame_2/duration = 5.0
+frame_3/texture = ExtResource("41_tu1rt")
+frame_3/duration = 0.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12t43"]
+atlas = ExtResource("39_bsrcm")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_pxd4m"]
+frames = 2
+speed_scale = 2.0
+frame_0/texture = ExtResource("40_ydff8")
+frame_1/texture = ExtResource("41_1eeac")
+frame_1/duration = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ege7h"]
+atlas = ExtResource("52_q5jur")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17fby"]
+atlas = ExtResource("54_x3mou")
+region = Rect2(0, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl4y0"]
+atlas = ExtResource("54_x3mou")
+region = Rect2(32, 0, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4t4h"]
+atlas = ExtResource("56_a467v")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5cu2"]
+atlas = ExtResource("56_a467v")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj6rw"]
+atlas = ExtResource("57_e5sbk")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypn0r"]
+atlas = ExtResource("57_e5sbk")
+region = Rect2(0, 32, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vit7n"]
+atlas = ExtResource("58_i4t4h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axkya"]
+atlas = ExtResource("58_i4t4h")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hxcc2"]
+atlas = ExtResource("59_j5cu2")
+region = Rect2(8, 8, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6n3f7"]
+atlas = ExtResource("59_j5cu2")
+region = Rect2(8, 40, 16, 24)
+
+[node name="SpriteSettings" type="ScrollContainer"]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.207407
+anchor_right = 0.883333
+anchor_bottom = 0.948148
+offset_right = -112.0
+offset_bottom = -7.62939e-05
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("1_7malp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="Luigi" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_ram21"), SubResource("AtlasTexture_niu3g"), SubResource("AtlasTexture_carms")])
+sprite = NodePath("Sprite2D")
+node_title = "Luigi"
+selectable_values = ["Maker", "Advance 2", "All-Stars"]
+settings_value = "luigi"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Luigi"]
+top_level = true
+z_index = 10
+offset = Vector2(0, -8)
+
+[node name="TilesetColours" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_ynici"), SubResource("AtlasTexture_br81l")])
+sprite = NodePath("Sprite2D")
+node_title = "Tile Style"
+selectable_values = ["Classic", "Maker"]
+settings_value = "tileset_colour_style"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/TilesetColours"]
+top_level = true
+z_index = 10
+offset = Vector2(0, -8)
+
+[node name="1Up" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_hi3ju"), SubResource("AtlasTexture_37hwu")])
+sprite = NodePath("Sprite2D")
+node_title = "1-Up"
+selectable_values = ["Original", "Colour-Blind"]
+settings_value = "1up"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/1Up"]
+
+[node name="Galoomba" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_xcqte"), SubResource("AtlasTexture_4yodd")])
+sprite = NodePath("Sprite2D")
+node_title = "Galoomba"
+selectable_values = ["Original", "Fixed"]
+settings_value = "galoomba"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Galoomba"]
+top_level = true
+
+[node name="Koopalings" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_mr48x"), SubResource("AtlasTexture_g4mlx")])
+sprite = NodePath("Sprite2D")
+node_title = "Koopaling Colours"
+selectable_values = ["Classic", "Modern"]
+settings_value = "koopalings"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Koopalings"]
+offset = Vector2(0, -8)
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="PidgetBill" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_j5pry"), SubResource("AtlasTexture_v7y3u")])
+sprite = NodePath("Sprite2D")
+node_title = "Pidget Bill"
+selectable_values = ["SNES", "GBA"]
+settings_value = "pidget"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PidgetBill"]
+
+[node name="Bowser" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_wlnk4"), SubResource("AtlasTexture_5fl1s"), SubResource("AtlasTexture_2p057")])
+sprite = NodePath("Sprite2D")
+node_title = "Bowser"
+selectable_values = ["SNES", "GBA", "Modern"]
+settings_value = "bowser"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Bowser"]
+offset = Vector2(16, 0)
+
+[node name="Yoshi" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_rvppu"), SubResource("AtlasTexture_2ohe7")])
+sprite = NodePath("Sprite2D")
+node_title = "Yoshi"
+selectable_values = ["Classic", "Modern"]
+settings_value = "yoshi"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Yoshi"]
+position = Vector2(8, -7.99989)
+flip_h = true
+
+[node name="YoshiSwim" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_mks7a"), SubResource("AtlasTexture_sb10v")])
+sprite = NodePath("Sprite2D")
+node_title = "Yoshi Swim"
+selectable_values = [false, true]
+settings_value = "yoshiswim"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/YoshiSwim"]
+
+[node name="Peach" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_kklo8"), SubResource("AtlasTexture_sxkjp"), SubResource("AtlasTexture_cvf1y")])
+sprite = NodePath("Sprite2D")
+node_title = "Peach"
+selectable_values = ["SNES", "GBA", "Modern"]
+settings_value = "peach"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Peach"]
+
+[node name="Magikoopa" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_tyub6"), SubResource("AtlasTexture_uf5br"), SubResource("AtlasTexture_cfayb")])
+sprite = NodePath("Sprite2D")
+node_title = "Magikoopa"
+selectable_values = ["Original", "Fixed", "Maker"]
+settings_value = "magikoopa"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Magikoopa"]
+
+[node name="Control2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Muncher" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_gxfdw"), SubResource("AtlasTexture_q1rdf")])
+sprite = NodePath("Sprite2D")
+node_title = "Muncher"
+selectable_values = ["Original", "Maker"]
+settings_value = "muncher"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Muncher"]
+
+[node name="Podoboo" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_jf1nl"), SubResource("AtlasTexture_efnp0")])
+sprite = NodePath("Sprite2D")
+node_title = "Podoboo"
+selectable_values = ["Original", "Maker"]
+settings_value = "podoboo"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Podoboo"]
+
+[node name="LakituCloud" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([ExtResource("20_2xk7a"), SubResource("AtlasTexture_706bx")])
+sprite = NodePath("Sprite2D")
+node_title = "Lakitu Cloud"
+selectable_values = ["Original", "Maker"]
+settings_value = "lakitucloud"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/LakituCloud"]
+
+[node name="Bubble" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_6nq7n"), SubResource("AtlasTexture_hrpbq")])
+sprite = NodePath("Sprite2D")
+node_title = "Bubble"
+selectable_values = ["Original", "Maker"]
+settings_value = "bubble"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Bubble"]
+
+[node name="DryBones" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_io2pt"), SubResource("AtlasTexture_vhguu")])
+sprite = NodePath("Sprite2D")
+node_title = "Dry Bones"
+selectable_values = ["Original", "Maker"]
+settings_value = "drybones"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/DryBones"]
+
+[node name="BonyBeetle" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_nxg82"), SubResource("AtlasTexture_bo435")])
+sprite = NodePath("Sprite2D")
+node_title = "Bony Beetle"
+selectable_values = ["Original", "Fixed"]
+settings_value = "bonybeetle"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/BonyBeetle"]
+
+[node name="Fireball" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_gk374"), SubResource("AtlasTexture_tyc4f")])
+sprite = NodePath("Sprite2D")
+node_title = "Fireball"
+selectable_values = ["Original", "Maker"]
+settings_value = "fireball"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Fireball"]
+
+[node name="BowserFire" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_ioaae"), SubResource("AtlasTexture_keyeq")])
+sprite = NodePath("Sprite2D")
+node_title = "Bowser Fire"
+selectable_values = ["Original", "Maker"]
+settings_value = "bowserflame"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/BowserFire"]
+
+[node name="BuzzyBeetleShell" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_31crp"), SubResource("AtlasTexture_bnot6")])
+sprite = NodePath("Sprite2D")
+node_title = "Buzzy Beetle Shell"
+selectable_values = ["Original", "Maker"]
+settings_value = "buzzybeetleshell"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/BuzzyBeetleShell"]
+
+[node name="SpikeTop" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_nsukd"), SubResource("AtlasTexture_pi7r0")])
+sprite = NodePath("Sprite2D")
+node_title = "Spike Top"
+selectable_values = ["Original", "Maker"]
+settings_value = "spiketop"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/SpikeTop"]
+
+[node name="YoshiBerries" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_e0wrw"), SubResource("AtlasTexture_1e5i6")])
+sprite = NodePath("Sprite2D")
+node_title = "Yoshi Berries"
+selectable_values = ["Transparent Stem", "Coloured Stem"]
+settings_value = "yoshi_berry"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/YoshiBerries"]
+offset = Vector2(16, 0)
+
+[node name="FishBone" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_nhe68"), SubResource("AtlasTexture_0llhq")])
+sprite = NodePath("Sprite2D")
+node_title = "Fish Bone"
+selectable_values = ["Original", "Maker"]
+settings_value = "fishbone"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/FishBone"]
+
+[node name="BobOmb" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_6kjob"), SubResource("AtlasTexture_4o2u0")])
+sprite = NodePath("Sprite2D")
+node_title = "Bob Omb"
+selectable_values = ["Original", "Maker"]
+settings_value = "bobomb"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/BobOmb"]
+
+[node name="SnakeBlock" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([ExtResource("28_j7i06"), ExtResource("29_jhm4s")])
+sprite = NodePath("Sprite2D")
+node_title = "Snake Block"
+selectable_values = ["Original", "Maker"]
+settings_value = "snakeblock"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/SnakeBlock"]
+
+[node name="ColouredSwitchEmpty" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_724vo"), SubResource("AtlasTexture_kka6b")])
+sprite = NodePath("Sprite2D")
+node_title = "Empty Switch Block"
+selectable_values = ["Original", "GBA"]
+settings_value = "coloured_switch_empty"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/ColouredSwitchEmpty"]
+
+[node name="IceBlock" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_t4xn0"), SubResource("AtlasTexture_ka8g6")])
+sprite = NodePath("Sprite2D")
+node_title = "Static Ice Block"
+selectable_values = ["Original", "Maker"]
+settings_value = "iceblock"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/IceBlock"]
+
+[node name="Coin" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_jepo7"), ExtResource("38_nxg82")])
+sprite = NodePath("Sprite2D")
+node_title = "Coin"
+selectable_values = ["Original", "Maker"]
+settings_value = "coin"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Coin"]
+
+[node name="Motor" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_lgjy6"), SubResource("AtlasTexture_hy2bd")])
+sprite = NodePath("Sprite2D")
+node_title = "Motor"
+selectable_values = ["Original", "Maker"]
+settings_value = "motor"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Motor"]
+
+[node name="Parachute" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_68vqc"), SubResource("AtlasTexture_vqcsd")])
+sprite = NodePath("Sprite2D")
+node_title = "Parachute"
+selectable_values = ["Original", "Maker"]
+settings_value = "parachute"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Parachute"]
+
+[node name="PSwitch" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_tm6p1"), SubResource("AnimatedTexture_2rrhr")])
+sprite = NodePath("Sprite2D")
+node_title = "P-Switch"
+selectable_values = ["Original", "Maker"]
+settings_value = "pswitch"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/PSwitch"]
+
+[node name="Door" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([ExtResource("39_ynaxs"), SubResource("AnimatedTexture_j0beb")])
+sprite = NodePath("Sprite2D")
+node_title = "Door"
+selectable_values = ["Original", "Maker"]
+settings_value = "door"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Door"]
+
+[node name="OnOffSwitch" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_12t43"), SubResource("AnimatedTexture_pxd4m")])
+sprite = NodePath("Sprite2D")
+node_title = "On-Off Switch"
+selectable_values = ["Original", "Maker"]
+settings_value = "onoffswitch"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/OnOffSwitch"]
+
+[node name="Signpost" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_ege7h"), ExtResource("53_hsx6a")])
+sprite = NodePath("Sprite2D")
+node_title = "Sign Post"
+selectable_values = ["Original", "Maker"]
+settings_value = "signpost"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Signpost"]
+
+[node name="SecretGoalPost" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_17fby"), SubResource("AtlasTexture_vl4y0")])
+sprite = NodePath("Sprite2D")
+node_title = "Secret Goal-Post"
+selectable_values = ["Original", "Alternate"]
+settings_value = "secretgoalpost"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/SecretGoalPost"]
+
+[node name="ChainChomp" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_i4t4h"), SubResource("AtlasTexture_j5cu2")])
+sprite = NodePath("Sprite2D")
+node_title = "Chain-Chomp"
+selectable_values = ["Construct", "Maker"]
+settings_value = "chain_chomp"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/ChainChomp"]
+
+[node name="Blooper" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_oj6rw"), SubResource("AtlasTexture_ypn0r")])
+sprite = NodePath("Sprite2D")
+node_title = "Blooper"
+selectable_values = ["Construct", "Maker"]
+settings_value = "blooper"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Blooper"]
+
+[node name="AngrySun" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_vit7n"), SubResource("AtlasTexture_axkya")])
+sprite = NodePath("Sprite2D")
+node_title = "Angry Sun"
+selectable_values = ["Construct", "Maker"]
+settings_value = "angry_sun"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/AngrySun"]
+
+[node name="Spike" parent="VBoxContainer" node_paths=PackedStringArray("sprite") instance=ExtResource("2_pl8ir")]
+layout_mode = 2
+textures = Array[Texture2D]([SubResource("AtlasTexture_hxcc2"), SubResource("AtlasTexture_6n3f7")])
+sprite = NodePath("Sprite2D")
+node_title = "Spike"
+selectable_values = ["Construct", "Maker"]
+settings_value = "spike"
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Spike"]

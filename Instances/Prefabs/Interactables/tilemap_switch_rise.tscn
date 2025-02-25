@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://di0sxdhyw16sn"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/tilemap_switch_rise.gd" id="1_y5rv6"]
+
+[node name="TilemapSwitchRise" type="Node2D"]
+script = ExtResource("1_y5rv6")

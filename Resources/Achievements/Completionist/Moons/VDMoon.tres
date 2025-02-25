@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://pkdhwmwkh60x"]
+
+[ext_resource type="Texture2D" uid="uid://6jnx78b52nal" path="res://Assets/Sprites/AchievementIcons/46559.png" id="1_f5i88"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_r3u8o"]
+
+[resource]
+script = ExtResource("1_r3u8o")
+title = "Lunar Vanilla"
+description = "Collect the 3-Up Moon in Vanilla Dome"
+icon = ExtResource("1_f5i88")

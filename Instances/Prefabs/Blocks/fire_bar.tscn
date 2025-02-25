@@ -1,0 +1,272 @@
+[gd_scene load_steps=19 format=3 uid="uid://bexud7jc8rmjm"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/fire_bar.gd" id="1_l52ke"]
+[ext_resource type="Texture2D" uid="uid://dttcss01sof82" path="res://Assets/Sprites/Objects/FireBarBlock.png" id="2_h80ot"]
+[ext_resource type="Texture2D" uid="uid://dnkq23lwhn0dq" path="res://Assets/Sprites/Items/DefaultFireball.png" id="3_8665s"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="4_l34gk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0qvl"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgxgp"]
+atlas = ExtResource("3_8665s")
+region = Rect2(0, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adh44"]
+atlas = ExtResource("3_8665s")
+region = Rect2(16, 8, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3obg0"]
+atlas = ExtResource("3_8665s")
+region = Rect2(32, 8, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uje4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgxgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adh44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3obg0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m0lc"]
+atlas = ExtResource("3_8665s")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o20jn"]
+atlas = ExtResource("3_8665s")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7r87"]
+atlas = ExtResource("3_8665s")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyyox"]
+atlas = ExtResource("3_8665s")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xtjj6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m0lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o20jn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7r87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyyox")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xcga"]
+size = Vector2(4, 4)
+
+[sub_resource type="Animation" id="Animation_fjahb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_c3nra"]
+resource_name = "Spin"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RotationJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cegws"]
+_data = {
+"RESET": SubResource("Animation_fjahb"),
+"Spin": SubResource("Animation_c3nra")
+}
+
+[node name="FireBar" type="AnimatableBody2D"]
+sync_to_physics = false
+script = ExtResource("1_l52ke")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w0qvl")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_h80ot")
+
+[node name="RotationJoint" type="Node2D" parent="."]
+
+[node name="Fire1" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -8)
+remote_path = NodePath("../../Fireball1")
+update_rotation = false
+update_scale = false
+
+[node name="Fire2" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -16)
+remote_path = NodePath("../../Fireball2")
+update_rotation = false
+update_scale = false
+
+[node name="Fire3" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -24)
+remote_path = NodePath("../../Fireball3")
+update_rotation = false
+update_scale = false
+
+[node name="Fire4" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -32)
+remote_path = NodePath("../../Fireball4")
+update_rotation = false
+update_scale = false
+
+[node name="Fire5" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -40)
+remote_path = NodePath("../../Fireball5")
+update_rotation = false
+update_scale = false
+
+[node name="Fire6" type="RemoteTransform2D" parent="RotationJoint"]
+position = Vector2(0, -48)
+remote_path = NodePath("../../Fireball6")
+update_rotation = false
+update_scale = false
+
+[node name="Fireball1" type="Node2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball1"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.563565
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball1/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Fireball2" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball2"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.716487
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball2/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Fireball3" type="Node2D" parent="."]
+position = Vector2(0, -24)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball3"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.716487
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball3/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Fireball4" type="Node2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball4"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.716487
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball4/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Fireball5" type="Node2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball5"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.716487
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball5/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Fireball6" type="Node2D" parent="."]
+position = Vector2(0, -48)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Fireball6"]
+sprite_frames = SubResource("SpriteFrames_uje4n")
+autoplay = "default"
+frame_progress = 0.716487
+script = ExtResource("4_l34gk")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtjj6"), SubResource("SpriteFrames_uje4n")])
+settings_value = "fireball"
+
+[node name="Hitbox" type="Area2D" parent="Fireball6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireball6/Hitbox"]
+shape = SubResource("RectangleShape2D_1xcga")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cegws")
+}
+autoplay = "Spin"
+speed_scale = 0.3
+
+[connection signal="area_entered" from="Fireball1/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Fireball2/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Fireball3/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Fireball4/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Fireball5/Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Fireball6/Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://denlowkdu7o5p"]
+
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="1_2i1tq"]
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/goal_post_power_reward.gd" id="1_7efq5"]
+[ext_resource type="PackedScene" uid="uid://bimrxpg5a4yrk" path="res://Instances/Prefabs/Items/1_up.tscn" id="2_5n5km"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idjne"]
+radius = 4.0
+
+[node name="GoalPostPowerReward" type="Node2D"]
+z_index = 4096
+z_as_relative = false
+script = ExtResource("1_7efq5")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_2i1tq")
+
+[node name="Hitbox" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Hitbox"]
+shape = SubResource("CircleShape2D_idjne")
+
+[node name="1Up" parent="." instance=ExtResource("2_5n5km")]
+static_movement = true
+
+[connection signal="area_entered" from="Sprite/Hitbox" to="." method="_on_hitbox_area_entered"]

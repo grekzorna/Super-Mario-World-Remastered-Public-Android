@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dapkk0kb40pdi"]
+
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="1_d7jfp"]
+
+[sub_resource type="Animation" id="Animation_fvh54"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x6e32"]
+resource_name = "Rise"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -64), Vector2(0, -64), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tnfha"]
+_data = {
+"RESET": SubResource("Animation_fvh54"),
+"Rise": SubResource("Animation_x6e32")
+}
+
+[node name="PipeRise" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_d7jfp")]
+collision_animatable = true
+layer_0/tile_data = PackedInt32Array(-65537, 5, 0, -1, 5, 1, 65535, 5, 1, 131071, 5, 1, 196607, 5, 1, -131072, 65541, 0, -65536, 65541, 1, 0, 65541, 1, 65536, 65541, 1, 131072, 65541, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_tnfha")
+}
+autoplay = "Rise"

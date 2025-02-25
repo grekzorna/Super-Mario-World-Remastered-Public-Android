@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://kulf8ueeo2y6"]
+
+[ext_resource type="Script" path="res://Scripts/UI/option_section_node.gd" id="1_p7833"]
+[ext_resource type="PackedScene" uid="uid://xjo6vkm2mwwv" path="res://Instances/UI/slider_option_node.tscn" id="4_oap5v"]
+
+[node name="Audio" type="Control" node_paths=PackedStringArray("options")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p7833")
+options = [NodePath("ScrollContainer/Container/Master"), NodePath("ScrollContainer/Container/Music"), NodePath("ScrollContainer/Container/SFX"), NodePath("ScrollContainer/Container/UI")]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0333333
+anchor_top = 0.148148
+anchor_right = 0.966667
+anchor_bottom = 0.948148
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Master" parent="ScrollContainer/Container" instance=ExtResource("4_oap5v")]
+layout_mode = 2
+option_title = "Master"
+
+[node name="Music" parent="ScrollContainer/Container" instance=ExtResource("4_oap5v")]
+layout_mode = 2
+option_title = "Music"
+
+[node name="SFX" parent="ScrollContainer/Container" instance=ExtResource("4_oap5v")]
+layout_mode = 2
+option_title = "SFX"
+
+[node name="UI" parent="ScrollContainer/Container" instance=ExtResource("4_oap5v")]
+auto_translate_mode = 1
+layout_mode = 2
+option_title = "UI"

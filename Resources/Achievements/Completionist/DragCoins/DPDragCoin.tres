@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://jqk34owisgt5"]
+
+[ext_resource type="Texture2D" uid="uid://buo7xi5vhjtrr" path="res://Assets/Sprites/AchievementIcons/46589.png" id="1_0ir4v"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_1edvv"]
+
+[resource]
+script = ExtResource("1_1edvv")
+title = "A Hole In Your Wallet"
+description = "Collect all Dragon Coins in all eligible levels in Donut Plains"
+icon = ExtResource("1_0ir4v")

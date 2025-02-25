@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdbsvmplutv35"]
+
+[ext_resource type="Texture2D" uid="uid://4tonvcjbw2t5" path="res://Assets/Sprites/Items/CapeFeather.png" id="1_0iur2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Items/cape_feather.gd" id="1_wsec0"]
+[ext_resource type="Resource" uid="uid://btx7hj0d2vjhy" path="res://Resources/PlayerPowerUpState/Cape.tres" id="2_e4rvx"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="4_relh2"]
+[ext_resource type="Resource" uid="uid://dxe7pdxagxdk0" path="res://Resources/Achievements/General/CapeGet.tres" id="5_rwjqw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxfgj"]
+
+[node name="CapeFeather" type="CharacterBody2D"]
+script = ExtResource("1_wsec0")
+power = ExtResource("2_e4rvx")
+slow_block_emerge = false
+item_emerge_velocity = 500
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_0iur2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wxfgj")
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("4_relh2")
+achievement = ExtResource("5_rwjqw")
+
+[connection signal="grabbed" from="." to="AchievementUnlocker" method="unlock_achievement"]

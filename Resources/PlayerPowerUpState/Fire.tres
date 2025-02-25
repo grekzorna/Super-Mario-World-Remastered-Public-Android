@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=5 format=3 uid="uid://cr2skqyngp5o0"]
+
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="1_6jmdn"]
+[ext_resource type="Texture2D" uid="uid://cpjxlqt3sjb6c" path="res://Assets/Sprites/Items/FireFlowerSheet.png" id="1_frpua"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_yw50c"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Fire.gd" id="3_5gmw3"]
+
+[resource]
+script = ExtResource("1_yw50c")
+state_name = "Fire"
+sprite_frame_name = "Fire"
+power_script = ExtResource("3_5gmw3")
+states = Array[Script]([])
+hitbox_size = "Regular"
+transform_animation = false
+power_down = ExtResource("1_6jmdn")
+power_tier = 2
+item_sprite = ExtResource("1_frpua")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://yb8lhw18jpjv"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/spike_projectile_ball.gd" id="1_2u1v5"]
+[ext_resource type="Script" path="res://Scripts/Classes/EnemyClass.gd" id="1_x7x0i"]
+[ext_resource type="Texture2D" uid="uid://csyc2qvts42eb" path="res://Assets/Sprites/Enemys/SpikeEnemyBall.png" id="2_2u1v5"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="3_6bbi3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkmny"]
+atlas = ExtResource("2_2u1v5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffphh"]
+atlas = ExtResource("2_2u1v5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x43vs"]
+atlas = ExtResource("2_2u1v5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vjgwb"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bbi3"]
+size = Vector2(16, 16)
+
+[node name="SpikeBall" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+floor_constant_speed = true
+floor_max_angle = 1.309
+floor_snap_length = 4.0
+script = ExtResource("1_2u1v5")
+yoshi_behavior = "Spit"
+gib_type = 2
+spiky_top = true
+can_slide_damage = false
+can_silver_switch = false
+can_cape_damage = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+metadata/_custom_type_script = ExtResource("1_x7x0i")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+texture = SubResource("AtlasTexture_lkmny")
+script = ExtResource("3_6bbi3")
+textures = Array[Texture2D]([SubResource("AtlasTexture_ffphh"), SubResource("AtlasTexture_x43vs")])
+settings_value = "spike"
+metadata/_custom_type_script = ExtResource("3_6bbi3")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vjgwb")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_6bbi3")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

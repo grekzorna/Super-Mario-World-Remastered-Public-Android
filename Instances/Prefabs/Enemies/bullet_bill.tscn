@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcx2s1mpy8wes"]
+
+[ext_resource type="Script" uid="uid://8oksl1uleydm" path="res://Scripts/Classes/Enemies/BulletBill.gd" id="1_nmsy7"]
+[ext_resource type="Texture2D" uid="uid://rh45bjveta70" path="res://Assets/Sprites/Enemys/PidgetBill.png" id="2_irjee"]
+[ext_resource type="Texture2D" uid="uid://ddkwqa7tiqu17" path="res://Assets/Sprites/Enemys/BulletBill.png" id="2_yf03d"]
+[ext_resource type="PackedScene" uid="uid://gr6gqqb0pdkl" path="res://Instances/Particles/Player/puff_trail.tscn" id="4_36c5p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkjmx"]
+atlas = ExtResource("2_irjee")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wb6xb"]
+atlas = ExtResource("2_irjee")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a5lt"]
+atlas = ExtResource("2_irjee")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_junp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkjmx")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wb6xb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a5lt")
+}],
+"loop": true,
+"name": &"1",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56qm2"]
+size = Vector2(10, 10)
+
+[node name="BulletBill" type="CharacterBody2D"]
+script = ExtResource("1_nmsy7")
+enemy_height = 4
+gib_type = 1
+can_fire_damage = false
+
+[node name="AutumnSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_junp7")
+animation = &"0"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 10
+texture = ExtResource("2_yf03d")
+
+[node name="PuffTrail" parent="Sprite" instance=ExtResource("4_36c5p")]
+z_index = -1
+position = Vector2(8, -2.18279e-11)
+rotation = 1.5708
+lifetime = 1.5
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_56qm2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

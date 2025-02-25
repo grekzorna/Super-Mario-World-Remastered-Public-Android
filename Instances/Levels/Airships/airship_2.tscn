@@ -1,0 +1,276 @@
+[gd_scene load_steps=30 format=3 uid="uid://ew3b4lchbat0"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_k7tst"]
+[ext_resource type="AudioStream" uid="uid://b1i5k6pke7opx" path="res://Resources/MusicTracks/Airship.tres" id="2_n1oyx"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_3dtky"]
+[ext_resource type="AudioStream" uid="uid://doxjwppy3kw3g" path="res://Resources/MusicTracks/AirshipAutumn.tres" id="3_x3yrq"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="4_46tk3"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="4_w5od3"]
+[ext_resource type="Texture2D" uid="uid://3mvwjkif1ytb" path="res://Assets/Sprites/Tilesets/Airship/Tileset.png" id="5_ht21k"]
+[ext_resource type="PackedScene" uid="uid://bk6gwhcfdn3nn" path="res://Instances/Prefabs/Enemies/airship_cannon.tscn" id="5_ujqw8"]
+[ext_resource type="PackedScene" uid="uid://bnpmmo1mnf23m" path="res://Instances/Parts/airship_player_launch.tscn" id="7_pgp1c"]
+[ext_resource type="PackedScene" uid="uid://d377acfcvpbhk" path="res://Instances/Prefabs/auto_scroll.tscn" id="8_iyn3c"]
+[ext_resource type="PackedScene" uid="uid://dxipn4urepq1w" path="res://Instances/Prefabs/Enemies/rocky_wrench.tscn" id="10_7o7f2"]
+[ext_resource type="PackedScene" uid="uid://2n65pmkmpmp3" path="res://Instances/Prefabs/Interactables/bullet_bill_launcher.tscn" id="10_h47l3"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="13_gvhmr"]
+[ext_resource type="PackedScene" uid="uid://cdbsvmplutv35" path="res://Instances/Prefabs/Items/cape_feather.tscn" id="14_mxv5p"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="16_xkqhm"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="17_ps8e3"]
+[ext_resource type="Texture2D" uid="uid://cxvypikw6cj17" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/TallMountains1.png" id="17_wg8uw"]
+[ext_resource type="Texture2D" uid="uid://d0xffqsebrdfg" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds2.png" id="18_1j6ql"]
+[ext_resource type="Texture2D" uid="uid://me6yb4x10rj8" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/TallMountains2.png" id="18_lhq00"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6qu5"]
+atlas = ExtResource("5_ht21k")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3860"]
+atlas = ExtResource("5_ht21k")
+region = Rect2(32, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpodq"]
+atlas = ExtResource("5_ht21k")
+region = Rect2(64, 96, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_skgp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6qu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3860")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpodq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_b2gk0"]
+resource_name = "Bob"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_afvhx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc2ww"]
+_data = {
+"Bob": SubResource("Animation_b2gk0"),
+"RESET": SubResource("Animation_afvhx")
+}
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0k8c1"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="Curve2D" id="Curve2D_ak5hv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 160, -224, 0, 0, 0, 0, 488, -224, 0, 0, 0, 0, 632, -224, -218.035, 6.13518, 218.035, -6.13518, 880, -224, -69.3748, 0, 69.3748, 0, 1144, -112, -86.1192, 22.3496, 86.1192, -22.3496, 1344, -160, -62.7676, -1.41581, 62.7676, 1.41581, 1520, -192, -64.6554, 0.471937, 64.6554, -0.471937, 1672, -192, -100.523, -3.7755, 100.523, 3.7755, 1864, -264)
+}
+point_count = 9
+
+[node name="Airship2" type="Node"]
+script = ExtResource("1_k7tst")
+level_music = ExtResource("2_n1oyx")
+autumn_music = ExtResource("3_x3yrq")
+camera_top_end_position = -384
+
+[node name="ShipBob" type="Node2D" parent="."]
+
+[node name="TileMap" parent="ShipBob" instance=ExtResource("3_3dtky")]
+layer_0/tile_data = PackedInt32Array(-786432, 131092, 2, -720895, 131092, 5, -655358, 131092, 5, -589821, 131092, 5, -524284, 131092, 3, -524283, 196628, 3, -458746, 131092, 3, -458745, 196628, 3, -458735, 262164, 3, -524264, 262164, 3, -589800, 262164, 3, -655349, 262164, 3, -720886, 262164, 3, -786423, 393236, 2, -458744, 196628, 5, -458743, 196628, 5, -458742, 196628, 5, -458741, 196628, 5, -458740, 196628, 5, -458739, 196628, 5, -458738, 196628, 5, -458737, 196628, 5, -458736, 196628, 5, -589818, 196628, 5, -524282, 196628, 5, -589817, 196628, 5, -524281, 196628, 5, -589816, 196628, 5, -524280, 196628, 5, -589815, 196628, 5, -524279, 196628, 5, -589814, 196628, 5, -524278, 196628, 5, -589813, 196628, 5, -524277, 196628, 5, -589812, 196628, 5, -524276, 196628, 5, -589811, 196628, 5, -524275, 196628, 5, -589810, 196628, 5, -524274, 196628, 5, -589809, 196628, 5, -524273, 196628, 5, -589808, 196628, 5, -524272, 196628, 5, -589807, 196628, 5, -524271, 196628, 5, -589806, 196628, 5, -524270, 196628, 5, -589805, 196628, 5, -524269, 196628, 5, -589804, 196628, 5, -524268, 196628, 5, -589803, 196628, 5, -524267, 196628, 5, -589802, 196628, 5, -524266, 196628, 5, -589801, 196628, 5, -524265, 196628, 5, -655356, 196628, 5, -589820, 196628, 5, -655355, 196628, 5, -589819, 196628, 5, -655354, 196628, 5, -655353, 196628, 5, -655352, 196628, 5, -655351, 196628, 5, -655350, 196628, 5, -720893, 196628, 5, -655357, 196628, 5, -720892, 196628, 5, -720891, 196628, 5, -720890, 196628, 5, -720889, 196628, 5, -720888, 196628, 5, -720887, 196628, 5, -786430, 262164, 2, -720894, 196628, 5, -786429, 327700, 2, -786428, 327700, 2, -786427, 327700, 2, -786426, 196628, 2, -786425, 262164, 2, -786424, 327700, 2, -786431, 196628, 2, -655343, 393236, 8, -655340, 393236, 8, -786412, 393236, 6, -720876, 393236, 7, -983018, 131092, 2, -917479, 131092, 5, -851942, 131092, 5, -786405, 131092, 5, -851938, 262164, 3, -917474, 262164, 3, -983006, 393236, 2, -786395, 262164, 3, -786404, 196628, 5, -786403, 196628, 5, -786402, 196628, 5, -786401, 196628, 5, -786400, 196628, 5, -786399, 196628, 5, -786398, 196628, 5, -786397, 196628, 5, -786396, 196628, 5, -917477, 196628, 5, -851941, 196628, 5, -917478, 196628, 5, -983017, 196628, 2, -983016, 262164, 2, -983015, 327700, 2, -983014, 327700, 2, -983013, 327700, 2, -983012, 196628, 2, -983011, 262164, 2, -983010, 327700, 2, -983009, 327700, 2, -983008, 327700, 2, -983007, 327700, 2, -917476, 720916, 0, -851940, 720916, 1, -917475, 786452, 0, -851939, 786452, 1, -720863, 720916, 1610612738, -458729, 720916, 1610612738, -458719, 720916, 1610612738, -655317, 393236, 6, -851921, 393236, 6, -786385, 393236, 7, -720849, 393236, 8, -589781, 393236, 8, -524256, 131092, 5, -458717, 131092, 5, -393180, 131092, 5, -327643, 131092, 5, -393178, 196628, 5, -327642, 196628, 5, -393177, 196628, 5, -327641, 196628, 5, -393176, 196628, 5, -327640, 196628, 5, -393175, 196628, 5, -327639, 196628, 5, -393174, 196628, 5, -327638, 196628, 5, -393173, 196628, 5, -327637, 196628, 5, -393172, 196628, 5, -327636, 196628, 5, -393171, 196628, 5, -327635, 196628, 5, -393170, 196628, 5, -327634, 196628, 5, -393169, 196628, 5, -327633, 196628, 5, -393168, 196628, 5, -327632, 196628, 5, -393167, 196628, 5, -327631, 196628, 5, -458702, 196628, 5, -327630, 262164, 3, -393166, 262164, 3, -458701, 262164, 3, -458703, 393236, 4, -458705, 393236, 4, -458707, 393236, 4, -458709, 393236, 4, -458711, 393236, 4, -458715, 196628, 5, -393179, 196628, 5, -458716, 196628, 5, -458714, 196628, 5, -458713, 196628, 5, -458712, 196628, 5, -458710, 196628, 5, -458708, 196628, 5, -458706, 196628, 5, -458704, 196628, 5, -524255, 196628, 5, -524254, 196628, 5, -524253, 196628, 5, -524252, 196628, 5, -524251, 196628, 5, -524250, 196628, 5, -524249, 196628, 5, -524248, 196628, 5, -524247, 196628, 5, -524246, 196628, 5, -524245, 196628, 5, -524244, 196628, 5, -524243, 196628, 5, -524242, 196628, 5, -524241, 196628, 5, -524240, 196628, 5, -524239, 196628, 5, -524238, 196628, 5, -524237, 196628, 5, -524236, 196628, 5, -524235, 196628, 5, -524234, 262164, 3, -327629, 720916, 2, -458699, 720916, 1342177282, -720841, 131092, 5, -655304, 131092, 5, -720837, 262164, 3, -655301, 262164, 3, -786370, 393236, 2, -655303, 196628, 5, -655302, 196628, 5, -720840, 196628, 5, -720839, 196628, 5, -720838, 196628, 5, -786379, 327700, 2, -786378, 196628, 2, -786377, 262164, 2, -786376, 327700, 2, -786375, 327700, 2, -786374, 327700, 2, -786373, 196628, 2, -786372, 262164, 2, -786371, 327700, 2, -524227, 393236, 6, -196547, 393236, 8, -458691, 393236, 7, -393155, 393236, 7, -327619, 393236, 7, -262083, 393236, 7, -131011, 131092, 4, -131010, 196628, 5, -131009, 196628, 5, -131008, 196628, 5, -131007, 196628, 5, -131006, 196628, 5, -131005, 196628, 5, -131004, 196628, 5, -131003, 196628, 5, -131002, 196628, 5, -131001, 196628, 5, -131000, 196628, 5, -130999, 196628, 5, -130998, 196628, 5, -130997, 196628, 5, -130996, 196628, 5, -130995, 196628, 5, -130994, 196628, 5, -130993, 196628, 5, -130992, 262164, 3, -196528, 393236, 8, -196529, 393236, 8, -327601, 393236, 7, -458673, 393236, 7, -458672, 393236, 7, -393136, 393236, 7, -327600, 393236, 7, -262064, 393236, 7, -524208, 393236, 6, -458681, 393236, 7, -393145, 393236, 8, -458680, 393236, 7, -393144, 393236, 8, -1310649, 393236, 7, -1245113, 393236, 7, -1179577, 393236, 7, -1114041, 393236, 7, -1048505, 393236, 7, -982969, 393236, 7, -917433, 393236, 7, -851897, 393236, 7, -786361, 393236, 7, -655289, 393236, 7, -589753, 393236, 7, -524217, 393236, 7, -1310648, 393236, 7, -1245112, 393236, 7, -1179576, 393236, 7, -1114040, 393236, 7, -1048504, 393236, 7, -982968, 393236, 7, -917432, 393236, 7, -851896, 393236, 7, -786360, 393236, 7, -720824, 393236, 7, -655288, 393236, 7, -589752, 393236, 7, -524216, 393236, 7, -1376185, 393236, 6, -1376184, 393236, 6, -262082, 393236, 7, -393154, 393236, 7, -786351, 196628, 2, -786350, 262164, 2, -786349, 327700, 2, -786348, 327700, 2, -786347, 196628, 2, -786346, 262164, 2, -786345, 327700, 2, -720813, 196628, 5, -720812, 196628, 5, -720811, 196628, 5, -720810, 196628, 5, -720809, 196628, 5, -655276, 196628, 5, -655275, 196628, 5, -655274, 196628, 5, -655273, 196628, 5, -589739, 196628, 5, -589738, 196628, 5, -589737, 196628, 5, -589736, 196628, 5, -589735, 196628, 5, -589734, 196628, 5, -589733, 196628, 5, -589732, 196628, 5, -589731, 196628, 5, -786344, 393236, 2, -720808, 262164, 3, -655272, 262164, 3, -786352, 131092, 2, -720814, 131092, 5, -655277, 131092, 5, -589740, 131092, 5, -524197, 131092, 5, -458660, 131092, 5, -393123, 131092, 3, -393122, 196628, 3, -458657, 196628, 5, -393121, 196628, 5, -458656, 196628, 5, -393120, 196628, 5, -458655, 196628, 5, -393119, 196628, 5, -458654, 196628, 5, -393118, 196628, 5, -458653, 196628, 5, -393117, 196628, 5, -458652, 196628, 5, -393116, 196628, 5, -458651, 196628, 5, -393115, 196628, 5, -458650, 196628, 5, -393114, 196628, 5, -458649, 196628, 5, -393113, 196628, 5, -458648, 196628, 5, -393112, 196628, 5, -458647, 196628, 5, -393111, 196628, 5, -458646, 196628, 5, -393110, 196628, 5, -458645, 196628, 5, -393109, 196628, 5, -458644, 196628, 5, -393108, 196628, 5, -458643, 196628, 5, -393107, 196628, 5, -458642, 196628, 5, -393106, 196628, 5, -458641, 196628, 5, -393105, 196628, 5, -458640, 196628, 5, -393104, 196628, 5, -458639, 196628, 5, -393103, 196628, 5, -458638, 196628, 5, -393102, 196628, 5, -458637, 196628, 5, -393101, 196628, 5, -458636, 196628, 5, -393100, 196628, 5, -458635, 196628, 5, -393099, 196628, 5, -458659, 196628, 5, -458658, 196628, 5, -524196, 196628, 5, -524195, 196628, 5, -524194, 196628, 5, -524193, 393236, 4, -524191, 393236, 4, -524189, 393236, 4, -655248, 393236, 4, -655246, 393236, 4, -655244, 393236, 4, -655242, 393236, 4, -393098, 262164, 3, -458634, 262164, 3, -524169, 262164, 3, -589704, 262164, 3, -655239, 262164, 3, -720774, 262164, 3, -786310, 262164, 3, -851846, 262164, 3, -851856, 131092, 4, -786320, 131092, 4, -720785, 131092, 4, -655250, 131092, 4, -720790, 393236, 6, -786323, 393236, 6, -655254, 393236, 8, -655251, 393236, 8, -720787, 393236, 7, -589730, 196628, 5, -589729, 196628, 5, -589728, 196628, 5, -589727, 196628, 5, -589726, 196628, 5, -589725, 196628, 5, -589724, 196628, 5, -589723, 196628, 5, -589722, 196628, 5, -589721, 196628, 5, -589720, 196628, 5, -589719, 196628, 5, -589718, 196628, 5, -589717, 196628, 5, -589716, 196628, 5, -589715, 196628, 5, -851855, 196628, 5, -851854, 196628, 5, -851853, 196628, 5, -851852, 196628, 5, -851851, 196628, 5, -851850, 196628, 5, -851849, 196628, 5, -851848, 196628, 5, -851847, 196628, 5, -524182, 196628, 5, -524183, 196628, 5, -524184, 196628, 5, -524185, 196628, 5, -524186, 196628, 5, -524187, 196628, 5, -524188, 196628, 5, -524181, 196628, 5, -524180, 196628, 5, -524179, 196628, 5, -524178, 196628, 5, -589714, 196628, 5, -589713, 196628, 5, -655249, 196628, 5, -524177, 196628, 5, -524176, 196628, 5, -589712, 196628, 5, -589711, 196628, 5, -655247, 196628, 5, -720783, 196628, 5, -786319, 196628, 5, -786318, 196628, 5, -720782, 196628, 5, -720781, 196628, 5, -786317, 196628, 5, -786316, 196628, 5, -720780, 196628, 5, -720779, 196628, 5, -786315, 196628, 5, -786314, 196628, 5, -720778, 196628, 5, -720777, 196628, 5, -786313, 196628, 5, -786312, 196628, 5, -720776, 196628, 5, -655240, 196628, 5, -655241, 196628, 5, -589705, 196628, 5, -589706, 196628, 5, -589707, 196628, 5, -655243, 196628, 5, -589708, 196628, 5, -589709, 196628, 5, -655245, 196628, 5, -589710, 196628, 5, -524174, 196628, 5, -524175, 196628, 5, -524173, 196628, 5, -524172, 196628, 5, -524171, 196628, 5, -524170, 196628, 5, -720775, 196628, 5, -786311, 196628, 5, -720784, 196628, 5, -524190, 393236, 5, -524192, 393236, 5, -393097, 720916, 2, -65475, 720916, 1342177282, -65465, 720916, 1342177282, -65456, 720916, 1342177282, -327609, 720916, 1342177282, -982924, 20, 0, -917388, 20, 1, -982923, 65556, 0, -917387, 65556, 1, -720825, 393236, 7, -917481, 720916, 3, -851945, 720916, 3, -786409, 720916, 3, -720873, 720916, 3, -655337, 720916, 3, -655327, 720916, 3, -589791, 720916, 3, -917471, 720916, 3, -851935, 720916, 3, -655313, 720916, 3, -589777, 720916, 3, -720843, 720916, 3, -655307, 720916, 3, -589771, 720916, 3, -720835, 720916, 3, -655299, 720916, 3, -589763, 720916, 3, -262073, 720916, 3, -196537, 720916, 3, -720816, 720916, 3, -655280, 720916, 3, -589744, 720916, 3, -851888, 786452, 2, -851907, 786452, 2, -851915, 786452, 2, -1048543, 786452, 2, -1048553, 786452, 2, -786380, 131092, 2)
+layer_1/tile_data = PackedInt32Array(-393149, 524308, 5, -327613, 524308, 6, -262077, 524308, 7, -196541, 524308, 8, -393148, 589844, 5, -327612, 589844, 6, -262076, 589844, 7, -196540, 589844, 8, -393147, 655380, 5, -327611, 655380, 6, -262075, 655380, 7, -196539, 655380, 8, -393153, 524308, 5, -327617, 524308, 6, -262081, 524308, 7, -196545, 524308, 8, -393152, 589844, 5, -327616, 589844, 6, -262080, 589844, 7, -196544, 589844, 8, -393151, 655380, 5, -327615, 655380, 6, -262079, 655380, 7, -196543, 655380, 8, -655296, 524308, 5, -589760, 524308, 6, -524224, 524308, 7, -458688, 524308, 8, -655295, 589844, 5, -589759, 589844, 6, -524223, 589844, 7, -458687, 589844, 8, -655294, 655380, 5, -589758, 655380, 6, -524222, 655380, 7, -458686, 655380, 8, -655292, 524308, 5, -589756, 524308, 6, -524220, 524308, 7, -458684, 524308, 8, -655291, 589844, 5, -589755, 589844, 6, -524219, 589844, 7, -458683, 589844, 8, -655290, 655380, 5, -589754, 655380, 6, -524218, 655380, 7, -458682, 655380, 8, -655287, 524308, 5, -589751, 524308, 6, -524215, 524308, 7, -458679, 524308, 8, -655286, 655380, 5, -589750, 655380, 6, -524214, 655380, 7, -458678, 655380, 8, -393143, 524308, 5, -327607, 524308, 6, -262071, 524308, 7, -196535, 524308, 8, -393142, 589844, 5, -327606, 589844, 6, -262070, 589844, 7, -196534, 589844, 8, -393139, 589844, 5, -327603, 589844, 6, -262067, 589844, 7, -196531, 589844, 8, -393138, 655380, 5, -327602, 655380, 6, -262066, 655380, 7, -196530, 655380, 8, -393141, 589844, 5, -327605, 589844, 6, -262069, 589844, 7, -196533, 589844, 8, -393140, 589844, 5, -327604, 589844, 6, -262068, 589844, 7, -196532, 589844, 8, -655284, 524308, 5, -589748, 524308, 6, -524212, 524308, 7, -458676, 524308, 8, -655283, 589844, 5, -589747, 589844, 6, -524211, 589844, 7, -458675, 589844, 8, -655282, 655380, 5, -589746, 655380, 6, -524210, 655380, 7, -458674, 655380, 8, -917392, 458772, 6, -917383, 458772, 8, -917391, 458772, 7, -917390, 458772, 7, -917389, 458772, 7, -917388, 458772, 7, -917387, 458772, 7, -917386, 458772, 7, -917385, 458772, 7, -917384, 458772, 7)
+
+[node name="PipeArea" parent="ShipBob/TileMap" instance=ExtResource("4_w5od3")]
+position = Vector2(1872, -240)
+level_scene = "res://Instances/Levels/Airships/airship_boom_boom_1.tscn"
+
+[node name="Propeller2" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(848, -72)
+sprite_frames = SubResource("SpriteFrames_skgp3")
+autoplay = "default"
+flip_h = true
+
+[node name="Propeller3" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(1936, -88)
+sprite_frames = SubResource("SpriteFrames_skgp3")
+autoplay = "default"
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShipBob"]
+libraries = {
+"": SubResource("AnimationLibrary_pc2ww")
+}
+autoplay = "Bob"
+
+[node name="BulletBillLauncher" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(280, -168)
+bullet_time = 4
+
+[node name="BulletBillLauncher2" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(328, -200)
+bullet_time = 4
+
+[node name="BulletBillLauncher3" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(600, -200)
+bullet_time = 4
+
+[node name="BulletBillLauncher4" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(696, -168)
+bullet_time = 4
+
+[node name="BulletBillLauncher5" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(760, -216)
+bullet_time = 4
+
+[node name="BulletBillLauncher6" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(808, -136)
+bullet_time = 4
+
+[node name="BulletBillLauncher7" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1000, -104)
+direction = 1
+bullet_time = 4
+
+[node name="BulletBillLauncher8" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1000, -72)
+direction = 1
+bullet_time = 4
+
+[node name="BulletBillLauncher9" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1000, -40)
+direction = 1
+bullet_time = 4
+
+[node name="BulletBillLauncher10" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1272, -120)
+bullet_time = 4
+
+[node name="BulletBillLauncher11" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1272, -88)
+bullet_time = 4
+
+[node name="BulletBillLauncher12" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1272, -56)
+bullet_time = 4
+
+[node name="BulletBillLauncher13" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1704, -184)
+bullet_time = 4
+
+[node name="BulletBillLauncher14" parent="ShipBob" instance=ExtResource("10_h47l3")]
+position = Vector2(1752, -200)
+bullet_time = 4
+
+[node name="AirshipCannon" parent="ShipBob" instance=ExtResource("5_ujqw8")]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(464, -208)
+rotation = 0.785398
+
+[node name="?Block" parent="ShipBob" instance=ExtResource("13_gvhmr")]
+position = Vector2(904, -248)
+item = ExtResource("14_mxv5p")
+
+[node name="RockyWrench" parent="ShipBob" instance=ExtResource("10_7o7f2")]
+position = Vector2(1528, -144)
+
+[node name="RockyWrench2" parent="ShipBob" instance=ExtResource("10_7o7f2")]
+position = Vector2(1560, -144)
+
+[node name="RockyWrench3" parent="ShipBob" instance=ExtResource("10_7o7f2")]
+position = Vector2(1592, -144)
+
+[node name="Player" parent="." instance=ExtResource("4_46tk3")]
+material = SubResource("ShaderMaterial_0k8c1")
+position = Vector2(64, -16)
+
+[node name="AirshipPlayerLaunch" parent="." instance=ExtResource("7_pgp1c")]
+position = Vector2(64, -8)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_ak5hv")
+
+[node name="AutoScroll" parent="." node_paths=PackedStringArray("path") instance=ExtResource("8_iyn3c")]
+path = NodePath("../Path2D")
+scroll_speed = 32.0
+
+[node name="LevelBG" parent="." instance=ExtResource("16_xkqhm")]
+main_texture = ExtResource("17_wg8uw")
+fg_texture = ExtResource("18_1j6ql")
+sky_colour = Color(0.752941, 0.952941, 0.713726, 1)
+bg_scroll_speed = Vector2(32, 0)
+fg_scroll_speed = Vector2(64, 0)
+fg_vertical_offset = -278
+
+[node name="AutumnLevelBG" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("17_ps8e3")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("18_lhq00")
+fg_texture = ExtResource("18_1j6ql")
+bg_scroll_speed = Vector2(32, 0)
+fg_scroll_speed = Vector2(64, 0)
+fg_vertical_offset = -350

@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://mllj08uqowt2"]
+
+[ext_resource type="Script" uid="uid://bb1a83xtpps3x" path="res://Scripts/Classes/Enemies/Goomba.gd" id="1_mogf6"]
+[ext_resource type="Texture2D" uid="uid://c1crcybj175y6" path="res://Assets/Sprites/Enemys/Goomba.png" id="2_5goag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdysd"]
+atlas = ExtResource("2_5goag")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxxat"]
+atlas = ExtResource("2_5goag")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd6ki"]
+atlas = ExtResource("2_5goag")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k3lbr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdysd")
+}],
+"loop": true,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxxat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sd6ki")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e4iv"]
+size = Vector2(7, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_askt2"]
+size = Vector2(11, 15)
+
+[node name="Goomba" type="CharacterBody2D"]
+editor_description = "Sprites by Enzo999 & Jojota, Thanks!!! <3"
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_mogf6")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_k3lbr")
+animation = &"Die"
+autoplay = "Walk"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.75)
+shape = SubResource("RectangleShape2D_0e4iv")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_askt2")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -9)

@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bkaii6uup7xft"]
+
+[ext_resource type="Texture2D" uid="uid://bexfcyqrm0q7e" path="res://Assets/Sprites/Map/MapSprites/StandardMapPoints.png" id="1_wi3p3"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/standard_map_point_visual.gd" id="2_uderi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7br8b"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iya5w"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q7ce"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5t5na"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfqad"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2htnp"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8evik"]
+atlas = ExtResource("1_wi3p3")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ky1je"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Completed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7br8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iya5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6q7ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5t5na")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfqad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2htnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8evik")
+}],
+"loop": true,
+"name": &"Incomplete",
+"speed": 5.0
+}]
+
+[node name="StandardMapPointVisual" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ky1je")
+animation = &"Completed"
+autoplay = "Incomplete"
+frame_progress = 0.720602
+speed_scale = 2.0
+script = ExtResource("2_uderi")

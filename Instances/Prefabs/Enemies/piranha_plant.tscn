@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0bcccf3bfcw"]
+
+[ext_resource type="Script" uid="uid://di5w68vi7mbd1" path="res://Scripts/Classes/Enemies/piranha_plant.gd" id="1_kskp3"]
+[ext_resource type="Texture2D" uid="uid://c3onqx2w3sgon" path="res://Assets/Sprites/Enemys/AutumnPiranhaPlant.png" id="2_13mcj"]
+[ext_resource type="Texture2D" uid="uid://btl8ifnn6hay4" path="res://Assets/Sprites/Enemys/PiranhaPlant.png" id="2_31p2x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aqnxx"]
+atlas = ExtResource("2_13mcj")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk63k"]
+atlas = ExtResource("2_13mcj")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0svm"]
+atlas = ExtResource("2_31p2x")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4f13"]
+atlas = ExtResource("2_31p2x")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7dv5d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aqnxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk63k")
+}],
+"loop": true,
+"name": &"Autumn",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0svm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4f13")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_h8vj4"]
+resource_name = "PopUp"
+length = 4.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, -16), Vector2(0, -16), Vector2(0, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_kkjnc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_id0vd"]
+_data = {
+&"PopUp": SubResource("Animation_h8vj4"),
+&"RESET": SubResource("Animation_kkjnc")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_thvks"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijh50"]
+size = Vector2(10, 26)
+
+[node name="PiranhaPlant" type="CharacterBody2D" node_paths=PackedStringArray("main_animation_player")]
+z_index = -10
+script = ExtResource("1_kskp3")
+gib_type = 2
+ice_size = Vector2(1.5, 2)
+main_animation_player = NodePath("Animations")
+spiky_top = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_7dv5d")
+animation = &"Autumn"
+autoplay = "default"
+frame_progress = 0.203938
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite"]
+remote_path = NodePath("../../Hitbox")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_id0vd")
+}
+
+[node name="PlayerDetect" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="PlayerDetect"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_thvks")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(1, 3.2)
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_ijh50")
+
+[connection signal="killed" from="." to="." method="hi"]
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

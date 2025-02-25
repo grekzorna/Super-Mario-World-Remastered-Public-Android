@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://ysj3ofwosux8"]
+
+[ext_resource type="Texture2D" uid="uid://clfer5nhxmnws" path="res://Assets/Sprites/Objects/Vine.png" id="1_6dhmi"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="2_m10rc"]
+[ext_resource type="PackedScene" uid="uid://cnv6i6byojhnq" path="res://Instances/Parts/climbable_area.tscn" id="3_3ikoi"]
+[ext_resource type="Texture2D" uid="uid://xse6tu4ec6mb" path="res://Assets/Sprites/Objects/AutumnVine.png" id="3_qp0sm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6krn"]
+size = Vector2(8, 16)
+
+[node name="Vine" type="Node2D"]
+z_index = -6
+z_as_relative = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_6dhmi")
+script = ExtResource("2_m10rc")
+autumn_texture = ExtResource("3_qp0sm")
+
+[node name="ClimbableArea" parent="." instance=ExtResource("3_3ikoi")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClimbableArea"]
+shape = SubResource("RectangleShape2D_k6krn")

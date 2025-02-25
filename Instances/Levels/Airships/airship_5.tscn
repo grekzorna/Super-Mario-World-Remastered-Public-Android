@@ -1,0 +1,305 @@
+[gd_scene load_steps=23 format=3 uid="uid://ctati3ogtasa6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_vctuk"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="2_uh2ps"]
+[ext_resource type="Texture2D" uid="uid://d0c2x1tfgf3su" path="res://Assets/LevelGuides/SuperMarioBros3Map8Airship.png" id="4_ye8y3"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="5_bjxy2"]
+[ext_resource type="Texture2D" uid="uid://3mvwjkif1ytb" path="res://Assets/Sprites/Tilesets/Airship/Tileset.png" id="5_dm1mc"]
+[ext_resource type="PackedScene" uid="uid://drwoo4wu0o6lv" path="res://Instances/Prefabs/Interactables/horizontal_burner_flame.tscn" id="6_3gw2r"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="6_tmu2o"]
+[ext_resource type="Texture2D" uid="uid://b20102ak5ai75" path="res://Assets/Sprites/Backgrounds/Overworld/Rocks/Rock2.png" id="7_pepk5"]
+[ext_resource type="PackedScene" uid="uid://dxipn4urepq1w" path="res://Instances/Prefabs/Enemies/rocky_wrench.tscn" id="7_u1irf"]
+[ext_resource type="Texture2D" uid="uid://d0xffqsebrdfg" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds2.png" id="8_cy6h7"]
+[ext_resource type="PackedScene" uid="uid://bnpmmo1mnf23m" path="res://Instances/Parts/airship_player_launch.tscn" id="9_w8pqv"]
+[ext_resource type="PackedScene" uid="uid://d377acfcvpbhk" path="res://Instances/Prefabs/auto_scroll.tscn" id="12_gpt1i"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_og2cl"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6qu5"]
+atlas = ExtResource("5_dm1mc")
+region = Rect2(0, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3860"]
+atlas = ExtResource("5_dm1mc")
+region = Rect2(32, 96, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpodq"]
+atlas = ExtResource("5_dm1mc")
+region = Rect2(64, 96, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxdma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6qu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3860")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpodq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_b2gk0"]
+resource_name = "Bob"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_afvhx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc2ww"]
+_data = {
+"Bob": SubResource("Animation_b2gk0"),
+"RESET": SubResource("Animation_afvhx")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_puq4i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 88, -264, 0, 0, 0, 0, 2992, -280)
+}
+point_count = 2
+
+[node name="Airship5" type="Node"]
+script = ExtResource("1_vctuk")
+
+[node name="Player" parent="." instance=ExtResource("2_uh2ps")]
+material = SubResource("ShaderMaterial_og2cl")
+position = Vector2(48, -8)
+
+[node name="LevelGuide" type="Sprite2D" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+z_index = -10
+position = Vector2(128, -592)
+texture = ExtResource("4_ye8y3")
+centered = false
+
+[node name="ShipBob" type="Node2D" parent="."]
+
+[node name="TileMap" parent="ShipBob" instance=ExtResource("5_bjxy2")]
+position = Vector2(0, -16)
+layer_0/tile_data = PackedInt32Array(-851967, 131092, 2, -851966, 196628, 2, -851965, 262164, 2, -851964, 327700, 2, -851963, 327700, 2, -851962, 196628, 2, -851961, 262164, 2, -851960, 327700, 2, -851959, 393236, 2, -983026, 131092, 5, -983025, 196628, 5, -983024, 196628, 5, -983023, 196628, 5, -983022, 262164, 3, -917480, 262164, 3, -786401, 262164, 3, -917459, 393236, 2, -917448, 262164, 3, -1114047, 262164, 3, -982964, 262164, 3, -917421, 262164, 3, -851878, 262164, 3, -917415, 393236, 2, -982958, 393236, 2, -1048501, 393236, 2, -851872, 262164, 3, -1179535, 262164, 3, -1245072, 393236, 2, -786309, 262164, 3, -917370, 262164, 3, -1245042, 262164, 3, -786279, 262164, 3, -1113952, 262164, 3, -982867, 262164, 3, -917320, 262164, 3, -1113921, 393236, 2, -1048385, 262164, 3, -982849, 262164, 3, -917313, 262164, 3, -917308, 262164, 3, -851772, 262164, 4, -851773, 196628, 4, -851785, 196628, 5, -851784, 196628, 5, -851783, 196628, 5, -851782, 196628, 5, -851781, 196628, 5, -851780, 196628, 5, -851779, 196628, 5, -851778, 196628, 5, -851777, 196628, 5, -851776, 196628, 5, -851775, 196628, 5, -851774, 196628, 5, -851786, 131092, 5, -917323, 131092, 5, -917322, 196628, 5, -917321, 196628, 5, -1113925, 131092, 2, -1048389, 131092, 4, -982853, 131092, 4, -917317, 131092, 4, -1113924, 196628, 2, -1048388, 196628, 5, -982852, 196628, 5, -917316, 196628, 5, -1113923, 262164, 2, -1048387, 196628, 5, -982851, 196628, 5, -917315, 196628, 5, -1113922, 327700, 2, -1048386, 196628, 5, -982850, 196628, 5, -917314, 196628, 5, -917309, 196628, 5, -917310, 131092, 4, -982871, 131092, 3, -982870, 196628, 3, -982869, 196628, 5, -982868, 196628, 5, -1113955, 196628, 5, -1113954, 196628, 5, -1113953, 196628, 5, -1113956, 131092, 5, -786283, 131092, 5, -1245046, 131092, 5, -917374, 131092, 5, -786313, 131092, 5, -1179539, 131092, 5, -851874, 131092, 5, -786337, 131092, 3, -786336, 196628, 3, -786335, 196628, 5, -786334, 196628, 5, -786333, 196628, 5, -786332, 196628, 5, -786331, 196628, 5, -786330, 196628, 5, -786329, 196628, 5, -786328, 196628, 5, -786327, 196628, 5, -786326, 196628, 5, -786325, 262164, 5, -851861, 393236, 2, -851863, 131092, 2, -851862, 327700, 2, -851873, 196628, 5, -851881, 196628, 5, -851880, 196628, 5, -851879, 196628, 5, -917416, 327700, 2, -917417, 131092, 2, -851882, 131092, 5, -982960, 131092, 2, -982959, 327700, 2, -917424, 196628, 5, -917423, 196628, 5, -917422, 196628, 5, -917425, 131092, 5, -982968, 131092, 5, -1048503, 131092, 2, -982967, 196628, 5, -982966, 196628, 5, -1048502, 327700, 2, -982965, 196628, 5, -1114051, 196628, 5, -1114050, 196628, 5, -1114049, 196628, 5, -1114048, 196628, 5, -1114052, 131092, 5, -917452, 131092, 5, -851930, 131092, 5, -786406, 131092, 5, -917484, 131092, 5, -917483, 196628, 5, -917482, 196628, 5, -917481, 196628, 5, -786405, 196628, 5, -786404, 196628, 5, -786403, 196628, 5, -786402, 196628, 5, -851929, 196628, 5, -851928, 196628, 5, -851927, 196628, 5, -851926, 196628, 5, -851925, 196628, 5, -851924, 196628, 5, -851923, 262164, 5, -917463, 196628, 2, -917462, 327700, 2, -917461, 327700, 2, -917460, 327700, 2, -917464, 131092, 2, -1114068, 393236, 6, -1048532, 393236, 7, -982996, 393236, 8, -917474, 393236, 6, -851938, 393236, 8, -1245121, 393236, 6, -1179585, 393236, 8, -917451, 196628, 5, -917450, 196628, 5, -917449, 196628, 5, -1114037, 393236, 6, -1048494, 393236, 6, -982951, 393236, 6, -1310608, 393236, 6, -786282, 196628, 5, -786281, 196628, 5, -786280, 196628, 5, -1245045, 196628, 5, -1245044, 196628, 5, -1245043, 196628, 5, -917373, 196628, 5, -917372, 196628, 5, -917371, 196628, 5, -786312, 196628, 5, -786311, 196628, 5, -786310, 196628, 5, -1179538, 196628, 5, -1179537, 196628, 5, -1179536, 196628, 5, -1245073, 327700, 2, -1245074, 131092, 2, -1244996, 20, 0, -1179460, 20, 1, -1244995, 65556, 0, -1179459, 65556, 1, -786430, 131092, 3, -786429, 196628, 3, -720892, 131092, 3, -720891, 196628, 3, -655354, 131092, 3, -655353, 196628, 3, -786423, 262164, 5, -720888, 262164, 3, -655352, 262164, 3, -720890, 196628, 5, -720889, 196628, 5, -786428, 196628, 5, -786427, 196628, 5, -786426, 196628, 5, -786425, 196628, 5, -786424, 196628, 5, -655351, 720916, 2)
+layer_1/tile_data = PackedInt32Array(-1048476, 524308, 5, -982940, 524308, 6, -917404, 524308, 7, -851868, 524308, 8, -1048475, 589844, 5, -982939, 589844, 6, -917403, 589844, 7, -851867, 589844, 8, -1048474, 589844, 5, -982938, 589844, 6, -917402, 589844, 7, -851866, 589844, 8, -1048473, 655380, 5, -982937, 655380, 6, -917401, 655380, 7, -851865, 655380, 8)
+
+[node name="Propeller2" type="AnimatedSprite2D" parent="ShipBob/TileMap"]
+position = Vector2(176, -152)
+sprite_frames = SubResource("SpriteFrames_qxdma")
+autoplay = "default"
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShipBob"]
+libraries = {
+"": SubResource("AnimationLibrary_pc2ww")
+}
+autoplay = "Bob"
+
+[node name="Horizontal" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(296, -264)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal2" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(392, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal3" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(504, -216)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal4" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(728, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal5" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(904, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal6" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1048, -296)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal7" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1224, -264)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal8" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1336, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal9" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1448, -232)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal10" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1720, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal11" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1720, -232)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal12" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1816, -312)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal13" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(1976, -216)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal14" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(2152, -248)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal15" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(2280, -328)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal16" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(2456, -216)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal17" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(2568, -296)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="Horizontal18" parent="ShipBob" instance=ExtResource("6_3gw2r")]
+position = Vector2(2776, -264)
+rotation = 3.14159
+scale = Vector2(1, -1)
+
+[node name="RockyWrench" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(360, -240)
+
+[node name="RockyWrench2" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(456, -208)
+
+[node name="RockyWrench3" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(680, -240)
+
+[node name="RockyWrench4" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(872, -240)
+
+[node name="RockyWrench5" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(1208, -288)
+
+[node name="RockyWrench6" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(1432, -256)
+
+[node name="RockyWrench7" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(1800, -336)
+
+[node name="RockyWrench8" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(2120, -240)
+
+[node name="RockyWrench9" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(2248, -320)
+
+[node name="RockyWrench10" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(2424, -208)
+
+[node name="RockyWrench11" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(2536, -288)
+
+[node name="RockyWrench12" parent="ShipBob" instance=ExtResource("7_u1irf")]
+position = Vector2(2744, -256)
+
+[node name="LevelBG" parent="." instance=ExtResource("6_tmu2o")]
+main_texture = ExtResource("7_pepk5")
+fg_texture = ExtResource("8_cy6h7")
+sky_colour = Color(0.847059, 0.972549, 0.847059, 1)
+bg_scroll_speed = Vector2(32, 0)
+bg_vertical_offset = -450
+fg_scroll_speed = Vector2(64, 0)
+fg_vertical_offset = -367
+
+[node name="AirshipPlayerLaunch" parent="." instance=ExtResource("9_w8pqv")]
+
+[node name="AutoScroll" parent="." node_paths=PackedStringArray("path") instance=ExtResource("12_gpt1i")]
+path = NodePath("../Path2D")
+scroll_speed = 32.0
+
+[node name="Path2D" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_puq4i")

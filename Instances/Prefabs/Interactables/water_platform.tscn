@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cusgb660l7rkp"]
+
+[ext_resource type="Texture2D" uid="uid://bremhxbseya0a" path="res://Assets/Sprites/Objects/FloatingPlatform.png" id="1_dblf5"]
+[ext_resource type="Script" path="res://Scripts/Interactables/water_platform.gd" id="1_ga7pj"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="3_ihkwr"]
+[ext_resource type="Texture2D" uid="uid://ctb0npuyuonic" path="res://Assets/Sprites/Objects/AutumnFloatingPlatform.png" id="4_mxosc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3foil"]
+size = Vector2(48, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kmqd"]
+size = Vector2(48, 1)
+
+[node name="WaterPlatform" type="StaticBody2D"]
+collision_layer = 25
+script = ExtResource("1_ga7pj")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 16)
+texture = ExtResource("1_dblf5")
+script = ExtResource("3_ihkwr")
+autumn_texture = ExtResource("4_mxosc")
+overhaul_only = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_3foil")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_3kmqd")

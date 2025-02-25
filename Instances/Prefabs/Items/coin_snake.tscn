@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://bml67t0ji3wll"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Items/CoinSnake.gd" id="1_nvtrd"]
+[ext_resource type="Texture2D" uid="uid://dmkiltbmecuxq" path="res://Assets/Sprites/Items/PhysicsCoin.png" id="2_kr4cw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we3sq"]
+atlas = ExtResource("2_kr4cw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3pun"]
+atlas = ExtResource("2_kr4cw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uye6d"]
+atlas = ExtResource("2_kr4cw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gjxw8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we3sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3pun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uye6d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kd33n"]
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggqu7"]
+size = Vector2(8, 8)
+
+[node name="CoinSnake" type="StaticBody2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_nvtrd")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gjxw8")
+autoplay = "default"
+frame_progress = 0.401856
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.25
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kd33n")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ggqu7")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

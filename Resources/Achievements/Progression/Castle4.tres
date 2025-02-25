@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c0u7ye8euyl74"]
+
+[ext_resource type="Texture2D" uid="uid://cs0gtvu6mk4oo" path="res://Assets/Sprites/AchievementIcons/46601.png" id="1_bhmrv"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_0rpp6"]
+
+[resource]
+script = ExtResource("2_0rpp6")
+title = "Ludwig's Last Symphony"
+description = "Defeat Ludwig von Koopa of Castle #4"
+icon = ExtResource("1_bhmrv")

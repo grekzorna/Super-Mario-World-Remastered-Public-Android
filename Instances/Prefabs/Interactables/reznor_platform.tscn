@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dklps00ugd3ii"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/BlockClass.gd" id="1_6l7s7"]
+[ext_resource type="Texture2D" uid="uid://cl73du6wg7ynx" path="res://Assets/Sprites/Characters/Bosses/Reznor/ReznorPlatform.png" id="2_h3hjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fj7yr"]
+size = Vector2(32, 16)
+
+[node name="Block" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+collision_mask = 12
+script = ExtResource("1_6l7s7")
+visuals = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.1)
+shape = SubResource("RectangleShape2D_fj7yr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_h3hjf")

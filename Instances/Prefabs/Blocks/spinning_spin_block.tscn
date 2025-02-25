@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://cytsak3syvkd5"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/spinning_spin_block.gd" id="1_vsr2w"]
+[ext_resource type="Texture2D" uid="uid://bp2noccv2ehqo" path="res://Assets/Sprites/Objects/SpinBlock.png" id="2_4f4v4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5f5f"]
+atlas = ExtResource("2_4f4v4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvegg"]
+atlas = ExtResource("2_4f4v4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34tm4"]
+atlas = ExtResource("2_4f4v4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bn4h"]
+atlas = ExtResource("2_4f4v4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cxj42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5f5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvegg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34tm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bn4h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l43l0"]
+size = Vector2(16, 16)
+
+[node name="SpinningSpinBlock" type="StaticBody2D"]
+script = ExtResource("1_vsr2w")
+enable_side_hits = false
+enable_ground_pounds = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cxj42")
+autoplay = "default"
+frame_progress = 0.533859
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
+shape = SubResource("RectangleShape2D_l43l0")
+
+[connection signal="timeout" from="Timer" to="." method="stop_spinning"]

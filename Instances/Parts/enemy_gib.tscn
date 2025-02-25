@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpjtx6k6k12ql"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyGib.gd" id="1_5ydqf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_joif6"]
+
+[node name="EnemyGib" type="CharacterBody2D"]
+z_index = 10
+script = ExtResource("1_5ydqf")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_joif6")

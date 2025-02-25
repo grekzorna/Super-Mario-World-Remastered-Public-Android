@@ -1,0 +1,223 @@
+[gd_scene load_steps=20 format=3 uid="uid://m8b8qt3r5ujn"]
+
+[ext_resource type="Script" uid="uid://bwvf2ferwbjvq" path="res://Scripts/UI/title_screen.gd" id="1_vemv5"]
+[ext_resource type="Texture2D" uid="uid://brpkusquyfnyu" path="res://Assets/Sprites/UI/MainBG.png" id="2_aihp8"]
+[ext_resource type="Texture2D" uid="uid://c74wp3uqremug" path="res://Assets/Sprites/UI/Logo.png" id="3_h7vyc"]
+[ext_resource type="Texture2D" uid="uid://d2g1m7wul4xs3" path="res://Assets/Sprites/UI/TitleBorder.png" id="4_qedfh"]
+[ext_resource type="AudioStream" uid="uid://drk0vkqkg7nwm" path="res://Assets/Audio/BGM/SMW/TitleScreen.mp3" id="5_hxm7t"]
+[ext_resource type="PackedScene" uid="uid://cvydavs8pfpqo" path="res://Instances/UI/main_menu_selections.tscn" id="6_ib3oy"]
+[ext_resource type="PackedScene" uid="uid://buq5u2vf04i17" path="res://Instances/UI/Menus/player_amount_select.tscn" id="7_r62vo"]
+[ext_resource type="PackedScene" uid="uid://g0kxywn2ba76" path="res://Instances/UI/save_container.tscn" id="8_exupd"]
+[ext_resource type="PackedScene" uid="uid://bxirkhurqoou5" path="res://Instances/UI/Menus/device_assigner.tscn" id="9_3nnpx"]
+[ext_resource type="PackedScene" uid="uid://bi6g06uvigns2" path="res://Instances/UI/Menus/player_select.tscn" id="10_fdcae"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="11_4nfqw"]
+[ext_resource type="PackedScene" uid="uid://dlwtp0uo7c8y3" path="res://Instances/UI/campaign_container.tscn" id="12_xs36h"]
+
+[sub_resource type="Shader" id="Shader_eikt6"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_knxcf"]
+shader = SubResource("Shader_eikt6")
+shader_parameter/circle_size = 0.0
+shader_parameter/screen_width = 480.0
+shader_parameter/screen_height = 270.0
+
+[sub_resource type="Animation" id="Animation_mnhrb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircleShow:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b0c1n"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircleShow:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u67xq"]
+_data = {
+&"RESET": SubResource("Animation_mnhrb"),
+&"Show": SubResource("Animation_b0c1n")
+}
+
+[sub_resource type="Shader" id="Shader_xqsvx"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsnwt"]
+shader = SubResource("Shader_xqsvx")
+shader_parameter/motion = Vector2(-8, -8)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vemv5")
+metadata/_edit_use_anchors_ = true
+
+[node name="CircleShow" type="ColorRect" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_knxcf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CircleAnim" type="AnimationPlayer" parent="CircleShow"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_u67xq")
+}
+autoplay = "Show"
+
+[node name="Main" type="TextureRect" parent="."]
+z_index = -10
+material = SubResource("ShaderMaterial_jsnwt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aihp8")
+stretch_mode = 1
+
+[node name="Logo" type="TextureRect" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.295833
+anchor_top = 0.114815
+anchor_right = 0.704167
+anchor_bottom = 0.451852
+grow_horizontal = 2
+texture = ExtResource("3_h7vyc")
+stretch_mode = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Border" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qedfh")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hxm7t")
+autoplay = true
+bus = &"Music"
+
+[node name="MainMenuSelections" parent="." instance=ExtResource("6_ib3oy")]
+layout_mode = 1
+options = Array[String](["Play Game", "Options", "Custom Levels", "Quit Game", "", ""])
+option_colours = Array[Color]([Color(0, 1, 0, 1), Color(0.816353, 0.489456, 0.85536, 1), Color(0, 0.741176, 1, 1), Color(1, 0.312295, 0.248026, 1), Color(0, 0, 0, 1)])
+initial_active = true
+
+[node name="MainMenuSelections2" parent="." instance=ExtResource("6_ib3oy")]
+layout_mode = 1
+options = Array[String](["Local", "Online", "", "", "", ""])
+option_colours = Array[Color]([Color(1, 0.54592, 0.347146, 1), Color(0, 1, 0, 1), Color(0.816353, 0.489456, 0.85536, 1), Color(1, 0.312295, 0.248026, 1), Color(0, 0, 0, 1)])
+can_exit = true
+
+[node name="PlayerAmountSelect" parent="." instance=ExtResource("7_r62vo")]
+visible = false
+layout_mode = 1
+
+[node name="SaveSelect" parent="." instance=ExtResource("8_exupd")]
+visible = false
+layout_mode = 1
+
+[node name="DeviceAssigner" parent="." instance=ExtResource("9_3nnpx")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterSelect" parent="." instance=ExtResource("10_fdcae")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -53.0
+offset_right = 107.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("11_4nfqw")
+text = "V 1.0
+"
+vertical_alignment = 1
+uppercase = true
+
+[node name="CampaignSelector" parent="." instance=ExtResource("12_xs36h")]
+visible = false
+layout_mode = 1
+
+[connection signal="option_1_selected" from="MainMenuSelections" to="MainMenuSelections" method="close_menu"]
+[connection signal="option_1_selected" from="MainMenuSelections" to="MainMenuSelections2" method="open_menu"]
+[connection signal="option_2_selected" from="MainMenuSelections" to="." method="open_settings"]
+[connection signal="option_3_selected" from="MainMenuSelections" to="." method="open_addon_menu"]
+[connection signal="option_4_selected" from="MainMenuSelections" to="." method="quit_game"]
+[connection signal="menu_exited" from="MainMenuSelections2" to="MainMenuSelections" method="open_menu"]
+[connection signal="option_1_selected" from="MainMenuSelections2" to="Logo" method="hide"]
+[connection signal="option_1_selected" from="MainMenuSelections2" to="MainMenuSelections2" method="close_menu"]
+[connection signal="option_1_selected" from="MainMenuSelections2" to="PlayerAmountSelect" method="open"]
+[connection signal="option_2_selected" from="MainMenuSelections2" to="." method="open_online_menu"]
+[connection signal="cancelled" from="PlayerAmountSelect" to="Logo" method="show"]
+[connection signal="cancelled" from="PlayerAmountSelect" to="MainMenuSelections2" method="open_menu"]
+[connection signal="selected" from="PlayerAmountSelect" to="DeviceAssigner" method="open"]
+[connection signal="closed" from="SaveSelect" to="PlayerAmountSelect" method="open"]
+[connection signal="custom_levels_selected" from="SaveSelect" to="." method="open_custom_levels"]
+[connection signal="save_selected" from="SaveSelect" to="CircleShow/CircleAnim" method="play_backwards"]
+[connection signal="save_selected" from="SaveSelect" to="SaveSelect" method="enter_game"]
+[connection signal="closed" from="DeviceAssigner" to="PlayerAmountSelect" method="open"]
+[connection signal="finished" from="DeviceAssigner" to="CharacterSelect" method="open"]
+[connection signal="finished" from="CharacterSelect" to="CharacterSelect" method="close"]
+[connection signal="finished" from="CharacterSelect" to="CampaignSelector" method="open"]
+[connection signal="campaign_selected" from="CampaignSelector" to="SaveSelect" method="enter"]

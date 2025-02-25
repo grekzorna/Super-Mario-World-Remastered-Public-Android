@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://xiryx8x6ywcv"]
+
+[ext_resource type="Texture2D" uid="uid://b584nol0ikkre" path="res://Assets/Sprites/AchievementIcons/47069.png" id="1_1m28w"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_td7qw"]
+
+[resource]
+script = ExtResource("2_td7qw")
+title = "Filling All The Blocks In"
+description = "Hit the buttons in all four coloured switch palaces"
+icon = ExtResource("1_1m28w")

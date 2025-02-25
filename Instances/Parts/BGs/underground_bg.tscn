@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://t033dlch5h64"]
+
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="1_rwscf"]
+[ext_resource type="Texture2D" uid="uid://cbllbsvb61cup" path="res://Assets/Sprites/Backgrounds/Underground/BG1.png" id="2_8m015"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phg24"]
+atlas = ExtResource("2_8m015")
+region = Rect2(0, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj073"]
+atlas = ExtResource("2_8m015")
+region = Rect2(512, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_715il"]
+atlas = ExtResource("2_8m015")
+region = Rect2(1024, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6anh"]
+atlas = ExtResource("2_8m015")
+region = Rect2(1536, 0, 512, 432)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nxh6r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phg24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj073")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_715il")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6anh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="LevelBG" instance=ExtResource("1_rwscf")]
+main_texture = null
+main_sprite_frames = SubResource("SpriteFrames_nxh6r")
+sky_colour = Color(0, 0, 0, 1)
+
+[node name="SkyLayer" parent="." index="0"]
+screen_offset = Vector2(-165, -110)
+
+[node name="SkyColor" parent="SkyLayer" index="1"]
+color = Color(0, 0, 0, 1)
+
+[node name="RainLayer" parent="." index="1"]
+screen_offset = Vector2(-165, -110)
+
+[node name="MainBGLayer" parent="." index="2"]
+screen_offset = Vector2(-165, -110)
+
+[node name="MainTexture" parent="MainBGLayer" index="0"]
+visible = false
+texture_repeat = 3
+
+[node name="AnimatedMainTexture" parent="MainBGLayer" index="1"]
+texture_repeat = 3
+sprite_frames = SubResource("SpriteFrames_nxh6r")
+frame_progress = 0.988382
+
+[node name="AnimatedSpriteLayer" parent="MainBGLayer" index="2"]
+texture_repeat = 3
+
+[node name="MainFGLayer" parent="." index="3"]
+screen_offset = Vector2(-165, -110)
+
+[node name="MainTexture" parent="MainFGLayer" index="0"]
+texture_repeat = 3
+
+[node name="FGLayer" parent="." index="4"]
+screen_offset = Vector2(-165, -110)
+
+[node name="Texture" parent="FGLayer" index="0"]
+texture_repeat = 3
+
+[node name="SnowLayer" parent="." index="8"]
+screen_offset = Vector2(-165, -110)
+
+[node name="LeafLayer" parent="." index="9"]
+screen_offset = Vector2(-165, -110)

@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7jo1vix3m2rq"]
+
+[ext_resource type="Script" uid="uid://dc8xxjajiki22" path="res://Scripts/Classes/Enemies/ninji.gd" id="1_fpl0y"]
+[ext_resource type="Texture2D" uid="uid://gym1uypw8tdj" path="res://Assets/Sprites/Enemys/Ninji.png" id="2_c5ur4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xl28p"]
+atlas = ExtResource("2_c5ur4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjhdx"]
+atlas = ExtResource("2_c5ur4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6aln1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xl28p")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjhdx")
+}],
+"loop": true,
+"name": &"Stand",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i623l"]
+size = Vector2(5, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5qfc"]
+size = Vector2(11, 10.5)
+
+[node name="Ninji" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_fpl0y")
+yoshi_behavior = "Swallow"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_6aln1")
+animation = &"Jump"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_i623l")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -5.25)
+shape = SubResource("RectangleShape2D_a5qfc")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

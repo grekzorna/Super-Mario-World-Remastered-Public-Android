@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://b1p74nixs6q8o"]
+
+[ext_resource type="Script" uid="uid://istrvdgk1st8" path="res://Scripts/Classes/HeldObject.gd" id="1_r1smw"]
+[ext_resource type="Texture2D" uid="uid://y8uoxqn0l0tu" path="res://Assets/Sprites/Enemys/Goombud.png" id="2_fh3iu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppvoc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17en0"]
+size = Vector2(16, 8)
+
+[sub_resource type="Animation" id="Animation_6havl"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_mcmmb"]
+resource_name = "Shake"
+length = 0.4
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n77sl"]
+_data = {
+&"RESET": SubResource("Animation_6havl"),
+&"Shake": SubResource("Animation_mcmmb")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdl6y"]
+atlas = ExtResource("2_fh3iu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axxud"]
+atlas = ExtResource("2_fh3iu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_drto3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdl6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axxud")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="GoombudHeld" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_r1smw")
+directional_sprite = true
+can_destroy = true
+destructable = true
+kick_bounce = true
+player_can_destroy = true
+respawnable = true
+flip_animation = true
+respawn_entity_scene = "res://Instances/Prefabs/Enemies/goombud.tscn"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ppvoc")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_17en0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n77sl")
+}
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_drto3")
+autoplay = "default"
+frame_progress = 0.881141
+flip_h = true
+flip_v = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

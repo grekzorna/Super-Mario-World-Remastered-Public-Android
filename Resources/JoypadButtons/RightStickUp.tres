@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="JoypadButton" load_steps=4 format=3 uid="uid://dbfo3esxonkmb"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/GamepadButton.gd" id="1_4dyn0"]
+[ext_resource type="Texture2D" uid="uid://bfj36c4brdxnw" path="res://Assets/Sprites/UI/InputButtons/Generic/RightStickUp.png" id="1_oaapo"]
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_nikrc"]
+axis = 3
+axis_value = -1.0
+
+[resource]
+script = ExtResource("1_4dyn0")
+input_event = SubResource("InputEventJoypadMotion_nikrc")
+ps_texture = ExtResource("1_oaapo")
+xbox_texture = ExtResource("1_oaapo")
+switch_texture = ExtResource("1_oaapo")

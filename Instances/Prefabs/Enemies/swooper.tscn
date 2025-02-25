@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8gwgjd2tfoc5"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/swooper.gd" id="1_mrc5j"]
+[ext_resource type="Texture2D" uid="uid://cpxjdef220p2h" path="res://Assets/Sprites/Enemys/Swooper.png" id="2_a0lo8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4js6"]
+atlas = ExtResource("2_a0lo8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2lhk"]
+atlas = ExtResource("2_a0lo8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spt0h"]
+atlas = ExtResource("2_a0lo8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8h8uw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4js6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2lhk")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spt0h")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyoxx"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yljxe"]
+radius = 64.0
+
+[node name="Swooper" type="CharacterBody2D"]
+script = ExtResource("1_mrc5j")
+yoshi_behavior = "Swallow"
+gib_type = 1
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8h8uw")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.893393
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pyoxx")
+
+[node name="PlayerDetectArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="PlayerDetectArea"]
+position = Vector2(0, 80)
+shape = SubResource("CircleShape2D_yljxe")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_area_entered"]

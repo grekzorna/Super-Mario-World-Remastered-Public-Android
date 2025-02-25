@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://hcw1yov7o40o"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/ColouredSwitchEmpty.gd" id="1_ldkal"]
+[ext_resource type="Texture2D" uid="uid://b75y6uuuos77j" path="res://Assets/Sprites/Objects/ColouredSwitchBlockEmpty.png" id="2_a66o4"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationSprite.gd" id="3_sehdm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnuft"]
+atlas = ExtResource("2_a66o4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny40g"]
+atlas = ExtResource("2_a66o4")
+region = Rect2(16, 0, 16, 16)
+
+[node name="ColouredSwitchEmpty" type="Node2D"]
+visibility_layer = 2
+script = ExtResource("1_ldkal")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+texture = SubResource("AtlasTexture_wnuft")
+script = ExtResource("3_sehdm")
+textures = Array[Texture2D]([SubResource("AtlasTexture_wnuft"), SubResource("AtlasTexture_ny40g")])
+settings_value = "coloured_switch_empty"

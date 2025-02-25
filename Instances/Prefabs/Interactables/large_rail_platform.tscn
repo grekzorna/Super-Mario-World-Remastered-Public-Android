@@ -1,0 +1,108 @@
+[gd_scene load_steps=18 format=3 uid="uid://cempplqp85non"]
+
+[ext_resource type="PackedScene" uid="uid://c8mn8iem7ys5m" path="res://Instances/Prefabs/Interactables/rail_follower.tscn" id="1_88bi7"]
+[ext_resource type="Script" path="res://Scripts/Interactables/wooden_platform.gd" id="2_774al"]
+[ext_resource type="Texture2D" uid="uid://31ip4o0xy683" path="res://Assets/Sprites/Objects/PlatformSheet.png" id="3_gm0tk"]
+[ext_resource type="Texture2D" uid="uid://df6p4t0570f1v" path="res://Assets/Sprites/Objects/Motor.png" id="4_xwl4v"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="5_itunj"]
+
+[sub_resource type="Animation" id="Animation_nxxw6"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_ftisc"]
+resource_name = "Travel"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7h27"]
+_data = {
+"RESET": SubResource("Animation_nxxw6"),
+"Travel": SubResource("Animation_ftisc")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnukn"]
+atlas = ExtResource("3_gm0tk")
+region = Rect2(0, 32, 32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fd3mm"]
+size = Vector2(128, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h756l"]
+size = Vector2(128, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mf500"]
+atlas = ExtResource("4_xwl4v")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8mg8"]
+atlas = ExtResource("4_xwl4v")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5gj"]
+atlas = ExtResource("4_xwl4v")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7webk"]
+atlas = ExtResource("4_xwl4v")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmd8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mf500")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8mg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0u5gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7webk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f3smi"]
+
+[node name="LargeRailPlatform" instance=ExtResource("1_88bi7")]
+script = ExtResource("2_774al")
+player_activated = false
+move_speed = 64
+
+[node name="TravelAnimation" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_s7h27")
+}
+
+[node name="Sprite" type="NinePatchRect" parent="." index="2"]
+offset_left = -64.0
+offset_top = -8.0
+offset_right = 64.0
+offset_bottom = 8.0
+texture = SubResource("AtlasTexture_hnukn")
+patch_margin_left = 8
+patch_margin_right = 8
+axis_stretch_horizontal = 1
+
+[node name="Collision" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("RectangleShape2D_fd3mm")
+one_way_collision = true
+
+[node name="PlayerDetection" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" index="0"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_h756l")
+
+[node name="Motor" type="AnimatedSprite2D" parent="." index="5"]
+scale = Vector2(1e-05, 1)
+sprite_frames = SubResource("SpriteFrames_cmd8w")
+autoplay = "default"
+frame_progress = 0.188482
+script = ExtResource("5_itunj")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_f3smi"), SubResource("SpriteFrames_cmd8w")])
+settings_value = "motor"
+
+[connection signal="area_entered" from="PlayerDetection" to="." method="_on_player_detection_area_entered"]

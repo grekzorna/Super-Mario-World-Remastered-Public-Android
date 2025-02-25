@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c0laybfq480x2"]
+
+[ext_resource type="Texture2D" uid="uid://ws6n0nkp61wn" path="res://Assets/Sprites/AchievementIcons/47073.png" id="1_lmbjb"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_2qjhy"]
+
+[resource]
+script = ExtResource("2_2qjhy")
+title = "Mario's Special Place"
+description = "Get to the challenging Special Zone"
+icon = ExtResource("1_lmbjb")

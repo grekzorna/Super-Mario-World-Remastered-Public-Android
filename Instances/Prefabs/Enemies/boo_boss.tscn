@@ -1,0 +1,221 @@
+[gd_scene load_steps=14 format=3 uid="uid://conlhnj0d03lj"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/boo_boss.gd" id="1_d1xfo"]
+[ext_resource type="Texture2D" uid="uid://rfwv0drr0er4" path="res://Assets/Sprites/Enemys/BigBoo.png" id="2_gidup"]
+[ext_resource type="AudioStream" uid="uid://cnfeq8ks20ojc" path="res://Assets/Audio/SFX/magic.wav" id="3_sb8j3"]
+[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="4_6iuoj"]
+[ext_resource type="Resource" uid="uid://dthnop5t133xo" path="res://Resources/Achievements/Progression/BooBoss.tres" id="5_0p5pb"]
+
+[sub_resource type="Animation" id="Animation_kskjf"]
+resource_name = "Appear"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sfx")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_sb8j3")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_sbf4x"]
+resource_name = "Disappear"
+step = 0.05
+
+[sub_resource type="Animation" id="Animation_fc0l0"]
+resource_name = "Hurt"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.615686, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(0.305882, 0.784314, 1, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 0.615686, 1), Color(1, 1, 1, 1), Color(1, 1, 0, 1), Color(0.305882, 0.784314, 1, 1), Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uq7p1"]
+resource_name = "Idle"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_a1i70"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_ydp88"]
+resource_name = "Turn"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 0, 0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5yxkn"]
+_data = {
+"Appear": SubResource("Animation_kskjf"),
+"Disappear": SubResource("Animation_sbf4x"),
+"Hurt": SubResource("Animation_fc0l0"),
+"Idle": SubResource("Animation_uq7p1"),
+"RESET": SubResource("Animation_a1i70"),
+"Turn": SubResource("Animation_ydp88")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tfuut"]
+radius = 24.0
+
+[node name="BooBoss" type="CharacterBody2D"]
+script = ExtResource("1_d1xfo")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.5)
+position = Vector2(0, -32)
+scale = Vector2(-1, 1)
+texture = ExtResource("2_gidup")
+hframes = 5
+frame = 2
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5yxkn")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -32)
+shape = SubResource("CircleShape2D_tfuut")
+
+[node name="Sfx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="AchievementUnlocker" type="Node" parent="."]
+script = ExtResource("4_6iuoj")
+achievement = ExtResource("5_0p5pb")
+
+[connection signal="defeated" from="." to="AchievementUnlocker" method="unlock_achievement"]
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

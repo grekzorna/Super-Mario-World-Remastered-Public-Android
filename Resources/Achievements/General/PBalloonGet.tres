@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cb4p0q65nphga"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_5cl6y"]
+[ext_resource type="Texture2D" uid="uid://bj6i87maf7glf" path="res://Assets/Sprites/AchievementIcons/47083.png" id="1_wbsj3"]
+
+[resource]
+script = ExtResource("1_5cl6y")
+title = "Another Kind of Flying"
+description = "Collect a P-Balloon"
+icon = ExtResource("1_wbsj3")

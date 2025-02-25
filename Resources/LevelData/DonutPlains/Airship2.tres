@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=5 format=3 uid="uid://cjuiit3d7gbw4"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_sjybl"]
+[ext_resource type="Texture2D" uid="uid://bae1y7iac6k26" path="res://Assets/Sprites/UI/TextImages/Airship1.png" id="2_l3wip"]
+[ext_resource type="Texture2D" uid="uid://cae7sydba5k0o" path="res://Assets/Sprites/UI/TextImages/Airship2.png" id="3_5ldsy"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_8n58e"]
+frames = 2
+frame_0/texture = ExtResource("2_l3wip")
+frame_0/duration = 0.25
+frame_1/texture = ExtResource("3_5ldsy")
+frame_1/duration = 0.25
+
+[resource]
+script = ExtResource("1_sjybl")
+level_title = "Donut Airship"
+level_scene_path = "res://Instances/Levels/Airships/airship_2.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = false
+title_image = SubResource("AnimatedTexture_8n58e")
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = true
+map_point_warp = ""
+map_scene_warp = ""

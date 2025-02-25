@@ -1,0 +1,25 @@
+[remap]
+
+importer="font_data_image"
+type="FontFile"
+uid="uid://swvedu147iqf"
+path="res://.godot/imported/HUDNumbersWhite.png-ccc86802dc50ab41f51e11f50a3357dc.fontdata"
+
+[deps]
+
+source_file="res://Assets/Sprites/UI/HUD/HUDNumbersWhite.png"
+dest_files=["res://.godot/imported/HUDNumbersWhite.png-ccc86802dc50ab41f51e11f50a3357dc.fontdata"]
+
+[params]
+
+character_ranges=PackedStringArray("48-57")
+kerning_pairs=PackedStringArray()
+columns=10
+rows=1
+image_margin=Rect2i(0, 0, 0, 0)
+character_margin=Rect2i(0, 0, 0, 0)
+ascent=0
+descent=0
+fallbacks=[]
+compress=true
+scaling_mode=0

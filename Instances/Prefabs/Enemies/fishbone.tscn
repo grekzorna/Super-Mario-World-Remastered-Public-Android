@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkf603dqqy7m8"]
+
+[ext_resource type="Script" uid="uid://cg6ka8rxupemb" path="res://Scripts/Classes/Enemies/fishbone.gd" id="1_wtjh7"]
+[ext_resource type="Texture2D" uid="uid://bhhh7d1h2opuu" path="res://Assets/Sprites/Enemys/FishBone.png" id="2_a1ur2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lppx0"]
+atlas = ExtResource("2_a1ur2")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt46a"]
+atlas = ExtResource("2_a1ur2")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iiqf8"]
+atlas = ExtResource("2_a1ur2")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yil2"]
+atlas = ExtResource("2_a1ur2")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iasj8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lppx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt46a")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iiqf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yil2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcf42"]
+size = Vector2(14, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s31oe"]
+size = Vector2(16, 10)
+
+[node name="Fishbone" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
+script = ExtResource("1_wtjh7")
+can_swim = true
+spiky_top = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iasj8")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.36764
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rcf42")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_s31oe")
+debug_color = Color(0, 0.6, 0, 0.419608)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-2.38419e-07, 2.38419e-07)
+scale = Vector2(1.3, 1.3)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

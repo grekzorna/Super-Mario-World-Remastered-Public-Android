@@ -1,0 +1,189 @@
+[gd_scene load_steps=24 format=3 uid="uid://l8k76pwfw473"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_d2csg"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_70v16"]
+[ext_resource type="AudioStream" uid="uid://cwraguncjdkmy" path="res://Resources/MusicTracks/Overworld.tres" id="2_cl605"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_stali"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="4_dhypk"]
+[ext_resource type="Texture2D" uid="uid://c807vdpkccf3o" path="res://Assets/Sprites/Objects/YoshiHouse.png" id="5_i4tn7"]
+[ext_resource type="PackedScene" uid="uid://drlaty4ed1k8v" path="res://Instances/Prefabs/FriendlyEntities/bird.tscn" id="6_qltdu"]
+[ext_resource type="PackedScene" uid="uid://dp23fp7phgons" path="res://Instances/Prefabs/level_exit_area.tscn" id="7_bjc8h"]
+[ext_resource type="PackedScene" uid="uid://cp5jp56rp76so" path="res://Instances/Prefabs/Items/yoshi_berry.tscn" id="8_ml5wy"]
+[ext_resource type="PackedScene" uid="uid://wsiwhw5luv8e" path="res://Instances/Prefabs/Blocks/speaker_block.tscn" id="9_o2w30"]
+[ext_resource type="Texture2D" uid="uid://ckhfgcs6lbcvx" path="res://Assets/Sprites/UI/Messages/YoshiHouse.png" id="10_gv8h3"]
+[ext_resource type="Texture2D" uid="uid://d3hajamnhjfc8" path="res://Assets/Sprites/Objects/YoshiFirePlace.png" id="11_gvuqc"]
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="12_0xixt"]
+[ext_resource type="Texture2D" uid="uid://dw1x233mbnmp4" path="res://Assets/Sprites/Objects/AutumnYoshiHouse.png" id="13_c0v44"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="15_fih5q"]
+[ext_resource type="Texture2D" uid="uid://mplkklvyttc7" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/CylMountainsAutumn2.png" id="16_yvpdw"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npun3"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f5s7"]
+atlas = ExtResource("11_gvuqc")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enmkh"]
+atlas = ExtResource("11_gvuqc")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bh278"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f5s7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enmkh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5b52"]
+size = Vector2(170, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_woeti"]
+size = Vector2(13, 17)
+
+[node name="YoshiHouse" type="Node"]
+script = ExtResource("1_d2csg")
+override_time = true
+hide_hud = true
+level_music = ExtResource("2_cl605")
+camera_left_end_position = 416
+camera_top_end_position = -216
+
+[node name="LevelBG" parent="." instance=ExtResource("2_70v16")]
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)
+
+[node name="TileMap" parent="." instance=ExtResource("3_stali")]
+layer_0/tile_data = PackedInt32Array(65535, 655360, 0, 0, 655360, 0, 1, 655360, 0, 2, 655360, 0, 3, 655360, 0, 4, 655360, 0, 5, 655360, 0, 6, 655360, 0, 7, 655360, 0, 8, 655360, 0, 9, 655360, 0, 10, 655360, 0, 11, 655360, 0, 12, 655360, 0, 13, 655360, 0, 14, 655360, 0, 15, 655360, 0, 16, 655360, 0, 17, 655360, 0, 18, 655360, 0, 19, 655360, 0, 20, 655360, 0, 21, 655360, 0, 22, 655360, 0, 23, 655360, 0, 24, 655360, 0, 25, 655360, 0, 26, 720896, 0, 131071, 589824, 2, 65536, 589824, 2, 65537, 589824, 2, 65538, 589824, 2, 65539, 589824, 2, 65540, 589824, 2, 65541, 589824, 2, 65542, 589824, 2, 65543, 589824, 2, 65544, 589824, 2, 65545, 589824, 2, 65546, 589824, 2, 65547, 589824, 2, 65548, 589824, 2, 65549, 589824, 2, 65550, 589824, 2, 65551, 589824, 2, 65552, 589824, 2, 65553, 589824, 2, 65554, 589824, 2, 65555, 589824, 2, 65556, 589824, 2, 65557, 589824, 2, 65558, 589824, 2, 65559, 589824, 2, 65560, 589824, 2, 65561, 589824, 2, 65562, 720896, 2, 196607, 589824, 2, 131072, 589824, 2, 131073, 589824, 2, 131074, 589824, 2, 131075, 589824, 2, 131076, 589824, 2, 131077, 589824, 2, 131078, 589824, 2, 131079, 589824, 2, 131080, 589824, 2, 131081, 589824, 2, 131082, 589824, 2, 131083, 589824, 2, 131084, 589824, 2, 131085, 589824, 2, 131086, 589824, 2, 131087, 589824, 2, 131088, 589824, 2, 131089, 589824, 2, 131090, 589824, 2, 131091, 589824, 2, 131092, 589824, 2, 131093, 589824, 2, 131094, 589824, 2, 131095, 589824, 2, 131096, 589824, 2, 131097, 589824, 2, 131098, 720896, 2, 262143, 589824, 3, 196608, 589824, 3, 196609, 589824, 3, 196610, 589824, 3, 196611, 589824, 3, 196612, 589824, 3, 196613, 589824, 3, 196614, 589824, 3, 196615, 589824, 3, 196616, 589824, 3, 196617, 589824, 3, 196618, 589824, 3, 196619, 589824, 3, 196620, 589824, 3, 196621, 589824, 3, 196622, 589824, 3, 196623, 589824, 3, 196624, 589824, 3, 196625, 589824, 3, 196626, 589824, 3, 196627, 589824, 3, 196628, 589824, 3, 196629, 589824, 3, 196630, 589824, 3, 196631, 589824, 3, 196632, 589824, 3, 196633, 589824, 3, 196634, 720896, 3, 65529, 524288, 0, 65530, 655360, 0, 65531, 655360, 0, 65532, 655360, 0, 65533, 655360, 0, 65534, 655360, 0, 131065, 524288, 1, 131066, 589824, 2, 131067, 589824, 2, 131068, 589824, 2, 131069, 589824, 2, 131070, 589824, 2, 196601, 524288, 1, 196602, 589824, 2, 196603, 589824, 2, 196604, 589824, 2, 196605, 589824, 2, 196606, 589824, 2, 262137, 524288, 3, 262138, 589824, 3, 262139, 589824, 3, 262140, 589824, 3, 262141, 589824, 3, 262142, 589824, 3)
+
+[node name="Player" parent="." instance=ExtResource("4_dhypk")]
+material = SubResource("ShaderMaterial_npun3")
+position = Vector2(184, 0)
+
+[node name="LevelExitArea" parent="." instance=ExtResource("7_bjc8h")]
+position = Vector2(-64, -32)
+scale = Vector2(1, 100)
+
+[node name="LevelExitArea2" parent="." instance=ExtResource("7_bjc8h")]
+position = Vector2(416, -32)
+scale = Vector2(1, 100)
+
+[node name="House" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(-8, 0)
+
+[node name="YoshiBerry" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(96, -120)
+
+[node name="YoshiBerry2" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(112, -104)
+
+[node name="YoshiBerry3" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(160, -120)
+
+[node name="YoshiBerry4" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(176, -88)
+
+[node name="YoshiBerry5" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(208, -104)
+
+[node name="YoshiBerry6" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(240, -120)
+
+[node name="YoshiBerry7" parent="House" instance=ExtResource("8_ml5wy")]
+position = Vector2(272, -104)
+
+[node name="SpeakerBlock" parent="House" instance=ExtResource("9_o2w30")]
+position = Vector2(192, -40)
+message = ExtResource("10_gv8h3")
+
+[node name="Fireplace" type="AnimatedSprite2D" parent="House"]
+z_index = -1
+position = Vector2(247, -8)
+sprite_frames = SubResource("SpriteFrames_bh278")
+autoplay = "default"
+frame_progress = 0.9996
+
+[node name="Level104" type="Sprite2D" parent="House"]
+z_index = -3
+position = Vector2(56, -384)
+texture = ExtResource("5_i4tn7")
+centered = false
+script = ExtResource("12_0xixt")
+autumn_texture = ExtResource("13_c0v44")
+
+[node name="Bird" parent="House" instance=ExtResource("6_qltdu")]
+position = Vector2(112, -144)
+
+[node name="Bird2" parent="House" instance=ExtResource("6_qltdu")]
+position = Vector2(128, -144)
+
+[node name="Bird3" parent="House" instance=ExtResource("6_qltdu")]
+position = Vector2(144, -144)
+
+[node name="Bird4" parent="House" instance=ExtResource("6_qltdu")]
+position = Vector2(160, -144)
+
+[node name="BirdPlatform" type="StaticBody2D" parent="House"]
+collision_layer = 65536
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(184, -141)
+shape = SubResource("RectangleShape2D_q5b52")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(92.5, -151.5)
+shape = SubResource("RectangleShape2D_woeti")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="House/BirdPlatform"]
+position = Vector2(275, -152)
+shape = SubResource("RectangleShape2D_woeti")
+
+[node name="LevelBG2" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("15_fih5q")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("16_yvpdw")
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)

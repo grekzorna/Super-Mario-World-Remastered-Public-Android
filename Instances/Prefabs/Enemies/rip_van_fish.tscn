@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://vb4jaqu8wdab"]
+
+[ext_resource type="Script" uid="uid://c14ndn7hjwp5g" path="res://Scripts/Classes/Enemies/RipVanFish.gd" id="1_dg6bo"]
+[ext_resource type="Texture2D" uid="uid://bjgxvkir7upqw" path="res://Assets/Sprites/Enemys/RipVanFish.png" id="2_4r8i2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2blc"]
+atlas = ExtResource("2_4r8i2")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v31yt"]
+atlas = ExtResource("2_4r8i2")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nj7bo"]
+atlas = ExtResource("2_4r8i2")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xumpa"]
+atlas = ExtResource("2_4r8i2")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2fic1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2blc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v31yt")
+}],
+"loop": true,
+"name": &"Chasing",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nj7bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xumpa")
+}],
+"loop": true,
+"name": &"Sleeping",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfvaq"]
+size = Vector2(13, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04dii"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxyrx"]
+radius = 48.0
+
+[node name="RipVanFish" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_dg6bo")
+enemy_height = 8
+yoshi_behavior = "Swallow"
+can_swim = true
+spiky_top = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_2fic1")
+animation = &"Sleeping"
+autoplay = "Sleeping"
+frame_progress = 0.16518
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_cfvaq")
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_04dii")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="StartleBox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartleBox"]
+position = Vector2(0, -24)
+shape = SubResource("CircleShape2D_dxyrx")
+
+[node name="SleepParticleTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="StartleBox" to="." method="_on_startle_box_area_entered"]
+[connection signal="timeout" from="SleepParticleTimer" to="." method="_on_sleep_particle_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://fx4s6nm5oauw"]
+
+[ext_resource type="Texture2D" uid="uid://c88p36h8locqo" path="res://Assets/Sprites/Backgrounds/Overworld/Clouds.png" id="1_yag12"]
+
+[sub_resource type="GDScript" id="GDScript_yc7rx"]
+script/source = "extends ParallaxBackground
+@onready var parallax_layer: ParallaxLayer = $ParallaxLayer
+
+const SCROLL_SPEED := 15
+
+func _physics_process(delta: float) -> void:
+	parallax_layer.motion_offset.x -= SCROLL_SPEED * delta
+"
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+layer = 100
+script = SubResource("GDScript_yc7rx")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 1)
+motion_offset = Vector2(0, -318)
+motion_mirroring = Vector2(512, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+modulate = Color(1, 1, 1, 0.658824)
+texture = ExtResource("1_yag12")
+centered = false

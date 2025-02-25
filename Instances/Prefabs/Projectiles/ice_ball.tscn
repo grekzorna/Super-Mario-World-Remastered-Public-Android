@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://b14vrrjixb2ek"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/ice_ball.gd" id="1_c84e6"]
+[ext_resource type="Texture2D" uid="uid://ohi3vi4wa6dl" path="res://Assets/Sprites/Items/IceBall.png" id="3_ah3gs"]
+[ext_resource type="Texture2D" uid="uid://dx5itw642ypa4" path="res://Assets/Sprites/Particles/IceShine.png" id="4_c16f4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_diob5"]
+size = Vector2(7, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xkwk2"]
+size = Vector2(13, 13)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfoio"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ckjp5"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 8.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 4.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 2.0
+
+[node name="IceBall" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_c84e6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_diob5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xkwk2")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_ah3gs")
+
+[node name="IceAmbience" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_bfoio")
+process_material = SubResource("ParticleProcessMaterial_ckjp5")
+texture = ExtResource("4_c16f4")
+randomness = 0.5
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="queue_free"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbcbh8y5k1yrp"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/online_field_player_display.gd" id="1_g0sw2"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="2_g1dx8"]
+[ext_resource type="SpriteFrames" uid="uid://d124ylm0askxf" path="res://Resources/PlayerSpriteFrames/Mario/Map.tres" id="2_m51su"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_br862"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g1dx8"]
+shader = ExtResource("2_g1dx8")
+shader_parameter/og_1 = Color(1, 0, 1, 1)
+shader_parameter/og_2 = Color(0, 1, 0, 1)
+shader_parameter/og_3 = null
+shader_parameter/og_arm = Color(1, 0, 0, 1)
+shader_parameter/og_arm_2 = Color(1, 1, 0, 1)
+shader_parameter/colour_1 = null
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = Color(0, 0, 0, 1)
+shader_parameter/arm_2_colour = Color(0, 0, 0, 1)
+shader_parameter/alpha = 1.0
+shader_parameter/epsilon = 0.001
+
+[node name="OnlineFieldPlayerDisplay" type="Node2D"]
+script = ExtResource("1_g0sw2")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.784314)
+z_index = 1
+material = SubResource("ShaderMaterial_g1dx8")
+sprite_frames = ExtResource("2_m51su")
+animation = &"WalkDown"
+offset = Vector2(0, -12)
+
+[node name="UsernameLabel" type="Label" parent="."]
+offset_left = -72.0
+offset_top = -24.0
+offset_right = 72.0
+offset_bottom = -1.0
+theme_override_fonts/font = ExtResource("3_br862")
+text = "username"
+horizontal_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true

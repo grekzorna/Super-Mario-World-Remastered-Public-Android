@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=11 format=3 uid="uid://b1fobwpjkjqj8"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_428v5"]
+[ext_resource type="AudioStream" uid="uid://cmyxcabt1osv0" path="res://Assets/Audio/BGM/SMW/StarRoadAutumn.mp3" id="1_v52e4"]
+[ext_resource type="Resource" uid="uid://bavboweoqtcac" path="res://Resources/Achievements/Completionist/DragCoins/SRDragCoin.tres" id="2_4hih2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="2_12pgj"]
+[ext_resource type="Resource" uid="uid://volfpatnmqws" path="res://Resources/LevelData/StarRoad/SR1.tres" id="3_e028q"]
+[ext_resource type="Resource" uid="uid://kticron33cr8" path="res://Resources/LevelData/StarRoad/SR2.tres" id="4_fw48j"]
+[ext_resource type="Resource" uid="uid://xsbspecy16kj" path="res://Resources/LevelData/StarRoad/SR3.tres" id="5_0jjr8"]
+[ext_resource type="Resource" uid="uid://bmgxn05dv6ddt" path="res://Resources/LevelData/StarRoad/SR4.tres" id="6_w64k6"]
+[ext_resource type="Resource" uid="uid://b6wgm4f34hf06" path="res://Resources/LevelData/StarRoad/SR5.tres" id="7_rvqhd"]
+[ext_resource type="AudioStream" uid="uid://bkxm6iy6pfyj1" path="res://Assets/Audio/BGM/SMW/StarRoad.mp3" id="8_d1l7y"]
+
+[resource]
+script = ExtResource("2_12pgj")
+area_name = "Star Road"
+music = ExtResource("8_d1l7y")
+autumn_music = ExtResource("1_v52e4")
+levels = Array[ExtResource("1_428v5")]([ExtResource("3_e028q"), ExtResource("4_fw48j"), ExtResource("5_0jjr8"), ExtResource("6_w64k6"), ExtResource("7_rvqhd")])
+dragon_coin_achievement = ExtResource("2_4hih2")

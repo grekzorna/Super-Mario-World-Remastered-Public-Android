@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://yag8o41djnv4"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/cannon_ball.gd" id="1_ni7dk"]
+[ext_resource type="Texture2D" uid="uid://dtmj4ua1cpnk3" path="res://Assets/Sprites/Enemys/CannonBall.png" id="2_fivg7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1dis"]
+radius = 5.09902
+
+[node name="CannonBall" type="CharacterBody2D"]
+script = ExtResource("1_ni7dk")
+enemy_height = 4
+yoshi_behavior = "None"
+gib_type = 1
+can_slide_damage = false
+can_cape_damage = false
+can_spin_kill = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_fivg7")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_l1dis")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

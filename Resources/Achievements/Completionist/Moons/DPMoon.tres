@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://mjx8twljh4qk"]
+
+[ext_resource type="Texture2D" uid="uid://3jlkgr0p8ais" path="res://Assets/Sprites/AchievementIcons/46560.png" id="1_8i6wd"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_yk1fl"]
+
+[resource]
+script = ExtResource("1_yk1fl")
+title = "Crescent Donut"
+description = "Collect the 3-Up Moon in Donut Plains"
+icon = ExtResource("1_8i6wd")

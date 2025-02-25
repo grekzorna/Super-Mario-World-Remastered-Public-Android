@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbo1pg3yi2t3b"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/Bosses/BossBall.gd" id="1_utxd0"]
+[ext_resource type="Texture2D" uid="uid://dad1qxecx3gs2" path="res://Assets/Sprites/Characters/Bosses/Ball.png" id="2_hhs0o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6g353"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_243gj"]
+radius = 6.0
+
+[node name="BossBall" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+floor_max_angle = 1.5708
+platform_on_leave = 2
+script = ExtResource("1_utxd0")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_hhs0o")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6g353")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_243gj")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

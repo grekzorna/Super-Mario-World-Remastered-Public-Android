@@ -1,0 +1,17 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdfjykja0oui2"]
+
+[ext_resource type="PackedScene" uid="uid://bw8btch38g6bx" path="res://Instances/Prefabs/Interactables/water.tscn" id="1_y6gqb"]
+[ext_resource type="Texture2D" uid="uid://b7pq3cnro620l" path="res://Assets/Sprites/Objects/Water/OldWater/1.png" id="2_euga4"]
+[ext_resource type="Texture2D" uid="uid://bi464ds6figpg" path="res://Assets/Sprites/Objects/Water/OldWater/2.png" id="3_kgwej"]
+[ext_resource type="Texture2D" uid="uid://c1nlro6gw5fwb" path="res://Assets/Sprites/Objects/Water/OldWater/3.png" id="4_vox0b"]
+[ext_resource type="Texture2D" uid="uid://byve353ex8nc0" path="res://Assets/Sprites/Objects/Water/OldWater/4.png" id="5_iveaf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ismwh"]
+resource_local_to_scene = true
+size = Vector2(16, 16)
+
+[node name="Water" instance=ExtResource("1_y6gqb")]
+z_index = -5
+shape = SubResource("RectangleShape2D_ismwh")
+top_textures = Array[Texture2D]([ExtResource("2_euga4"), ExtResource("3_kgwej"), ExtResource("4_vox0b"), ExtResource("5_iveaf")])
+water_colour = Color(0.282353, 0.282353, 0.533333, 1)

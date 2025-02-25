@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://cr080mol026x8"]
+
+[ext_resource type="Script" path="res://Scripts/HeldObjects/p_switch.gd" id="1_xxn2f"]
+[ext_resource type="Texture2D" uid="uid://yusf4y443uvn" path="res://Assets/Sprites/Objects/PSwitch.png" id="2_did3e"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_2o8um"]
+[ext_resource type="Script" path="res://Scripts/Classes/water_bouyancy.gd" id="4_ipgfj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmhms"]
+atlas = ExtResource("2_did3e")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1aep"]
+atlas = ExtResource("2_did3e")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fp0b3"]
+atlas = ExtResource("2_did3e")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycnt1"]
+atlas = ExtResource("2_did3e")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pma61"]
+atlas = ExtResource("2_did3e")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ebyp"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_tmhms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1aep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fp0b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycnt1")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pma61")
+}],
+"loop": true,
+"name": &"Pressed",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wm3mg"]
+atlas = ExtResource("2_did3e")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t7bn"]
+atlas = ExtResource("2_did3e")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xtol7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wm3mg")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t7bn")
+}],
+"loop": true,
+"name": &"Pressed",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdeh8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rn8s"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5y3i"]
+size = Vector2(10, 4)
+
+[node name="PSwitch" type="CharacterBody2D"]
+collision_layer = 24
+collision_mask = 5
+script = ExtResource("1_xxn2f")
+kickable = false
+player_can_stand = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_1ebyp")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.563756
+script = ExtResource("3_2o8um")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_xtol7"), SubResource("SpriteFrames_1ebyp")])
+settings_value = "pswitch"
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_sdeh8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_1rn8s")
+one_way_collision = true
+
+[node name="Pressbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pressbox"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_y5y3i")
+
+[node name="WaterBouyancy" type="Node" parent="." node_paths=PackedStringArray("hitbox")]
+script = ExtResource("4_ipgfj")
+hitbox = NodePath("../Hitbox")
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]
+[connection signal="area_entered" from="Pressbox" to="." method="_on_pressbox_area_entered"]

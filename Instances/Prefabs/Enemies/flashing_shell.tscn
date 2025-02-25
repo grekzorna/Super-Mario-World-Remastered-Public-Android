@@ -1,0 +1,169 @@
+[gd_scene load_steps=13 format=3 uid="uid://b75ptg6nr6vmo"]
+
+[ext_resource type="Script" uid="uid://bj6mpvy3u8y70" path="res://Scripts/Classes/Enemies/flashing_shell.gd" id="1_q2h8n"]
+[ext_resource type="PackedScene" uid="uid://c0qnskibbdutl" path="res://Instances/Prefabs/Projectiles/fire_breath.tscn" id="2_a11qf"]
+[ext_resource type="Texture2D" uid="uid://cs81kmgqp044t" path="res://Assets/Sprites/Enemys/Koopas/KoopaShells/FlashingShell.png" id="2_kex2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulsyx"]
+size = Vector2(8, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frn3n"]
+size = Vector2(14, 15)
+
+[sub_resource type="Animation" id="Animation_metye"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(2, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame_coords:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_icf5m"]
+resource_name = "Spin"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kic24"]
+_data = {
+&"RESET": SubResource("Animation_metye"),
+&"Spin": SubResource("Animation_icf5m")
+}
+
+[sub_resource type="Animation" id="Animation_vjtrk"]
+resource_name = "Flash"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+
+[sub_resource type="Animation" id="Animation_4iiem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame_coords:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i43ck"]
+_data = {
+&"Flash": SubResource("Animation_vjtrk"),
+&"RESET": SubResource("Animation_4iiem")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7j3l"]
+
+[node name="FlashingShell" type="CharacterBody2D"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_q2h8n")
+enemy_height = 8
+yoshi_behavior = "Spit"
+spit_item = ExtResource("2_a11qf")
+can_slide_damage = false
+player_bounce_off = false
+can_cape_damage = false
+can_held_item_damage = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_kex2s")
+hframes = 4
+vframes = 8
+frame = 28
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_ulsyx")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_frn3n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kic24")
+}
+autoplay = "Spin"
+speed_scale = 2.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i43ck")
+}
+autoplay = "Flash"
+
+[node name="DestructionBox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="DestructionBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_s7j3l")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="DestructionBox" to="." method="_on_destruction_box_area_entered"]

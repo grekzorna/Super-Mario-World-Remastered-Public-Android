@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c05s1hfyw54it"]
+
+[ext_resource type="Texture2D" uid="uid://bfni06564r6x0" path="res://Assets/Sprites/AchievementIcons/PeachCoinCollect.png" id="1_13alx"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_3dpwa"]
+
+[resource]
+script = ExtResource("2_3dpwa")
+title = "Peach Flavoured"
+description = "Collect all the Peach Coins, Thank you for playing!"
+icon = ExtResource("1_13alx")
+hidden_achievement = true

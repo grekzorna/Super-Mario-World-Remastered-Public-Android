@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://de45vwnlss6aq"]
+
+[ext_resource type="Script" uid="uid://ucylh23d25s4" path="res://Scripts/Classes/Enemies/pokey_segment.gd" id="1_ncw75"]
+[ext_resource type="Texture2D" uid="uid://cc2jrvshst0v6" path="res://Assets/Sprites/Enemys/PokeyBody.png" id="2_jf350"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3t8l"]
+size = Vector2(15, 15)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t4h36"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3a0p"]
+size = Vector2(8, 78.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjq80"]
+size = Vector2(8, 4)
+
+[node name="PokeySegment" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 16384
+collision_mask = 16388
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 8.0
+platform_on_leave = 2
+script = ExtResource("1_ncw75")
+yoshi_behavior = "Swallow"
+spiky_top = true
+can_cape_damage = false
+can_fire_damage = false
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_s3t8l")
+one_way_collision = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_t4h36")
+
+[node name="CheckAreas" type="Node2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="TopCheck" type="Area2D" parent="CheckAreas"]
+position = Vector2(0, -16)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckAreas/TopCheck"]
+position = Vector2(0, -32.75)
+shape = SubResource("RectangleShape2D_d3a0p")
+
+[node name="BottomCheck" type="Area2D" parent="CheckAreas"]
+position = Vector2(0, 16)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckAreas/BottomCheck"]
+position = Vector2(0, -5.25)
+shape = SubResource("RectangleShape2D_rjq80")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -16)
+scale = Vector2(1, 9.55)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_jf350")
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

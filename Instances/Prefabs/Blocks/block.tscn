@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfefvrg3c5gxv"]
+
+[ext_resource type="Texture2D" uid="uid://inwhsump260m" path="res://Assets/Sprites/SpinBlock.png" id="1_ap5j4"]
+[ext_resource type="PackedScene" uid="uid://buynfqe32158d" path="res://Instances/Parts/drop_shadow.tscn" id="2_7nrla"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxeil"]
+atlas = ExtResource("1_ap5j4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rs6k"]
+atlas = ExtResource("1_ap5j4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13fd8"]
+atlas = ExtResource("1_ap5j4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcgjr"]
+atlas = ExtResource("1_ap5j4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oft2u"]
+atlas = ExtResource("1_ap5j4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2rug0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxeil")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rs6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13fd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcgjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oft2u")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1c6ht"]
+size = Vector2(16, 16)
+
+[node name="SpinBlock" type="StaticBody2D"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2rug0")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.147351
+
+[node name="DropShadow" parent="Sprite" instance=ExtResource("2_7nrla")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1c6ht")

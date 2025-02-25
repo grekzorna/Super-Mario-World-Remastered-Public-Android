@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2y1atyogmv0x"]
+
+[ext_resource type="Script" path="res://Scripts/UI/game_choice_menu.gd" id="1_qehyo"]
+[ext_resource type="Texture2D" uid="uid://vmnatqkj2lio" path="res://Assets/Sprites/UI/Arrow.png" id="2_fsih0"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_ainnq"]
+
+[sub_resource type="Animation" id="Animation_7rd5l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 348)]
+}
+
+[sub_resource type="Animation" id="Animation_cdgv5"]
+resource_name = "Show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 348), Vector2(0, 188)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kh12m"]
+_data = {
+"RESET": SubResource("Animation_7rd5l"),
+"Show": SubResource("Animation_cdgv5")
+}
+
+[node name="GameChoice" type="Node"]
+script = ExtResource("1_qehyo")
+
+[node name="Pointer" type="CenterContainer" parent="."]
+offset_left = 120.0
+offset_top = 220.0
+offset_right = 120.0
+offset_bottom = 220.0
+rotation = 1.5708
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="Pointer"]
+layout_mode = 2
+texture = ExtResource("2_fsih0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -82.0
+offset_right = 480.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="Local" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.611765, 0.858824, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ainnq")
+text = "Local"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="Online" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.231373, 1, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_ainnq")
+text = "Online"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kh12m")
+}

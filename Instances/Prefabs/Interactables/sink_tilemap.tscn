@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://divpvaj6b8fkb"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/SinkTilemap.gd" id="1_dmv4g"]
+
+[node name="SinkTilemap" type="Node"]
+script = ExtResource("1_dmv4g")

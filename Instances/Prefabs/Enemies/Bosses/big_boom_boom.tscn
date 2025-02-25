@@ -1,0 +1,347 @@
+[gd_scene load_steps=28 format=3 uid="uid://cdt3mwg4f26k6"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/Bosses/boom_boom.gd" id="1_3j0n0"]
+[ext_resource type="Texture2D" uid="uid://dtqmdpfw0yo6i" path="res://Assets/Sprites/Characters/Bosses/BigBoomBoom.png" id="2_gmgwf"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/StateMachine.gd" id="3_jtktw"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/intro.gd" id="4_q0jrv"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/run.gd" id="5_66vx0"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/BoomStateClass.gd" id="6_r66kf"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/jump.gd" id="7_vmsv5"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/hurt.gd" id="8_cyo4x"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/shell.gd" id="9_shmg7"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/BoomBoom/lava_hurt.gd" id="10_24ep2"]
+[ext_resource type="AudioStream" uid="uid://dwr2tuytics5u" path="res://Assets/Audio/SFX/boomerang.wav" id="11_xsmuo"]
+[ext_resource type="PackedScene" uid="uid://xqivdp4tj0se" path="res://Instances/Particles/Player/skid.tscn" id="12_foo0g"]
+[ext_resource type="PackedScene" uid="uid://gr6gqqb0pdkl" path="res://Instances/Particles/Player/puff_trail.tscn" id="13_fb325"]
+
+[sub_resource type="Animation" id="Animation_fv0j1"]
+resource_name = "Fly"
+length = 0.25
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 15, 16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_ooyli"]
+resource_name = "Intro"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 2, 8, 2, 8, 2, 8]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"play_stomp_effect"
+}, {
+"args": [],
+"method": &"play_stomp_effect"
+}, {
+"args": [],
+"method": &"play_stomp_effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cmqox"]
+resource_name = "JumpCharge"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_5a8nq"]
+resource_name = "Land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 8]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_stomp_effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1jb6q"]
+resource_name = "NormalHurt"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_etol8"]
+resource_name = "NormalShellEnter"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 0, 1, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:spiky")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_hoffk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:spiky")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_q6ohc"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_m3www"]
+resource_name = "WingHurt"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_ih7uj"]
+resource_name = "WingShellEnter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.8, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [14, 13, 12, 12, 13, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1ee2"]
+_data = {
+"Fly": SubResource("Animation_fv0j1"),
+"Intro": SubResource("Animation_ooyli"),
+"JumpCharge": SubResource("Animation_cmqox"),
+"Land": SubResource("Animation_5a8nq"),
+"NormalHurt": SubResource("Animation_1jb6q"),
+"NormalShellEnter": SubResource("Animation_etol8"),
+"RESET": SubResource("Animation_hoffk"),
+"Run": SubResource("Animation_q6ohc"),
+"WingHurt": SubResource("Animation_m3www"),
+"WingShellEnter": SubResource("Animation_ih7uj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xycjp"]
+size = Vector2(10, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wv1x5"]
+size = Vector2(16, 21.3333)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l4j36"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(-10, -0.5, 0)
+spread = 22.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+
+[node name="BigBoomBoom" type="CharacterBody2D"]
+position = Vector2(224, 16)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_3j0n0")
+health = 8
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_gmgwf")
+hframes = 5
+vframes = 5
+frame = 5
+
+[node name="EdgeCheck" type="RayCast2D" parent="Sprite"]
+position = Vector2(8, 0)
+
+[node name="EdgeCheck2" type="RayCast2D" parent="Sprite"]
+position = Vector2(-8, 0)
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w1ee2")
+}
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_xycjp")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
+[node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -10.6667)
+shape = SubResource("RectangleShape2D_wv1x5")
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("3_jtktw")
+initial_state = NodePath("Intro")
+
+[node name="Intro" type="Node" parent="States"]
+script = ExtResource("4_q0jrv")
+
+[node name="Run" type="Node" parent="States"]
+script = ExtResource("5_66vx0")
+
+[node name="Fly" type="Node" parent="States"]
+script = ExtResource("6_r66kf")
+
+[node name="Jump" type="Node" parent="States"]
+script = ExtResource("7_vmsv5")
+
+[node name="Hurt" type="Node" parent="States"]
+script = ExtResource("8_cyo4x")
+
+[node name="Shell" type="Node" parent="States"]
+script = ExtResource("9_shmg7")
+
+[node name="LavaHurt" type="Node" parent="States"]
+script = ExtResource("10_24ep2")
+
+[node name="SwingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_xsmuo")
+bus = &"SFX"
+
+[node name="Skid" parent="." instance=ExtResource("12_foo0g")]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_l4j36")
+
+[node name="PuffTrail" parent="." instance=ExtResource("13_fb325")]
+emitting = false
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

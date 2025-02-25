@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://cuj7minywq18u"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/dolphin.gd" id="1_dkfs4"]
+[ext_resource type="Texture2D" uid="uid://bdg8r2nk8eyf4" path="res://Assets/Sprites/Enemys/Dolphins.png" id="1_qyxlw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8whi"]
+atlas = ExtResource("1_qyxlw")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwdq7"]
+atlas = ExtResource("1_qyxlw")
+region = Rect2(0, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5ugf"]
+atlas = ExtResource("1_qyxlw")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4qe7a"]
+atlas = ExtResource("1_qyxlw")
+region = Rect2(64, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8xafv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8whi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwdq7")
+}],
+"loop": true,
+"name": &"Horizontal",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5ugf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4qe7a")
+}],
+"loop": true,
+"name": &"Vertical",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wabes"]
+size = Vector2(48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34fho"]
+size = Vector2(16, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_24iyr"]
+
+[node name="Dolphin" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_dkfs4")
+yoshi_behavior = "Swallow"
+can_jump_on = false
+can_slide_damage = false
+player_bounce_off = false
+can_silver_switch = false
+can_cape_damage = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8xafv")
+animation = &"Horizontal"
+autoplay = "Horizontal"
+frame_progress = 0.0575605
+flip_h = true
+
+[node name="HorizontalCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wabes")
+one_way_collision = true
+one_way_collision_margin = 8.0
+
+[node name="VerticalCollision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_34fho")
+one_way_collision = true
+one_way_collision_margin = 8.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_24iyr")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1.43051e-06, 0)
+scale = Vector2(2.4, 1)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]

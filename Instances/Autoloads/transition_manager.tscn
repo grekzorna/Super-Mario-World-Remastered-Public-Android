@@ -1,0 +1,446 @@
+[gd_scene load_steps=16 format=3 uid="uid://bnu2hx65bmelq"]
+
+[ext_resource type="Shader" uid="uid://bctbpwip7ks6o" path="res://Scripts/Shaders/circle_transition_tres.gdshader" id="1_6iv2y"]
+[ext_resource type="Script" uid="uid://28svxe475qty" path="res://Scripts/Autoload/transition_manager.gd" id="1_c67nn"]
+[ext_resource type="FontFile" uid="uid://bnrj0qwi0uol4" path="res://Assets/Sprites/UI/GoldFont.png" id="3_gwl50"]
+[ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="4_4w7pm"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="5_7at85"]
+[ext_resource type="Resource" uid="uid://b84iwjp4ib15g" path="res://Resources/PlayerPowerUpState/Small.tres" id="5_od2xn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wls1t"]
+shader = ExtResource("1_6iv2y")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 960.0
+shader_parameter/screen_height = 540.0
+
+[sub_resource type="Shader" id="Shader_aerp8"]
+code = "shader_type canvas_item;
+
+uniform float amount = 0.0;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear;
+
+void fragment() {
+	if (amount != 0.0) {
+		float newAmount = amount/3.338;
+		vec2 pixelSize = vec2(newAmount);
+
+		vec2 correction = SCREEN_PIXEL_SIZE * vec2(float(pixelSize.x), float(pixelSize.y)) / vec2(2.0);
+		vec2 texture_uv = floor(UV / SCREEN_PIXEL_SIZE);
+		vec2 offset = vec2(mod(texture_uv.x, pixelSize.x), mod(texture_uv.y, pixelSize.y));
+		vec2 target = (texture_uv - offset) * SCREEN_PIXEL_SIZE;
+		COLOR = textureLod(SCREEN_TEXTURE, target + correction, 0.0);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdwie"]
+shader = SubResource("Shader_aerp8")
+shader_parameter/amount = 0.1
+
+[sub_resource type="Animation" id="Animation_altgt"]
+resource_name = "Circle"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CircleTransition:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CircleTransition:material:shader_parameter/circle_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.05, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CircleTransition:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FadeTransition:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PixelTransition:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_ysxmv"]
+resource_name = "Fade"
+length = 0.25
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeTransition:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeTransition:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PixelTransition:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleTransition:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_aerp8"]
+resource_name = "Pixel"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PixelTransition:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 64.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PixelTransition:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PixelTransition/BlackBG:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FadeTransition:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleTransition:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_ex0ay"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeTransition:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FadeTransition:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CircleTransition:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CircleTransition:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CircleTransition:material:shader_parameter/circle_size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PixelTransition:material:shader_parameter/amount")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PixelTransition:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PixelTransition/BlackBG:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_glh6l"]
+_data = {
+&"Circle": SubResource("Animation_altgt"),
+&"Fade": SubResource("Animation_ysxmv"),
+&"Pixel": SubResource("Animation_aerp8"),
+&"RESET": SubResource("Animation_ex0ay")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_sds3i"]
+base_font = ExtResource("3_gwl50")
+spacing_glyph = -8
+
+[node name="TransitionManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_c67nn")
+metadata/_edit_vertical_guides_ = [-112.0]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="FadeTransition" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CircleTransition" type="ColorRect" parent="CanvasLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_wls1t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PixelTransition" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_hdwie")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlackBG" type="ColorRect" parent="CanvasLayer/PixelTransition"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_glh6l")
+}
+
+[node name="LevelStart" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_sds3i")
+text = "Level start!"
+vertical_alignment = 1
+uppercase = true
+
+[node name="LoadingIcon" parent="CanvasLayer" instance=ExtResource("4_4w7pm")]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+position = Vector2(88, 256)
+power_state = ExtResource("5_od2xn")
+
+[node name="LoadingIcon2" parent="CanvasLayer/LoadingIcon" instance=ExtResource("4_4w7pm")]
+z_index = 2
+position = Vector2(-24, 0)
+power_state = ExtResource("5_od2xn")
+
+[node name="LoadingIcon3" parent="CanvasLayer/LoadingIcon" instance=ExtResource("4_4w7pm")]
+z_index = 2
+position = Vector2(-48, 0)
+power_state = ExtResource("5_od2xn")
+
+[node name="LoadingIcon4" parent="CanvasLayer/LoadingIcon" instance=ExtResource("4_4w7pm")]
+z_index = 2
+position = Vector2(-72, 0)
+power_state = ExtResource("5_od2xn")
+
+[node name="Tip" type="Label" parent="CanvasLayer/LoadingIcon"]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 248.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("5_7at85")
+text = "Tip: This is some super duper long tip text, how was your day today? mine has been good so far"
+autowrap_mode = 2
+uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

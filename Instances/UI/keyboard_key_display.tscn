@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dm8iwij31whwi"]
+
+[ext_resource type="Texture2D" uid="uid://dnhff3icdlblp" path="res://Assets/Sprites/UI/InputButtons/Keyboard/Keys.png" id="1_bashm"]
+
+[node name="KeyboardKeyDisplay" type="Sprite2D"]
+texture = ExtResource("1_bashm")
+centered = false
+hframes = 17
+vframes = 8
+frame = 85
+
+[node name="2ndPart" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(16, 0)
+texture = ExtResource("1_bashm")
+centered = false
+hframes = 17
+vframes = 8
+frame = 86

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://xp0q0530wm27"]
+
+[ext_resource type="Texture2D" uid="uid://dos361c16m0qi" path="res://Assets/Sprites/AchievementIcons/47072.png" id="1_i1aq2"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_w2sg0"]
+
+[resource]
+script = ExtResource("2_w2sg0")
+title = "To the Stars!"
+description = "Reach the Star Road"
+icon = ExtResource("1_i1aq2")

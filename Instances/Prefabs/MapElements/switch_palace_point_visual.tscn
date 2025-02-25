@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp18jhr02i618"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Maps/switch_palace_point_visual.gd" id="1_vc06g"]
+[ext_resource type="Texture2D" uid="uid://dkmxyumao464u" path="res://Assets/Sprites/Map/MapSprites/Switch.png" id="2_j6tat"]
+
+[node name="SwitchPointVisual" type="Node2D"]
+script = ExtResource("1_vc06g")
+
+[node name="Normal" type="Sprite2D" parent="."]
+texture = ExtResource("2_j6tat")
+hframes = 2
+vframes = 4
+
+[node name="Destroyed" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_j6tat")
+hframes = 2
+vframes = 4
+frame = 1

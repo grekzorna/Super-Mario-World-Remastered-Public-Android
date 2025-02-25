@@ -1,0 +1,265 @@
+[gd_scene load_steps=19 format=3 uid="uid://e51luoo6jgbj"]
+
+[ext_resource type="Script" uid="uid://dt6ibe8m37nuc" path="res://Scripts/UI/multiplayer_lobby.gd" id="1_glxqh"]
+[ext_resource type="Texture2D" uid="uid://dqej01bqpksbg" path="res://Assets/Sprites/UI/OnlineBG.png" id="2_1e67q"]
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="3_8f6ai"]
+[ext_resource type="FontFile" uid="uid://cv4egxyou0iuv" path="res://Resources/Fonts/Undead Pixel 8.ttf" id="3_tutan"]
+[ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="4_cgwbv"]
+[ext_resource type="Texture2D" uid="uid://dhhr68mhkpj4q" path="res://Assets/Sprites/UI/PlayPanel.png" id="10_aepx5"]
+[ext_resource type="PackedScene" uid="uid://bi6g06uvigns2" path="res://Instances/UI/Menus/player_select.tscn" id="10_be4se"]
+[ext_resource type="Texture2D" uid="uid://c8f637ol3ffnw" path="res://Assets/Sprites/UI/QuitPanel.png" id="11_o5l3s"]
+[ext_resource type="Texture2D" uid="uid://c7xwwtf5iuq7v" path="res://Assets/Sprites/UI/GreenPanel.png" id="13_0h3va"]
+[ext_resource type="PackedScene" uid="uid://g0kxywn2ba76" path="res://Instances/UI/save_container.tscn" id="13_hxlhd"]
+
+[sub_resource type="Shader" id="Shader_wlvjm"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrvhq"]
+shader = SubResource("Shader_wlvjm")
+shader_parameter/motion = Vector2(-4, -4)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i5sxn"]
+texture = ExtResource("4_cgwbv")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_top = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dc8kr"]
+texture = ExtResource("10_aepx5")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6c32"]
+texture = ExtResource("11_o5l3s")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="Animation" id="Animation_ucd7d"]
+resource_name = "Display"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1e-05, 1, 1),
+"update": 0,
+"values": [Vector2(336, 269), Vector2(336, 231), Vector2(336, 231), Vector2(336, 269)]
+}
+
+[sub_resource type="Animation" id="Animation_cvyh1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(336, 269)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rg74y"]
+_data = {
+&"Display": SubResource("Animation_ucd7d"),
+&"RESET": SubResource("Animation_cvyh1")
+}
+
+[node name="MultiplayerLobby" type="Node"]
+script = ExtResource("1_glxqh")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+z_index = 4096
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/Control"]
+z_index = -10
+material = SubResource("ShaderMaterial_lrvhq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1e67q")
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -87.0
+offset_right = 136.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="IPEnter" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_tutan")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_i5sxn")
+placeholder_text = "Server IP:"
+alignment = 1
+
+[node name="Port" type="LineEdit" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_tutan")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxTexture_i5sxn")
+placeholder_text = "Server Port:"
+alignment = 1
+
+[node name="UserName" type="LineEdit" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -31.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Player"
+placeholder_text = "Username"
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 224.0
+offset_right = 320.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("3_8f6ai")
+text = "Nickname:"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 176.0
+offset_top = 104.0
+offset_right = 304.0
+offset_bottom = 122.0
+focus_mode = 0
+theme_override_colors/font_color = Color(0.65098, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_8f6ai")
+theme_override_styles/normal = SubResource("StyleBoxTexture_dc8kr")
+text = "JOIN SERVER"
+
+[node name="HostButton" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 2
+offset_left = 176.0
+offset_top = 136.0
+offset_right = 304.0
+offset_bottom = 154.0
+theme_override_colors/font_color = Color(1, 0.765143, 0.784284, 1)
+theme_override_fonts/font = ExtResource("3_8f6ai")
+theme_override_styles/normal = SubResource("StyleBoxTexture_b6c32")
+text = "HOST SERVER"
+
+[node name="ApplyNotification" type="NinePatchRect" parent="CanvasLayer/Control"]
+z_index = 4096
+layout_mode = 0
+offset_left = 336.0
+offset_top = 269.0
+offset_right = 480.0
+offset_bottom = 308.0
+texture = ExtResource("13_0h3va")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ApplyNotification"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.75573, 1, 0.550727, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_8f6ai")
+text = "Settings Applied!"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/ApplyNotification"]
+libraries = {
+&"": SubResource("AnimationLibrary_rg74y")
+}
+
+[node name="ApplyNotification2" type="NinePatchRect" parent="CanvasLayer/Control"]
+z_index = -1
+layout_mode = 0
+offset_left = 128.0
+offset_top = 216.0
+offset_right = 344.0
+offset_bottom = 272.0
+texture = ExtResource("13_0h3va")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="SaveSelect" parent="CanvasLayer/Control" instance=ExtResource("13_hxlhd")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterSelect" parent="CanvasLayer/Control" instance=ExtResource("10_be4se")]
+layout_mode = 1
+
+[connection signal="game_entered" from="." to="CanvasLayer/Control/SaveSelect" method="enter_game"]
+[connection signal="open_save" from="." to="CanvasLayer/Control/SaveSelect" method="enter"]
+[connection signal="pressed" from="CanvasLayer/Control/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="save_selected" from="CanvasLayer/Control/SaveSelect" to="CanvasLayer/Control/SaveSelect" method="close"]
+[connection signal="save_selected" from="CanvasLayer/Control/SaveSelect" to="CanvasLayer/Control/CharacterSelect" method="open"]

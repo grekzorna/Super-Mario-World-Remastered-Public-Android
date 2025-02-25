@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://cag2r4mfdsw6c"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_gcgh1"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="2_luus0"]
+[ext_resource type="AudioStream" uid="uid://cwraguncjdkmy" path="res://Resources/MusicTracks/Overworld.tres" id="2_urjcu"]
+[ext_resource type="Texture2D" uid="uid://dixdc26amhiti" path="res://Assets/LevelGuides/Level 0FF.png" id="4_dcbg3"]
+[ext_resource type="PackedScene" uid="uid://c8kxuerbuqk7p" path="res://Instances/Prefabs/goal_post.tscn" id="5_gde8r"]
+[ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="7_gk755"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="8_jml32"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="8_qwmw5"]
+[ext_resource type="Texture2D" uid="uid://c8nork0385k8f" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/Mountains1.png" id="9_bjnv2"]
+[ext_resource type="PackedScene" uid="uid://cge612j26d8ws" path="res://Instances/Prefabs/autumn_level_bg.tscn" id="10_2nbm8"]
+[ext_resource type="Texture2D" uid="uid://clpd6hf7kumrb" path="res://Assets/Sprites/Backgrounds/Overworld/Mountains/MountainsAutumn2.png" id="11_lmxis"]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64671"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="DP2A" type="Node"]
+script = ExtResource("1_gcgh1")
+level_music = ExtResource("2_urjcu")
+
+[node name="TileMap" parent="." instance=ExtResource("2_luus0")]
+position = Vector2(0, 40)
+layer_0/tile_data = PackedInt32Array(-65536, 589824, 2, -131072, 589824, 2, -196608, 393216, 1, -262144, 720896, 2, -327680, 720896, 2, -393216, 720896, 2, -458752, 720896, 2, -524288, 720896, 0, -1, 589824, 2, -65537, 589824, 2, -131073, 589824, 2, -196609, 589824, 2, -262145, 589824, 2, -327681, 589824, 2, -393217, 589824, 2, -458753, 655360, 0, -2, 589824, 2, -65538, 589824, 2, -131074, 589824, 2, -196610, 589824, 2, -262146, 589824, 2, -327682, 589824, 2, -393218, 589824, 2, -458754, 655360, 0, -3, 589824, 2, -65539, 589824, 2, -131075, 589824, 2, -196611, 589824, 2, -262147, 589824, 2, -327683, 589824, 2, -393219, 589824, 2, -458755, 655360, 0, -4, 589824, 2, -65540, 589824, 2, -131076, 589824, 2, -196612, 589824, 2, -262148, 589824, 2, -327684, 589824, 2, -393220, 589824, 2, -458756, 655360, 0, 31, 589824, 3, -65505, 589824, 2, -131041, 589824, 2, -196577, 655360, 0, 30, 589824, 3, -65506, 589824, 2, -131042, 589824, 2, -196578, 655360, 0, 29, 589824, 3, -65507, 589824, 2, -131043, 589824, 2, -196579, 655360, 0, 28, 589824, 3, -65508, 589824, 2, -131044, 589824, 2, -196580, 655360, 0, 27, 589824, 3, -65509, 589824, 2, -131045, 589824, 2, -196581, 655360, 0, 26, 589824, 3, -65510, 589824, 2, -131046, 589824, 2, -196582, 655360, 0, 25, 589824, 3, -65511, 589824, 2, -131047, 589824, 2, -196583, 655360, 0, 24, 589824, 3, -65512, 589824, 2, -131048, 589824, 2, -196584, 655360, 0, 23, 589824, 3, -65513, 589824, 2, -131049, 589824, 2, -196585, 655360, 0, 22, 589824, 3, -65514, 589824, 2, -131050, 589824, 2, -196586, 655360, 0, 21, 589824, 3, -65515, 589824, 2, -131051, 589824, 2, -196587, 655360, 0, 20, 589824, 3, -65516, 589824, 2, -131052, 589824, 2, -196588, 655360, 0, 19, 589824, 3, -65517, 589824, 2, -131053, 589824, 2, -196589, 655360, 0, 18, 589824, 3, -65518, 589824, 2, -131054, 589824, 2, -196590, 655360, 0, 17, 589824, 3, -65519, 589824, 2, -131055, 589824, 2, -196591, 655360, 0, 16, 589824, 3, -65520, 589824, 2, -131056, 589824, 2, -196592, 655360, 0, 15, 589824, 3, -65521, 589824, 2, -131057, 589824, 2, -196593, 655360, 0, 14, 589824, 3, -65522, 589824, 2, -131058, 589824, 2, -196594, 655360, 0, 13, 589824, 3, -65523, 589824, 2, -131059, 589824, 2, -196595, 655360, 0, 12, 589824, 3, -65524, 589824, 2, -131060, 589824, 2, -196596, 655360, 0, 11, 589824, 3, -65525, 589824, 2, -131061, 589824, 2, -196597, 655360, 0, 10, 589824, 3, -65526, 589824, 2, -131062, 589824, 2, -196598, 655360, 0, 9, 589824, 3, -65527, 589824, 2, -131063, 589824, 2, -196599, 655360, 0, 8, 589824, 3, -65528, 589824, 2, -131064, 589824, 2, -196600, 655360, 0, 7, 589824, 3, -65529, 589824, 2, -131065, 589824, 2, -196601, 655360, 0, 6, 589824, 3, -65530, 589824, 2, -131066, 589824, 2, -196602, 655360, 0, 5, 589824, 3, -65531, 589824, 2, -131067, 589824, 2, -196603, 655360, 0, 4, 589824, 3, -65532, 589824, 2, -131068, 589824, 2, -196604, 655360, 0, 3, 589824, 3, -65533, 589824, 2, -131069, 589824, 2, -196605, 655360, 0, 2, 589824, 3, -65534, 589824, 2, -131070, 589824, 2, -196606, 655360, 0, 1, 589824, 3, -65535, 589824, 2, -131071, 589824, 2, -196607, 655360, 0, 0, 589824, 3, 65535, 589824, 3, 65534, 589824, 3, 65533, 589824, 3, 65532, 589824, 3, 35, 589824, 3, -65501, 589824, 2, -131037, 589824, 2, -196573, 655360, 0, 34, 589824, 3, -65502, 589824, 2, -131038, 589824, 2, -196574, 655360, 0, 33, 589824, 3, -65503, 589824, 2, -131039, 589824, 2, -196575, 655360, 0, 32, 589824, 3, -65504, 589824, 2, -131040, 589824, 2, -196576, 655360, 0, 43, 720896, 3, -65493, 720896, 2, -131029, 720896, 2, -196565, 720896, 0, 42, 589824, 3, -65494, 589824, 2, -131030, 589824, 2, -196566, 655360, 0, 41, 589824, 3, -65495, 589824, 2, -131031, 589824, 2, -196567, 655360, 0, 40, 589824, 3, -65496, 589824, 2, -131032, 589824, 2, -196568, 655360, 0, 39, 589824, 3, -65497, 589824, 2, -131033, 589824, 2, -196569, 655360, 0, 38, 589824, 3, -65498, 589824, 2, -131034, 589824, 2, -196570, 655360, 0, 37, 589824, 3, -65499, 589824, 2, -131035, 589824, 2, -196571, 655360, 0, 36, 589824, 3, -65500, 589824, 2, -131036, 589824, 2, -196572, 655360, 0, 65531, 524288, 3, -5, 524288, 1, -65541, 524288, 1, -131077, 524288, 1, -196613, 524288, 1, -262149, 524288, 1, -327685, 524288, 1, -393221, 524288, 1, -458757, 524288, 0, -2031621, 196616, 0, -1966085, 196616, 0, -1900549, 196616, 0, -1835013, 196616, 0, -1769477, 196616, 0, -1703941, 196616, 0, -1638405, 196616, 0, -1572869, 196616, 0, -1507333, 196616, 0, -1441797, 196616, 0, -1376261, 196616, 0, -1310725, 196616, 0, -1245189, 196616, 0, -1179653, 196616, 0, -1114117, 196616, 0, -1048581, 196616, 0, -983045, 196616, 0, -917509, 196616, 0, -851973, 196616, 0, -786437, 196616, 0, -720901, 196616, 0, -655365, 196616, 0, -589829, 196616, 0, -524293, 196616, 0, -393215, 524293, 0, -327679, 524293, 1, -393214, 589829, 0, -327678, 589829, 1, -262143, 524293, 1, -262142, 589829, 1)
+
+[node name="Level0ff" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -432)
+texture = ExtResource("4_dcbg3")
+centered = false
+
+[node name="GoalPost" parent="." instance=ExtResource("5_gde8r")]
+position = Vector2(232, -8)
+
+[node name="PipeArea" parent="." instance=ExtResource("7_gk755")]
+position = Vector2(32, -56)
+pipe_id = 1
+exit_only = true
+
+[node name="Player" parent="." instance=ExtResource("8_qwmw5")]
+material = SubResource("ShaderMaterial_64671")
+position = Vector2(32, -96)
+
+[node name="LevelBG" parent="." instance=ExtResource("8_jml32")]
+main_texture = ExtResource("9_bjnv2")
+sky_colour = Color(0.596078, 0.878431, 0.878431, 1)
+
+[node name="AutumnLevelBG" parent="." node_paths=PackedStringArray("og_bg") instance=ExtResource("10_2nbm8")]
+og_bg = NodePath("../LevelBG")
+main_texture = ExtResource("11_lmxis")
+sky_colour = Color(0.972549, 0.878431, 0.690196, 1)

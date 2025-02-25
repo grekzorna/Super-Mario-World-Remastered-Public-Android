@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=12 format=3 uid="uid://daimwvj3feuy"]
+
+[ext_resource type="Resource" uid="uid://v5bxp6p4o1y6" path="res://Resources/Achievements/Completionist/DragCoins/SPDragCoin.tres" id="1_4cb8l"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_eom6q"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="2_lx6bq"]
+[ext_resource type="Resource" uid="uid://baqpi5r4scfik" path="res://Resources/LevelData/SpecialWorld/SP1.tres" id="3_fy2xg"]
+[ext_resource type="Resource" uid="uid://br8vy1a06tco4" path="res://Resources/LevelData/SpecialWorld/SP2.tres" id="4_nbf4k"]
+[ext_resource type="Resource" uid="uid://bsxcxvtpb8lwx" path="res://Resources/LevelData/SpecialWorld/SP3.tres" id="5_bpyi5"]
+[ext_resource type="Resource" uid="uid://cgwn5dkowns3o" path="res://Resources/LevelData/SpecialWorld/SP4.tres" id="6_24sxh"]
+[ext_resource type="Resource" uid="uid://bsm81qa1v65kt" path="res://Resources/LevelData/SpecialWorld/SP5.tres" id="7_ush67"]
+[ext_resource type="Resource" uid="uid://bicxncxauhd17" path="res://Resources/LevelData/SpecialWorld/SP6.tres" id="8_284j0"]
+[ext_resource type="Resource" uid="uid://m54co6jipfeb" path="res://Resources/LevelData/SpecialWorld/SP7.tres" id="9_mcoc6"]
+[ext_resource type="Resource" uid="uid://csgnw4jjw3mqm" path="res://Resources/LevelData/SpecialWorld/SP8.tres" id="10_xv3gj"]
+
+[resource]
+script = ExtResource("2_lx6bq")
+area_name = "Special Zone"
+levels = Array[ExtResource("1_eom6q")]([ExtResource("3_fy2xg"), ExtResource("4_nbf4k"), ExtResource("5_bpyi5"), ExtResource("6_24sxh"), ExtResource("7_ush67"), ExtResource("8_284j0"), ExtResource("9_mcoc6"), ExtResource("10_xv3gj")])
+dragon_coin_achievement = ExtResource("1_4cb8l")

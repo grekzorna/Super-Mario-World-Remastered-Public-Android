@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cxg6n431m7v8e"]
+
+[ext_resource type="Texture2D" uid="uid://yaao0nkwisf6" path="res://Assets/Sprites/Particles/DashStart.png" id="1_20dki"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37vcy"]
+atlas = ExtResource("1_20dki")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38wki"]
+atlas = ExtResource("1_20dki")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gw2tj"]
+atlas = ExtResource("1_20dki")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpwfh"]
+atlas = ExtResource("1_20dki")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epv74"]
+atlas = ExtResource("1_20dki")
+region = Rect2(3, 2, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gto73"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37vcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38wki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gw2tj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpwfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epv74")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="DashStart" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_gto73")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(0, -4)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="queue_free"]

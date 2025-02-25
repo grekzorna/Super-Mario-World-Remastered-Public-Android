@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://v5bxp6p4o1y6"]
+
+[ext_resource type="Texture2D" uid="uid://dtfcxsa7e2fk5" path="res://Assets/Sprites/AchievementIcons/SpecialWorldDragCoins.png" id="1_fprd8"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="1_i1qsc"]
+
+[resource]
+script = ExtResource("1_i1qsc")
+title = "Special Sorta Person"
+description = "Collect all Dragon Coins in all levels in Special World."
+icon = ExtResource("1_fprd8")

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://bps7un4a6jvbp"]
+
+[ext_resource type="Texture2D" uid="uid://cy124bd0omyr8" path="res://Assets/Sprites/UI/TextImages/RedSwitch.png" id="2_l0jnw"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="2_mtupo"]
+
+[resource]
+script = ExtResource("2_mtupo")
+level_title = "Red Switch Palace"
+level_scene_path = "res://Instances/Levels/VanillaDome/red_switch_palace.tscn"
+start_cutscene_path = ""
+has_secret_exit = false
+yoshi_allowed = true
+has_dragon_coins = false
+title_image = ExtResource("2_l0jnw")
+dragon_coin_amount = 5
+counts_as_exit = true
+has_peach_coin = false
+map_point_warp = "RedSwitchPalace"
+map_scene_warp = "res://Instances/Levels/Maps/VanillaDome.tscn"

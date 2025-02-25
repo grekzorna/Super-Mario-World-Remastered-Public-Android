@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://gvnml5jau7jl"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/RailClass.gd" id="1_1a70m"]
+[ext_resource type="Texture2D" uid="uid://cpx1lgra8sir0" path="res://Assets/Sprites/Objects/RailMotor.png" id="2_kl8i8"]
+[ext_resource type="Texture2D" uid="uid://bw37fvi73o8i7" path="res://Assets/Sprites/Objects/RailEnd.png" id="3_lrk3m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fqh2"]
+atlas = ExtResource("2_kl8i8")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mghrs"]
+atlas = ExtResource("2_kl8i8")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njyqx"]
+atlas = ExtResource("2_kl8i8")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir527"]
+atlas = ExtResource("2_kl8i8")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2dt6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fqh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mghrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njyqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir527")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1s65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fqh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mghrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njyqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir527")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Rail" type="Path2D"]
+z_index = -1
+script = ExtResource("1_1a70m")
+
+[node name="LineVisual" type="Line2D" parent="."]
+visibility_layer = 2
+texture_repeat = 2
+width = 1.0
+default_color = Color(0, 0, 0, 1)
+texture_mode = 1
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="StartMotor" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e2dt6")
+autoplay = "default"
+frame_progress = 0.393125
+
+[node name="EndMotor" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v1s65")
+autoplay = "default"
+
+[node name="BounceStart" type="Sprite2D" parent="."]
+texture = ExtResource("3_lrk3m")
+
+[node name="BounceEnd" type="Sprite2D" parent="."]
+texture = ExtResource("3_lrk3m")
+
+[node name="Follow" type="PathFollow2D" parent="."]
+position = Vector2(141.902, -137.554)
+progress = 17.0
+rotates = false
+loop = false
+
+[node name="Joint" type="Node2D" parent="Follow"]

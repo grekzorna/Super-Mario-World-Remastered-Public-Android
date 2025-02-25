@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cdxlwmj7u3grj"]
+
+[ext_resource type="Texture2D" uid="uid://baqex788kr0b4" path="res://Assets/Sprites/AchievementIcons/46600.png" id="1_1u2ya"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/AchievementResource.gd" id="2_ikpkv"]
+
+[resource]
+script = ExtResource("2_ikpkv")
+title = "Lemmy Down Slowly"
+description = "Defeat Lemmy Koopa of Castle #3"
+icon = ExtResource("1_1u2ya")

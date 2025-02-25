@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://3dbp1bh377er"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/question_block.gd" id="1_6gd62"]
+[ext_resource type="Texture2D" uid="uid://b3ib6laostiok" path="res://Assets/Sprites/Objects/EmptyBlock.png" id="2_uhjuk"]
+[ext_resource type="Texture2D" uid="uid://hh434xllkh0v" path="res://Assets/Sprites/Objects/Question_Block_Sheet.png" id="3_quad4"]
+[ext_resource type="PackedScene" uid="uid://gqebnb6ripsr" path="res://Instances/Parts/BlockParts/item_dispenser.tscn" id="4_vx338"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nptv8"]
+atlas = ExtResource("2_uhjuk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmlsq"]
+atlas = ExtResource("3_quad4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8ub8"]
+atlas = ExtResource("3_quad4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_764dr"]
+atlas = ExtResource("3_quad4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fn86"]
+atlas = ExtResource("3_quad4")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w75xy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nptv8")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmlsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8ub8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_764dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fn86")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrw0e"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m45e"]
+size = Vector2(16, 2)
+
+[node name="?Block" type="AnimatableBody2D" node_paths=PackedStringArray("visuals")]
+physics_interpolation_mode = 2
+light_mask = 3
+visibility_layer = 3
+collision_layer = 7
+collision_mask = 8
+script = ExtResource("1_6gd62")
+mushroom_if_small = true
+visuals = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+process_mode = 3
+light_mask = 3
+visibility_layer = 3
+sprite_frames = SubResource("SpriteFrames_w75xy")
+autoplay = "default"
+frame_progress = 0.503998
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_hrw0e")
+
+[node name="ItemDispenser" parent="." instance=ExtResource("4_vx338")]
+
+[node name="InvisibleDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleDetect"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_2m45e")
+
+[connection signal="area_entered" from="InvisibleDetect" to="." method="_on_invisible_detect_area_entered"]

@@ -1,0 +1,5 @@
+[gd_resource type="InputEventJoypadButton" format=3 uid="uid://bel7qkjykmhx0"]
+
+[resource]
+button_index = 13
+pressed = true

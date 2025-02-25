@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://deocyl6ki83jj"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Blocks/SpikeBlock.gd" id="1_qfo55"]
+[ext_resource type="Texture2D" uid="uid://cj8n7bnn5yr7u" path="res://Assets/Sprites/Enemys/Muncher.png" id="2_munrp"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_r6w0h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dg3r"]
+atlas = ExtResource("2_munrp")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgkxi"]
+atlas = ExtResource("2_munrp")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ps74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dg3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgkxi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuvq3"]
+atlas = ExtResource("2_munrp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6trj"]
+atlas = ExtResource("2_munrp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qqwu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuvq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6trj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slwpr"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65uxp"]
+size = Vector2(16, 8)
+
+[node name="Muncher" type="StaticBody2D"]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_qfo55")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7ps74")
+autoplay = "default"
+script = ExtResource("3_r6w0h")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_2qqwu"), SubResource("SpriteFrames_7ps74")])
+settings_value = "muncher"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_slwpr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_65uxp")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

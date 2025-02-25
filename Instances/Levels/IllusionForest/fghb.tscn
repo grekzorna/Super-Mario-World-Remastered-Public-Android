@@ -1,0 +1,156 @@
+[gd_scene load_steps=24 format=3 uid="uid://cahfmx1swqbse"]
+
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_7j58p"]
+[ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_3dhxy"]
+[ext_resource type="AudioStream" uid="uid://d2mfwfapwilqw" path="res://Resources/MusicTracks/GhostHouse.tres" id="2_m7u6t"]
+[ext_resource type="Texture2D" uid="uid://hsj1u4o8tcy2" path="res://Assets/Sprites/Backgrounds/GhostHouse/BG6.png" id="4_a4v0o"]
+[ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="5_xiddl"]
+[ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="7_kjpdw"]
+[ext_resource type="PackedScene" uid="uid://cfip1xv4shg3l" path="res://Instances/Prefabs/Blocks/flying_question_block.tscn" id="12_hfwuw"]
+[ext_resource type="PackedScene" uid="uid://c308cugamvq8a" path="res://Instances/Prefabs/Items/fire_flower.tscn" id="13_uptkj"]
+[ext_resource type="PackedScene" uid="uid://d3ay6d00er3ko" path="res://Instances/Prefabs/Interactables/door.tscn" id="14_wnkyr"]
+[ext_resource type="PackedScene" uid="uid://dm7exbyvtd2fw" path="res://Instances/Prefabs/Blocks/spin_block.tscn" id="15_wxpgm"]
+[ext_resource type="PackedScene" uid="uid://bimrxpg5a4yrk" path="res://Instances/Prefabs/Items/1_up.tscn" id="16_7nqhk"]
+[ext_resource type="PackedScene" uid="uid://dn7uw0nsc3kcs" path="res://Instances/Prefabs/Enemies/boo_horde.tscn" id="16_oejrf"]
+[ext_resource type="PackedScene" uid="uid://cr080mol026x8" path="res://Instances/Prefabs/HeldObjects/p_switch.tscn" id="17_n6esk"]
+[ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="18_vo156"]
+[ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="19_o60jm"]
+[ext_resource type="PackedScene" uid="uid://cdbsvmplutv35" path="res://Instances/Prefabs/Items/cape_feather.tscn" id="20_4wldw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_062ei"]
+atlas = ExtResource("4_a4v0o")
+region = Rect2(0, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwj3f"]
+atlas = ExtResource("4_a4v0o")
+region = Rect2(512, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krsfn"]
+atlas = ExtResource("4_a4v0o")
+region = Rect2(1024, 0, 512, 432)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0duor"]
+atlas = ExtResource("4_a4v0o")
+region = Rect2(1536, 0, 512, 432)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_385sa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_062ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwj3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krsfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0duor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Shader" id="Shader_1xk88"]
+code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
+// Rotation matrix from https://en.wikipedia.org/wiki/Rotation_matrix
+
+shader_type canvas_item;
+
+
+uniform float strength: hint_range(0., 1.) = 0.5;
+uniform float speed: hint_range(0., 10.) = 0.5;
+uniform float angle: hint_range(0., 360.) = 0.;
+
+void fragment() {
+	float hue = UV.x * cos(radians(angle)) - UV.y * sin(radians(angle));
+	hue = fract(hue + fract(TIME  * speed));
+	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
+	vec3 rainbow;
+	if(hue < 1./6.){
+		rainbow = vec3(1., x, 0.);
+	} else if (hue < 1./3.) {
+		rainbow = vec3(x, 1., 0);
+	} else if (hue < 0.5) {
+		rainbow = vec3(0, 1., x);
+	} else if (hue < 2./3.) {
+		rainbow = vec3(0., x, 1.);
+	} else if (hue < 5./6.) {
+		rainbow = vec3(x, 0., 1.);
+	} else {
+		rainbow = vec3(1., 0., x);
+	}
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, vec4(rainbow, color.a), strength);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rm14w"]
+resource_local_to_scene = true
+shader = SubResource("Shader_1xk88")
+shader_parameter/strength = 0.0
+shader_parameter/speed = 0.5
+shader_parameter/angle = 36.404
+
+[node name="FGHB" type="Node"]
+script = ExtResource("1_7j58p")
+level_music = ExtResource("2_m7u6t")
+camera_left_end_position = 1984
+camera_top_end_position = -384
+
+[node name="LevelBG" parent="." instance=ExtResource("2_3dhxy")]
+modulate = Color(0.61136, 0.61136, 0.61136, 1)
+main_sprite_frames = SubResource("SpriteFrames_385sa")
+sky_colour = Color(0.0941176, 0.188235, 0.282353, 1)
+
+[node name="Player" parent="." instance=ExtResource("5_xiddl")]
+material = SubResource("ShaderMaterial_rm14w")
+
+[node name="TileMap" parent="." instance=ExtResource("7_kjpdw")]
+layer_0/tile_data = PackedInt32Array(65532, 11, 0, 65533, 65547, 0, 57, 65547, 0, 58, 131083, 0, 61, 11, 0, 62, 65547, 0, 74, 65547, 0, 75, 131083, 0, -196538, 65547, 0, -196537, 131083, 0, -196543, 11, 0, -196542, 65547, 0, -196532, 11, 0, -196531, 65547, 0, -196527, 65547, 0, -196526, 131083, 0, 83, 11, 0, 84, 65547, 0, 122, 65547, 0, 123, 131083, 0, 99, 65547, 0, 100, 65547, 0, 101, 65547, 0, 102, 65547, 0, 103, 65547, 0, 104, 65547, 0, 105, 65547, 0, 106, 65547, 0, 107, 65547, 0, 108, 65547, 0, 109, 65547, 0, 110, 65547, 0, 111, 65547, 0, 112, 65547, 0, 113, 65547, 0, 114, 65547, 0, 115, 65547, 0, 116, 65547, 0, 117, 65547, 0, 118, 65547, 0, 119, 65547, 0, 120, 65547, 0, 121, 65547, 0, 86, 65547, 0, 87, 65547, 0, 88, 65547, 0, 89, 65547, 0, 90, 65547, 0, 91, 65547, 0, 92, 65547, 0, 93, 65547, 0, 94, 65547, 0, 95, 65547, 0, 96, 65547, 0, 97, 65547, 0, 98, 65547, 0, 85, 65547, 0, -196530, 65547, 0, -196529, 65547, 0, -196528, 65547, 0, -196541, 65547, 0, -196540, 65547, 0, -196539, 65547, 0, 63, 65547, 0, 64, 65547, 0, 65, 65547, 0, 66, 65547, 0, 67, 65547, 0, 68, 65547, 0, 69, 65547, 0, 70, 65547, 0, 71, 65547, 0, 72, 65547, 0, 73, 65547, 0, 37, 65547, 0, 38, 65547, 0, 39, 65547, 0, 40, 65547, 0, 41, 65547, 0, 42, 65547, 0, 43, 65547, 0, 44, 65547, 0, 45, 65547, 0, 46, 65547, 0, 47, 65547, 0, 48, 65547, 0, 49, 65547, 0, 50, 65547, 0, 51, 65547, 0, 52, 65547, 0, 53, 65547, 0, 54, 65547, 0, 55, 65547, 0, 56, 65547, 0, 22, 65547, 0, 23, 65547, 0, 24, 65547, 0, 25, 65547, 0, 26, 65547, 0, 27, 65547, 0, 28, 65547, 0, 29, 65547, 0, 30, 65547, 0, 31, 65547, 0, 32, 65547, 0, 33, 65547, 0, 34, 65547, 0, 35, 65547, 0, 36, 65547, 0, 6, 65547, 0, 7, 65547, 0, 8, 65547, 0, 9, 65547, 0, 10, 65547, 0, 11, 65547, 0, 12, 65547, 0, 13, 65547, 0, 14, 65547, 0, 15, 65547, 0, 16, 65547, 0, 17, 65547, 0, 18, 65547, 0, 19, 65547, 0, 20, 65547, 0, 21, 65547, 0, 65534, 65547, 0, 65535, 65547, 0, 0, 65547, 0, 1, 65547, 0, 2, 65547, 0, 3, 65547, 0, 4, 65547, 0, 5, 65547, 0, -65512, 131083, 1, -131038, 131083, 1, -65502, 131083, 1, -196566, 131083, 1, -131030, 131083, 1, -65494, 131083, 1, -196519, 131083, 1, -130983, 131083, 1, -196518, 131083, 1, -130982, 131083, 1, -196517, 131083, 1, -130981, 131083, 1, -196516, 131083, 1, -130980, 131083, 1, -196515, 131083, 1, -130979, 131083, 1, -196514, 131083, 1, -130978, 131083, 1, -196513, 131083, 1, -130977, 131083, 1, -130975, 131083, 1, -327585, 131083, 1, -327584, 131083, 1, -327577, 131083, 1, -262041, 131083, 1, -196505, 131083, 1, -130969, 131083, 1, -65433, 131083, 1, -262036, 131083, 1, -196500, 131083, 1, -130964, 131083, 1, -65428, 131083, 1, -1572741, 11, 1, -1507205, 11, 1, -1441669, 11, 1, -1376133, 11, 1, -1310597, 11, 1, -1245061, 11, 1, -1179525, 11, 1, -1113989, 11, 1, -1048453, 11, 1, -982917, 11, 1, -917381, 11, 1, -851845, 11, 1, -786309, 11, 1, -720773, 11, 1, -655237, 11, 1, -589701, 11, 1, -524165, 11, 1, -458629, 11, 1, -393093, 11, 1, -327557, 11, 1, -262021, 11, 1, -196485, 11, 1, -130949, 11, 1, -65413, 11, 1, -327583, 11, 0, -327582, 65547, 0, -327579, 65547, 0, -327578, 131083, 0, -327581, 65547, 0, -327580, 65547, 0, -1507332, 65547, 1, -1441796, 65547, 1, -1376260, 65547, 1, -1310724, 65547, 1, -1245188, 65547, 1, -1179652, 65547, 1, -1114116, 65547, 1, -1048580, 65547, 1, -983044, 65547, 1, -917508, 65547, 1, -851972, 65547, 1, -786436, 65547, 1, -720900, 65547, 1, -655364, 65547, 1, -589828, 65547, 1, -524292, 65547, 1, -458756, 65547, 1, -393220, 65547, 1, -327684, 65547, 1, -262148, 65547, 1, -196612, 65547, 1, -131076, 65547, 1, -65540, 65547, 1, -4, 65547, 1, 131069, 327691, 0, 196605, 327691, 1, 65537, 327691, 0, 131073, 327691, 1, 65541, 327691, 0, 131077, 327691, 1, 65545, 327691, 0, 131081, 327691, 1, 65549, 327691, 0, 131085, 327691, 1, 65553, 327691, 0, 131089, 327691, 1, 65557, 327691, 0, 131093, 327691, 1, 65561, 327691, 0, 131097, 327691, 1, 65565, 327691, 0, 131101, 327691, 1, 65569, 327691, 0, 131105, 327691, 1, 65573, 327691, 0, 131109, 327691, 1, 65577, 327691, 0, 131113, 327691, 1, 65581, 327691, 0, 131117, 327691, 1, 65585, 327691, 0, 131121, 327691, 1, 65589, 327691, 0, 131125, 327691, 1, 65593, 327691, 0, 131129, 327691, 1, 65598, 327691, 0, 131134, 327691, 1, 65602, 327691, 0, 131138, 327691, 1, 65606, 327691, 0, 131142, 327691, 1, 65610, 327691, 0, 131146, 327691, 1, -131002, 327691, 0, -65466, 327691, 1, -131006, 327691, 0, -65470, 327691, 1, -130995, 327691, 0, -65459, 327691, 1, -130991, 327691, 0, -65455, 327691, 1, 65622, 327691, 0, 131158, 327691, 1, 65626, 327691, 0, 131162, 327691, 1, -65446, 327691, 0, -65442, 327691, 0, 65630, 327691, 0, 131166, 327691, 1, 65634, 327691, 0, 131170, 327691, 1, 65638, 327691, 0, 131174, 327691, 1, 65642, 327691, 0, 131178, 327691, 1, 65646, 327691, 0, 131182, 327691, 1, 65650, 327691, 0, 131186, 327691, 1, 65654, 327691, 0, 131190, 327691, 1, 65658, 327691, 0, 131194, 327691, 1, -262046, 327691, 0, -196510, 327691, 1, -130974, 327691, 1, -65438, 327691, 1, 77, 327691, 1, 65613, 327691, 1, 131149, 327691, 1, 81, 327691, 1, 65617, 327691, 1, 131153, 327691, 1, -262040, 15, 196608, -262039, 15, 196608, -262038, 15, 196608, -262037, 15, 196608, -262035, 15, 196608, -262034, 15, 196608, -262033, 15, 196608, -262032, 15, 196608, -262031, 15, 196608, -262030, 15, 196608, -262029, 15, 196608, -262028, 15, 196608, -262027, 15, 196608, -262026, 15, 196608, -262025, 15, 196608, -262024, 15, 196608, -262023, 15, 196608, -262022, 15, 196608, -130993, 393227, 268435458, -130994, 458763, 268435458, -65458, 458763, 268435459)
+
+[node name="LevelGuide" type="Sprite2D" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 1)
+z_index = -10
+position = Vector2(-64, -384)
+centered = false
+
+[node name="FlyingQuestionBlock" parent="." instance=ExtResource("12_hfwuw")]
+position = Vector2(344, -40)
+continuous_flight = true
+item = ExtResource("13_uptkj")
+
+[node name="Door" parent="." instance=ExtResource("14_wnkyr")]
+position = Vector2(1704, 0)
+level_scene = "res://Instances/Levels/IllusionForest/fgha.tscn"
+spawn_position = Vector2(1864, 0)
+
+[node name="Door2" parent="." instance=ExtResource("14_wnkyr")]
+position = Vector2(1944, 0)
+level_scene = "res://Instances/Levels/IllusionForest/fgha.tscn"
+spawn_position = Vector2(1608, -48)
+p_switch = true
+
+[node name="SpinBlock" parent="." instance=ExtResource("15_wxpgm")]
+position = Vector2(1544, -24)
+item = ExtResource("16_7nqhk")
+
+[node name="PSwitch" parent="." instance=ExtResource("17_n6esk")]
+position = Vector2(1576, -80)
+
+[node name="DragonCoin" parent="." instance=ExtResource("18_vo156")]
+position = Vector2(1480, -80)
+
+[node name="DragonCoin2" parent="." instance=ExtResource("18_vo156")]
+position = Vector2(1176, -112)
+
+[node name="DragonCoin3" parent="." instance=ExtResource("18_vo156")]
+position = Vector2(888, -64)
+
+[node name="?Block" parent="." instance=ExtResource("19_o60jm")]
+position = Vector2(824, -56)
+item = ExtResource("20_4wldw")
+
+[node name="BooHorde" parent="." instance=ExtResource("16_oejrf")]
+position = Vector2(856, -128)

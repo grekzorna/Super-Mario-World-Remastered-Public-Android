@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq0233se7av2d"]
+
+[ext_resource type="Texture2D" uid="uid://kftdgfwfq64d" path="res://Assets/Sprites/Enemys/BowserStatue.png" id="1_4jchp"]
+[ext_resource type="Script" path="res://Scripts/Classes/Enemies/bowser_statue.gd" id="1_ktow8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6h6eq"]
+size = Vector2(18, 19)
+
+[node name="BowserStatue" type="CharacterBody2D"]
+script = ExtResource("1_ktow8")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1, -9.5)
+shape = SubResource("RectangleShape2D_6h6eq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-4, -11)
+texture = ExtResource("1_4jchp")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -12)
+scale = Vector2(1.35, 1.35)
+
+[connection signal="timeout" from="FireTimer" to="." method="spawn_fire"]

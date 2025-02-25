@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MapArea" load_steps=15 format=3 uid="uid://c8vxuw4j0rqsi"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="1_6vbvh"]
+[ext_resource type="Resource" uid="uid://cxc8k446r115b" path="res://Resources/Achievements/Completionist/DragCoins/IFDragCoin.tres" id="1_evjvy"]
+[ext_resource type="AudioStream" uid="uid://bjeqmsau7yykg" path="res://Assets/Audio/BGM/SMW/AutumnIllusionForest.mp3" id="1_iwbbf"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_pm2dk"]
+[ext_resource type="Resource" uid="uid://0yunahosqnga" path="res://Resources/LevelData/IllusionForest/F1.tres" id="1_wu1l3"]
+[ext_resource type="Resource" uid="uid://b8mpa82arysof" path="res://Resources/LevelData/IllusionForest/F2.tres" id="2_mx4ty"]
+[ext_resource type="Resource" uid="uid://blokhl58uxjje" path="res://Resources/LevelData/IllusionForest/F3.tres" id="3_qgnjk"]
+[ext_resource type="Resource" uid="uid://b36v061ibde4b" path="res://Resources/LevelData/IllusionForest/F4.tres" id="4_co7ib"]
+[ext_resource type="Resource" uid="uid://bqe3c8b4ptnq4" path="res://Resources/LevelData/IllusionForest/FGH.tres" id="5_54uuh"]
+[ext_resource type="Resource" uid="uid://b0rhcnno0e1vq" path="res://Resources/LevelData/IllusionForest/Castle5.tres" id="6_h3eco"]
+[ext_resource type="Resource" uid="uid://c5koqr8eq8j14" path="res://Resources/LevelData/IllusionForest/FSA.tres" id="7_vilsx"]
+[ext_resource type="Resource" uid="uid://cul06q6bdpu1" path="res://Resources/LevelData/IllusionForest/FF.tres" id="11_mlg4v"]
+[ext_resource type="Resource" uid="uid://ceta21ps547a1" path="res://Resources/LevelData/IllusionForest/BlueSwitchPalace.tres" id="12_8srj5"]
+[ext_resource type="AudioStream" uid="uid://dvgo8cjc0f71t" path="res://Assets/Audio/BGM/SMW/IllusionForest.mp3" id="13_fy1an"]
+
+[resource]
+script = ExtResource("1_6vbvh")
+area_name = "Forest of Illusion"
+music = ExtResource("13_fy1an")
+autumn_music = ExtResource("1_iwbbf")
+levels = Array[ExtResource("1_pm2dk")]([ExtResource("1_wu1l3"), ExtResource("2_mx4ty"), ExtResource("3_qgnjk"), ExtResource("4_co7ib"), ExtResource("5_54uuh"), ExtResource("6_h3eco"), ExtResource("7_vilsx"), ExtResource("11_mlg4v"), ExtResource("12_8srj5")])
+dragon_coin_achievement = ExtResource("1_evjvy")

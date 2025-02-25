@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://cs44ye1evkt56"]
+
+[ext_resource type="Script" uid="uid://t8ximr354sv4" path="res://Scripts/Classes/Items/bowser_statue_flame.gd" id="1_ed7bc"]
+[ext_resource type="Texture2D" uid="uid://m41w356u4tmn" path="res://Assets/Sprites/Particles/BowserStatueFlame.png" id="2_8bsag"]
+[ext_resource type="PackedScene" uid="uid://bpsdhhyetvdri" path="res://Instances/Parts/fire_breath_signel.tscn" id="2_hq4ge"]
+[ext_resource type="Script" uid="uid://bqdfwdbvl65wk" path="res://Scripts/Classes/EnemyClass.gd" id="3_6xkqe"]
+
+[sub_resource type="Animation" id="Animation_22bja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fypgx"]
+resource_name = "default"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_we2bh"]
+_data = {
+&"RESET": SubResource("Animation_22bja"),
+&"default": SubResource("Animation_fypgx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77rct"]
+size = Vector2(10, 2)
+
+[node name="BowserStatueFlame" type="CharacterBody2D"]
+script = ExtResource("1_ed7bc")
+yoshi_behavior = "Spit"
+gib_type = 2
+spit_item = ExtResource("2_hq4ge")
+spiky_top = true
+can_slide_damage = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+metadata/_custom_type_script = ExtResource("3_6xkqe")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_8bsag")
+hframes = 2
+
+[node name="Animation" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_we2bh")
+}
+autoplay = "default"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_77rct")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]
+[connection signal="screen_entered" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamInteractive" load_steps=2 format=3 uid="uid://b5c78m81esnfw"]
+
+[ext_resource type="AudioStream" uid="uid://ct0e66fs5wjrq" path="res://Assets/Audio/BGM/SMW/AutumnAthletic.mp3" id="1_najm2"]
+
+[resource]
+clip_count = 1
+clip_0/name = &"Athletic Autumn"
+clip_0/stream = ExtResource("1_najm2")
+clip_0/auto_advance = 0
+metadata/Name = "Athletic Remix"
+metadata/Artist = "HarvettFox96"

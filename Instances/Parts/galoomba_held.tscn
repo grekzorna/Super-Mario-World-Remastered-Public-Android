@@ -1,0 +1,159 @@
+[gd_scene load_steps=20 format=3 uid="uid://d0jbc3xpphl4k"]
+
+[ext_resource type="Script" path="res://Scripts/HeldObjects/galoomba_held.gd" id="1_r5dbu"]
+[ext_resource type="Texture2D" uid="uid://djyr2ffecc8w4" path="res://Assets/Sprites/Enemys/GoomboSheet.png" id="2_6eatk"]
+[ext_resource type="Texture2D" uid="uid://cuu01o0iwv7p0" path="res://Assets/Sprites/Enemys/GaloombaAutumnSheet.png" id="3_7d2lm"]
+[ext_resource type="Script" path="res://Scripts/Classes/VariationAnimatedSprite.gd" id="3_j0c7r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tphaq"]
+atlas = ExtResource("2_6eatk")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5eb0"]
+atlas = ExtResource("2_6eatk")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iim7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tphaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5eb0")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_guyhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tphaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5eb0")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dui40"]
+atlas = ExtResource("2_6eatk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ch0oj"]
+atlas = ExtResource("2_6eatk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_052q4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dui40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ch0oj")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtp8m"]
+atlas = ExtResource("3_7d2lm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xnws"]
+atlas = ExtResource("3_7d2lm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8rtx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtp8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xnws")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppvoc"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17en0"]
+size = Vector2(16, 8)
+
+[sub_resource type="Animation" id="Animation_6havl"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_mcmmb"]
+resource_name = "Shake"
+length = 0.4
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n77sl"]
+_data = {
+&"RESET": SubResource("Animation_6havl"),
+&"Shake": SubResource("Animation_mcmmb")
+}
+
+[node name="GaloombaHeld" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_r5dbu")
+directional_sprite = true
+can_destroy = true
+destructable = true
+kick_bounce = true
+player_can_destroy = true
+respawnable = true
+flip_animation = true
+respawn_entity_scene = "res://Instances/Prefabs/Enemies/galoomba.tscn"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_iim7t")
+animation = &"0"
+autoplay = "0"
+flip_h = true
+flip_v = true
+script = ExtResource("3_j0c7r")
+frames = Array[SpriteFrames]([SubResource("SpriteFrames_guyhh"), SubResource("SpriteFrames_052q4")])
+settings_value = "galoomba"
+metadata/_custom_type_script = ExtResource("3_j0c7r")
+
+[node name="AutumnSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_u8rtx")
+autoplay = "default"
+frame_progress = 0.787631
+offset = Vector2(0, 1)
+flip_h = true
+flip_v = true
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ppvoc")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_17en0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n77sl")
+}
+
+[connection signal="area_entered" from="Hitbox" to="." method="hitbox_hit"]

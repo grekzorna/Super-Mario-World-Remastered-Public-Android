@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://drlaty4ed1k8v"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGimicks/bird.gd" id="1_j0lsi"]
+[ext_resource type="Texture2D" uid="uid://citeofy7xki3o" path="res://Assets/Sprites/Objects/Birds.png" id="2_rjhgr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ab2n"]
+size = Vector2(5, 2.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khlho"]
+radius = 48.0
+
+[sub_resource type="Animation" id="Animation_n66rw"]
+resource_name = "Fly"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_hixy6"]
+resource_name = "Idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.7, 3.8, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_16j87"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4hpux"]
+_data = {
+"Fly": SubResource("Animation_n66rw"),
+"Idle": SubResource("Animation_hixy6"),
+"RESET": SubResource("Animation_16j87")
+}
+
+[node name="Bird" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 65540
+script = ExtResource("1_j0lsi")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("2_rjhgr")
+hframes = 5
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.25)
+shape = SubResource("RectangleShape2D_7ab2n")
+
+[node name="PlayerDetect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+shape = SubResource("CircleShape2D_khlho")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4hpux")
+}
+autoplay = "Idle"
+
+[connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]

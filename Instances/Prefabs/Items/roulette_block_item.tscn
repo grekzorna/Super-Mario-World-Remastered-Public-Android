@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://bjc68myrr4roi"]
+
+[ext_resource type="Texture2D" uid="uid://bgerhpivn3hsm" path="res://Assets/Sprites/Items/Mushroom.png" id="1_jhux5"]
+[ext_resource type="Script" uid="uid://bfqycjs1cjlm8" path="res://Scripts/Classes/Items/roulette_block_item.gd" id="1_smp2n"]
+[ext_resource type="Texture2D" uid="uid://cpjxlqt3sjb6c" path="res://Assets/Sprites/Items/FireFlowerSheet.png" id="3_cm2kv"]
+[ext_resource type="Texture2D" uid="uid://4tonvcjbw2t5" path="res://Assets/Sprites/Items/CapeFeather.png" id="4_yf1sw"]
+[ext_resource type="Texture2D" uid="uid://cue225imgd2wp" path="res://Assets/Sprites/Items/StarMan.png" id="5_mg71u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5yol"]
+atlas = ExtResource("3_cm2kv")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0ecg"]
+atlas = ExtResource("5_mg71u")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6w6r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jhux5")
+}],
+"loop": true,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5yol")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_yf1sw")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0ecg")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smp2n"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7gwj"]
+size = Vector2(16, 16)
+
+[node name="RouletteBlockItem" type="CharacterBody2D"]
+script = ExtResource("1_smp2n")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6w6r")
+animation = &"0"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_smp2n")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_a7gwj")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

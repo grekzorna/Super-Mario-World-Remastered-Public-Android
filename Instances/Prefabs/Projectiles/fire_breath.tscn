@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0qnskibbdutl"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/FireBreath.gd" id="1_l4740"]
+[ext_resource type="Texture2D" uid="uid://ky44n20g44ta" path="res://Assets/Sprites/Enemys/FireBreath.png" id="2_dwfb4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlygp"]
+atlas = ExtResource("2_dwfb4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17efo"]
+atlas = ExtResource("2_dwfb4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1vao7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlygp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17efo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq8pm"]
+
+[node name="FireBreath" type="Node2D" node_paths=PackedStringArray("parts")]
+script = ExtResource("1_l4740")
+parts = [NodePath("Top"), NodePath("Middle"), NodePath("Bottom")]
+
+[node name="Top" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1vao7")
+autoplay = "default"
+frame_progress = 0.675854
+
+[node name="Area2D" type="Area2D" parent="Top"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top/Area2D"]
+shape = SubResource("RectangleShape2D_iq8pm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Top"]
+
+[node name="Middle" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1vao7")
+autoplay = "default"
+frame_progress = 0.315127
+
+[node name="Area2D" type="Area2D" parent="Middle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Middle/Area2D"]
+shape = SubResource("RectangleShape2D_iq8pm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Middle"]
+
+[node name="Bottom" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1vao7")
+autoplay = "default"
+frame_progress = 0.315127
+
+[node name="Area2D" type="Area2D" parent="Bottom"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom/Area2D"]
+shape = SubResource("RectangleShape2D_iq8pm")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Bottom"]
+
+[connection signal="area_entered" from="Top/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="Top/VisibleOnScreenNotifier2D" to="Top" method="queue_free"]
+[connection signal="area_entered" from="Middle/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="Middle/VisibleOnScreenNotifier2D" to="Middle" method="queue_free"]
+[connection signal="area_entered" from="Bottom/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="screen_exited" from="Bottom/VisibleOnScreenNotifier2D" to="Bottom" method="queue_free"]

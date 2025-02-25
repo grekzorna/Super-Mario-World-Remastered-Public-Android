@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3 uid="uid://oeiqvupa2v30"]
+
+[ext_resource type="Script" path="res://Scripts/UI/settings_section.gd" id="1_1a2tb"]
+[ext_resource type="PackedScene" uid="uid://den5kogms88pd" path="res://Instances/UI/selectable_option_node.tscn" id="2_xgdys"]
+
+[node name="GameplaySettings" type="ScrollContainer" node_paths=PackedStringArray("option_nodes")]
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.207407
+anchor_right = 0.883333
+anchor_bottom = 0.948148
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("1_1a2tb")
+option_nodes = [NodePath("VBoxContainer/LevelLayout"), null, null, NodePath("VBoxContainer/AutumnStyle"), NodePath("VBoxContainer/CharacterPhysics")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -4
+
+[node name="LevelLayout" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Level Layouts"
+option_value_usage = 1
+selectable_values = ["SNES", "GBA"]
+value_colours = Array[Color]([Color(1, 0, 0.270588, 1), Color(0.462745, 0.427451, 0.647059, 1)])
+settings_value = "level_layout_type"
+
+[node name="TimerEnabled" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Speedrun Timer"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0, 0.270588, 1), Color(0.235294, 1, 0.290196, 1)])
+settings_value = "timer_enabled"
+
+[node name="TimerType" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Speedrun Timer Type"
+option_value_usage = 1
+selectable_values = ["Per-Save", "Per-Level"]
+value_colours = Array[Color]([Color(0, 0.627451, 0.478431, 1), Color(0.462745, 0.427451, 0.647059, 1)])
+settings_value = "timer_type"
+
+[node name="CameraShake" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Camera Shake"
+selectable_values = [true, false]
+value_colours = Array[Color]([Color(0.345098, 0.972549, 0.345098, 1), Color(1, 0.194376, 0.144153, 1)])
+settings_value = "camera_shake"
+
+[node name="AutumnStyle" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Autumn (Fall) Style"
+option_value_usage = 1
+selectable_values = ["Overhaul", "Classic"]
+settings_value = "autumn_type"
+
+[node name="CharacterPhysics" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Unique Character Physics"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "character_specific_physics"
+
+[node name="DamageStyle" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Player Damage Style"
+option_value_usage = 1
+selectable_values = ["Modern", "Classic"]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "player_damage_style"
+
+[node name="YoshiSpawnPause" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Yoshi Spawn Pause"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "yoshi_spawn_pause"
+
+[node name="EdibleDolphins" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Edible Dolphins"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "edible_dolphins"
+
+[node name="SpinJumpHold" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Spin Jump While Holding"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "holding_spin_jump"
+
+[node name="AutoItemDrop" parent="VBoxContainer" instance=ExtResource("2_xgdys")]
+layout_mode = 2
+node_title = "Auto Reserve Item Drop"
+selectable_values = [false, true]
+value_colours = Array[Color]([Color(1, 0.194376, 0.144153, 1), Color(0.345098, 0.972549, 0.345098, 1)])
+settings_value = "auto_item_drop"

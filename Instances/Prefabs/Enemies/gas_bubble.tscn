@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://uad2ip1uxnmd"]
+
+[ext_resource type="Script" uid="uid://cmfpihnv8rrh3" path="res://Scripts/Classes/Enemies/gas_bubble.gd" id="1_6n5bx"]
+[ext_resource type="Texture2D" uid="uid://c5d43fkqxds8w" path="res://Assets/Sprites/Enemys/GasBubble.png" id="2_mcrm2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bri5"]
+atlas = ExtResource("2_mcrm2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0fo3"]
+atlas = ExtResource("2_mcrm2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw7ts"]
+atlas = ExtResource("2_mcrm2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7ten"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bri5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0fo3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw7ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0fo3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5uyky"]
+radius = 24.0
+
+[node name="GasBubble" type="CharacterBody2D"]
+script = ExtResource("1_6n5bx")
+spiky_top = true
+can_slide_damage = false
+can_silver_switch = false
+can_cape_damage = false
+can_spin_kill = false
+can_held_item_damage = false
+can_ground_pound = false
+can_fire_damage = false
+can_ice_freeze = false
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.686275)
+sprite_frames = SubResource("SpriteFrames_c7ten")
+autoplay = "default"
+frame_progress = 0.222236
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_5uyky")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(4, 4)
+
+[connection signal="area_entered" from="Hitbox" to="." method="check_hit"]

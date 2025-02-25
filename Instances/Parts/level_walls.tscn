@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci7yaj7xdqkye"]
+
+[ext_resource type="Script" path="res://Scripts/LevelElements/level_walls.gd" id="1_2dbiy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0y64d"]
+size = Vector2(16, 9999)
+
+[node name="LevelWalls" type="Node2D"]
+z_index = 999
+z_as_relative = false
+script = ExtResource("1_2dbiy")
+
+[node name="Left" type="StaticBody2D" parent="."]
+position = Vector2(-64, 0)
+collision_layer = 4097
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_0y64d")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="Right" type="StaticBody2D" parent="."]
+position = Vector2(488, 0)
+collision_layer = 4097
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2(16, 0)
+shape = SubResource("RectangleShape2D_0y64d")
+debug_color = Color(1, 0, 0, 0.419608)

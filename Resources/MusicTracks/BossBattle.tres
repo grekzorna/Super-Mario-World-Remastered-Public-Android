@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamInteractive" load_steps=3 format=3 uid="uid://ba78prjxuoedr"]
+
+[ext_resource type="AudioStream" uid="uid://bdcla7n184nvn" path="res://Assets/Audio/BGM/SMW/BossBattle.mp3" id="1_2tm47"]
+[ext_resource type="AudioStream" uid="uid://bdcla7n184nvn" path="res://Assets/Audio/BGM/SMW/BossBattle.mp3" id="2_i5q7c"]
+
+
+[resource]
+clip_count = 2
+clip_0/name = &"Normal"
+clip_0/stream = ExtResource("1_2tm47")
+clip_0/auto_advance = 0
+clip_1/name = &"Hurry"
+clip_1/stream = ExtResource("2_i5q7c")
+clip_1/auto_advance = 0

@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://wajjlu4p5r85"]
+
+[ext_resource type="Script" path="res://Scripts/Projectile/VolcanoPlantBullets.gd" id="1_oumpf"]
+[ext_resource type="Texture2D" uid="uid://ya60ikb60oki" path="res://Assets/Sprites/Enemys/VolcanoPlantBullet.png" id="2_88ftf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1q5k"]
+atlas = ExtResource("2_88ftf")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgkel"]
+atlas = ExtResource("2_88ftf")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yjv72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1q5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgkel")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2c4ck"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hpyp"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8d4x"]
+size = Vector2(4, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvpta"]
+size = Vector2(4, 4)
+
+[node name="VolcanoPlantBullets" type="Node2D"]
+script = ExtResource("1_oumpf")
+
+[node name="Bullet1" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Bullet1"]
+sprite_frames = SubResource("SpriteFrames_yjv72")
+autoplay = "default"
+frame_progress = 0.75341
+
+[node name="Hitbox" type="Area2D" parent="Bullet1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet1/Hitbox"]
+shape = SubResource("RectangleShape2D_2c4ck")
+
+[node name="Bullet2" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Bullet2"]
+sprite_frames = SubResource("SpriteFrames_yjv72")
+autoplay = "default"
+frame_progress = 0.155575
+
+[node name="Hitbox" type="Area2D" parent="Bullet2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet2/Hitbox"]
+shape = SubResource("RectangleShape2D_1hpyp")
+
+[node name="Bullet3" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Bullet3"]
+sprite_frames = SubResource("SpriteFrames_yjv72")
+autoplay = "default"
+frame_progress = 0.155575
+
+[node name="Hitbox" type="Area2D" parent="Bullet3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet3/Hitbox"]
+shape = SubResource("RectangleShape2D_u8d4x")
+
+[node name="Bullet4" type="Node2D" parent="."]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Bullet4"]
+sprite_frames = SubResource("SpriteFrames_yjv72")
+autoplay = "default"
+frame_progress = 0.155575
+
+[node name="Hitbox" type="Area2D" parent="Bullet4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet4/Hitbox"]
+shape = SubResource("RectangleShape2D_cvpta")
+
+[connection signal="area_entered" from="Bullet1/Hitbox" to="." method="bullet_hit"]
+[connection signal="area_entered" from="Bullet2/Hitbox" to="." method="bullet_hit"]
+[connection signal="area_entered" from="Bullet3/Hitbox" to="." method="bullet_hit"]
+[connection signal="area_entered" from="Bullet4/Hitbox" to="." method="bullet_hit"]

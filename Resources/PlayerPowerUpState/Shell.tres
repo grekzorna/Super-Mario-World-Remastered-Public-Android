@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PlayerPowerUpState" load_steps=6 format=3 uid="uid://cspfu8p1yhsoc"]
+
+[ext_resource type="Resource" uid="uid://b8cl3invnv0aj" path="res://Resources/PlayerPowerUpState/Big.tres" id="1_bx51e"]
+[ext_resource type="Texture2D" uid="uid://cox6li6at1ja1" path="res://Assets/Sprites/Items/BlueShell.png" id="1_it4cd"]
+[ext_resource type="Script" path="res://Scripts/Classes/Resources/PlayerPowerUpStateResource.gd" id="1_sumcq"]
+[ext_resource type="Script" path="res://Scripts/Classes/PowerUps/Shell.gd" id="2_of4rx"]
+[ext_resource type="Script" path="res://Scripts/Classes/States/Player/ShellSlide.gd" id="6_sxcob"]
+
+[resource]
+script = ExtResource("1_sumcq")
+state_name = "Shell"
+sprite_frame_name = "Shell"
+power_script = ExtResource("2_of4rx")
+states = Array[Script]([ExtResource("6_sxcob")])
+hitbox_size = "Regular"
+transform_animation = false
+power_down = ExtResource("1_bx51e")
+power_tier = 2
+item_sprite = ExtResource("1_it4cd")
+can_water_damage = false
+technical_swim = false
+sprite_extras = Array[PackedScene]([])

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://udjhfchbii1l"]
+
+[ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="1_nf3g2"]
+[ext_resource type="Script" uid="uid://bb826evnqjs0q" path="res://Scripts/UI/credits_title.gd" id="2_2dslm"]
+
+[node name="CreditsTitle" type="Label"]
+visibility_layer = 4
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("1_nf3g2")
+text = "Credits Title"
+horizontal_alignment = 1
+uppercase = true
+script = ExtResource("2_2dslm")
