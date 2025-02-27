@@ -73,6 +73,13 @@ xyz600sp
 --Star Road, Illusion Forest, Underground Autumn Remixes
 MakerK6
 
+--Settings Menu
+Fyre150
+
+--SMB1 Map Theme
+MinecraftGamerLR
+Segment1Zone2
+
 
 --Special Thanks
 Dykas Kong
