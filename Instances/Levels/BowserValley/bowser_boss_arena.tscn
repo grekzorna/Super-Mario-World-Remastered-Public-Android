@@ -67,8 +67,9 @@ sources/0 = SubResource("TileSetAtlasSource_j7tlj")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7f08"]
 size = Vector2(34, 296)
 
-[node name="BowserBossArena" type="Node"]
+[node name="BowserBossArena" type="Node" node_paths=PackedStringArray("rain_bg")]
 script = ExtResource("1_euqsl")
+rain_bg = NodePath("LevelBG2")
 time = 999
 override_time = true
 hide_hud = true

@@ -8,6 +8,8 @@ extends Level
 const BOWSER_FIRE = preload("res://Instances/Prefabs/Projectiles/bowser_fire.tscn")
 @onready var bowser_boss: BowserBoss = $BowserBoss
 
+@export var rain_bg: LevelBG = null
+
 func spawn() -> void:
 	GameManager.all_players_dead.connect(stop_music)
 	if not bowser_boss.seen_intro:
@@ -33,7 +35,8 @@ func start_music() -> void:
 			fight_music_3.play()
 
 func peach_spawn() -> void:
-	$LevelBG.queue_free()
+	if is_instance_valid(rain_bg):
+		rain_bg.queue_free()
 	GameManager.speedrun_timer.stop()
 	CoopManager.bubble_fly_away = true
 	ending_peach_cutscene.global_position = bowser_boss.global_position + Vector2(0, 48)
