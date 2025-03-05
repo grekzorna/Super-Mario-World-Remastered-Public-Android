@@ -1,24 +1,24 @@
 [gd_scene load_steps=79 format=3 uid="uid://c0c1qjj2p4s1j"]
 
-[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_n5yom"]
+[ext_resource type="Script" uid="uid://d0q0d3rfsxxc1" path="res://Scripts/UI/map_screen.gd" id="1_n5yom"]
 [ext_resource type="PackedScene" uid="uid://b044hxmqs1ahv" path="res://Instances/Prefabs/MapElements/map_tilemap.tscn" id="2_c6a3s"]
 [ext_resource type="PackedScene" uid="uid://dvvlrrth1fxul" path="res://Instances/Prefabs/MapElements/map_mario.tscn" id="3_0solb"]
 [ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="4_ruju5"]
 [ext_resource type="PackedScene" uid="uid://bdkivqa6mhx1l" path="res://Instances/Prefabs/MapElements/star_road_warp.tscn" id="5_k5evg"]
 [ext_resource type="Resource" uid="uid://b1fobwpjkjqj8" path="res://Resources/MapAreas/StarRoad.tres" id="6_7k6mn"]
-[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="7_6vsln"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="8_hy4m3"]
+[ext_resource type="Script" uid="uid://dw00jp3g2y3w" path="res://Scripts/Classes/MapPoint.gd" id="7_6vsln"]
+[ext_resource type="Script" uid="uid://cs5lle7y5wqyv" path="res://Scripts/Classes/Resources/MapRoute.gd" id="8_hy4m3"]
 [ext_resource type="Resource" uid="uid://volfpatnmqws" path="res://Resources/LevelData/StarRoad/SR1.tres" id="9_0ileh"]
 [ext_resource type="Texture2D" uid="uid://bsc7v7ndin4oi" path="res://Assets/Sprites/Map/SMWOverworldMap.png" id="10_gatuv"]
 [ext_resource type="Texture2D" uid="uid://dluexaxmwfn03" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/StarRoadPath.png" id="10_gtg62"]
 [ext_resource type="Resource" uid="uid://kticron33cr8" path="res://Resources/LevelData/StarRoad/SR2.tres" id="12_st6ti"]
-[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="13_8yqtd"]
+[ext_resource type="Script" uid="uid://ch6d162n6cn6q" path="res://Scripts/Classes/Maps/MapSprite.gd" id="13_8yqtd"]
 [ext_resource type="Resource" uid="uid://xsbspecy16kj" path="res://Resources/LevelData/StarRoad/SR3.tres" id="13_rc65d"]
 [ext_resource type="Resource" uid="uid://bmgxn05dv6ddt" path="res://Resources/LevelData/StarRoad/SR4.tres" id="14_0fuph"]
 [ext_resource type="PackedScene" uid="uid://cm7ivyv7adsjr" path="res://Instances/Prefabs/MapElements/red_map_point_visual.tscn" id="14_fwscx"]
 [ext_resource type="Texture2D" uid="uid://bwk7ksiq8okfo" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/StarRoadAutumnPath.png" id="14_o5j63"]
 [ext_resource type="Resource" uid="uid://b6wgm4f34hf06" path="res://Resources/LevelData/StarRoad/SR5.tres" id="15_k58gb"]
-[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="17_2nn8u"]
+[ext_resource type="Script" uid="uid://bn5kyth8eyxbb" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="17_2nn8u"]
 [ext_resource type="Resource" uid="uid://xp0q0530wm27" path="res://Resources/Achievements/Progression/StarRoadReach.tres" id="18_b3uku"]
 [ext_resource type="Resource" uid="uid://baqpi5r4scfik" path="res://Resources/LevelData/SpecialWorld/SP1.tres" id="19_yeyxf"]
 [ext_resource type="Texture2D" uid="uid://b12xkw1303bv3" path="res://Assets/Sprites/Map/SpecialWorldStars.png" id="23_fi0oa"]
@@ -1180,6 +1180,8 @@ achievement = ExtResource("18_b3uku")
 [node name="SpecialWarp" parent="." instance=ExtResource("5_k5evg")]
 position = Vector2(120, 56)
 current_area = ExtResource("6_7k6mn")
+title = "Special Zone"
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/SpecialWorld.tscn"
 warp_point_name = "StarRoadWarp"
 level = ExtResource("19_yeyxf")

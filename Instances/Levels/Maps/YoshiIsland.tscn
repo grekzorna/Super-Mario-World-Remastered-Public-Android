@@ -1,17 +1,17 @@
 [gd_scene load_steps=62 format=3 uid="uid://cvhh568ae1w06"]
 
-[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_1wfk2"]
+[ext_resource type="Script" uid="uid://d0q0d3rfsxxc1" path="res://Scripts/UI/map_screen.gd" id="1_1wfk2"]
 [ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="2_lemk1"]
 [ext_resource type="PackedScene" uid="uid://b044hxmqs1ahv" path="res://Instances/Prefabs/MapElements/map_tilemap.tscn" id="3_pe150"]
 [ext_resource type="Resource" uid="uid://dj3hx2sxuddb3" path="res://Resources/MapAreas/YoshiIsland.tres" id="5_6eur5"]
 [ext_resource type="PackedScene" uid="uid://4xhrug5ojmca" path="res://Instances/Parts/map_point.tscn" id="5_nsjrf"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="6_obn7f"]
+[ext_resource type="Script" uid="uid://cs5lle7y5wqyv" path="res://Scripts/Classes/Resources/MapRoute.gd" id="6_obn7f"]
 [ext_resource type="Resource" uid="uid://c8ctbdsxdwi2u" path="res://Resources/LevelData/YoshiIsland/YoshiHouse.tres" id="6_vaubt"]
 [ext_resource type="Resource" uid="uid://d0e5e7384ax1s" path="res://Resources/LevelData/YoshiIsland/YI1.tres" id="7_61fd1"]
 [ext_resource type="Texture2D" uid="uid://cmt6yh0lgi5q4" path="res://Assets/Sprites/Map/MapSprites/YoshiHouse.png" id="8_vmxxj"]
 [ext_resource type="Texture2D" uid="uid://d11qc8ikt387p" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/YoshiIslandPathTiles.png" id="10_gqu87"]
 [ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="10_m3qx3"]
-[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="11_gu4w5"]
+[ext_resource type="Script" uid="uid://ch6d162n6cn6q" path="res://Scripts/Classes/Maps/MapSprite.gd" id="11_gu4w5"]
 [ext_resource type="Texture2D" uid="uid://y6ar0e8jbcpr" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/YoshiIslandAutumnPathTiles.png" id="12_2q8cw"]
 [ext_resource type="Texture2D" uid="uid://b5nxbergvlxbo" path="res://Assets/Sprites/Map/MapPathSprites/Standard/YoshiIsland1.png" id="12_55lax"]
 [ext_resource type="Resource" uid="uid://dscs6r1i8i0cd" path="res://Resources/LevelData/YoshiIsland/YI2.tres" id="12_tlh3m"]
@@ -1172,6 +1172,8 @@ tile_pattern_file_name = "YoshiIsland"
 [node name="SpecialWarp" parent="." instance=ExtResource("25_xrghx")]
 position = Vector2(104, 184)
 current_area = ExtResource("5_6eur5")
+title = "Special Zone"
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/SpecialWorld.tscn"
 warp_point_name = "StarExit"
 level = ExtResource("26_jbrd5")
