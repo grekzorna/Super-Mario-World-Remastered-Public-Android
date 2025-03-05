@@ -120,12 +120,6 @@
 [ext_resource type="AudioStream" uid="uid://bmphjciw1uxax" path="res://Assets/Audio/BGM/SMW/BowserValleyCutscene.mp3" id="117_hb3y0"]
 [ext_resource type="Texture2D" uid="uid://bi0sn6hxj71hr" path="res://Assets/Sprites/Map/MapSprites/Cloud.png" id="118_21hby"]
 
-[sub_resource type="Curve2D" id="Curve2D_8c8r8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 56, 216, 0, 0, 0, 0, 24, 216)
-}
-point_count = 2
-
 [sub_resource type="Curve2D" id="Curve2D_sdia2"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 88, 280, 0, 0, 0, 0, 88, 336)
@@ -230,6 +224,12 @@ reverse_path = false
 unlock_speed = 0.2
 route_unlocked = false
 
+[sub_resource type="Curve2D" id="Curve2D_8c8r8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 56, 216, 0, 0, 0, 0, 24, 216)
+}
+point_count = 2
+
 [sub_resource type="Resource" id="Resource_8vgsg"]
 script = ExtResource("9_ndlur")
 destination_point = NodePath("../GreenSwitchPalace")
@@ -272,7 +272,7 @@ region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="Curve2D" id="Curve2D_bif1r"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 88, 176, 0, 0, 0, 0, 88, 136)
+"points": PackedVector2Array(0, 0, 0, 0, 88, 172, 0, 0, 0, 0, 88, 136)
 }
 point_count = 2
 
@@ -1276,7 +1276,6 @@ cam_limit_bottom = 512
 metadata/_edit_vertical_guides_ = [104.0]
 
 [node name="MapMario" parent="." instance=ExtResource("2_ex48p")]
-curve = SubResource("Curve2D_8c8r8")
 
 [node name="Guide" type="Sprite2D" parent="."]
 visible = false
@@ -2254,6 +2253,7 @@ autumn_texture = ExtResource("12_f8r3m")
 position = Vector2(88, 136)
 script = ExtResource("22_jsrjp")
 point_type = "Level"
+current_area = ExtResource("7_ivpg0")
 level = ExtResource("23_mfftk")
 down_route = SubResource("Resource_l2dve")
 

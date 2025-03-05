@@ -47,6 +47,7 @@ script = ExtResource("1_nmsy7")
 enemy_height = 4
 gib_type = 1
 can_fire_damage = false
+can_ice_freeze = false
 
 [node name="AutumnSprite" type="AnimatedSprite2D" parent="."]
 visible = false

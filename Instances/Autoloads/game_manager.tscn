@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://cjrk7sj67hipw"]
 
-[ext_resource type="Script" path="res://Scripts/Autoload/game_manager.gd" id="1_menhw"]
+[ext_resource type="Script" uid="uid://d03245vtt2nj8" path="res://Scripts/Autoload/game_manager.gd" id="1_menhw"]
 [ext_resource type="Texture2D" uid="uid://clquarihnko0u" path="res://Assets/Sprites/UI/Messages/YI1 A.png" id="2_vm6vc"]
 [ext_resource type="FontFile" uid="uid://bnrj0qwi0uol4" path="res://Assets/Sprites/UI/GoldFont.png" id="4_a2w77"]
 [ext_resource type="PackedScene" uid="uid://bks21whts2vvh" path="res://Instances/UI/speedrun_timer.tscn" id="6_25a6y"]
@@ -47,6 +47,22 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_bkgnq"]
+resource_name = "Timeout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TimeOut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
 [sub_resource type="Animation" id="Animation_2ven4"]
 resource_name = "Show"
 tracks/0/type = "value"
@@ -74,27 +90,11 @@ tracks/1/keys = {
 "values": [Vector2(497, 135), Vector2(264, 135)]
 }
 
-[sub_resource type="Animation" id="Animation_bkgnq"]
-resource_name = "Timeout"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TimeOut:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l5sdu"]
 _data = {
 &"RESET": SubResource("Animation_upxee"),
-&"Timeout": SubResource("Animation_bkgnq"),
-&"Show": SubResource("Animation_2ven4")
+&"Show": SubResource("Animation_2ven4"),
+&"Timeout": SubResource("Animation_bkgnq")
 }
 
 [sub_resource type="Shader" id="Shader_krkh3"]
@@ -173,8 +173,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ek5yi"]
 _data = {
-&"RESET": SubResource("Animation_ol46f"),
-&"Close": SubResource("Animation_l6cnr")
+&"Close": SubResource("Animation_l6cnr"),
+&"RESET": SubResource("Animation_ol46f")
 }
 
 [sub_resource type="Animation" id="Animation_pvref"]
@@ -211,8 +211,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tv14v"]
 _data = {
-&"RESET": SubResource("Animation_pvref"),
-&"Appear": SubResource("Animation_abcuy")
+&"Appear": SubResource("Animation_abcuy"),
+&"RESET": SubResource("Animation_pvref")
 }
 
 [sub_resource type="Animation" id="Animation_pkpkx"]
@@ -247,8 +247,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lsjg"]
 _data = {
-&"RESET": SubResource("Animation_pkpkx"),
-&"Appear": SubResource("Animation_kxkp1")
+&"Appear": SubResource("Animation_kxkp1"),
+&"RESET": SubResource("Animation_pkpkx")
 }
 
 [node name="GameManager" type="Node"]

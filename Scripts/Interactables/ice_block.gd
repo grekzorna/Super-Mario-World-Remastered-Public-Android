@@ -12,6 +12,8 @@ var crack_prog := 0
 
 var crack_limit := 20
 var shaking := false
+
+var falling := false
 @onready var visuals: NinePatchRect = $Visuals
 
 @export var frozen_target: Node2D = null
@@ -28,12 +30,15 @@ func _ready() -> void:
 	hitbox.add_child(collision.duplicate())
 	await get_tree().create_timer(1, false).timeout
 	can_fall = true
+	falling = true
 
 func physics_update(delta: float) -> void:
 	velocity_lerp = lerp(velocity_lerp, velocity, delta * 20)
 	if $WaterBouyancy.is_in_water():
 		can_fall = false
 		velocity.y = lerpf(velocity.y, -70, delta * 5)
+	elif falling:
+		can_fall = true
 	if is_on_floor() and not thrown:
 		if velocity_lerp.y > 250:
 			destroy()

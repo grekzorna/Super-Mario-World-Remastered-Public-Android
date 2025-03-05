@@ -199,8 +199,9 @@ uppercase = true
 visible = false
 layout_mode = 1
 
+[connection signal="option_1_selected" from="MainMenuSelections" to="Logo" method="hide"]
 [connection signal="option_1_selected" from="MainMenuSelections" to="MainMenuSelections" method="close_menu"]
-[connection signal="option_1_selected" from="MainMenuSelections" to="MainMenuSelections2" method="open_menu"]
+[connection signal="option_1_selected" from="MainMenuSelections" to="PlayerAmountSelect" method="open"]
 [connection signal="option_2_selected" from="MainMenuSelections" to="." method="open_settings"]
 [connection signal="option_3_selected" from="MainMenuSelections" to="." method="open_addon_menu"]
 [connection signal="option_4_selected" from="MainMenuSelections" to="." method="quit_game"]
