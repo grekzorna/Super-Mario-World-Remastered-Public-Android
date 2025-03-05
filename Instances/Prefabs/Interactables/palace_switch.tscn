@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7063ss225g41"]
 
 [ext_resource type="Texture2D" uid="uid://bgv0s755tebkv" path="res://Assets/Sprites/Bonus/PalaceSwitches.png" id="1_2oet4"]
-[ext_resource type="Script" path="res://Scripts/Interactables/palace_switch.gd" id="1_ueuq1"]
-[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_1upry"]
+[ext_resource type="Script" uid="uid://b131adlwxbki3" path="res://Scripts/Interactables/palace_switch.gd" id="1_ueuq1"]
+[ext_resource type="Script" uid="uid://bn5kyth8eyxbb" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="3_1upry"]
 [ext_resource type="Resource" uid="uid://xiryx8x6ywcv" path="res://Resources/Achievements/Progression/AllSwitchPal.tres" id="4_cmvqj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts2pe"]

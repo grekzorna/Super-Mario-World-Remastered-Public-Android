@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://c544bwxw2pbgh"]
 
 [ext_resource type="Texture2D" uid="uid://kjiw82n0hfn2" path="res://Assets/Sprites/UI/PauseBox.png" id="1_6xk8v"]
-[ext_resource type="Script" path="res://Scripts/UI/save_file_display.gd" id="2_7gynb"]
+[ext_resource type="Script" uid="uid://cb0rol82yiwk0" path="res://Scripts/UI/save_file_display.gd" id="2_7gynb"]
 [ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_cvure"]
 [ext_resource type="PackedScene" uid="uid://bdxmrocmkp6tl" path="res://Instances/UI/save_egg_display.tscn" id="4_2t2xm"]
 [ext_resource type="Texture2D" uid="uid://ccp5uopuudw2" path="res://Assets/Sprites/Cutscenes/Eggs/2.png" id="7_fl86s"]
@@ -149,12 +149,12 @@ id = 1
 [node name="SwitchBlockDisplay3" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
 layout_mode = 2
 full_texture = ExtResource("13_6tbbd")
-id = 2
+id = 3
 
 [node name="SwitchBlockDisplay4" parent="ValidFile/SwitchBlocks" instance=ExtResource("9_i2egq")]
 layout_mode = 2
 full_texture = ExtResource("12_gk3t6")
-id = 3
+id = 2
 
 [node name="Crown" type="TextureRect" parent="ValidFile"]
 layout_mode = 1
