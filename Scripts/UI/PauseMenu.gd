@@ -101,9 +101,19 @@ func do_option() -> void:
 			GameManager.reset_values()
 			if GameManager.playing_custom_level:
 				TransitionManager.transition_to_menu(GameManager.CUSTOM_LEVEL_SELECT, GameManager.current_level)
+			elif check_drag_coins() and SaveManager.current_save.peach_coins_unlocked == false:
+				TransitionManager.transition_to_level("res://Instances/Levels/Cutscenes/all_dragon_coins_cutscene.tscn", GameManager.current_level)
 			else:
 				TransitionManager.transition_to_map(GameManager.current_map_path, GameManager.current_level, false)
 			GameManager.game_paused = false
+
+const drag_coins := ["res://Resources/Achievements/Completionist/DragCoins/BVDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/CIDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/DPDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/IFDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/SPDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/SRDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/TBDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/VDDragCoin.tres", "res://Resources/Achievements/Completionist/DragCoins/YIDragCoin.tres"]
+
+func check_drag_coins() -> bool:
+	for i in drag_coins:
+		if SaveManager.current_save.achievements_unlocked.has(i) == false:
+			return false
+	return true
 
 func select_animation(option) -> void:
 	for i in 5:
