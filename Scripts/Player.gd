@@ -1028,7 +1028,7 @@ func damage() -> void:
 		power_script.spin_out()
 		return
 	if GameManager.reserved_item:
-		if power_state.power_down.power_tier < GameManager.reserved_item.power_tier:
+		if power_state.power_down.power_tier < GameManager.reserved_item.power_tier and SettingsManager.settings_file.auto_item_drop:
 			GameManager.drop_current_held_item()
 	if state_machine.state.power_state:
 		state_machine.transition_to("Normal")
@@ -1159,6 +1159,7 @@ func exit_pipe(pipe: Node, pipe_direction := "Down") -> void:
 	if pipe.cannon_exit:
 		state_machine.transition_to("Freeze")
 		global_position = pipe.global_position
+		reset_physics_interpolation()
 		sprite.show()
 		GameManager.can_pause = true
 		state_machine.transition_to("Normal")

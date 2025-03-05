@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cutgxs0raqjn3"]
+[gd_scene load_steps=21 format=3 uid="uid://cutgxs0raqjn3"]
 
 [ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_qs86u"]
 [ext_resource type="AudioStream" uid="uid://tmquifk0xxio" path="res://Resources/MusicTracks/Fortress.tres" id="2_11ac0"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://dqjcyap8tko20" path="res://Instances/Prefabs/Interactables/flip_panel.tscn" id="15_o2g3s"]
 [ext_resource type="Texture2D" uid="uid://bphg7glwjb31n" path="res://Assets/Sprites/Objects/CastleBossDoor.png" id="15_rbad5"]
 [ext_resource type="PackedScene" uid="uid://cdbsvmplutv35" path="res://Instances/Prefabs/Items/cape_feather.tscn" id="16_817rx"]
+[ext_resource type="Script" uid="uid://mjvpbqipct0s" path="res://Scripts/LevelGimicks/GBALevelNode.gd" id="16_amhfn"]
 [ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="16_k434f"]
+[ext_resource type="PackedScene" uid="uid://cai8wb5qay3j8" path="res://Instances/Prefabs/checkpoint_gate.tscn" id="17_wn5wu"]
 
 [sub_resource type="Shader" id="Shader_1xk88"]
 code = "// HSV to RBG from https://www.rapidtables.com/convert/color/hsv-to-rgb.html
@@ -389,3 +391,11 @@ position = Vector2(360, -464)
 
 [node name="DragonCoin3" parent="." instance=ExtResource("16_k434f")]
 position = Vector2(40, -984)
+
+[node name="GBALevelNode" type="Node" parent="."]
+script = ExtResource("16_amhfn")
+metadata/_custom_type_script = ExtResource("16_amhfn")
+
+[node name="CheckpointGate" parent="GBALevelNode" instance=ExtResource("17_wn5wu")]
+position = Vector2(188, -516)
+checkpoint_position = Vector2(-12, 4)

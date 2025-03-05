@@ -10,10 +10,10 @@ signal closed
 var assigned_joypads = []
 
 var primary_actions = [preload("res://Resources/Inputs/dive.tres"), preload("res://Resources/Inputs/jump.tres"), preload("res://Resources/Inputs/move_down_stick.tres"), preload("res://Resources/Inputs/move_left_stick.tres"), preload("res://Resources/Inputs/move_right_stick.tres"), preload("res://Resources/Inputs/move_up_stick.tres"), preload("res://Resources/Inputs/run.tres"), preload("res://Resources/Inputs/spin_jump.tres")]
-var secondary_actions = [preload("res://Resources/Inputs/move_down_pad.tres"), preload("res://Resources/Inputs/move_left_pad.tres"), preload("res://Resources/Inputs/move_right_pad.tres"), preload("res://Resources/Inputs/move_up_pad.tres"), preload("res://Resources/Inputs/jump_2.tres"), preload("res://Resources/Inputs/run_2.tres")]
-
 var primary_strings = ["dive", "jump", "move_down", "move_left", "move_right", "move_up", "run", "spin_jump"]
-var secondary_strings = ["move_down", "move_left", "move_right", "move_up", "jump", "run"]
+
+var secondary_actions = [preload("res://Resources/Inputs/move_down_pad.tres"), preload("res://Resources/Inputs/move_left_pad.tres"), preload("res://Resources/Inputs/move_right_pad.tres"), preload("res://Resources/Inputs/move_up_pad.tres"), preload("res://Resources/Inputs/jump_2.tres"), preload("res://Resources/Inputs/run_2.tres"), preload("res://Resources/Inputs/spin_jump_2.tres"), preload("res://Resources/Inputs/dive_2.tres")]
+var secondary_strings = ["move_down", "move_left", "move_right", "move_up", "jump", "run", "spin_jump", "dive"]
 
 func _ready() -> void:
 	hide()

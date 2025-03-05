@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bhumdl5cuv8ji"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_s0l2o"]
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_s0l2o"]
 [ext_resource type="AudioStream" uid="uid://doufgypk1hgny" path="res://Resources/MusicTracks/Underground.tres" id="2_dcmjx"]
 [ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_fgy0k"]
 [ext_resource type="AudioStream" uid="uid://bxdhxtjyth7kw" path="res://Resources/MusicTracks/UndergroundAutumn.tres" id="3_5sdit"]
@@ -152,7 +152,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_sskyj")
 }
 autoplay = "new_animation"
-speed_scale = 0.3
+speed_scale = 0.5
 
 [node name="?Block" parent="." instance=ExtResource("13_t1haq")]
 position = Vector2(-40, -216)
