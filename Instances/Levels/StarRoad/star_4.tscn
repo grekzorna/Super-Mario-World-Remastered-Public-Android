@@ -1,13 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://rh0puntjaoyc"]
+[gd_scene load_steps=28 format=3 uid="uid://rh0puntjaoyc"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_gx244"]
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_gx244"]
 [ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="2_3ifnd"]
 [ext_resource type="AudioStream" uid="uid://bri2wlqh6tcj3" path="res://Resources/MusicTracks/Athletic.tres" id="2_54k8t"]
 [ext_resource type="Texture2D" uid="uid://dyrlh4piuijie" path="res://Assets/Sprites/Backgrounds/Overworld/NightSky/Night1.png" id="4_cg0hx"]
 [ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="5_tva5w"]
 [ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="7_bqo42"]
 [ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="9_8uf7v"]
-[ext_resource type="Texture2D" uid="uid://c4b8g3g85yb7j" path="res://Assets/LevelGuides/Level 135.png" id="10_hy6ep"]
 [ext_resource type="PackedScene" uid="uid://bk374hknivypi" path="res://Instances/Prefabs/Interactables/windmill_platform.tscn" id="11_hwjb5"]
 [ext_resource type="PackedScene" uid="uid://cvdt1cn7f1g4w" path="res://Instances/Prefabs/Interactables/single_windmill_platform.tscn" id="12_hq6am"]
 [ext_resource type="PackedScene" uid="uid://dbinnyub65ub8" path="res://Instances/Prefabs/Items/baby_yoshi_egg.tscn" id="13_ox1bc"]
@@ -118,7 +117,6 @@ layer_1/tile_data = PackedInt32Array(-196598, 196618, 0, -131062, 196618, 0, -65
 modulate = Color(0.411765, 0.411765, 0.411765, 1)
 z_index = -10
 position = Vector2(-64, -384)
-texture = ExtResource("10_hy6ep")
 centered = false
 
 [node name="WindmillPlatform" parent="." instance=ExtResource("11_hwjb5")]
@@ -236,7 +234,7 @@ position = Vector2(4616, -136)
 
 [node name="BabyYoshiEgg" parent="." instance=ExtResource("13_ox1bc")]
 position = Vector2(200, -64)
-colour = 3
+colour = 1
 
 [node name="KoopaTroopa" parent="." instance=ExtResource("14_2x2op")]
 position = Vector2(504, -208)

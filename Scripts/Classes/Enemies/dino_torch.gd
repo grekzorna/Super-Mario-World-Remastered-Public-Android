@@ -33,6 +33,8 @@ func direction_check() -> void:
 		direction = -1
 
 func flame_attack() -> void:
+	if dead:
+		return
 	target_player = CoopManager.get_closest_player(global_position)
 	await get_tree().physics_frame
 	can_move = false
@@ -54,6 +56,7 @@ func play_flame_sfx() -> void:
 	SoundManager.play_sfx(SoundManager.fire_breath, self)
 
 func damage() -> void:
+	$Timer.queue_free()
 	can_move = false
 	$Hitbox.queue_free()
 	$Animations.play("Dead")
