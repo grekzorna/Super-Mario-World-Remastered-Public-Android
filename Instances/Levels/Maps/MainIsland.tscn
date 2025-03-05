@@ -1,4 +1,4 @@
-[gd_scene load_steps=283 format=3 uid="uid://bamf0l2tqvdce"]
+[gd_scene load_steps=280 format=3 uid="uid://bamf0l2tqvdce"]
 
 [ext_resource type="Script" uid="uid://w2arycrngcix" path="res://Scripts/Classes/Maps/MainIsland.gd" id="1_h5jk7"]
 [ext_resource type="PackedScene" uid="uid://dvvlrrth1fxul" path="res://Instances/Prefabs/MapElements/map_mario.tscn" id="2_ex48p"]
@@ -120,9 +120,9 @@
 [ext_resource type="AudioStream" uid="uid://bmphjciw1uxax" path="res://Assets/Audio/BGM/SMW/BowserValleyCutscene.mp3" id="117_hb3y0"]
 [ext_resource type="Texture2D" uid="uid://bi0sn6hxj71hr" path="res://Assets/Sprites/Map/MapSprites/Cloud.png" id="118_21hby"]
 
-[sub_resource type="Curve2D" id="Curve2D_876fm"]
+[sub_resource type="Curve2D" id="Curve2D_8c8r8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 312, 440, 0, 0, 0, 0, 312, 440)
+"points": PackedVector2Array(0, 0, 0, 0, 56, 216, 0, 0, 0, 0, 24, 216)
 }
 point_count = 2
 
@@ -230,12 +230,6 @@ reverse_path = false
 unlock_speed = 0.2
 route_unlocked = false
 
-[sub_resource type="Curve2D" id="Curve2D_8c8r8"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 56, 216, 0, 0, 0, 0, 28, 216)
-}
-point_count = 2
-
 [sub_resource type="Resource" id="Resource_8vgsg"]
 script = ExtResource("9_ndlur")
 destination_point = NodePath("../GreenSwitchPalace")
@@ -314,9 +308,9 @@ route_unlocked = false
 
 [sub_resource type="Curve2D" id="Curve2D_ibfgx"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 88, 168, 0, 0, 0, 0, 152, 168)
+"points": PackedVector2Array(0, 0, 0, 0, 88, 172, 0, 0, 0, 0, 109.75, 168.289, 0, 0, 0, 0, 152, 168)
 }
-point_count = 2
+point_count = 3
 
 [sub_resource type="Resource" id="Resource_ar7k6"]
 script = ExtResource("9_ndlur")
@@ -356,25 +350,19 @@ reverse_path = true
 unlock_speed = 0.2
 route_unlocked = true
 
-[sub_resource type="Curve2D" id="Curve2D_fkjan"]
+[sub_resource type="Curve2D" id="Curve2D_13k3n"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 88, 232, 0, 0, 0, 0, 108, 232, 0, 0, 0, 0, 120, 236, 0, 0, 0, 0, 120, 272)
+"points": PackedVector2Array(0, 0, 0, 0, 88, 232, 0, 0, 0, 0, 108, 232, 0, 0, 0, 0, 120, 236, 0, 0, 0, 0, 120, 264)
 }
 point_count = 4
 
 [sub_resource type="Resource" id="Resource_60yrj"]
 script = ExtResource("9_ndlur")
 destination_point = NodePath("../DSH")
-route_path = SubResource("Curve2D_fkjan")
+route_path = SubResource("Curve2D_13k3n")
 reverse_path = false
 unlock_speed = 0.2
 route_unlocked = false
-
-[sub_resource type="Curve2D" id="Curve2D_13k3n"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 88, 232, 0, 0, 0, 0, 108, 232, 0, 0, 0, 0, 120, 236, 0, 0, 0, 0, 120, 272)
-}
-point_count = 4
 
 [sub_resource type="Resource" id="Resource_qui6k"]
 script = ExtResource("9_ndlur")
@@ -386,7 +374,7 @@ route_unlocked = true
 
 [sub_resource type="Curve2D" id="Curve2D_8bajq"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 120, 272, 0, 0, 0, 0, 120, 288)
+"points": PackedVector2Array(0, 0, 0, 0, 120, 264, 0, 0, 0, 0, 120, 296)
 }
 point_count = 2
 
@@ -400,7 +388,7 @@ route_unlocked = false
 
 [sub_resource type="Curve2D" id="Curve2D_dqqqn"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 120, 272, 0, 0, 0, 0, 152, 272)
+"points": PackedVector2Array(0, 0, 0, 0, 120, 264, 0, 0, 0, 0, 152, 264)
 }
 point_count = 2
 
@@ -502,17 +490,11 @@ reverse_path = true
 unlock_speed = 0.2
 route_unlocked = false
 
-[sub_resource type="Curve2D" id="Curve2D_ht8qc"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 152, 272, 0, 0, 0, 0, 120, 272)
-}
-point_count = 2
-
 [sub_resource type="Resource" id="Resource_1k8by"]
 script = ExtResource("9_ndlur")
 destination_point = NodePath("../DSH")
-route_path = SubResource("Curve2D_ht8qc")
-reverse_path = false
+route_path = SubResource("Curve2D_dqqqn")
+reverse_path = true
 unlock_speed = 0.2
 route_unlocked = true
 
@@ -1294,7 +1276,7 @@ cam_limit_bottom = 512
 metadata/_edit_vertical_guides_ = [104.0]
 
 [node name="MapMario" parent="." instance=ExtResource("2_ex48p")]
-curve = SubResource("Curve2D_876fm")
+curve = SubResource("Curve2D_8c8r8")
 
 [node name="Guide" type="Sprite2D" parent="."]
 visible = false
@@ -2288,7 +2270,7 @@ z_index = -1
 layer_0/tile_data = PackedInt32Array(-1, 131072, 2, 65535, 131072, 2, -65536, 131072, 2, 0, 131072, 2)
 
 [node name="DS1" parent="DonutPlains" node_paths=PackedStringArray("normal_path_tiles", "special_path_tiles") instance=ExtResource("7_saq7q")]
-position = Vector2(88, 231)
+position = Vector2(88, 232)
 point_type = "Level"
 current_area = ExtResource("7_ivpg0")
 level = ExtResource("21_nwdl7")
@@ -2925,7 +2907,7 @@ vframes = 2
 frame = 4
 
 [node name="BowserValleyPipe" parent="DonutPlains" node_paths=PackedStringArray("return_point") instance=ExtResource("7_saq7q")]
-position = Vector2(152, 272)
+position = Vector2(152, 264)
 point_type = "Warp"
 current_area = ExtResource("7_ivpg0")
 map_warp = "res://Instances/Levels/Maps/BowserValley.tscn"
@@ -2939,7 +2921,7 @@ texture = ExtResource("20_r70mp")
 script = ExtResource("11_eau05")
 
 [node name="BowserValleyPipeReturn" parent="DonutPlains" instance=ExtResource("7_saq7q")]
-position = Vector2(152, 272)
+position = Vector2(152, 264)
 current_area = ExtResource("7_ivpg0")
 left_route = SubResource("Resource_1k8by")
 
@@ -3112,6 +3094,7 @@ down_route = SubResource("Resource_1wmrf")
 position = Vector2(120, 296)
 standard_check = true
 current_area = ExtResource("7_ivpg0")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "StarRoadWarp1"
 level = ExtResource("42_fb2j0")
@@ -5211,9 +5194,10 @@ special_path_tiles = NodePath("SecretPath")
 [node name="1" type="Node2D" parent="ChocoIsland/CI2/SecretPath"]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
+position = Vector2(352, 464)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/1"]
-position = Vector2(344, 456)
+position = Vector2(-8, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5223,7 +5207,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/1"]
-position = Vector2(344, 464)
+position = Vector2(-8, 0)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5233,7 +5217,6 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/1"]
-position = Vector2(352, 464)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5243,7 +5226,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/1"]
-position = Vector2(352, 456)
+position = Vector2(0, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5255,10 +5238,10 @@ autumn_texture = ExtResource("56_bsby4")
 [node name="2" type="Node2D" parent="ChocoIsland/CI2/SecretPath"]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(16, 0)
+position = Vector2(368, 464)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/2"]
-position = Vector2(344, 456)
+position = Vector2(-8, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5268,7 +5251,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/2"]
-position = Vector2(344, 464)
+position = Vector2(-8, 0)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5278,7 +5261,6 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/2"]
-position = Vector2(352, 464)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5288,7 +5270,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/2"]
-position = Vector2(352, 456)
+position = Vector2(0, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5300,10 +5282,10 @@ autumn_texture = ExtResource("56_bsby4")
 [node name="3" type="Node2D" parent="ChocoIsland/CI2/SecretPath"]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(24, -32)
+position = Vector2(376, 432)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/3"]
-position = Vector2(344, 456)
+position = Vector2(-8, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5313,7 +5295,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/3"]
-position = Vector2(344, 464)
+position = Vector2(-8, 0)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5323,7 +5305,6 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/3"]
-position = Vector2(352, 464)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5333,7 +5314,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/3"]
-position = Vector2(352, 456)
+position = Vector2(0, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5345,10 +5326,10 @@ autumn_texture = ExtResource("56_bsby4")
 [node name="4" type="Node2D" parent="ChocoIsland/CI2/SecretPath"]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(-24, -56)
+position = Vector2(328, 408)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/4"]
-position = Vector2(344, 456)
+position = Vector2(-8, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5358,7 +5339,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/4"]
-position = Vector2(344, 464)
+position = Vector2(-8, 0)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5368,7 +5349,6 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/4"]
-position = Vector2(352, 464)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5378,7 +5358,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/4"]
-position = Vector2(352, 456)
+position = Vector2(0, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5390,10 +5370,10 @@ autumn_texture = ExtResource("56_bsby4")
 [node name="5" type="Node2D" parent="ChocoIsland/CI2/SecretPath"]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
-position = Vector2(-40, -72)
+position = Vector2(312, 392)
 
 [node name="Sprite2D" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/5"]
-position = Vector2(344, 456)
+position = Vector2(-8, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5403,7 +5383,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D2" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/5"]
-position = Vector2(344, 464)
+position = Vector2(-8, 0)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5413,7 +5393,6 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D3" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/5"]
-position = Vector2(352, 464)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18
@@ -5423,7 +5402,7 @@ script = ExtResource("11_eau05")
 autumn_texture = ExtResource("56_bsby4")
 
 [node name="Sprite2D4" type="Sprite2D" parent="ChocoIsland/CI2/SecretPath/5"]
-position = Vector2(352, 456)
+position = Vector2(0, -8)
 texture = ExtResource("23_tb0q5")
 centered = false
 hframes = 18

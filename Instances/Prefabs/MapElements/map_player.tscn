@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://in27dksqeiu8"]
 
-[ext_resource type="Script" path="res://Scripts/UI/MapPlayer.gd" id="2_00dce"]
-[ext_resource type="Texture2D" uid="uid://brmyjpu415uu1" path="res://icon.png" id="2_n4dnc"]
-[ext_resource type="Shader" path="res://Scripts/Shaders/map_player_yoshi.gdshader" id="3_mfgo0"]
+[ext_resource type="Script" uid="uid://clekk7hn625de" path="res://Scripts/UI/MapPlayer.gd" id="2_00dce"]
+[ext_resource type="Texture2D" uid="uid://3pgeyxvjbjjm" path="res://icon.png" id="2_n4dnc"]
+[ext_resource type="Shader" uid="uid://bjht3mwlv7liv" path="res://Scripts/Shaders/map_player_yoshi.gdshader" id="3_mfgo0"]
 [ext_resource type="Texture2D" uid="uid://c3cfi2h02l6g4" path="res://Assets/Sprites/Map/Border.png" id="3_xqijj"]
 [ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="6_l11bh"]
 [ext_resource type="PackedScene" uid="uid://bo8ywxd3ajodb" path="res://Instances/Parts/player_sprite_display.tscn" id="6_pj6ow"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b2csl8c7iofaw" path="res://Instances/UI/map_pause_menu.tscn" id="8_gxcod"]
 [ext_resource type="Texture2D" uid="uid://bcvnavba5hwa7" path="res://Assets/Sprites/Map/MapSprites/MapArrow.png" id="9_cjj2m"]
 [ext_resource type="AudioStream" uid="uid://b0mn27m5m8l3f" path="res://Assets/Audio/SFX/p-meter.wav" id="9_elflb"]
-[ext_resource type="Shader" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="10_bk34v"]
+[ext_resource type="Shader" uid="uid://cda7wuxcvci5t" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="10_bk34v"]
 [ext_resource type="SpriteFrames" uid="uid://6ef0hopfef6p" path="res://Resources/PlayerSpriteFrames/Toad/Map.tres" id="10_mceca"]
 
 [sub_resource type="FontVariation" id="FontVariation_yd6yu"]
@@ -40,21 +40,6 @@ shader_parameter/circle_size = 1.05
 shader_parameter/screen_width = 480.0
 shader_parameter/screen_height = 270.0
 
-[sub_resource type="Animation" id="Animation_s1ndt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.05]
-}
-
 [sub_resource type="Animation" id="Animation_i51rl"]
 resource_name = "Enter"
 tracks/0/type = "value"
@@ -68,6 +53,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.05, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_s1ndt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.05]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yad6p"]

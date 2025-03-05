@@ -10,6 +10,7 @@ extends Node2D
 @export var current_area: MapArea = null
 @export var save_on_enter := false
 @export var title := ""
+@export var auto_assign_title := true
 
 @export_subgroup("Warp Point")
 @export_file("*.tscn") var map_warp := ""
@@ -95,7 +96,7 @@ func _ready() -> void:
 		special_completed = true
 	if map_warp != "":
 		map = map_warp
-	if level != null:
+	if level != null and auto_assign_title:
 		title = level.level_title
 	find_visual()
 	if Engine.is_editor_hint() == false:

@@ -32,8 +32,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygw35"]
 _data = {
-"RESET": SubResource("Animation_8hg1n"),
-"Travel": SubResource("Animation_4utfg")
+&"RESET": SubResource("Animation_8hg1n"),
+&"Travel": SubResource("Animation_4utfg")
 }
 
 [node name="MapMario" type="Path2D"]
@@ -44,7 +44,7 @@ rotates = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PathFollow2D"]
 libraries = {
-"": SubResource("AnimationLibrary_ygw35")
+&"": SubResource("AnimationLibrary_ygw35")
 }
 
 [node name="MarioPoint" type="Node2D" parent="PathFollow2D"]
