@@ -1,10 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://iy20sj3bwvij"]
+[gd_scene load_steps=27 format=3 uid="uid://iy20sj3bwvij"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_6cuoc"]
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_6cuoc"]
 [ext_resource type="AudioStream" uid="uid://tmquifk0xxio" path="res://Resources/MusicTracks/Fortress.tres" id="2_6bq8o"]
 [ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_6cdk2"]
 [ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="4_flhem"]
-[ext_resource type="Texture2D" uid="uid://b0ketrjjjgq0v" path="res://Assets/LevelGuides/SNES - Super Mario World - 2 Mortons Castle 33.png" id="5_0f2h4"]
 [ext_resource type="PackedScene" uid="uid://3dbp1bh377er" path="res://Instances/Prefabs/Blocks/question_block.tscn" id="7_3y7le"]
 [ext_resource type="PackedScene" uid="uid://b3s5y5wg0c6kc" path="res://Instances/Prefabs/Enemies/dry_bones.tscn" id="8_7rthg"]
 [ext_resource type="PackedScene" uid="uid://cdbsvmplutv35" path="res://Instances/Prefabs/Items/cape_feather.tscn" id="8_cp6hd"]
@@ -13,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://dm7exbyvtd2fw" path="res://Instances/Prefabs/Blocks/spin_block.tscn" id="11_auoev"]
 [ext_resource type="PackedScene" uid="uid://hcw1yov7o40o" path="res://Instances/Prefabs/Blocks/coloured_switch_empty.tscn" id="12_b143l"]
 [ext_resource type="PackedScene" uid="uid://dmie715ocubk5" path="res://Instances/Parts/vine_plant.tscn" id="13_ced8b"]
-[ext_resource type="Texture2D" uid="uid://cn278cold8q4" path="res://Assets/LevelGuides/SNES - Super Mario World - 2 Mortons Castle 33 - Movable Stage Objects.png" id="13_wa0k8"]
 [ext_resource type="PackedScene" uid="uid://bimrxpg5a4yrk" path="res://Instances/Prefabs/Items/1_up.tscn" id="14_yr22p"]
 [ext_resource type="PackedScene" uid="uid://nldepcgj07xt" path="res://Instances/Prefabs/Items/dragon_coin.tscn" id="16_og82t"]
 [ext_resource type="PackedScene" uid="uid://dqkvytvup4bgp" path="res://Instances/Prefabs/Blocks/point_spike.tscn" id="16_w4ykm"]
@@ -123,7 +121,6 @@ visible = false
 modulate = Color(0.489622, 0.489622, 0.489622, 1)
 z_index = -10
 position = Vector2(64, -2000)
-texture = ExtResource("5_0f2h4")
 centered = false
 
 [node name="?Block" parent="." instance=ExtResource("7_3y7le")]
@@ -294,7 +291,6 @@ visible = false
 modulate = Color(0.41598, 0.41598, 0.41598, 1)
 z_index = -99
 position = Vector2(64, -2000)
-texture = ExtResource("13_wa0k8")
 centered = false
 
 [node name="Door" parent="." instance=ExtResource("17_voalh")]

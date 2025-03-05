@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://lqusc3wryho6"]
 
 [ext_resource type="PackedScene" uid="uid://cqw1qs0bt5s4o" path="res://Instances/Prefabs/Player.tscn" id="1_mqain"]
-[ext_resource type="Script" path="res://Scripts/Classes/LevelClass.gd" id="1_wad7p"]
+[ext_resource type="Script" uid="uid://k72dmo2yqq6n" path="res://Scripts/Classes/LevelClass.gd" id="1_wad7p"]
 [ext_resource type="AudioStream" uid="uid://jyjpswb5b2wv" path="res://Resources/MusicTracks/Bonus.tres" id="2_e3721"]
 [ext_resource type="PackedScene" uid="uid://dwavjbyw0v12l" path="res://Instances/Prefabs/tile_map.tscn" id="3_fya2r"]
 [ext_resource type="PackedScene" uid="uid://cly5f6jt1cd28" path="res://Instances/Prefabs/Interactables/pipe_area.tscn" id="9_cqiws"]

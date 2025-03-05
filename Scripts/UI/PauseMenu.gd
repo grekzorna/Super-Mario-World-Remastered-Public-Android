@@ -53,7 +53,7 @@ func pause_toggle() -> void:
 func players_grounded_check() -> bool:
 	for i in CoopManager.alive_players.values():
 		if is_instance_valid(i):
-			if i.is_on_floor() == false:
+			if i.is_on_floor() == false and not i.is_on_wall():
 				return false
 	return true
 

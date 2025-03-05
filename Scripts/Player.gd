@@ -642,9 +642,7 @@ func _physics_process(delta: float) -> void:
 			if i is Block:
 				i.shatter()
 	if player.is_on_ceiling() and player.is_on_floor() == false and can_bump:
-		can_bump = false
-		vibrate_controller(0.5)
-		play_sfx("bump")
+		bump_ceiling()
 	elif player.is_on_floor():
 		can_bump = true
 	if is_on_floor():
@@ -657,6 +655,12 @@ func _physics_process(delta: float) -> void:
 	on_ice = ice_check.is_colliding()
 
 var carrying := false
+
+
+func bump_ceiling() -> void:
+	can_bump = false
+	vibrate_controller(0.5)
+	play_sfx("bump")
 
 func refresh_hitbox() -> void:
 	hitbox_area.set_deferred("monitoring", false)

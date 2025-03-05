@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://1avuytd3owf7" path="res://Scripts/Classes/States/Player/pipe_travel.gd" id="23_lfi46"]
 [ext_resource type="Texture2D" uid="uid://brxwbw5xhl7em" path="res://Assets/Sprites/Objects/VersusCrown.png" id="24_4afg5"]
 [ext_resource type="Script" uid="uid://db3ye1s4yrq3s" path="res://Scripts/Classes/States/Player/animation_test.gd" id="24_awngt"]
-[ext_resource type="SpriteFrames" uid="uid://cph5x4rmekpcr" path="res://Resources/PlayerSpriteFrames/Toad/Small.tres" id="25_71cox"]
+[ext_resource type="SpriteFrames" uid="uid://wbpo31tdgwid" path="res://Resources/PlayerSpriteFrames/Toad/Small.tres" id="25_71cox"]
 [ext_resource type="Script" uid="uid://bkt2h66pnkvms" path="res://Scripts/Classes/States/Player/flag_pole.gd" id="25_a8urd"]
 [ext_resource type="Texture2D" uid="uid://3pgeyxvjbjjm" path="res://icon.png" id="27_1dftu"]
 [ext_resource type="PackedScene" uid="uid://b07lfqfo25fi1" path="res://Instances/Prefabs/player_yoshi.tscn" id="28_m1u2g"]

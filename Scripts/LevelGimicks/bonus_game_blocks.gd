@@ -9,9 +9,10 @@ func block_hit(block: Block) -> void:
 	print(block.can_hit)
 	if block.can_hit == false:
 		return
-	if randf_range(0, 10) < 6.5:
+	if randf_range(0, 10) < 6.5 or idx == 2:
 		if idx >= 2:
 			block.dispense_item(_1_UP)
+			SoundManager.play_sfx(SoundManager.item_sprout, block)
 		else:
 			block.dispense_coin()
 		idx += 1
