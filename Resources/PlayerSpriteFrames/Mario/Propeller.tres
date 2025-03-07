@@ -1,7 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=162 format=3 uid="uid://b46bbr5ofwbp0"]
+[gd_resource type="SpriteFrames" load_steps=162 format=3]
 
-[ext_resource type="Texture2D" uid="uid://bj82dsuf7ljot" path="res://Assets/Sprites/Characters/Mario/Propeller.png" id="1_eccf5"]
-[ext_resource type="Texture2D" uid="uid://cldtyqu3ehwrm" path="res://Assets/Sprites/Characters/Mario/Small.png" id="2_7ruvn"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Mario/Propeller.png" id="1_eccf5"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Mario/Small.png" id="2_7ruvn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpwbi"]
 atlas = ExtResource("1_eccf5")

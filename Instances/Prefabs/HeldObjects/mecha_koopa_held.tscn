@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b55o5oesywdn2"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/Enemies/mecha_koopa_held.gd" id="1_ujoyi"]
+[ext_resource type="Script" uid="uid://u67gprfej7fb" path="res://Scripts/Classes/Enemies/mecha_koopa_held.gd" id="1_ujoyi"]
 [ext_resource type="Texture2D" uid="uid://c2r06g7vxmrap" path="res://Assets/Sprites/Enemys/MechaKoopa.png" id="2_p2k7y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhbao"]

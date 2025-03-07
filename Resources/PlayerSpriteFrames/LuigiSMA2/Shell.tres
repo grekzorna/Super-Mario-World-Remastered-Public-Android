@@ -1,8 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=133 format=3 uid="uid://fiult5s30p6c"]
+[gd_resource type="SpriteFrames" load_steps=133 format=3]
 
-[ext_resource type="Texture2D" uid="uid://c5lluqxnpk4pm" path="res://Assets/Sprites/Characters/Luigi/Shell.png" id="1_vg4mh"]
-[ext_resource type="Texture2D" uid="uid://hrrmoeuoqpjk" path="res://Assets/Sprites/Characters/Luigi/Small.png" id="2_1tmd6"]
-[ext_resource type="Texture2D" uid="uid://yjerhr26umrt" path="res://Assets/Sprites/Characters/Luigi/SMAS/Shell.png" id="2_j8emp"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Luigi/Shell.png" id="1_vg4mh"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Luigi/Small.png" id="2_1tmd6"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Luigi/SMAS/Shell.png" id="2_j8emp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kr7bc"]
 atlas = ExtResource("1_vg4mh")

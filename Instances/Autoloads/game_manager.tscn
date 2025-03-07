@@ -47,22 +47,6 @@ tracks/2/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_bkgnq"]
-resource_name = "Timeout"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TimeOut:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, false]
-}
-
 [sub_resource type="Animation" id="Animation_2ven4"]
 resource_name = "Show"
 tracks/0/type = "value"
@@ -88,6 +72,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(497, 135), Vector2(264, 135)]
+}
+
+[sub_resource type="Animation" id="Animation_bkgnq"]
+resource_name = "Timeout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TimeOut:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l5sdu"]
@@ -141,21 +141,6 @@ shader_parameter/circle_size = 1.05
 shader_parameter/screen_width = 480.0
 shader_parameter/screen_height = 270.0
 
-[sub_resource type="Animation" id="Animation_ol46f"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.05]
-}
-
 [sub_resource type="Animation" id="Animation_l6cnr"]
 resource_name = "Close"
 tracks/0/type = "value"
@@ -171,25 +156,25 @@ tracks/0/keys = {
 "values": [1.05, 0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek5yi"]
-_data = {
-&"Close": SubResource("Animation_l6cnr"),
-&"RESET": SubResource("Animation_ol46f")
-}
-
-[sub_resource type="Animation" id="Animation_pvref"]
+[sub_resource type="Animation" id="Animation_ol46f"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UI/Message:scale")
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1e-05, 1e-05)]
+"values": [1.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ek5yi"]
+_data = {
+&"Close": SubResource("Animation_l6cnr"),
+&"RESET": SubResource("Animation_ol46f")
 }
 
 [sub_resource type="Animation" id="Animation_abcuy"]
@@ -209,25 +194,25 @@ tracks/0/keys = {
 "values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tv14v"]
-_data = {
-&"Appear": SubResource("Animation_abcuy"),
-&"RESET": SubResource("Animation_pvref")
-}
-
-[sub_resource type="Animation" id="Animation_pkpkx"]
+[sub_resource type="Animation" id="Animation_pvref"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("UI/Message:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tv14v"]
+_data = {
+&"Appear": SubResource("Animation_abcuy"),
+&"RESET": SubResource("Animation_pvref")
 }
 
 [sub_resource type="Animation" id="Animation_kxkp1"]
@@ -243,6 +228,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pkpkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3lsjg"]

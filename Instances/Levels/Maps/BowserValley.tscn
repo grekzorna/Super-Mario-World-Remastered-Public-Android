@@ -1,22 +1,21 @@
-[gd_scene load_steps=145 format=3 uid="uid://btxwvtu5512yf"]
+[gd_scene load_steps=144 format=3 uid="uid://btxwvtu5512yf"]
 
-[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_lc53a"]
+[ext_resource type="Script" uid="uid://d0q0d3rfsxxc1" path="res://Scripts/UI/map_screen.gd" id="1_lc53a"]
 [ext_resource type="PackedScene" uid="uid://b044hxmqs1ahv" path="res://Instances/Prefabs/MapElements/map_tilemap.tscn" id="2_clxms"]
 [ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="3_6l411"]
 [ext_resource type="Resource" uid="uid://3tpjwk78oca4" path="res://Resources/MapAreas/BowserValley.tres" id="5_443qw"]
 [ext_resource type="PackedScene" uid="uid://4xhrug5ojmca" path="res://Instances/Parts/map_point.tscn" id="5_ayl7n"]
 [ext_resource type="Texture2D" uid="uid://cm8lt6gfnd111" path="res://Assets/Sprites/Map/MapSprites/Pipe.png" id="6_515c1"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="7_578bg"]
+[ext_resource type="Script" uid="uid://cs5lle7y5wqyv" path="res://Scripts/Classes/Resources/MapRoute.gd" id="7_578bg"]
 [ext_resource type="Resource" uid="uid://y03hju7bvqdm" path="res://Resources/LevelData/DonutPlains/DSH.tres" id="7_q7wft"]
 [ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="9_1jvdy"]
 [ext_resource type="Resource" uid="uid://cfttm6jihuytu" path="res://Resources/LevelData/DonutPlains/DS2.tres" id="10_6murh"]
 [ext_resource type="Resource" uid="uid://jqk34owisgt5" path="res://Resources/Achievements/Completionist/DragCoins/DPDragCoin.tres" id="10_cc2re"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="11_fesh3"]
+[ext_resource type="Script" uid="uid://cd6gr40f5vdhy" path="res://Scripts/Classes/Resources/LevelData.gd" id="11_fesh3"]
 [ext_resource type="PackedScene" uid="uid://c1xol3wby2j0k" path="res://Instances/Prefabs/level_bg.tscn" id="12_gxdt6"]
 [ext_resource type="Resource" uid="uid://dd8ptitrvm1y5" path="res://Resources/LevelData/DonutPlains/DP1.tres" id="12_hac4q"]
-[ext_resource type="Texture2D" uid="uid://d2l8ip7s3fpeq" path="res://Assets/LevelGuides/BowserValleyMap.png" id="13_rq421"]
 [ext_resource type="Resource" uid="uid://d1nuh7ljhp57f" path="res://Resources/LevelData/DonutPlains/DP2.tres" id="13_xp8ab"]
-[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="14_3x1sk"]
+[ext_resource type="Script" uid="uid://dw00jp3g2y3w" path="res://Scripts/Classes/MapPoint.gd" id="14_3x1sk"]
 [ext_resource type="Resource" uid="uid://753cvn2b7d1a" path="res://Resources/LevelData/DonutPlains/GreenSwitchPalace.tres" id="14_x7wir"]
 [ext_resource type="Resource" path="res://Resources/LevelData/BowserValley/BV1.tres" id="15_08f8w"]
 [ext_resource type="Texture2D" uid="uid://cp3jbk5p4m2pj" path="res://Assets/Sprites/Map/MapSprites/BowserCastleMain.png" id="15_d1hek"]
@@ -43,13 +42,13 @@
 [ext_resource type="Resource" uid="uid://cjuiit3d7gbw4" path="res://Resources/LevelData/DonutPlains/Airship2.tres" id="21_e3vl1"]
 [ext_resource type="Resource" uid="uid://bvmyr6ic1e116" path="res://Resources/LevelData/BowserValley/FrontDoor.tres" id="21_f63c7"]
 [ext_resource type="Texture2D" uid="uid://bu3d8smurasys" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/VanillaDomePathTiles1.png" id="22_j8ks7"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapArea.gd" id="23_dviol"]
+[ext_resource type="Script" uid="uid://beq53f3040ti3" path="res://Scripts/Classes/Resources/MapArea.gd" id="23_dviol"]
 [ext_resource type="Texture2D" uid="uid://cfjxfyui6adav" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/VanillaDomeAutumnPathTiles1.png" id="24_a1tax"]
 [ext_resource type="PackedScene" uid="uid://bdkivqa6mhx1l" path="res://Instances/Prefabs/MapElements/star_road_warp.tscn" id="28_fho1b"]
 [ext_resource type="Texture2D" uid="uid://c5tvd2tdu0k23" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/VanillaDomePathTiles2.png" id="29_0agn3"]
 [ext_resource type="Resource" uid="uid://bmgxn05dv6ddt" path="res://Resources/LevelData/StarRoad/SR4.tres" id="29_5eyfw"]
 [ext_resource type="PackedScene" uid="uid://c5mqg48l62p7b" path="res://Instances/Prefabs/MapElements/red_large_map_point.tscn" id="30_mic1o"]
-[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="30_ou8yp"]
+[ext_resource type="Script" uid="uid://ch6d162n6cn6q" path="res://Scripts/Classes/Maps/MapSprite.gd" id="30_ou8yp"]
 [ext_resource type="Texture2D" uid="uid://y51800jlobd7" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/VanillaDomeAutumnPathTiles2.png" id="31_4x6hs"]
 [ext_resource type="PackedScene" uid="uid://cm7ivyv7adsjr" path="res://Instances/Prefabs/MapElements/red_map_point_visual.tscn" id="35_fle3d"]
 [ext_resource type="PackedScene" uid="uid://umsxjfxiymvn" path="res://Instances/Prefabs/MapElements/fortress_point_visual.tscn" id="37_y5mm6"]
@@ -92,8 +91,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygw35"]
 _data = {
-"RESET": SubResource("Animation_8hg1n"),
-"Travel": SubResource("Animation_4utfg")
+&"RESET": SubResource("Animation_8hg1n"),
+&"Travel": SubResource("Animation_4utfg")
 }
 
 [sub_resource type="Resource" id="Resource_y28j0"]
@@ -693,8 +692,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ota21"]
 _data = {
-"Fly": SubResource("Animation_37qlm"),
-"RESET": SubResource("Animation_h4r31")
+&"Fly": SubResource("Animation_37qlm"),
+&"RESET": SubResource("Animation_h4r31")
 }
 
 [sub_resource type="Animation" id="Animation_4ff8n"]
@@ -730,8 +729,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bixnf"]
 _data = {
-"Float": SubResource("Animation_4ff8n"),
-"RESET": SubResource("Animation_bcq4f")
+&"Float": SubResource("Animation_4ff8n"),
+&"RESET": SubResource("Animation_bcq4f")
 }
 
 [sub_resource type="Resource" id="Resource_4uowk"]
@@ -801,7 +800,7 @@ rotates = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MapMario/PathFollow2D"]
 libraries = {
-"": SubResource("AnimationLibrary_ygw35")
+&"": SubResource("AnimationLibrary_ygw35")
 }
 
 [node name="MarioPoint" type="Node2D" parent="MapMario/PathFollow2D"]
@@ -950,7 +949,6 @@ enable_thunder = true
 [node name="BowserValleyMap" type="Sprite2D" parent="."]
 visible = false
 z_index = -1
-texture = ExtResource("13_rq421")
 centered = false
 
 [node name="Valley1" type="Node2D" parent="." node_paths=PackedStringArray("normal_path_tiles")]
@@ -1813,13 +1811,13 @@ flip_h = true
 
 [node name="Animations" type="AnimationPlayer" parent="Bowser"]
 libraries = {
-"": SubResource("AnimationLibrary_ota21")
+&"": SubResource("AnimationLibrary_ota21")
 }
 autoplay = "Fly"
 
 [node name="Animations2" type="AnimationPlayer" parent="Bowser"]
 libraries = {
-"": SubResource("AnimationLibrary_bixnf")
+&"": SubResource("AnimationLibrary_bixnf")
 }
 autoplay = "Float"
 
@@ -2071,6 +2069,7 @@ return_point = NodePath("../MainEntranceReturn")
 [node name="StarRoadWarp" parent="." node_paths=PackedStringArray("special_path_tiles") instance=ExtResource("28_fho1b")]
 position = Vector2(72, 56)
 current_area = ExtResource("5_443qw")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "StarRoadWarp5"
 level = ExtResource("29_5eyfw")

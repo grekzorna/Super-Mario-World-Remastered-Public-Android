@@ -4499,6 +4499,7 @@ up_route = SubResource("Resource_wof45")
 [node name="StarRoadWarp" parent="TwinBridge" instance=ExtResource("40_tysrg")]
 position = Vector2(264, 248)
 current_area = ExtResource("33_g5j2j")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "StarRoadWarp3"
 level = ExtResource("56_7nn17")
@@ -5064,6 +5065,7 @@ return_point = NodePath("../IllusionSecretWarpReturn")
 [node name="StarRoadWarp" parent="IllusionForest" instance=ExtResource("40_tysrg")]
 position = Vector2(328, 264)
 current_area = SubResource("Resource_icdla")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "StarRoadWarp4"
 right_route = SubResource("Resource_1n0ap")

@@ -5,6 +5,10 @@ const HEAD = preload("res://Assets/Sprites/Enemys/MechaKoopaParts/Head.png")
 const SCREW = preload("res://Assets/Sprites/Enemys/MechaKoopaParts/Screw.png")
 var parts := [HEAD, FEET, SCREW, BODY]
 
+func physics_update(_delta: float) -> void:
+	if global_position.y > 64:
+		queue_free()
+
 func die() -> void:
 	ParticleManager.summon_four_part(parts, global_position - Vector2(0, 16), 16)
 	SoundManager.play_sfx(SoundManager.shatter, self)

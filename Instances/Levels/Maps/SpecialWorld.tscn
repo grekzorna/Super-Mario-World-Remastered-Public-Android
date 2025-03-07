@@ -1,23 +1,23 @@
 [gd_scene load_steps=68 format=4 uid="uid://c3ne6dxqd8s1h"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/Maps/special_world.gd" id="1_gpvru"]
+[ext_resource type="Script" uid="uid://g2yb5l63m4c3" path="res://Scripts/Classes/Maps/special_world.gd" id="1_gpvru"]
 [ext_resource type="PackedScene" uid="uid://in27dksqeiu8" path="res://Instances/Prefabs/MapElements/map_player.tscn" id="2_va0el"]
 [ext_resource type="PackedScene" uid="uid://dvvlrrth1fxul" path="res://Instances/Prefabs/MapElements/map_mario.tscn" id="3_dqygg"]
 [ext_resource type="Texture2D" uid="uid://bsc7v7ndin4oi" path="res://Assets/Sprites/Map/SMWOverworldMap.png" id="4_mbgf2"]
 [ext_resource type="PackedScene" uid="uid://bdkivqa6mhx1l" path="res://Instances/Prefabs/MapElements/star_road_warp.tscn" id="5_wy3pl"]
 [ext_resource type="AudioStream" uid="uid://c1ms2dbrbejpm" path="res://Assets/Audio/BGM/SMW/SpecialWorld.mp3" id="6_cissw"]
 [ext_resource type="Texture2D" uid="uid://c5fpo7sreyumw" path="res://Assets/Sprites/Map/SNESLogo.png" id="7_6gpu6"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="8_b07ry"]
+[ext_resource type="Script" uid="uid://cs5lle7y5wqyv" path="res://Scripts/Classes/Resources/MapRoute.gd" id="8_b07ry"]
 [ext_resource type="Texture2D" uid="uid://b12xkw1303bv3" path="res://Assets/Sprites/Map/SpecialWorldStars.png" id="8_hr8r5"]
 [ext_resource type="Resource" uid="uid://daimwvj3feuy" path="res://Resources/MapAreas/SpecialWorld.tres" id="8_nqy0b"]
 [ext_resource type="Texture2D" uid="uid://dauhhg2e17hru" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/SpecialWorldPath.png" id="9_wo1sk"]
 [ext_resource type="Resource" uid="uid://b6wgm4f34hf06" path="res://Resources/LevelData/StarRoad/SR5.tres" id="9_wsrou"]
-[ext_resource type="Script" path="res://Scripts/Classes/MapPoint.gd" id="9_xacvf"]
+[ext_resource type="Script" uid="uid://dw00jp3g2y3w" path="res://Scripts/Classes/MapPoint.gd" id="9_xacvf"]
 [ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="10_rofb5"]
 [ext_resource type="AudioStream" uid="uid://d1wnb1cfvgeox" path="res://Assets/Audio/BGM/SMW/SpecialWorldSecretTune.mp3" id="13_7knag"]
 [ext_resource type="Resource" uid="uid://baqpi5r4scfik" path="res://Resources/LevelData/SpecialWorld/SP1.tres" id="14_a6cjd"]
 [ext_resource type="Resource" uid="uid://br8vy1a06tco4" path="res://Resources/LevelData/SpecialWorld/SP2.tres" id="16_j5tve"]
-[ext_resource type="Script" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="16_lrg6d"]
+[ext_resource type="Script" uid="uid://bn5kyth8eyxbb" path="res://Scripts/LevelElements/achievement_unlocker.gd" id="16_lrg6d"]
 [ext_resource type="Resource" uid="uid://bsxcxvtpb8lwx" path="res://Resources/LevelData/SpecialWorld/SP3.tres" id="17_1edpi"]
 [ext_resource type="Resource" uid="uid://c0laybfq480x2" path="res://Resources/Achievements/Progression/SpWorldReach.tres" id="17_1qbqh"]
 [ext_resource type="Resource" uid="uid://cgwn5dkowns3o" path="res://Resources/LevelData/SpecialWorld/SP4.tres" id="18_h6c21"]
@@ -25,7 +25,7 @@
 [ext_resource type="Resource" uid="uid://bicxncxauhd17" path="res://Resources/LevelData/SpecialWorld/SP6.tres" id="20_0kbj5"]
 [ext_resource type="Resource" uid="uid://m54co6jipfeb" path="res://Resources/LevelData/SpecialWorld/SP7.tres" id="21_lt18j"]
 [ext_resource type="Resource" uid="uid://csgnw4jjw3mqm" path="res://Resources/LevelData/SpecialWorld/SP8.tres" id="22_qbvrk"]
-[ext_resource type="Script" path="res://Scripts/LevelGimicks/OverhaulAutumnNode.gd" id="25_mutk8"]
+[ext_resource type="Script" uid="uid://bxd48wgn87ood" path="res://Scripts/LevelGimicks/OverhaulAutumnNode.gd" id="25_mutk8"]
 [ext_resource type="Resource" uid="uid://tqtldxfew824" path="res://Resources/Achievements/Completionist/SpecialTheme.tres" id="26_poaxw"]
 
 [sub_resource type="Curve2D" id="Curve2D_a0vbv"]
@@ -498,6 +498,7 @@ texture = ExtResource("4_mbgf2")
 [node name="StarRoadWarp" parent="." node_paths=PackedStringArray("normal_path_tiles") instance=ExtResource("5_wy3pl")]
 position = Vector2(-80, 64)
 current_area = ExtResource("8_nqy0b")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "SpecialWarp"
 level = ExtResource("9_wsrou")
@@ -619,6 +620,8 @@ frame = 20
 [node name="StarExit" parent="." instance=ExtResource("5_wy3pl")]
 position = Vector2(-80, 32)
 current_area = ExtResource("8_nqy0b")
+title = "Yoshi's Island"
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/YoshiIsland.tscn"
 warp_point_name = "SpecialWarp"
 right_route = SubResource("Resource_n37pj")

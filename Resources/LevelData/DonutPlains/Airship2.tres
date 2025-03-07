@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LevelInfo" load_steps=5 format=3 uid="uid://cjuiit3d7gbw4"]
 
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_sjybl"]
+[ext_resource type="Script" uid="uid://cd6gr40f5vdhy" path="res://Scripts/Classes/Resources/LevelData.gd" id="1_sjybl"]
 [ext_resource type="Texture2D" uid="uid://bae1y7iac6k26" path="res://Assets/Sprites/UI/TextImages/Airship1.png" id="2_l3wip"]
 [ext_resource type="Texture2D" uid="uid://cae7sydba5k0o" path="res://Assets/Sprites/UI/TextImages/Airship2.png" id="3_5ldsy"]
 

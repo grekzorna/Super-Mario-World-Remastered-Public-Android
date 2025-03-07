@@ -1,6 +1,6 @@
-[gd_scene load_steps=77 format=3 uid="uid://dttor8hcmdvea"]
+[gd_scene load_steps=78 format=3 uid="uid://dttor8hcmdvea"]
 
-[ext_resource type="Script" path="res://Scripts/UI/map_screen.gd" id="1_c8neg"]
+[ext_resource type="Script" uid="uid://d0q0d3rfsxxc1" path="res://Scripts/UI/map_screen.gd" id="1_c8neg"]
 [ext_resource type="PackedScene" uid="uid://dvvlrrth1fxul" path="res://Instances/Prefabs/MapElements/map_mario.tscn" id="2_aaybj"]
 [ext_resource type="Texture2D" uid="uid://bsc7v7ndin4oi" path="res://Assets/Sprites/Map/SMWOverworldMap.png" id="3_7l3gu"]
 [ext_resource type="PackedScene" uid="uid://b044hxmqs1ahv" path="res://Instances/Prefabs/MapElements/map_tilemap.tscn" id="4_6p3xb"]
@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://4xhrug5ojmca" path="res://Instances/Parts/map_point.tscn" id="7_q3esq"]
 [ext_resource type="Resource" uid="uid://5uk6b7vfalck" path="res://Resources/MapAreas/VanillaDome.tres" id="8_d4l0c"]
 [ext_resource type="Resource" uid="uid://b2lyt6bl34qg" path="res://Resources/LevelData/VanillaDome/VD1.tres" id="8_lljqb"]
-[ext_resource type="Script" path="res://Scripts/Classes/Resources/MapRoute.gd" id="9_2tk7n"]
+[ext_resource type="Script" uid="uid://cs5lle7y5wqyv" path="res://Scripts/Classes/Resources/MapRoute.gd" id="9_2tk7n"]
 [ext_resource type="PackedScene" uid="uid://b5h6w3lj8af04" path="res://Instances/Prefabs/MapElements/yellow_map_point_visual.tscn" id="10_as8co"]
 [ext_resource type="Texture2D" uid="uid://c5tvd2tdu0k23" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Standard/VanillaDomePathTiles2.png" id="11_yrfo0"]
-[ext_resource type="Script" path="res://Scripts/Classes/Maps/MapSprite.gd" id="12_amlqi"]
+[ext_resource type="Script" uid="uid://ch6d162n6cn6q" path="res://Scripts/Classes/Maps/MapSprite.gd" id="12_amlqi"]
 [ext_resource type="PackedScene" uid="uid://bxfqgskuvbumi" path="res://Instances/Prefabs/MapElements/castle_point_visual.tscn" id="13_4f0dn"]
 [ext_resource type="Texture2D" uid="uid://w208i18h0pns" path="res://Assets/Sprites/Tilesets/MapTiles/Misc/PathTiles1.png" id="13_8t26u"]
 [ext_resource type="Texture2D" uid="uid://y51800jlobd7" path="res://Assets/Sprites/Tilesets/MapTiles/Paths/Autumn/VanillaDomeAutumnPathTiles2.png" id="13_gg2vd"]
@@ -35,6 +35,7 @@
 [ext_resource type="Resource" uid="uid://dofqlbp1rddj0" path="res://Resources/LevelData/VanillaDome/Castle3.tres" id="23_63kt7"]
 [ext_resource type="PackedScene" uid="uid://bdkivqa6mhx1l" path="res://Instances/Prefabs/MapElements/star_road_warp.tscn" id="23_byih5"]
 [ext_resource type="PackedScene" uid="uid://cx4jaixfu6pdf" path="res://Instances/Prefabs/MapElements/yellow_large_map_point.tscn" id="29_fftva"]
+[ext_resource type="Resource" uid="uid://volfpatnmqws" path="res://Resources/LevelData/StarRoad/SR1.tres" id="34_uasup"]
 
 [sub_resource type="Curve2D" id="Curve2D_co0yk"]
 _data = {
@@ -1845,8 +1846,10 @@ autumn_texture = ExtResource("13_gg2vd")
 [node name="StarRoadWarp" parent="." instance=ExtResource("23_byih5")]
 position = Vector2(16, 64)
 current_area = ExtResource("8_d4l0c")
+auto_assign_title = false
 map_warp = "res://Instances/Levels/Maps/StarRoad.tscn"
 warp_point_name = "StarRoadWarp2"
+level = ExtResource("34_uasup")
 unlock_route_direction = "None"
 special_route_direction = "None"
 right_route = SubResource("Resource_qdk51")

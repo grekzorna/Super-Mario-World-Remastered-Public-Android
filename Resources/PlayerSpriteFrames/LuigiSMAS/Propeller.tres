@@ -1,7 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=161 format=3 uid="uid://idibinegb1it"]
+[gd_resource type="SpriteFrames" load_steps=161 format=3]
 
-[ext_resource type="Texture2D" uid="uid://b27jhnu0up5ef" path="res://Assets/Sprites/Characters/Luigi/SMAS/Propeller.png" id="1_qh4g4"]
-[ext_resource type="Texture2D" uid="uid://bkh2qf4i6c70r" path="res://Assets/Sprites/Characters/Luigi/SMAS/Small.png" id="2_vku1c"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Luigi/SMAS/Propeller.png" id="1_qh4g4"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Characters/Luigi/SMAS/Small.png" id="2_vku1c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bqy5"]
 atlas = ExtResource("1_qh4g4")
