@@ -1,7 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxirkhurqoou5"]
+[gd_scene load_steps=10 format=3 uid="uid://bxirkhurqoou5"]
 
-[ext_resource type="Script" path="res://Scripts/UI/device_assigner.gd" id="1_6mgsg"]
+[ext_resource type="Script" uid="uid://trwbarf078tc" path="res://Scripts/UI/device_assigner.gd" id="1_6mgsg"]
 [ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="2_p4k54"]
+[ext_resource type="Texture2D" uid="uid://b3qh78144xvma" path="res://Assets/Sprites/UI/BGs/Settings.png" id="3_f145u"]
+[ext_resource type="Shader" uid="uid://cda7wuxcvci5t" path="res://Scripts/Shaders/yoshi_colour.gdshader" id="4_syxx8"]
+[ext_resource type="Texture2D" uid="uid://dhcjw1v7vspn1" path="res://Assets/Sprites/UI/SettingsPanel.png" id="5_v157y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jaxjs"]
+size = Vector2(255, 48)
+
+[sub_resource type="Shader" id="Shader_xqsvx"]
+code = "shader_type canvas_item;
+
+uniform vec2 motion = vec2(0.0);
+uniform float scale = 1.0;
+uniform vec2 offset = vec2(0.0);
+
+void vertex(){
+	UV = (VERTEX + offset + TIME * motion) * TEXTURE_PIXEL_SIZE * (1.0/scale);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jn48y"]
+shader = SubResource("Shader_xqsvx")
+shader_parameter/motion = Vector2(-8, -8)
+shader_parameter/scale = 1.0
+shader_parameter/offset = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2mbxc"]
+shader = ExtResource("4_syxx8")
+shader_parameter/og_1 = Color(0.819608, 0.741176, 0.996078, 1)
+shader_parameter/og_2 = null
+shader_parameter/og_3 = null
+shader_parameter/og_arm = null
+shader_parameter/og_arm_2 = null
+shader_parameter/colour_1 = Color(1, 0, 0, 0)
+shader_parameter/colour_2 = null
+shader_parameter/colour_3 = null
+shader_parameter/arm_colour = null
+shader_parameter/arm_2_colour = null
+shader_parameter/alpha = 1.0
+shader_parameter/epsilon = 0.001
 
 [node name="DeviceAssigner" type="Control"]
 layout_mode = 3
@@ -37,3 +75,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(244, 211)
+shape = SubResource("RectangleShape2D_jaxjs")
+visibility_mode = 1
+
+[node name="ColorRect" type="TextureRect" parent="TouchScreenButton"]
+material = SubResource("ShaderMaterial_jn48y")
+offset_left = -127.0
+offset_top = -24.0
+offset_right = 127.0
+offset_bottom = 24.0
+texture = ExtResource("3_f145u")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TouchScreenButton"]
+material = SubResource("ShaderMaterial_2mbxc")
+offset_left = -127.0
+offset_top = -24.0
+offset_right = 127.0
+offset_bottom = 24.0
+texture = ExtResource("5_v157y")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Label" type="Label" parent="TouchScreenButton"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_p4k54")
+text = "PRESS THIS BUTTON IF YOU'RE
+PLAYING ON A MOBILE DEVICE"
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touchscreen_chosen"]
