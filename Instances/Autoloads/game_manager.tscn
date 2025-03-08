@@ -1,10 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://cjrk7sj67hipw"]
+[gd_scene load_steps=45 format=3 uid="uid://cjrk7sj67hipw"]
 
 [ext_resource type="Script" uid="uid://d03245vtt2nj8" path="res://Scripts/Autoload/game_manager.gd" id="1_menhw"]
 [ext_resource type="Texture2D" uid="uid://clquarihnko0u" path="res://Assets/Sprites/UI/Messages/YI1 A.png" id="2_vm6vc"]
 [ext_resource type="FontFile" uid="uid://bnrj0qwi0uol4" path="res://Assets/Sprites/UI/GoldFont.png" id="4_a2w77"]
 [ext_resource type="PackedScene" uid="uid://bks21whts2vvh" path="res://Instances/UI/speedrun_timer.tscn" id="6_25a6y"]
+[ext_resource type="Texture2D" uid="uid://bcvnavba5hwa7" path="res://Assets/Sprites/Map/MapSprites/MapArrow.png" id="8_8oqj1"]
+[ext_resource type="Texture2D" uid="uid://w073ewfdq4j3" path="res://Assets/Sprites/UI/MobileStartSelect.png" id="8_a24db"]
+[ext_resource type="Texture2D" uid="uid://cg68nbu14k0sx" path="res://Assets/Sprites/UI/MobileArrow.png" id="8_a30jm"]
 [ext_resource type="FontFile" uid="uid://bhqyq3yxbvqkd" path="res://Assets/Sprites/UI/HUD/HUDFont.png" id="8_yha2h"]
+[ext_resource type="Texture2D" uid="uid://cax2umwsbojvj" path="res://Assets/Sprites/UI/MobileABXY.png" id="9_5863a"]
 [ext_resource type="PackedScene" uid="uid://bdwod2eetvwea" path="res://Instances/UI/course_clear.tscn" id="20_aa66g"]
 [ext_resource type="Texture2D" uid="uid://366jnmfg8vjg" path="res://Assets/Sprites/UI/GameOver.png" id="21_lfatl"]
 
@@ -251,6 +255,57 @@ _data = {
 &"RESET": SubResource("Animation_pkpkx")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctdmb"]
+size = Vector2(47, 57)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6xvf"]
+atlas = ExtResource("9_5863a")
+region = Rect2(0, 0, 47, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8oqj1"]
+size = Vector2(47, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um8iv"]
+atlas = ExtResource("9_5863a")
+region = Rect2(47, 0, 47, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a24db"]
+size = Vector2(47, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky2dh"]
+atlas = ExtResource("9_5863a")
+region = Rect2(0, 47, 47, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rtlf"]
+atlas = ExtResource("9_5863a")
+region = Rect2(47, 47, 47, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bmmb"]
+atlas = ExtResource("8_a24db")
+region = Rect2(0, 0, 32, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bmmb"]
+size = Vector2(32, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a24db"]
+atlas = ExtResource("8_a24db")
+region = Rect2(0, 8, 32, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a30jm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bkjq"]
+atlas = ExtResource("9_5863a")
+region = Rect2(0, 47, 47, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5863a"]
+size = Vector2(47, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6xvf"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_um8iv"]
+size = Vector2(10, 10)
+
 [node name="GameManager" type="Node"]
 process_mode = 3
 script = ExtResource("1_menhw")
@@ -378,4 +433,142 @@ offset_top = -38.0
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="Mobile" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="DPAD" type="Node" parent="Mobile"]
+
+[node name="Up" type="TouchScreenButton" parent="Mobile/DPAD"]
+position = Vector2(47, 129)
+texture_normal = ExtResource("8_a30jm")
+shape = SubResource("RectangleShape2D_ctdmb")
+passby_press = true
+action = "move_up_0"
+visibility_mode = 1
+
+[node name="Left" type="TouchScreenButton" parent="Mobile/DPAD"]
+position = Vector2(0, 224)
+rotation = -1.5708
+texture_normal = ExtResource("8_a30jm")
+shape = SubResource("RectangleShape2D_ctdmb")
+passby_press = true
+action = "move_left_0"
+visibility_mode = 1
+
+[node name="Down" type="TouchScreenButton" parent="Mobile/DPAD"]
+position = Vector2(94, 270)
+rotation = -3.14159
+texture_normal = ExtResource("8_a30jm")
+shape = SubResource("RectangleShape2D_ctdmb")
+passby_press = true
+action = "move_down_0"
+visibility_mode = 1
+
+[node name="Right" type="TouchScreenButton" parent="Mobile/DPAD"]
+position = Vector2(141, 176)
+rotation = 1.5708
+texture_normal = ExtResource("8_a30jm")
+shape = SubResource("RectangleShape2D_ctdmb")
+passby_press = true
+action = "move_right_0"
+visibility_mode = 1
+
+[node name="ABXY" type="Node" parent="Mobile"]
+
+[node name="A" type="TouchScreenButton" parent="Mobile/ABXY"]
+position = Vector2(386, 207)
+texture_normal = SubResource("AtlasTexture_c6xvf")
+shape = SubResource("RectangleShape2D_8oqj1")
+passby_press = true
+action = "jump_0"
+visibility_mode = 1
+
+[node name="B" type="TouchScreenButton" parent="Mobile/ABXY"]
+position = Vector2(424, 159)
+texture_normal = SubResource("AtlasTexture_um8iv")
+shape = SubResource("RectangleShape2D_a24db")
+passby_press = true
+action = "spin_jump_0"
+visibility_mode = 1
+
+[node name="X" type="TouchScreenButton" parent="Mobile/ABXY"]
+position = Vector2(349, 159)
+texture_normal = SubResource("AtlasTexture_ky2dh")
+shape = SubResource("RectangleShape2D_a24db")
+passby_press = true
+action = "run_0"
+visibility_mode = 1
+
+[node name="Y" type="TouchScreenButton" parent="Mobile/ABXY"]
+position = Vector2(386, 112)
+texture_normal = SubResource("AtlasTexture_6rtlf")
+shape = SubResource("RectangleShape2D_a24db")
+passby_press = true
+action = "dive_0"
+visibility_mode = 1
+
+[node name="Misc" type="Node" parent="Mobile"]
+
+[node name="Start" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(267, 0)
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_7bmmb")
+shape = SubResource("RectangleShape2D_7bmmb")
+action = "pause"
+visibility_mode = 1
+
+[node name="Select" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(115, 0)
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_a24db")
+shape = SubResource("RectangleShape2D_7bmmb")
+action = "open_progress"
+visibility_mode = 1
+
+[node name="DropItem" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(240, 12)
+shape = SubResource("RectangleShape2D_a30jm")
+action = "open_inventory"
+visibility_mode = 1
+
+[node name="RunToggle" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(373, 49)
+texture_normal = SubResource("AtlasTexture_1bkjq")
+shape = SubResource("RectangleShape2D_5863a")
+
+[node name="LeftPage" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(20, 47)
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture_normal = ExtResource("8_8oqj1")
+shape = SubResource("RectangleShape2D_c6xvf")
+action = "ui_tab_left"
+
+[node name="RightPage" type="TouchScreenButton" parent="Mobile/Misc"]
+position = Vector2(460, 66)
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture_normal = ExtResource("8_8oqj1")
+shape = SubResource("RectangleShape2D_um8iv")
+action = "ui_tab_right"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Mobile/DPAD/Up" to="." method="_on_up_pressed"]
+[connection signal="released" from="Mobile/DPAD/Up" to="." method="_on_up_released"]
+[connection signal="pressed" from="Mobile/DPAD/Left" to="." method="_on_left_pressed"]
+[connection signal="released" from="Mobile/DPAD/Left" to="." method="_on_left_released"]
+[connection signal="pressed" from="Mobile/DPAD/Down" to="." method="_on_down_pressed"]
+[connection signal="released" from="Mobile/DPAD/Down" to="." method="_on_down_released"]
+[connection signal="pressed" from="Mobile/DPAD/Right" to="." method="_on_right_pressed"]
+[connection signal="released" from="Mobile/DPAD/Right" to="." method="_on_right_released"]
+[connection signal="pressed" from="Mobile/ABXY/A" to="." method="_on_a_pressed"]
+[connection signal="released" from="Mobile/ABXY/A" to="." method="_on_a_released"]
+[connection signal="pressed" from="Mobile/ABXY/B" to="." method="_on_b_pressed"]
+[connection signal="released" from="Mobile/ABXY/B" to="." method="_on_b_released"]
+[connection signal="pressed" from="Mobile/ABXY/X" to="." method="_on_x_pressed"]
+[connection signal="released" from="Mobile/ABXY/X" to="." method="_on_x_released"]
+[connection signal="pressed" from="Mobile/ABXY/Y" to="." method="_on_y_pressed"]
+[connection signal="released" from="Mobile/ABXY/Y" to="." method="_on_y_released"]
+[connection signal="pressed" from="Mobile/Misc/Start" to="." method="_on_start_pressed"]
+[connection signal="released" from="Mobile/Misc/Start" to="." method="_on_start_released"]
+[connection signal="pressed" from="Mobile/Misc/RunToggle" to="." method="_on_check_box_toggled"]

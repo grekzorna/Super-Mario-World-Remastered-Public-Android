@@ -91,12 +91,14 @@ var current_map_path := ""
 var red_coins_collected := 0
 var current_map_area: MapArea = null
 var time_played := 0.0
+var running := false
 
 
 var key_exiting := false
 
 var all_coins_collected := false
 @onready var save_animation: AnimationPlayer = $UI/SavingText/Animation
+
 
 
 const RESERVE_ITEM_DROP = preload("res://Instances/Parts/reserve_item_drop.tscn")
@@ -106,6 +108,15 @@ signal star_ended
 func _enter_tree() -> void:
 	load_addons()
 
+func _ready() -> void:
+	var dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS))
+	if !dir.dir_exists_absolute(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered"):
+		dir.make_dir("SuperMarioWorldRemastered")
+		dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered")
+		dir.make_dir("CustomLevels")
+	dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered")
+	if !dir.dir_exists_absolute(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered/CustomLevels"):
+		dir.make_dir("CustomLevels")
 func _process(delta: float) -> void:
 	if is_instance_valid(player):
 		riding_yoshi = player.riding_yoshi
@@ -122,6 +133,15 @@ func _process(delta: float) -> void:
 		time_played += 1 * delta
 	if is_instance_valid(GameManager.current_level) and is_instance_valid(CoopManager.get_first_any_player()):
 		level_time += 1 * delta
+	
+	if OS.get_name() == "Android" || OS.get_name() == "iOS":
+		match running:
+			true:
+				$Mobile/Misc/RunToggle.modulate = Color(1, 0, 0, 0.95)
+				Input.action_press("run_0")
+			false:
+				$Mobile/Misc/RunToggle.modulate = Color(1, 1, 1, 0.25)
+				Input.action_release("run_0")
 
 func _physics_process(delta: float) -> void:
 	handle_camera_shake()
@@ -180,6 +200,7 @@ func game_over() -> void:
 	GameManager.checkpoint_level_name = ""
 	GameManager.reset_values()
 	SaveManager.save_current_file()
+	#TODO FIX THUS PATH!!!!
 	if GameManager.playing_custom_level:
 		TransitionManager.transition_to_menu("res://Instances/UI/Menus/custom_level_select.tscn", current_level)
 	else:
@@ -258,6 +279,7 @@ func time_out() -> void:
 	await get_tree().create_timer(3).timeout
 	GameManager.checkpoint_level = ""
 	GameManager.checkpoint_level_name = ""
+	#TODO THIS ONE TOO!!
 	if GameManager.playing_custom_level:
 		TransitionManager.transition_to_menu("res://Instances/UI/Menus/custom_level_select.tscn", current_level)
 	else:
@@ -409,3 +431,77 @@ func _on_timer_timeout() -> void:
 		if can_pause:
 			GameManager.time -= 1
 	GameManager.time = clamp(GameManager.time, 0, 999999)
+
+#region MOBILE_STUFF
+############## DPAD ###############
+## D-PAD UP
+func _on_up_pressed() -> void:
+	Input.action_press("ui_up")
+	$Mobile/DPAD/Up.self_modulate = Color(1, 0, 0, 1)
+func _on_up_released() -> void:
+	Input.action_release("ui_up")
+	$Mobile/DPAD/Up.self_modulate = Color(1, 1, 1, 1)
+## D-PAD DOWN
+func _on_down_pressed() -> void:
+	Input.action_press("ui_down")
+	$Mobile/DPAD/Down.self_modulate = Color(1, 0, 0, 1)
+func _on_down_released() -> void:
+	Input.action_release("ui_down")
+	$Mobile/DPAD/Down.self_modulate = Color(1, 1, 1, 1)
+## D-PAD LEFT
+func _on_left_pressed() -> void:
+	Input.action_press("ui_left")
+	$Mobile/DPAD/Left.self_modulate = Color(1, 0, 0, 1)
+func _on_left_released() -> void:
+	Input.action_release("ui_left")
+	$Mobile/DPAD/Left.self_modulate = Color(1, 1, 1, 1)
+## D-PAD RIGHT
+func _on_right_pressed() -> void:
+	Input.action_press("ui_right")
+	$Mobile/DPAD/Right.self_modulate = Color(1, 0, 0, 1)
+func _on_right_released() -> void:
+	Input.action_release("ui_right")
+	$Mobile/DPAD/Right.self_modulate = Color(1, 1, 1, 1)
+############## ABXY ###############
+## A
+func _on_a_pressed() -> void:
+	Input.action_press("ui_accept")
+	$Mobile/ABXY/A.self_modulate = Color(0.1, 0.1, 1, 1)
+func _on_a_released() -> void:
+	Input.action_release("ui_accept")
+	$Mobile/ABXY/A.self_modulate = Color(1, 1, 1, 1)
+## B
+func _on_b_pressed() -> void:
+	Input.action_press("ui_back")
+	$Mobile/ABXY/B.self_modulate = Color(0.1, 0.1, 1, 1)
+func _on_b_released() -> void:
+	Input.action_release("ui_back")
+	$Mobile/ABXY/B.self_modulate = Color(1, 1, 1, 1)
+## X
+func _on_x_pressed() -> void:
+	Input.action_press("dialogue_proceed")
+	$Mobile/ABXY/X.self_modulate = Color(0.1, 0.1, 1, 1)
+func _on_x_released() -> void:
+	Input.action_release("dialogue_proceed")
+	$Mobile/ABXY/X.self_modulate = Color(1, 1, 1, 1)
+## Y
+func _on_y_pressed() -> void:
+	Input.action_press("delete_save")
+	$Mobile/ABXY/Y.self_modulate = Color(0.1, 0.1, 1, 1)
+func _on_y_released() -> void:
+	Input.action_release("delete_save")
+	$Mobile/ABXY/Y.self_modulate = Color(1, 1, 1, 1)
+############## Miscellanous ###############
+## START
+func _on_start_pressed() -> void:
+	Input.action_press("start")
+	Input.action_press("reload")
+	Input.action_press("apply_settings")
+func _on_start_released() -> void:
+	Input.action_release("start")
+	Input.action_release("reload")
+	Input.action_release("apply_settings")
+## RUN_TOGGLE
+func _on_check_box_toggled() -> void:
+	running = !running
+#endregion
