@@ -92,6 +92,8 @@ var red_coins_collected := 0
 var current_map_area: MapArea = null
 var time_played := 0.0
 var running := false
+var has_touchscreen := true
+
 
 
 var key_exiting := false
@@ -117,6 +119,8 @@ func _ready() -> void:
 	dir = DirAccess.open(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered")
 	if !dir.dir_exists_absolute(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "/SuperMarioWorldRemastered/CustomLevels"):
 		dir.make_dir("CustomLevels")
+	if !has_touchscreen:
+		$Mobile.offset = Vector2(10000.0, 0.0)
 func _process(delta: float) -> void:
 	if is_instance_valid(player):
 		riding_yoshi = player.riding_yoshi
@@ -134,14 +138,16 @@ func _process(delta: float) -> void:
 	if is_instance_valid(GameManager.current_level) and is_instance_valid(CoopManager.get_first_any_player()):
 		level_time += 1 * delta
 	
-	if OS.get_name() == "Android" || OS.get_name() == "iOS":
+	if OS.get_name() == "Android" || OS.get_name() == "iOS" || OS.is_debug_build():
 		match running:
 			true:
 				$Mobile/Misc/RunToggle.modulate = Color(1, 0, 0, 0.95)
 				Input.action_press("run_0")
 			false:
 				$Mobile/Misc/RunToggle.modulate = Color(1, 1, 1, 0.25)
-				Input.action_release("run_0")
+				if !Input.is_action_pressed("run_0"):
+					Input.action_release("run_0")
+	
 
 func _physics_process(delta: float) -> void:
 	handle_camera_shake()

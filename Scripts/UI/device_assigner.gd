@@ -111,5 +111,6 @@ func proceed() -> void:
 
 
 func _on_touchscreen_chosen() -> void:
+	GameManager.has_touchscreen = false
 	proceed()
 	$TouchScreenButton.hide()
