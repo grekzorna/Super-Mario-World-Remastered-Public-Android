@@ -145,7 +145,8 @@ func _process(delta: float) -> void:
 				Input.action_press("run_0")
 			false:
 				$Mobile/Misc/RunToggle.modulate = Color(1, 1, 1, 0.25)
-				if !Input.is_action_pressed("run_0"):
+				var condition: bool = !Input.is_physical_key_pressed(KEY_X) && !Input.is_joy_button_pressed(0, JOY_BUTTON_X) && !Input.is_joy_button_pressed(0, JOY_BUTTON_Y)
+				if condition:
 					Input.action_release("run_0")
 	
 
