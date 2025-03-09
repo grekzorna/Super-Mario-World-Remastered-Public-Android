@@ -18,7 +18,7 @@ func _ready() -> void:
 	if verify_rom():
 		proceed()
 	else:
-		$Text/Path.text = ProjectSettings.globalize_path("user://")
+		$Text/Path.text = ProjectSettings.globalize_path(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "SuperMarioWorldRemastered/baserom.sfc")
 		$ColorRect.hide()
 
 func run_check() -> void:
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		run_check()
 
 func verify_rom() -> bool:
-	return valid_hashes.has(FileAccess.get_sha256("user://baserom.sfc"))
+	return valid_hashes.has(FileAccess.get_sha256(OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS) + "SuperMarioWorldRemastered/baserom.sfc"))
 
 func proceed() -> void:
 	TransitionManager.transition_to_menu("res://Instances/UI/Menus/disclaimer.tscn", self)
